@@ -1,0 +1,29 @@
+{
+  "name": "cagov-eureka-development",
+  "version": "0.0.1",
+  "description": "Eureka Design System Research development Project",
+  "author": {
+    "name": "Carter Medlin",
+    "email": "carter.medlin@state.ca.gov",
+    "url": "https://github.com/carterm"
+  },
+  "license": "MIT",
+  "scripts": {
+    "start": "npx @11ty/eleventy --serve",
+    "build": "npx @11ty/eleventy",
+    "GIT cleanup": "git clean -fd",
+    "stylelint-rules-prettier-check": "stylelint-config-prettier-css-check",
+    "stylelint run fix": "npx stylelint '**/*.css' --fix"
+  },
+  "private": true,
+  "type": "commonjs",
+  "dependencies": {
+    "@11ty/eleventy": "^2.0.0"
+  },
+  "devDependencies": {
+    "eslint": "8.43.0",
+    "eslint-config-prettier": "^8.8.0",
+    "prettier": "2.8.3",
+    "stylelint": "^15.10.2"
+  }
+}

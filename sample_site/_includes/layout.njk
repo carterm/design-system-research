@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {% include "head.njk" %}{%- if customjs -%}
+    <script>
+      {% include customjs -%}
+    </script>
+    {%- endif %}
+  </head>
+  <body>
+    {% block content -%} {{ content | safe }} {%- endblock -%}
+  </body>
+</html>
