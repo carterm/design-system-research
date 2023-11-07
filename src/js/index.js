@@ -4,10 +4,14 @@
 
 window.addEventListener("load", () => {
   class MyElement extends HTMLElement {
-    connectedCallback() {
-      // Create a shadow root
-    }
+    connectedCallback() {}
   }
 
   window.customElements.define("ca-eureka", MyElement);
+
+  class MyElement2 extends HTMLElement {
+    connectedCallback() {}
+  }
+
+  window.customElements.define("ca-header", MyElement2);
 });

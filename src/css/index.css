@@ -1,3 +1,18 @@
 body {
-  background-color: blue;
+  background-color: #ddf;
+}
+
+ca-eureka {
+  background-color: #fdd;
+  padding: 5em;
+}
+
+ca-eureka > ca-header {
+  background-color: #484;
+  padding: 2em;
+}
+
+ca-eureka > ca-body {
+  background-color: #884;
+  padding: 1em;
 }
