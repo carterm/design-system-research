@@ -3,20 +3,44 @@
 // https://developer.mozilla.org/en-US/docs/Web/API/Web_Components/Using_custom_elements
 
 window.addEventListener("load", () => {
-  class MyElement extends HTMLElement {
+  /**
+   *
+   * @param {HTMLElement} MyElement
+   * @param {string} ParentType
+   */
+  const requireParentElement = (MyElement, ParentType) => {
+    if (
+      MyElement.parentElement?.tagName.toUpperCase() !==
+      ParentType.toUpperCase()
+    ) {
+      console.error(
+        `${
+          MyElement.tagName
+        } must be contained within ${ParentType.toUpperCase()}`
+      );
+    }
+  };
+
+  const tagName_ca_eureka = "ca-eureka";
+
+  class ca_eureka extends HTMLElement {
     connectedCallback() {}
   }
 
-  window.customElements.define("ca-eureka", MyElement);
+  window.customElements.define(tagName_ca_eureka, ca_eureka);
 
-  class MyElement2 extends HTMLElement {
-    connectedCallback() {}
+  class ca_header extends HTMLElement {
+    connectedCallback() {
+      requireParentElement(this, tagName_ca_eureka);
+    }
   }
 
-  window.customElements.define("ca-header", MyElement2);
+  window.customElements.define("ca-header", ca_header);
 
   class ca_head extends HTMLElement {
     connectedCallback() {
+      requireParentElement(this, tagName_ca_eureka);
+
       if (this.dataset.title) {
         document.title = this.dataset.title;
       }
