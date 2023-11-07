@@ -8,7 +8,8 @@ module.exports = function (
   eleventyConfig.addPassthroughCopy({
     "sample_site/images": "images",
     "sample_site/siteRoot": "/",
-    "src/js": "js"
+    "src/js": "js",
+    "src/css": "css"
   });
 
   //Start with default config, easier to configure 11ty later

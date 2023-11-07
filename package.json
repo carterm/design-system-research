@@ -12,7 +12,6 @@
     "start": "npx @11ty/eleventy --serve",
     "build": "npx @11ty/eleventy",
     "GIT cleanup": "git clean -fd",
-    "stylelint-rules-prettier-check": "stylelint-config-prettier-css-check",
     "stylelint run fix": "npx stylelint '**/*.css' --fix"
   },
   "private": true,
@@ -21,9 +20,8 @@
     "@11ty/eleventy": "^2.0.0"
   },
   "devDependencies": {
-    "eslint": "8.43.0",
-    "eslint-config-prettier": "^8.8.0",
-    "prettier": "2.8.3",
-    "stylelint": "^15.10.2"
+    "eslint": "^8.53.0",
+    "prettier": "^3.0.3",
+    "stylelint": "^15.11.0"
   }
 }

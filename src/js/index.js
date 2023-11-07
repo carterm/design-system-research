@@ -6,10 +6,6 @@ window.addEventListener("load", () => {
   class MyElement extends HTMLElement {
     connectedCallback() {
       // Create a shadow root
-      // const shadow = this.attachShadow({ mode: "open" });
-
-      this.style.backgroundColor = "#FAA";
-      this.innerText = "connected";
     }
   }
 
