@@ -15,7 +15,7 @@
     "stylelint run fix": "npx stylelint '**/*.css' --fix"
   },
   "private": true,
-  "type": "commonjs",
+  "type": "module",
   "dependencies": {
     "@11ty/eleventy": "^2.0.0"
   },

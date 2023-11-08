@@ -2,7 +2,11 @@
 
 // https://developer.mozilla.org/en-US/docs/Web/API/Web_Components/Using_custom_elements
 
+import yo from "./web-components/ca-eureka/index.js";
+
 window.addEventListener("load", () => {
+  yo();
+
   /**
    *
    * @param {HTMLElement} MyElement
