@@ -3,6 +3,7 @@
 // https://developer.mozilla.org/en-US/docs/Web/API/Web_Components/Using_custom_elements
 
 import yo from "./web-components/ca-eureka/index.js";
+import ca_head from "./web-components/ca-head/index.js";
 
 window.addEventListener("load", () => {
   yo();
@@ -40,26 +41,5 @@ window.addEventListener("load", () => {
   }
 
   window.customElements.define("ca-header", ca_header);
-
-  class ca_head extends HTMLElement {
-    connectedCallback() {
-      requireParentElement(this, tagName_ca_eureka);
-
-      if (this.dataset.title) {
-        document.title = this.dataset.title;
-      }
-
-      if (this.dataset.description) {
-        const metaDescription =
-          document.head.querySelector(`meta[name="description" i]`) ||
-          Object.assign(document.createElement("meta"), {
-            name: "Description"
-          });
-
-        metaDescription.attributes["content"].value = this.dataset.description;
-      }
-    }
-  }
-
   window.customElements.define("ca-head", ca_head);
 });
