@@ -5,19 +5,29 @@ import { ca_eureka_component, ca_eureka } from "../index.js";
 export default class ca_head extends ca_eureka_component {
   connectedCallback() {
     this.requireParentElement(ca_eureka.tagName);
+  }
 
-    if (this.dataset.title) {
-      document.title = this.dataset.title;
-    }
+  static observedAttributes = ["data-title", "data-description"];
+  /**
+   *
+   * @param {string} name
+   * @param {string} _oldValue
+   * @param {string} newValue
+   */
+  attributeChangedCallback(name, _oldValue, newValue) {
+    switch (name) {
+      case "data-title":
+        document.title = newValue;
+        break;
+      case "data-description":
+        const metaDescription =
+          document.head.querySelector(`meta[name="description" i]`) ||
+          Object.assign(document.createElement("meta"), {
+            name: "description"
+          });
 
-    if (this.dataset.description) {
-      const metaDescription =
-        document.head.querySelector(`meta[name="description" i]`) ||
-        Object.assign(document.createElement("meta"), {
-          name: "Description"
-        });
-
-      metaDescription.attributes["content"].value = this.dataset.description;
+        metaDescription.attributes["content"].value = newValue;
+        break;
     }
   }
 }
