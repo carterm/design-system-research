@@ -31,6 +31,26 @@ export default class ca_eureka_component extends HTMLElement {
   }
 
   /**
+   * Require that this component be last
+   */
+  requireLast() {
+    if (
+      this.parentElement?.querySelector(this.tagName + ":last-child") !== this
+    ) {
+      console.error(`${this.tagName} must be last`);
+    }
+  }
+
+  /**
+   * Require that this component be first
+   */
+  requireFirst() {
+    if (this.parentElement?.querySelector("*") !== this) {
+      console.error(`${this.tagName} must be first`);
+    }
+  }
+
+  /**
    * Require that this component be unique within a parent
    */
   requireSingle() {
