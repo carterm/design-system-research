@@ -6,12 +6,14 @@ import {
   ca_eureka,
   ca_head,
   ca_header,
-  ca_body
+  ca_body,
+  ca_footer
 } from "./web-components/index.js";
 
 window.addEventListener("load", () => {
-  window.customElements.define(ca_eureka.tagName, ca_eureka);
-  window.customElements.define(ca_header.tagName, ca_header);
-  window.customElements.define(ca_head.tagName, ca_head);
-  window.customElements.define(ca_body.tagName, ca_body);
+  ca_eureka.defineComponent(window);
+  ca_head.defineComponent(window);
+  ca_header.defineComponent(window);
+  ca_body.defineComponent(window);
+  ca_footer.defineComponent(window);
 });

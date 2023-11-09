@@ -4,10 +4,18 @@ body {
 
 ca-eureka > ca-header > p {
   background-color: #484;
-  margin: 1em;
+  padding: 1em;
+  margin: 0;
 }
 
 ca-eureka > ca-body > p {
   background-color: #f84;
-  margin: 1em;
+  padding: 1em;
+  margin: 0;
+}
+
+ca-eureka > ca-footer > p {
+  background-color: #88f;
+  padding: 1em;
+  margin: 0;
 }
