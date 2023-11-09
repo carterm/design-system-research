@@ -1,24 +1,11 @@
-const tagName_ca_eureka = "ca-eureka";
-/**
- *
- * @param {HTMLElement} MyElement
- * @param {string} ParentType
- */
-const requireParentElement = (MyElement, ParentType) => {
-  if (
-    MyElement.parentElement?.tagName.toUpperCase() !== ParentType.toUpperCase()
-  ) {
-    console.error(
-      `${
-        MyElement.tagName
-      } must be contained within ${ParentType.toUpperCase()}`
-    );
-  }
-};
+//@ts-check
 
-export default class ca_head extends HTMLElement {
+import ca_eureka_component from "../ca-eureka-component/index.js";
+import ca_eureka from "../ca-eureka/index.js";
+
+export default class ca_head extends ca_eureka_component {
   connectedCallback() {
-    requireParentElement(this, tagName_ca_eureka);
+    this.requireParentElement(ca_eureka.tagName);
 
     if (this.dataset.title) {
       document.title = this.dataset.title;
