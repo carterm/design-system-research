@@ -2,16 +2,32 @@
 export default class ca_eureka_component extends HTMLElement {
   /**
    * Require that this component be within a specified parent
-   * @param {string} ParentType
+   * @param {string} ParentTagName
    */
-  requireParentElement(ParentType) {
+  requireParentElement(ParentTagName) {
     if (
-      this.parentElement?.tagName.toUpperCase() !== ParentType.toUpperCase()
+      this.parentElement?.tagName.toUpperCase() !== ParentTagName.toUpperCase()
     ) {
       console.error(
-        `${this.tagName} must be contained within ${ParentType.toUpperCase()}`
+        `${
+          this.tagName
+        } must be contained within ${ParentTagName.toUpperCase()}`
       );
     }
+  }
+
+  /**
+   * Require that this component not be after OtherTagNames
+   * @param {string[]} OtherTagNames
+   */
+  requireNotAfter(...OtherTagNames) {
+    OtherTagNames.forEach(t => {
+      if (
+        this.parentElement?.querySelectorAll(this.tagName + "," + t)[0] !== this
+      ) {
+        console.error(`${this.tagName} cannot be after ${t.toUpperCase()}`);
+      }
+    });
   }
 
   /**
