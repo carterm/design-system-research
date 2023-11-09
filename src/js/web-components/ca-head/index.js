@@ -5,6 +5,7 @@ import { ca_eureka_component, ca_eureka } from "../index.js";
 export default class ca_head extends ca_eureka_component {
   connectedCallback() {
     this.requireParentElement(ca_eureka.tagName);
+    this.requireSingle();
   }
 
   static observedAttributes = ["data-title", "data-description"];
