@@ -2,19 +2,19 @@ body {
   background-color: #ddf;
 }
 
-ca-eureka > ca-header > p {
+ca-eureka > ca-header > * {
   background-color: #484;
   padding: 1em;
   margin: 0;
 }
 
-ca-eureka > ca-body > p {
+ca-eureka > ca-body > * {
   background-color: #f84;
   padding: 1em;
   margin: 0;
 }
 
-ca-eureka > ca-footer > p {
+ca-eureka > ca-footer > * {
   background-color: #88f;
   padding: 1em;
   margin: 0;
