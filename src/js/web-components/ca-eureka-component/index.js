@@ -14,7 +14,10 @@ export default class ca_eureka_component extends HTMLElement {
     }
   }
 
+  /**
+   * Returns the tagName for this static class
+   */
   static get tagName() {
-    return "ca-eureka-component";
+    return this.name.toLowerCase().replace(/_/g, "-");
   }
 }
