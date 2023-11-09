@@ -2,21 +2,12 @@ body {
   background-color: #ddf;
 }
 
-ca-eureka {
-  background-color: #fdd;
-  padding: 5em;
-}
-
-ca-eureka > ca-header {
+ca-eureka > ca-header > p {
   background-color: #484;
-  padding: 2em;
+  margin: 1em;
 }
 
-ca-eureka > ca-head {
-  display: none;
-}
-
-ca-eureka > ca-body {
-  background-color: #884;
-  padding: 1em;
+ca-eureka > ca-body > p {
+  background-color: #f84;
+  margin: 1em;
 }
