@@ -2,7 +2,7 @@ body {
   background-color: #ddf;
 }
 
-ca-eureka > ca-header > * {
+ca-eureka > ca-nav > * {
   background-color: #484;
   padding: 1em;
   margin: 0;
