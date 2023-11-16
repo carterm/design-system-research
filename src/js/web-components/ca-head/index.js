@@ -3,6 +3,13 @@
 import ca_eureka_component from "../ca-eureka-component/index.js";
 
 export default class ca_head extends ca_eureka_component {
+  /**
+   * Returns the tagName for this static class
+   */
+  static get tagName() {
+    return "ca-head";
+  }
+
   connectedCallback() {
     this.requireParentElement("ca-eureka");
     this.requireSingle();
@@ -30,12 +37,5 @@ export default class ca_head extends ca_eureka_component {
         metaDescription.attributes["content"].value = newValue;
         break;
     }
-  }
-
-  /**
-   * Returns the tagName for this static class
-   */
-  static get tagName() {
-    return "ca-head";
   }
 }

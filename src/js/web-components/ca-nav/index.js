@@ -5,6 +5,13 @@ import ca_eureka_component from "../ca-eureka-component/index.js";
 import styles from "./styles.css" assert { type: "css" };
 
 export default class ca_nav extends ca_eureka_component {
+  /**
+   * Returns the tagName for this static class
+   */
+  static get tagName() {
+    return "ca-nav";
+  }
+
   constructor() {
     super();
 
@@ -56,12 +63,5 @@ export default class ca_nav extends ca_eureka_component {
     this.requireNotAfter("ca-body", "ca-footer");
 
     this.contentChanged();
-  }
-
-  /**
-   * Returns the tagName for this static class
-   */
-  static get tagName() {
-    return "ca-nav";
   }
 }

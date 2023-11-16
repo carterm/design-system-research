@@ -1,6 +1,14 @@
 //@ts-check
 export default class ca_eureka_component extends HTMLElement {
   /**
+   * Returns the tagName for this static class
+   */
+  static get tagName() {
+    // can't use classname with minification
+    return "ca-eureka-component";
+  }
+
+  /**
    * Require that this component be within a specified parent
    * @param {string} ParentTagName
    */
@@ -57,13 +65,5 @@ export default class ca_eureka_component extends HTMLElement {
     if (this.parentElement?.querySelector(this.tagName) !== this) {
       console.error(`Only one ${this.tagName} allowed.`);
     }
-  }
-
-  /**
-   * Returns the tagName for this static class
-   */
-  static get tagName() {
-    // can't use classname with minification
-    return "ca-eureka-component";
   }
 }
