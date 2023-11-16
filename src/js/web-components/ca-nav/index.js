@@ -13,7 +13,7 @@ export default class ca_nav extends ca_eureka_component {
   }
 
   constructor() {
-    const yo = () => {
+    const connectedCallback = () => {
       this.requireParentElement("ca-eureka");
       this.requireSingle();
       this.requireNotAfter("ca-body", "ca-footer");
@@ -21,7 +21,7 @@ export default class ca_nav extends ca_eureka_component {
       this.contentChanged();
     };
 
-    super(yo);
+    super(connectedCallback);
 
     const sheet = new CSSStyleSheet();
     sheet.replaceSync(styles);
@@ -48,8 +48,6 @@ export default class ca_nav extends ca_eureka_component {
       subtree: true,
       characterData: true
     });
-
-    this.contentChanged();
   }
 
   contentChanged() {
