@@ -37,37 +37,33 @@ export default class ca_eureka_component extends HTMLElement {
    * Base class connectedCallback
    */
   connectedCallback() {
-    if (this._options) {
+    if (this._options && this.parentElement) {
       const options = this._options;
+      const parentElement = this.parentElement;
+      const tagName = this.tagName;
 
       if (options.parent) {
         const parent = options.parent.toUpperCase();
-        if (this.parentElement?.tagName.toUpperCase() !== parent) {
-          console.error(`${this.tagName} must be contained within ${parent}`);
+        if (parentElement.tagName.toUpperCase() !== parent) {
+          console.error(`${tagName} must be contained within ${parent}`);
         }
       }
 
       options.not_after?.forEach(t => {
-        if (
-          this.parentElement?.querySelectorAll(this.tagName + "," + t)[0] !==
-          this
-        ) {
-          console.error(`${this.tagName} cannot be after ${t.toUpperCase()}`);
+        if (parentElement.querySelectorAll(tagName + "," + t)[0] !== this) {
+          console.error(`${tagName} cannot be after ${t.toUpperCase()}`);
         }
       });
 
       if (options.single) {
-        if (this.parentElement?.querySelector(this.tagName) !== this) {
-          console.error(`Only one ${this.tagName} allowed.`);
+        if (parentElement.querySelector(tagName) !== this) {
+          console.error(`Only one ${tagName} allowed.`);
         }
       }
 
       if (options.last) {
-        if (
-          this.parentElement?.querySelector(this.tagName + ":last-child") !==
-          this
-        ) {
-          console.error(`${this.tagName} must be last`);
+        if (parentElement.querySelector(tagName + ":last-child") !== this) {
+          console.error(`${tagName} must be last`);
         }
       }
     }
