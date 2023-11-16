@@ -37,38 +37,38 @@ export default class ca_eureka_component extends HTMLElement {
    * Base class connectedCallback
    */
   connectedCallback() {
-    if (this._options?.parent) {
-      if (
-        this.parentElement?.tagName.toUpperCase() !==
-        this._options.parent.toUpperCase()
-      ) {
-        console.error(
-          `${
-            this.tagName
-          } must be contained within ${this._options.parent.toUpperCase()}`
-        );
-      }
-    }
+    if (this._options) {
+      const options = this._options;
 
-    this._options?.not_after?.forEach(t => {
-      if (
-        this.parentElement?.querySelectorAll(this.tagName + "," + t)[0] !== this
-      ) {
-        console.error(`${this.tagName} cannot be after ${t.toUpperCase()}`);
+      if (options.parent) {
+        const parent = options.parent.toUpperCase();
+        if (this.parentElement?.tagName.toUpperCase() !== parent) {
+          console.error(`${this.tagName} must be contained within ${parent}`);
+        }
       }
-    });
 
-    if (this._options?.single) {
-      if (this.parentElement?.querySelector(this.tagName) !== this) {
-        console.error(`Only one ${this.tagName} allowed.`);
+      options.not_after?.forEach(t => {
+        if (
+          this.parentElement?.querySelectorAll(this.tagName + "," + t)[0] !==
+          this
+        ) {
+          console.error(`${this.tagName} cannot be after ${t.toUpperCase()}`);
+        }
+      });
+
+      if (options.single) {
+        if (this.parentElement?.querySelector(this.tagName) !== this) {
+          console.error(`Only one ${this.tagName} allowed.`);
+        }
       }
-    }
 
-    if (this._options?.last) {
-      if (
-        this.parentElement?.querySelector(this.tagName + ":last-child") !== this
-      ) {
-        console.error(`${this.tagName} must be last`);
+      if (options.last) {
+        if (
+          this.parentElement?.querySelector(this.tagName + ":last-child") !==
+          this
+        ) {
+          console.error(`${this.tagName} must be last`);
+        }
       }
     }
 
