@@ -10,6 +10,4 @@ import * as eureka from "./web-components/index.js";
   eureka.ca_nav,
   eureka.ca_body,
   eureka.ca_footer
-].forEach(c => {
-  window.customElements.define(c.tagName, c);
-});
+].forEach(c => window.customElements.define(c.tagName, c));
