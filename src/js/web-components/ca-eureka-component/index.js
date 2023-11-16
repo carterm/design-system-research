@@ -60,14 +60,6 @@ export default class ca_eureka_component extends HTMLElement {
   }
 
   /**
-   *
-   * @param {Window} window
-   */
-  static defineComponent(window) {
-    window.customElements.define(this.tagName, this);
-  }
-
-  /**
    * Returns the tagName for this static class
    */
   static get tagName() {
