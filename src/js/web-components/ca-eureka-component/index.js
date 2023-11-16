@@ -41,29 +41,32 @@ export default class ca_eureka_component extends HTMLElement {
       const options = this._options;
       const parentElement = this.parentElement;
       const tagName = this.tagName;
+      const reportError = (/** @type {string} */ message) => {
+        console.error(`${tagName}: ${message}`);
+      };
 
       if (options.parent) {
         const parent = options.parent.toUpperCase();
         if (parentElement.tagName.toUpperCase() !== parent) {
-          console.error(`${tagName} must be contained within ${parent}`);
+          reportError(`Must be contained within ${parent}`);
         }
       }
 
       options.not_after?.forEach(t => {
         if (parentElement.querySelectorAll(tagName + "," + t)[0] !== this) {
-          console.error(`${tagName} cannot be after ${t.toUpperCase()}`);
+          reportError(`Cannot be after ${t.toUpperCase()}`);
         }
       });
 
       if (options.single) {
         if (parentElement.querySelector(tagName) !== this) {
-          console.error(`Only one ${tagName} allowed.`);
+          reportError(`Only one allowed.`);
         }
       }
 
       if (options.last) {
         if (parentElement.querySelector(tagName + ":last-child") !== this) {
-          console.error(`${tagName} must be last`);
+          reportError(`Must be last`);
         }
       }
     }
