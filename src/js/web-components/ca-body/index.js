@@ -10,12 +10,12 @@ export default class ca_body extends ca_eureka_component {
   }
 
   constructor() {
-    const connectedCallback = () => {
-      this.requireParentElement("ca-eureka");
-      this.requireSingle();
-      this.requireNotAfter("ca-footer");
-    };
+    const connectedCallback = () => {};
 
-    super(connectedCallback);
+    super(connectedCallback, {
+      not_after: ["ca-footer"],
+      parent: "ca-eureka",
+      single: true
+    });
   }
 }

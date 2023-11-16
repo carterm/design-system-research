@@ -14,14 +14,14 @@ export default class ca_nav extends ca_eureka_component {
 
   constructor() {
     const connectedCallback = () => {
-      this.requireParentElement("ca-eureka");
-      this.requireSingle();
-      this.requireNotAfter("ca-body", "ca-footer");
-
       this.contentChanged();
     };
 
-    super(connectedCallback);
+    super(connectedCallback, {
+      not_after: ["ca-body", "ca-footer"],
+      parent: "ca-eureka",
+      single: true
+    });
 
     const sheet = new CSSStyleSheet();
     sheet.replaceSync(styles);
