@@ -8,10 +8,10 @@ export default class ca_nav extends ca_eureka_component {
   constructor() {
     super();
 
-    const shadow = this.attachShadow({ mode: "open" });
-
     const sheet = new CSSStyleSheet();
     sheet.replaceSync(styles);
+
+    const shadow = this.attachShadow({ mode: "open" });
     shadow.adoptedStyleSheets.push(sheet);
 
     // Callback function to execute when mutations are observed
