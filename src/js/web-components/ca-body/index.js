@@ -9,9 +9,11 @@ export default class ca_body extends ca_eureka_component {
     return "ca-body";
   }
 
-  connectedCallback() {
-    this.requireParentElement("ca-eureka");
-    this.requireSingle();
-    this.requireNotAfter("ca-footer");
+  constructor() {
+    super(() => {
+      this.requireParentElement("ca-eureka");
+      this.requireSingle();
+      this.requireNotAfter("ca-footer");
+    });
   }
 }

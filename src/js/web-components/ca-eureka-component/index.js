@@ -9,6 +9,27 @@ export default class ca_eureka_component extends HTMLElement {
   }
 
   /**
+   * @param {function} connectedCallback
+   */
+  constructor(connectedCallback) {
+    super();
+
+    /** @type {function} */
+    this._connectedCallback = connectedCallback;
+  }
+
+  /**
+   * Base class connectedCallback
+   */
+  connectedCallback() {
+    if (this._connectedCallback) {
+      console.log(this.tagName + " connectedCallback");
+
+      this._connectedCallback();
+    }
+  }
+
+  /**
    * Require that this component be within a specified parent
    * @param {string} ParentTagName
    */

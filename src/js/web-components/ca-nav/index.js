@@ -13,7 +13,15 @@ export default class ca_nav extends ca_eureka_component {
   }
 
   constructor() {
-    super();
+    const yo = () => {
+      this.requireParentElement("ca-eureka");
+      this.requireSingle();
+      this.requireNotAfter("ca-body", "ca-footer");
+
+      this.contentChanged();
+    };
+
+    super(yo);
 
     const sheet = new CSSStyleSheet();
     sheet.replaceSync(styles);
@@ -55,13 +63,5 @@ export default class ca_nav extends ca_eureka_component {
       //sheet.replaceSync(styles);
       //this.shadowRoot.adoptedStyleSheets = [sheet];
     }
-  }
-
-  connectedCallback() {
-    this.requireParentElement("ca-eureka");
-    this.requireSingle();
-    this.requireNotAfter("ca-body", "ca-footer");
-
-    this.contentChanged();
   }
 }

@@ -18,8 +18,10 @@ export default class ca_eureka extends ca_eureka_component {
     return "ca-eureka";
   }
 
-  connectedCallback() {
-    this.requireParentElement("body");
-    this.requireSingle();
+  constructor() {
+    super(() => {
+      this.requireParentElement("body");
+      this.requireSingle();
+    });
   }
 }

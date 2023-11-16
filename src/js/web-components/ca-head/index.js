@@ -10,9 +10,13 @@ export default class ca_head extends ca_eureka_component {
     return "ca-head";
   }
 
-  connectedCallback() {
-    this.requireParentElement("ca-eureka");
-    this.requireSingle();
+  constructor() {
+    const connectedCallback = () => {
+      this.requireParentElement("ca-eureka");
+      this.requireSingle();
+    };
+
+    super(connectedCallback);
   }
 
   static observedAttributes = ["data-title", "data-description"];
