@@ -42,7 +42,7 @@ export default class ca_eureka_component extends HTMLElement {
       const parentElement = this.parentElement;
       const tagName = this.tagName;
       const reportError = (/** @type {string} */ message) => {
-        console.error(`${tagName}: ${message}`);
+        console.error(tagName + " " + message);
       };
 
       if (options.parent) {
