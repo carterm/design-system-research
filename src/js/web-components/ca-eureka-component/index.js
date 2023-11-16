@@ -11,11 +11,13 @@
 
 export default class ca_eureka_component extends HTMLElement {
   /**
-   * Returns the tagName for this static class
+   * Must override this static get in your component
    */
   static get tagName() {
-    // can't use classname with minification
-    return "ca-eureka-component";
+    throw new Error(
+      "ca_eureka_component: tagName needs to be defined as a static get in component"
+    );
+    return "";
   }
 
   /**
