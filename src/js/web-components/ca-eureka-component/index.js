@@ -71,6 +71,7 @@ export default class ca_eureka_component extends HTMLElement {
    * Returns the tagName for this static class
    */
   static get tagName() {
-    return this.name.toLowerCase().replace(/_/g, "-");
+    // can't use classname with minification
+    return "ca-eureka-component";
   }
 }

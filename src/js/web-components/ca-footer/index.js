@@ -7,4 +7,11 @@ export default class ca_footer extends ca_eureka_component {
     this.requireSingle();
     this.requireLast();
   }
+
+  /**
+   * Returns the tagName for this static class
+   */
+  static get tagName() {
+    return "ca-footer";
+  }
 }

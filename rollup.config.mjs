@@ -1,5 +1,6 @@
 //@ts-check
 import terser from "@rollup/plugin-terser";
+import css from "rollup-plugin-import-css";
 
 export default function () {
   //Place a var at the top of generated source
@@ -12,6 +13,7 @@ export default function () {
   const plugins = [terser({ module: true })];
 
   return {
+    plugins: [css({ minify: true })],
     input: "src/js/index.js",
     output: [
       {

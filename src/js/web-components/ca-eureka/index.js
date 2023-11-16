@@ -15,4 +15,11 @@ export default class ca_eureka extends ca_eureka_component {
     this.requireParentElement("body");
     this.requireSingle();
   }
+
+  /**
+   * Returns the tagName for this static class
+   */
+  static get tagName() {
+    return "ca-eureka";
+  }
 }

@@ -31,4 +31,11 @@ export default class ca_head extends ca_eureka_component {
         break;
     }
   }
+
+  /**
+   * Returns the tagName for this static class
+   */
+  static get tagName() {
+    return "ca-head";
+  }
 }

@@ -2,12 +2,6 @@ body {
   background-color: #ddf;
 }
 
-ca-eureka > ca-nav > * {
-  background-color: #484;
-  padding: 1em;
-  margin: 0;
-}
-
 ca-eureka > ca-body > * {
   background-color: #f84;
   padding: 1em;
