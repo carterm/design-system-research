@@ -4,10 +4,29 @@
 
 import * as eureka from "./web-components/index.js";
 
-//window.addEventListener("load", () => {
-eureka.ca_eureka.defineComponent(window);
-eureka.ca_head.defineComponent(window);
-eureka.ca_nav.defineComponent(window);
-eureka.ca_body.defineComponent(window);
-eureka.ca_footer.defineComponent(window);
-//});
+const all = (
+  /** @type {Window } */ window,
+  /** @type {(typeof eureka.ca_eureka_component)[]} */ ...constructors
+) => {
+  constructors.forEach(c => {
+    window.customElements.define(c.tagName, c);
+  });
+};
+
+all(
+  window,
+  eureka.ca_eureka,
+  eureka.ca_head,
+  eureka.ca_nav,
+  eureka.ca_body,
+  eureka.ca_footer
+);
+/*
+  [eureka.ca_eureka,
+    eureka.ca_head,
+    eureka.ca_nav,
+    eureka.ca_body,
+    eureka.ca_footer].forEach(c => {
+      
+    })
+    */
