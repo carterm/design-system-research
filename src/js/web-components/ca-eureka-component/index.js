@@ -41,9 +41,9 @@ export default class ca_eureka_component extends HTMLElement {
       const options = this._options;
       const parentElement = this.parentElement;
       const tagName = this.tagName;
-      const reportError = (/** @type {string} */ message) => {
-        console.error(tagName + " " + message);
-      };
+
+      const reportError = (/** @type {string} */ message) =>
+        console.error(tagName + ": " + message);
 
       if (options.parent) {
         const parent = options.parent.toUpperCase();
