@@ -10,5 +10,6 @@ import * as eureka from "./web-components/index.js";
   eureka.ca_head,
   eureka.ca_nav,
   eureka.ca_body,
-  eureka.ca_footer
+  eureka.ca_footer,
+  eureka.ca_accordion
 ].forEach(c => window.customElements.define(c.tagName, c));
