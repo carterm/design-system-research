@@ -5,9 +5,7 @@ import ca_eureka_component from "../ca-eureka-component/index.js";
 import styles from "./styles.css" assert { type: "css" };
 
 export default class ca_nav extends ca_eureka_component {
-  /**
-   * Returns the tagName for this static class
-   */
+  /** @override */
   static get tagName() {
     return "ca-nav";
   }

@@ -11,13 +11,10 @@
 
 export default class ca_eureka_component extends HTMLElement {
   /**
-   * Must override this static get in your component
+   * Get the tagName this class will use
    */
   static get tagName() {
-    throw new Error(
-      "ca_eureka_component: tagName needs to be defined as a static get in component"
-    );
-    return "";
+    return "must override";
   }
 
   /**
