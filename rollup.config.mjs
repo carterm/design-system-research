@@ -13,7 +13,7 @@ export default function () {
   const plugins = [terser({ module: true })];
 
   return {
-    plugins: [css({ minify: true })],
+    plugins: [css({ minify: true, modules: true })],
     input: "src/js/index.js",
     output: [
       {
