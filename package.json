@@ -7,6 +7,10 @@
     "email": "carter.medlin@state.ca.gov",
     "url": "https://github.com/carterm"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/carterm/design-system-research.git"
+  },
   "license": "MIT",
   "scripts": {
     "start": "run-p watch:*",
