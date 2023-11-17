@@ -1,7 +1,7 @@
 //@ts-check
 
 /**
- * The complete Triforce, or one or more components of the Triforce.
+ * Options for ca-eureka components
  * @typedef {Object} ca_eureka_component_options
  * @property {string} [parent] - The required parent tag. Example:```ca-eureka```
  * @property {string[]} [not_after] - Elements this element must not be after
