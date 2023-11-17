@@ -1,6 +1,7 @@
 //@ts-check
 import terser from "@rollup/plugin-terser";
 import css from "rollup-plugin-import-css";
+import htmlString from "rollup-plugin-html-string";
 
 export default function () {
   //Place a var at the top of generated source
@@ -13,7 +14,17 @@ export default function () {
   const plugins = [terser({ module: true })];
 
   return {
-    plugins: [css({ minify: true, modules: true })],
+    plugins: [
+      css({ minify: true, modules: false }),
+      htmlString({
+        htmlMinifierOptions: {
+          collapseWhitespace: true,
+          collapseBooleanAttributes: true,
+          conservativeCollapse: true,
+          minifyJS: true
+        }
+      })
+    ],
     input: "src/js/index.js",
     output: [
       {
