@@ -57,12 +57,7 @@ cagov-accordion details summary .cagov-open-indicator::before {
   font-size: 1.6rem;
   transition: transform 0.2s;
 }
-cagov-accordion details summary:hover {
-  color: black;
-}
-cagov-accordion details summary:hover::before {
-  background-color: var(--gray-100, #f3f3f4);
-}
+
 cagov-accordion details .accordion-body {
   padding: 1rem;
   border-radius: 0 0 4px 4px;
@@ -71,41 +66,48 @@ cagov-accordion details .accordion-body {
 }
 
 /* styles applied after custom element javascript runs */
-cagov-accordion:defined {
+cagov-accordion {
   /* let it be open initially if details has open attribute */
 }
-cagov-accordion:defined details {
+cagov-accordion details {
   transition: height 0.2s;
   height: 3rem;
   overflow: visible;
 }
-cagov-accordion:defined summary::-webkit-details-marker {
+cagov-accordion summary::-webkit-details-marker {
   display: none;
 }
-cagov-accordion:defined details summary {
+cagov-accordion details summary {
   list-style: none; /* hide default expansion triangle after js executes */
   border-radius: 4px;
 }
-cagov-accordion:defined details summary:focus::before {
+cagov-accordion details summary:hover {
+  color: black;
+}
+cagov-accordion details summary:hover::before {
   background-color: var(--gray-100, #f3f3f4);
 }
-cagov-accordion:defined details summary:focus::after {
+cagov-accordion details summary:focus::before {
+  background-color: var(--gray-100, #f3f3f4);
+}
+cagov-accordion details summary:focus::after {
   outline: solid 2px #2ea3f2 !important;
   outline-offset: -2px;
 }
-cagov-accordion:defined details[open] {
+cagov-accordion details[open] {
   height: auto;
 }
-cagov-accordion:defined details[open] .cagov-open-indicator::before {
+
+cagov-accordion details[open] .cagov-open-indicator::before {
   transform: rotate(90deg) translateY(-0.2rem);
 }
-cagov-accordion:defined details[open] summary {
+cagov-accordion details[open] summary {
   border-radius: 4px 4px 0 0;
 }
-cagov-accordion:defined details[open] summary::before {
+cagov-accordion details[open] summary::before {
   border-radius: 3px 0 0;
   background-color: var(--gray-100, #f3f3f4);
 }
-cagov-accordion:defined details[open] summary:focus::after {
+cagov-accordion details[open] summary:focus::after {
   border-radius: 3px 3px 0 0;
 }
