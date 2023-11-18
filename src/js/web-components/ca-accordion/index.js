@@ -76,10 +76,7 @@ export default class ca_accordion extends ca_eureka_component {
 
         setHeight();
         summaryEl.addEventListener("click", listen.bind(this));
-        summaryEl.insertAdjacentHTML(
-          "beforeend",
-          `<div class="cagov-open-indicator" aria-hidden="true" />`
-        );
+        summaryEl.insertAdjacentHTML("beforeend", `<div aria-hidden="true" />`);
 
         window.addEventListener("resize", debounce(setHeight).bind(this));
       }

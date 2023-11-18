@@ -43,14 +43,14 @@ details summary::after {
   width: 100%;
   border-radius: 3px;
 }
-details summary .cagov-open-indicator {
+details summary * {
   position: absolute;
   left: 0.5rem;
   top: 0.4rem;
   width: 0;
   height: 0;
 }
-details summary .cagov-open-indicator::before {
+details summary ::before {
   /*font-family: CaGov;*/
   content: ">";
   position: absolute;
@@ -94,7 +94,7 @@ details[open] {
   height: auto;
 }
 
-details[open] .cagov-open-indicator::before {
+details[open] ::before {
   transform: rotate(90deg) translateY(-0.2rem);
 }
 details[open] summary {
