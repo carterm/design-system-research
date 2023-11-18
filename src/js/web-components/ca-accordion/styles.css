@@ -1,5 +1,111 @@
-div {
-  background-color: #a04;
-  padding: 1em;
+/* -----------------------------------------
+   ACCORDIONS
+   /source/scss/cagov/accordion.scss
+----------------------------------------- */
+/* accordion component specific classes */
+/* initial styles */
+cagov-accordion details {
+  margin-bottom: 0;
+  min-height: 3rem;
+  margin-top: 1rem;
+  overflow: visible;
+}
+cagov-accordion details summary {
+  cursor: pointer;
+  padding: 0.5rem 3rem 0.5rem 3.75rem;
+  background-color: var(--gray-50, #fafafa);
+  position: relative;
+  line-height: 2rem;
   margin: 0;
+  color: var(--gray-800, #4a4958);
+  font-size: 1.125rem;
+  font-weight: bold;
+  border: 1px solid var(--gray-200, #d4d4d7);
+}
+cagov-accordion details summary::before {
+  position: absolute;
+  height: 100%;
+  width: 2.75rem;
+  border-right: 1px solid var(--gray-200, #d4d4d7);
+  top: 0;
+  left: 0;
+  background-color: var(--gray-50, #fafafa);
+  border-radius: 3px 0 0 3px;
+  content: "";
+}
+cagov-accordion details summary::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: transparent;
+  height: 100%;
+  width: 100%;
+  border-radius: 3px;
+}
+cagov-accordion details summary .cagov-open-indicator {
+  position: absolute;
+  left: 0.5rem;
+  top: 0.4rem;
+  width: 0;
+  height: 0;
+}
+cagov-accordion details summary .cagov-open-indicator::before {
+  /*font-family: CaGov;*/
+  content: "5";
+  position: absolute;
+  font-size: 1.6rem;
+  transition: transform 0.2s;
+}
+cagov-accordion details summary:hover {
+  color: black;
+}
+cagov-accordion details summary:hover::before {
+  background-color: var(--gray-100, #f3f3f4);
+}
+cagov-accordion details .accordion-body {
+  padding: 1rem;
+  border-radius: 0 0 4px 4px;
+  border: 1px solid var(--gray-200, #d4d4d7);
+  border-top: none;
+}
+
+/* styles applied after custom element javascript runs */
+cagov-accordion:defined {
+  /* let it be open initially if details has open attribute */
+}
+cagov-accordion:defined details {
+  transition: height 0.2s;
+  height: 3rem;
+  overflow: visible;
+}
+cagov-accordion:defined summary::-webkit-details-marker {
+  display: none;
+}
+cagov-accordion:defined details summary {
+  list-style: none; /* hide default expansion triangle after js executes */
+  border-radius: 4px;
+}
+cagov-accordion:defined details summary:focus::before {
+  background-color: var(--gray-100, #f3f3f4);
+}
+cagov-accordion:defined details summary:focus::after {
+  outline: solid 2px #2ea3f2 !important;
+  outline-offset: -2px;
+}
+cagov-accordion:defined details[open] {
+  height: auto;
+}
+cagov-accordion:defined details[open] .cagov-open-indicator::before {
+  transform: rotate(90deg) translateY(-0.2rem);
+}
+cagov-accordion:defined details[open] summary {
+  border-radius: 4px 4px 0 0;
+}
+cagov-accordion:defined details[open] summary::before {
+  border-radius: 3px 0 0;
+  background-color: var(--gray-100, #f3f3f4);
+}
+cagov-accordion:defined details[open] summary:focus::after {
+  border-radius: 3px 3px 0 0;
 }

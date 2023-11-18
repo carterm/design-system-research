@@ -15,7 +15,77 @@ export default class ca_accordion extends ca_eureka_component {
   constructor() {
     const connectedCallback = () => {
       //console.log(template);
-      if (this.shadowRoot) this.shadowRoot.innerHTML = template;
+      if (!this.shadowRoot) return;
+
+      this.shadowRoot.innerHTML = template;
+
+      /** @type {Element | null} */
+      const root = this.shadowRoot.querySelector("cagov-accordion");
+      if (!root) return;
+
+      const summaryEl = root.querySelector("summary");
+      const detailsEl = root.querySelector("details");
+      const bodyEl = root.querySelector(".accordion-body");
+
+      if (summaryEl && detailsEl && bodyEl) {
+        // trigger the opening and closing height change animation on summary click
+
+        /**
+         * @param {function} func
+         */
+        const debounce = (func, timeout = 300) => {
+          let timer;
+          return (/** @type {any} */ ...args) => {
+            window.clearTimeout(timer);
+            timer = window.setTimeout(() => {
+              func.apply(this, args);
+            }, timeout);
+          };
+        };
+
+        const setHeight = () => {
+          window.requestAnimationFrame(() => {
+            // delay so the desired height is readable in all browsers
+            this.closedHeightInt = summaryEl.scrollHeight + 2;
+            this.closedHeight = `${this.closedHeightInt}px`;
+
+            // apply initial height
+            if (detailsEl.hasAttribute("open")) {
+              // if open get scrollHeight
+              detailsEl.style.height = `${
+                bodyEl.scrollHeight + this.closedHeightInt
+              }px`;
+            } else {
+              // else apply closed height
+              detailsEl.style.height = this.closedHeight;
+            }
+          });
+        };
+
+        const listen = () => {
+          if (detailsEl.hasAttribute("open")) {
+            // was open, now closing
+            detailsEl.style.height = this.closedHeight;
+          } else {
+            // was closed, opening
+            window.requestAnimationFrame(() => {
+              // delay so the desired height is readable in all browsers
+              detailsEl.style.height = `${
+                bodyEl.scrollHeight + this.closedHeightInt
+              }px`;
+            });
+          }
+        };
+
+        setHeight();
+        summaryEl.addEventListener("click", listen.bind(this));
+        summaryEl.insertAdjacentHTML(
+          "beforeend",
+          `<div class="cagov-open-indicator" aria-hidden="true" />`
+        );
+
+        window.addEventListener("resize", debounce(setHeight).bind(this));
+      }
     };
 
     super(connectedCallback, {
