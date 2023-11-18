@@ -10,7 +10,7 @@ details {
   margin-top: 1rem;
   overflow: visible;
 }
-details summary {
+details > summary {
   cursor: pointer;
   padding: 0.5rem 3rem 0.5rem 3.75rem;
   background-color: var(--gray-50, #fafafa);
@@ -22,7 +22,7 @@ details summary {
   font-weight: bold;
   border: 1px solid var(--gray-200, #d4d4d7);
 }
-details summary::before {
+details > summary::before {
   position: absolute;
   height: 100%;
   width: 2.75rem;
@@ -33,7 +33,11 @@ details summary::before {
   border-radius: 3px 0 0 3px;
   content: "";
 }
-details summary::after {
+details[open] > summary::before {
+  border-radius: 3px 0 0;
+  background-color: var(--gray-100, #f3f3f4);
+}
+details > summary::after {
   content: "";
   position: absolute;
   top: 0;
@@ -43,14 +47,14 @@ details summary::after {
   width: 100%;
   border-radius: 3px;
 }
-details summary * {
+details > summary > div {
   position: absolute;
   left: 0.5rem;
   top: 0.4rem;
   width: 0;
   height: 0;
 }
-details summary ::before {
+details > summary > div::before {
   /*font-family: CaGov;*/
   content: ">";
   position: absolute;
@@ -58,7 +62,7 @@ details summary ::before {
   transition: transform 0.2s;
 }
 
-details .accordion-body {
+details > :not(summary) {
   padding: 1rem;
   border-radius: 0 0 4px 4px;
   border: 1px solid var(--gray-200, #d4d4d7);
@@ -67,26 +71,24 @@ details .accordion-body {
 
 details {
   transition: height 0.2s;
-  height: 3rem;
-  overflow: visible;
 }
 summary::-webkit-details-marker {
   display: none;
 }
-details summary {
+details > summary {
   list-style: none; /* hide default expansion triangle after js executes */
   border-radius: 4px;
 }
-details summary:hover {
+details > summary:hover {
   color: black;
 }
-details summary:hover::before {
+details > summary:hover::before {
   background-color: var(--gray-100, #f3f3f4);
 }
-details summary:focus::before {
+details > summary:focus::before {
   background-color: var(--gray-100, #f3f3f4);
 }
-details summary:focus::after {
+details > summary:focus::after {
   outline: solid 2px #2ea3f2 !important;
   outline-offset: -2px;
 }
@@ -94,16 +96,14 @@ details[open] {
   height: auto;
 }
 
-details[open] ::before {
+details[open] > summary > div::before {
   transform: rotate(90deg) translateY(-0.2rem);
 }
-details[open] summary {
+
+details[open] > summary {
   border-radius: 4px 4px 0 0;
 }
-details[open] summary::before {
-  border-radius: 3px 0 0;
-  background-color: var(--gray-100, #f3f3f4);
-}
-details[open] summary:focus::after {
+
+details[open] > summary:focus::after {
   border-radius: 3px 3px 0 0;
 }
