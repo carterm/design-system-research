@@ -17,7 +17,6 @@ details > summary {
   position: relative;
   line-height: 2rem;
   margin: 0;
-  color: var(--gray-800, #4a4958);
   font-size: 1.125rem;
   font-weight: bold;
   border: 1px solid var(--gray-200, #d4d4d7);
@@ -82,18 +81,14 @@ details > summary {
 details > summary:hover {
   color: black;
 }
-details > summary:hover::before {
-  background-color: var(--gray-100, #f3f3f4);
-}
+details > summary:hover::before,
 details > summary:focus::before {
   background-color: var(--gray-100, #f3f3f4);
 }
+
 details > summary:focus::after {
   outline: solid 2px #2ea3f2 !important;
   outline-offset: -2px;
-}
-details[open] {
-  height: auto;
 }
 
 details[open] > summary > div::before {
