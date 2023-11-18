@@ -22,7 +22,7 @@ export default class ca_accordion extends ca_eureka_component {
       const root = /** @type {Element} */ (this.shadowRoot.getRootNode());
       const summaryEl = root.querySelector("summary");
       const detailsEl = root.querySelector("details");
-      const bodyEl = root.querySelector(".accordion-body");
+      const bodyEl = root.querySelector("details > :not(summary)");
 
       if (summaryEl && detailsEl && bodyEl) {
         // trigger the opening and closing height change animation on summary click
