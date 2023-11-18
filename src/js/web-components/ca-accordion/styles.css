@@ -52,7 +52,7 @@ cagov-accordion details summary .cagov-open-indicator {
 }
 cagov-accordion details summary .cagov-open-indicator::before {
   /*font-family: CaGov;*/
-  content: "5";
+  content: ">";
   position: absolute;
   font-size: 1.6rem;
   transition: transform 0.2s;
