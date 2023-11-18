@@ -19,10 +19,7 @@ export default class ca_accordion extends ca_eureka_component {
 
       this.shadowRoot.innerHTML = template;
 
-      /** @type {Element | null} */
-      const root = this.shadowRoot.querySelector("cagov-accordion");
-      if (!root) return;
-
+      const root = /** @type {Element} */ (this.shadowRoot.getRootNode());
       const summaryEl = root.querySelector("summary");
       const detailsEl = root.querySelector("details");
       const bodyEl = root.querySelector(".accordion-body");
