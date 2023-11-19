@@ -34,7 +34,7 @@ export default class ca_accordion extends ca_eureka_component {
     const root = /** @type {Element} */ (shadow.getRootNode());
 
     const detailsEl = root.querySelector("details");
-    const summaryEl = detailsEl?.querySelector("details > summary");
+    const summaryEl = root.querySelector("details > summary");
     const bodyEl = root.querySelector("details > :not(summary)");
 
     if (summaryEl && detailsEl && bodyEl) {
