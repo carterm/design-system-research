@@ -14,7 +14,6 @@ export default class ca_body extends ca_eureka_component {
 
   constructor() {
     const connectedCallback = () => {
-      console.log(template);
       if (this.shadowRoot) this.shadowRoot.innerHTML = this.innerHTML;
     };
 

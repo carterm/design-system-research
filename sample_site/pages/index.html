@@ -9,7 +9,22 @@
 
   <ca-body>
     <div>My body</div>
-    <ca-accordion></ca-accordion>
+    <ca-accordion>
+      <span slot="summary">My accordion</span>
+      <span slot="content"
+        >My accordion content
+        <p>P1</p>
+        <p>P2</p></span
+      >
+    </ca-accordion>
+    <ca-accordion>
+      <span slot="summary">My accordion 2</span>
+      <span slot="content"
+        >My accordion content 2
+        <p>P1</p>
+        <p>P2</p></span
+      >
+    </ca-accordion>
   </ca-body>
   <ca-footer>
     <p>My footer</p>
