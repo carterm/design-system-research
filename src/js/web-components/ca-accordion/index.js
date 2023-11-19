@@ -13,16 +13,13 @@ export default class ca_accordion extends ca_eureka_component {
   }
 
   /** @type {CSSStyleSheet | undefined} */
-  static _getStyle;
-  static get getStyle() {
-    if (!this._getStyle) {
-      this._getStyle = new CSSStyleSheet();
-      this._getStyle.replaceSync(styles);
-      console.log("style built");
-    } else {
-      console.log("style reused");
+  static _style;
+  static get StyleSheet() {
+    if (!this._style) {
+      this._style = new CSSStyleSheet();
+      this._style.replaceSync(styles);
     }
-    return this._getStyle;
+    return this._style;
   }
 
   constructor() {
@@ -32,11 +29,9 @@ export default class ca_accordion extends ca_eureka_component {
       parent: "ca-body"
     });
 
-    //const sheet = new CSSStyleSheet();
-    //sheet.replaceSync(styles);
-
     const shadow = this.attachShadow({ mode: "closed" });
-    shadow.adoptedStyleSheets.push(ca_accordion.getStyle);
+
+    shadow.adoptedStyleSheets.push(ca_accordion.StyleSheet);
 
     const myTemplate = document.createElement("template");
     myTemplate.innerHTML = template;
