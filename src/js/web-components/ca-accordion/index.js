@@ -24,12 +24,11 @@ export default class ca_accordion extends ca_eureka_component {
 
     const shadow = this.attachShadow({ mode: "closed" });
     shadow.adoptedStyleSheets.push(sheet);
-    shadow.innerHTML = template;
 
-    const myTemplate = shadow.querySelector("template");
-    if (!myTemplate) return;
+    const myTemplate = document.createElement("template");
+    myTemplate.innerHTML = template;
 
-    shadow.appendChild(myTemplate.content.cloneNode(true));
+    shadow.appendChild(myTemplate.content);
 
     const root = /** @type {Element} */ (shadow.getRootNode());
 

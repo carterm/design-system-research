@@ -1,10 +1,16 @@
-<template>
-  <details>
-    <summary>
-      <slot name="summary"></slot>
-    </summary>
-    <div>
-      <slot name="content"></slot>
-    </div>
-  </details>
-</template>
+<details>
+  <summary>
+    <slot name="summary"
+      >Error - Expecting
+      <br />
+      <code>&lt;span slot="summary"&gt;(Summary HTML)&lt;/span&gt;</code></slot
+    >
+  </summary>
+  <div>
+    <slot name="content"
+      >Error - Expecting
+      <br />
+      <code>&lt;span slot="content"&gt;(Content HTML)&lt;/span&gt;</code></slot
+    >
+  </div>
+</details>
