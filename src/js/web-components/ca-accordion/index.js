@@ -28,7 +28,7 @@ export default class ca_accordion extends ca_eureka_component {
     const myTemplate = document.createElement("template");
     myTemplate.innerHTML = template;
 
-    shadow.appendChild(myTemplate.content);
+    shadow.appendChild(myTemplate.content.cloneNode(true));
 
     const root = /** @type {Element} */ (shadow.getRootNode());
 
