@@ -16,7 +16,6 @@ details > summary {
   background-color: var(--gray-50, #fafafa);
   position: relative;
   line-height: 2rem;
-  margin: 0;
   font-size: 1.125rem;
   font-weight: bold;
   border: 1px solid var(--gray-200, #d4d4d7);
@@ -33,7 +32,7 @@ details > summary::before {
   content: "";
 }
 details[open] > summary::before {
-  border-radius: 3px 0 0;
+  border-bottom-left-radius: 0;
   background-color: var(--gray-100, #f3f3f4);
 }
 details > summary::after {
@@ -60,6 +59,9 @@ details > summary > div::before {
   font-size: 1.6rem;
   transition: transform 0.2s;
 }
+details[open] > summary > div::before {
+  transform: rotate(90deg) translateY(-0.2rem);
+}
 
 details > :not(summary) {
   padding: 1rem;
@@ -78,6 +80,11 @@ details > summary {
   list-style: none; /* hide default expansion triangle after js executes */
   border-radius: 4px;
 }
+details[open] > summary {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
 details > summary:hover {
   color: black;
 }
@@ -89,14 +96,6 @@ details > summary:focus::before {
 details > summary:focus::after {
   outline: solid 2px #2ea3f2 !important;
   outline-offset: -2px;
-}
-
-details[open] > summary > div::before {
-  transform: rotate(90deg) translateY(-0.2rem);
-}
-
-details[open] > summary {
-  border-radius: 4px 4px 0 0;
 }
 
 details[open] > summary:focus::after {
