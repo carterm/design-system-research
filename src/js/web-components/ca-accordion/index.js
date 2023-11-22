@@ -2,10 +2,11 @@
 import ca_eureka_component from "../ca-eureka-component/index.js";
 
 // @ts-ignore
-import styles from "./styles.css" assert { type: "css" };
+import CssStyleString from "./styles.css" assert { type: "css" };
 
 // @ts-ignore
-import template from "./template.html" assert { type: "html" };
+import HtmlTemplateString from "./template.html" assert { type: "html" };
+
 export default class ca_accordion extends ca_eureka_component {
   /** @override */
   static get tagName() {
@@ -17,7 +18,7 @@ export default class ca_accordion extends ca_eureka_component {
   static get StyleSheet() {
     if (!this._style) {
       this._style = new CSSStyleSheet();
-      this._style.replaceSync(styles);
+      this._style.replaceSync(CssStyleString);
     }
     return this._style;
   }
@@ -34,7 +35,7 @@ export default class ca_accordion extends ca_eureka_component {
     shadow.adoptedStyleSheets.push(ca_accordion.StyleSheet);
 
     const myTemplate = document.createElement("template");
-    myTemplate.innerHTML = template;
+    myTemplate.innerHTML = HtmlTemplateString;
 
     shadow.appendChild(myTemplate.content.cloneNode(true));
 
