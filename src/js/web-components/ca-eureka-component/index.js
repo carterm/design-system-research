@@ -43,22 +43,22 @@ export default class ca_eureka_component extends HTMLElement {
     };
 
     const hash = hashCode(styleString);
-    const i = this._styleHashes.indexOf(hash);
+    const i = ca_eureka_component._styleHashes.indexOf(hash);
     if (i < 0) {
       const newStyle = new CSSStyleSheet();
       newStyle.replaceSync(styleString);
-      this._styleHashes.push(hash);
-      this._styles.push(newStyle);
+      ca_eureka_component._styleHashes.push(hash);
+      ca_eureka_component._styles.push(newStyle);
 
       shadow.adoptedStyleSheets.push(newStyle);
     } else {
-      shadow.adoptedStyleSheets.push(this._styles[i]);
+      shadow.adoptedStyleSheets.push(ca_eureka_component._styles[i]);
     }
   }
 
   /** @param {ShadowRoot} shadow */
   static addRootStyle(shadow) {
-    return this.addStyle(shadow, CssRootStyleString);
+    return ca_eureka_component.addStyle(shadow, CssRootStyleString);
   }
 
   /**
