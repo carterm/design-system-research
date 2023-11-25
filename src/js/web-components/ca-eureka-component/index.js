@@ -35,12 +35,11 @@ export default class ca_eureka_component extends HTMLElement {
      *
      * @param {string} s
      */
-    const hashCode = s => {
-      return s.split("").reduce(function (a, b) {
+    const hashCode = s =>
+      s.split("").reduce((a, b) => {
         a = (a << 5) - a + b.charCodeAt(0);
         return a & a;
       }, 0);
-    };
 
     const hash = hashCode(styleString);
     const i = ca_eureka_component._styleHashes.indexOf(hash);
