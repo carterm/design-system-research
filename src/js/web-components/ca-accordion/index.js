@@ -22,7 +22,7 @@ export default class ca_accordion extends ca_eureka_component {
 
     const shadow = this.attachShadow({ mode: "closed" });
 
-    ca_accordion.addRootStyle(shadow);
+    ca_accordion.addStyle(shadow);
     ca_accordion.addStyle(shadow, CssStyleString);
 
     const myTemplate = document.createElement("template");

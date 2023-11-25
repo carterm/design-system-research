@@ -27,10 +27,11 @@ export default class ca_eureka_component extends HTMLElement {
   static _styles = [];
 
   /**
+   * Add a cachable stylestring to a shadow root
    * @param {ShadowRoot} shadow
-   * @param {string} styleString
+   * @param {string} [styleString] leave blank to add the root css
    */
-  static addStyle(shadow, styleString) {
+  static addStyle(shadow, styleString = CssRootStyleString) {
     /**
      * @param {string} s
      */
@@ -52,11 +53,6 @@ export default class ca_eureka_component extends HTMLElement {
     }
 
     shadow.adoptedStyleSheets.push(style);
-  }
-
-  /** @param {ShadowRoot} shadow */
-  static addRootStyle(shadow) {
-    return ca_eureka_component.addStyle(shadow, CssRootStyleString);
   }
 
   /**
