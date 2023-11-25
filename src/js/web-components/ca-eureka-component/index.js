@@ -1,5 +1,8 @@
 //@ts-check
 
+// @ts-ignore
+import CssRootStyleString from "./rootstyle.css" assert { type: "css" };
+
 /**
  * Options for ca-eureka components
  * @typedef {Object} ca_eureka_component_options
@@ -15,6 +18,16 @@ export default class ca_eureka_component extends HTMLElement {
    */
   static get tagName() {
     return "must override";
+  }
+
+  /** @type {CSSStyleSheet | undefined} */
+  static _rootstyle;
+  static get RootStyleSheet() {
+    if (!this._rootstyle) {
+      this._rootstyle = new CSSStyleSheet();
+      this._rootstyle.replaceSync(CssRootStyleString);
+    }
+    return this._rootstyle;
   }
 
   /**
