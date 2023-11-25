@@ -20,14 +20,45 @@ export default class ca_eureka_component extends HTMLElement {
     return "must override";
   }
 
-  /** @type {CSSStyleSheet | undefined} */
-  static _rootstyle;
-  static get RootStyleSheet() {
-    if (!this._rootstyle) {
-      this._rootstyle = new CSSStyleSheet();
-      this._rootstyle.replaceSync(CssRootStyleString);
+  /** @type {number[]} */
+  static _styleHashes = [];
+
+  /** @type {CSSStyleSheet[]} */
+  static _styles = [];
+
+  /**
+   * @param {ShadowRoot} shadow
+   * @param {string} styleString
+   */
+  static addStyle(shadow, styleString) {
+    /**
+     *
+     * @param {string} s
+     */
+    const hashCode = s => {
+      return s.split("").reduce(function (a, b) {
+        a = (a << 5) - a + b.charCodeAt(0);
+        return a & a;
+      }, 0);
+    };
+
+    const hash = hashCode(styleString);
+    const i = this._styleHashes.indexOf(hash);
+    if (i < 0) {
+      const newStyle = new CSSStyleSheet();
+      newStyle.replaceSync(styleString);
+      this._styleHashes.push(hash);
+      this._styles.push(newStyle);
+
+      shadow.adoptedStyleSheets.push(newStyle);
+    } else {
+      shadow.adoptedStyleSheets.push(this._styles[i]);
     }
-    return this._rootstyle;
+  }
+
+  /** @param {ShadowRoot} shadow */
+  static addRootStyle(shadow) {
+    return this.addStyle(shadow, CssRootStyleString);
   }
 
   /**
