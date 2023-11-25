@@ -20,11 +20,10 @@ export default class ca_eureka_component extends HTMLElement {
     return "must override";
   }
 
-  /** @type {number[]} */
-  static _styleHashes = [];
-
-  /** @type {CSSStyleSheet[]} */
-  static _styles = [];
+  /**
+   * Hashtable for style objects
+   */
+  static _styles = {};
 
   /**
    * Add a cachable stylestring to a shadow root
@@ -42,14 +41,15 @@ export default class ca_eureka_component extends HTMLElement {
       }, 0);
 
     const hash = hashCode(styleString);
-    const i = ca_eureka_component._styleHashes.indexOf(hash);
 
-    const style = i < 0 ? new CSSStyleSheet() : ca_eureka_component._styles[i];
+    /** @type {CSSStyleSheet | undefined} */
+    let style = ca_eureka_component._styles[hash];
 
-    if (i < 0) {
+    if (!style) {
+      style = new CSSStyleSheet();
       style.replaceSync(styleString);
-      ca_eureka_component._styleHashes.push(hash);
-      ca_eureka_component._styles.push(style);
+
+      ca_eureka_component._styles[hash] = style;
     }
 
     shadow.adoptedStyleSheets.push(style);
