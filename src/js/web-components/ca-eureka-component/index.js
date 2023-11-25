@@ -31,7 +31,7 @@ export default class ca_eureka_component extends HTMLElement {
    * @param {string} [styleString] leave blank to add the root css
    */
   static addStyle(shadow, styleString = CssRootStyleString) {
-    const hashCode = (/** @type {string} **/ s) =>
+    const hashCode = (/** @type {string} */ s) =>
       s.split("").reduce((a, b) => {
         a = (a << 5) - a + b.charCodeAt(0);
         return a & a;
@@ -39,7 +39,7 @@ export default class ca_eureka_component extends HTMLElement {
 
     const hash = hashCode(styleString);
 
-    /** @type {CSSStyleSheet | undefined} */
+    /** @type {CSSStyleSheet} */
     let style = ca_eureka_component._styles[hash];
 
     if (!style) {
