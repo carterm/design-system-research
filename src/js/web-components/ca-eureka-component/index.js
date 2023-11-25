@@ -32,7 +32,6 @@ export default class ca_eureka_component extends HTMLElement {
    */
   static addStyle(shadow, styleString) {
     /**
-     *
      * @param {string} s
      */
     const hashCode = s =>
@@ -43,16 +42,16 @@ export default class ca_eureka_component extends HTMLElement {
 
     const hash = hashCode(styleString);
     const i = ca_eureka_component._styleHashes.indexOf(hash);
-    if (i < 0) {
-      const newStyle = new CSSStyleSheet();
-      newStyle.replaceSync(styleString);
-      ca_eureka_component._styleHashes.push(hash);
-      ca_eureka_component._styles.push(newStyle);
 
-      shadow.adoptedStyleSheets.push(newStyle);
-    } else {
-      shadow.adoptedStyleSheets.push(ca_eureka_component._styles[i]);
+    const style = i < 0 ? new CSSStyleSheet() : ca_eureka_component._styles[i];
+
+    if (i < 0) {
+      style.replaceSync(styleString);
+      ca_eureka_component._styleHashes.push(hash);
+      ca_eureka_component._styles.push(style);
     }
+
+    shadow.adoptedStyleSheets.push(style);
   }
 
   /** @param {ShadowRoot} shadow */
