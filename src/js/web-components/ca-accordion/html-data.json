@@ -1,0 +1,28 @@
+{
+  "version": 1.1,
+  "tags": [
+    {
+      "name": "ca-accordion",
+      "description": "html-data.description.md",
+      "attributes": [
+        {
+          "name": "type",
+          "description": "Root element type",
+          "references": [
+            {
+              "name": "Reference - Eureka",
+              "url": "https://template.webstandards.ca.gov/"
+            }
+          ]
+        }
+      ],
+
+      "references": [
+        {
+          "name": "Reference - Eureka",
+          "url": "https://template.webstandards.ca.gov/"
+        }
+      ]
+    }
+  ]
+}
