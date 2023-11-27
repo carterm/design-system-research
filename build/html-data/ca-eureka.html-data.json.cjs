@@ -41,9 +41,9 @@ const files = fs
           fs.readFileSync(r.path + "/" + r.name, {
             encoding: "utf-8"
           })
-        ).slice(1, -1);
+        );
 
-        jsonText = jsonText.replace(r.name, mdText);
+        jsonText = jsonText.replace(`"${r.name}"`, mdText);
       });
 
     return /** @type {html_data} */ (JSON.parse(jsonText));
