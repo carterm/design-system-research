@@ -28,7 +28,7 @@ const files = fs
     recursive: true,
     withFileTypes: true
   })
-  .filter(d => d.name === "html-data.json")
+  .filter(d => d.name.endsWith(".html-data.json"))
   .map(f => {
     let jsonText = fs.readFileSync(f.path + "/" + f.name, {
       encoding: "utf-8"
