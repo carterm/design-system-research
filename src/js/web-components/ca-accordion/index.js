@@ -86,10 +86,10 @@ export default class ca_accordion extends ca_eureka_component {
         }
       };
 
-      summaryEl.addEventListener("click", clickHandler.bind(this));
+      summaryEl.addEventListener("click", clickHandler);
       summaryEl.insertAdjacentHTML("beforeend", `<div aria-hidden="true" />`);
 
-      window.addEventListener("resize", debounce(setHeight).bind(this));
+      window.addEventListener("resize", debounce(setHeight));
 
       setHeight();
     }
