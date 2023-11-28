@@ -1,10 +1,13 @@
 //@ts-check
 
+const targetFileName = "./_site/html-data/ca-eureka.html-data.json";
+const srcPath = "./src/js/web-components";
+
 const fs = require("fs");
 const path = require("path");
 
 /**
- * Options for ca-eureka components
+ * Default root for html-data.json
  * @typedef {Object} html_data
  * @property {number} version
  * @property {*[]} tags
@@ -17,17 +20,17 @@ const combo = {
 };
 
 const replacements = fs
-  .readdirSync("./src/js/web-components", {
+  .readdirSync(srcPath, {
     recursive: true,
     withFileTypes: true
   })
   .filter(d => d.name.startsWith(".html-data.") && d.name.endsWith(".md"));
 
-const files = fs
-  .readdirSync("./src/js/web-components", {
-    recursive: true,
-    withFileTypes: true
-  })
+// process all the html-data files
+fs.readdirSync(srcPath, {
+  recursive: true,
+  withFileTypes: true
+})
   .filter(d => d.name.endsWith(".html-data.json"))
   .map(f => {
     let jsonText = fs.readFileSync(f.path + "/" + f.name, {
@@ -47,16 +50,10 @@ const files = fs
       });
 
     return /** @type {html_data} */ (JSON.parse(jsonText));
-  });
+  })
+  .forEach(f => combo.tags.push(...f.tags));
 
-files.forEach(f => combo.tags.push(...f.tags));
+const dir = path.dirname(targetFileName);
+!fs.existsSync(dir) && fs.mkdirSync(dir, { recursive: true });
 
-const targetDir = "./_site/html-data/";
-
-if (!fs.existsSync("./_site")) fs.mkdirSync("./_site");
-if (!fs.existsSync(targetDir)) fs.mkdirSync(targetDir);
-
-fs.writeFileSync(
-  `${targetDir}ca-eureka.html-data.json`,
-  JSON.stringify(combo, null, 2)
-);
+fs.writeFileSync(targetFileName, JSON.stringify(combo, null, 2));
