@@ -71,7 +71,7 @@ export default class ca_accordion extends ca_eureka_component {
         });
       };
 
-      const listen = () => {
+      const clickHandler = () => {
         if (detailsEl.hasAttribute("open")) {
           // was open, now closing
           detailsEl.style.height = this.closedHeight;
@@ -86,11 +86,12 @@ export default class ca_accordion extends ca_eureka_component {
         }
       };
 
-      setHeight();
-      summaryEl.addEventListener("click", listen.bind(this));
+      summaryEl.addEventListener("click", clickHandler.bind(this));
       summaryEl.insertAdjacentHTML("beforeend", `<div aria-hidden="true" />`);
 
       window.addEventListener("resize", debounce(setHeight).bind(this));
+
+      setHeight();
     }
   }
 }
