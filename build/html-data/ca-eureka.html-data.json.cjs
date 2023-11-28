@@ -21,7 +21,7 @@ const replacements = fs
     recursive: true,
     withFileTypes: true
   })
-  .filter(d => d.name.startsWith("html-data.") && d.name.endsWith(".md"));
+  .filter(d => d.name.startsWith(".html-data.") && d.name.endsWith(".md"));
 
 const files = fs
   .readdirSync("./src/js/web-components", {
