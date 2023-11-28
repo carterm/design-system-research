@@ -26,7 +26,7 @@ const allFiles = fs.readdirSync(srcPath, {
   withFileTypes: true
 });
 
-// process all the html-data files
+// process all the html-data input files and push them into combo
 allFiles
   .filter(d => d.name.endsWith(".html-data.json"))
   .forEach(f => {
@@ -55,6 +55,7 @@ allFiles
     combo.tags.push(.../** @type {html_data} */ (JSON.parse(jsonText)).tags);
   });
 
+// Make the target path if it isn't already there
 const dir = path.dirname(targetFileName);
 !fs.existsSync(dir) && fs.mkdirSync(dir, { recursive: true });
 
