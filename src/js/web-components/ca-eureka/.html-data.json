@@ -3,7 +3,7 @@
   "tags": [
     {
       "name": "ca-eureka",
-      "description": "html-data.description.md",
+      "description": ".html-data.description.md",
       "attributes": [
         {
           "name": "type",
