@@ -2,6 +2,9 @@
   "name": "cagov-eureka-development",
   "version": "0.0.1",
   "description": "Eureka Design System Research development Project",
+  "engines": {
+    "node": ">=20.0.0"
+  },
   "author": {
     "name": "Carter Medlin",
     "email": "carter.medlin@state.ca.gov",
