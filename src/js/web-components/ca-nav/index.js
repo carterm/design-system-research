@@ -11,21 +11,16 @@ export default class ca_nav extends ca_eureka_component {
   }
 
   constructor() {
-    const connectedCallback = () => {
-      this.contentChanged();
-    };
-
-    super(connectedCallback, {
+    super({
       not_after: ["ca-body", "ca-footer"],
       parent: "ca-eureka",
       single: true
     });
 
-    const sheet = new CSSStyleSheet();
-    sheet.replaceSync(styles);
-
     const shadow = this.attachShadow({ mode: "open" });
-    shadow.adoptedStyleSheets.push(sheet);
+    this.setConnectedCallback(this.contentChanged);
+
+    ca_nav.addStyle(shadow, styles);
 
     // Callback function to execute when mutations are observed
     /** @type {MutationCallback} */

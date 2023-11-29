@@ -17,9 +17,7 @@ export default class ca_eureka extends ca_eureka_component {
   }
 
   constructor() {
-    const connectedCallback = () => {};
-
-    super(connectedCallback, {
+    super({
       parent: "body",
       single: true
     });

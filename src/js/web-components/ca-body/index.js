@@ -6,6 +6,7 @@ import styles from "./styles.css" assert { type: "css" };
 
 // @ts-ignore
 import template from "./template.html" assert { type: "html" };
+
 export default class ca_body extends ca_eureka_component {
   /** @override */
   static get tagName() {
@@ -13,20 +14,14 @@ export default class ca_body extends ca_eureka_component {
   }
 
   constructor() {
-    const connectedCallback = () => {
-      if (this.shadowRoot) this.shadowRoot.innerHTML = this.innerHTML;
-    };
-
-    super(connectedCallback, {
+    super({
       not_after: ["ca-footer"],
       parent: "ca-eureka",
       single: true
     });
 
-    const sheet = new CSSStyleSheet();
-    sheet.replaceSync(styles);
-
-    const shadow = this.attachShadow({ mode: "open" });
-    shadow.adoptedStyleSheets.push(sheet);
+    const shadow = this.attachShadow({ mode: "closed" });
+    ca_body.addStyle(shadow, styles);
+    shadow.innerHTML = template;
   }
 }

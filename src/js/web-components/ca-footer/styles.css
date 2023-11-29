@@ -1,4 +1,4 @@
-p {
+:host > div {
   background-color: #88f;
   padding: 1em;
   margin: 0;

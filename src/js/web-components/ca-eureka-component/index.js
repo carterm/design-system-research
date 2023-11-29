@@ -53,16 +53,21 @@ export default class ca_eureka_component extends HTMLElement {
   }
 
   /**
-   * @param {() => void} connectedCallback
+ 
    * @param {ca_eureka_component_options} [options]
    */
-  constructor(connectedCallback, options) {
+  constructor(options) {
     super();
 
-    /** @type {()=>void} */
-    this._connectedCallback = connectedCallback;
     /** @type {ca_eureka_component_options | undefined} */
     this._options = options;
+  }
+
+  /**
+   * @param {() => void} [connectedCallback]
+   */
+  setConnectedCallback(connectedCallback) {
+    this._connectedCallback = connectedCallback;
   }
 
   /**

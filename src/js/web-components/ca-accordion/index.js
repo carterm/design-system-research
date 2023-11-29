@@ -14,9 +14,7 @@ export default class ca_accordion extends ca_eureka_component {
   }
 
   constructor() {
-    const connectedCallback = () => {};
-
-    super(connectedCallback, {
+    super({
       parent: "ca-body"
     });
 
