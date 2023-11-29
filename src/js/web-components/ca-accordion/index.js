@@ -28,11 +28,9 @@ export default class ca_accordion extends ca_eureka_component {
 
     shadow.appendChild(myTemplate.content.cloneNode(true));
 
-    const root = /** @type {Element} */ (shadow.getRootNode());
-
-    const detailsEl = root.querySelector("details");
-    const summaryEl = root.querySelector("details > summary");
-    const bodyEl = root.querySelector("details > :not(summary)");
+    const detailsEl = shadow.querySelector("details");
+    const summaryEl = shadow.querySelector("details > summary");
+    const bodyEl = shadow.querySelector("details > :not(summary)");
 
     if (summaryEl && detailsEl && bodyEl) {
       // trigger the opening and closing height change animation on summary click
