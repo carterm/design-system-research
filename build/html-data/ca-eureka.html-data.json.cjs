@@ -22,7 +22,7 @@ const combo = {
 };
 
 const allFiles = fs.readdirSync(srcPath, {
-  recursive: true,
+  recursive: true, //Node V20+
   withFileTypes: true
 });
 
@@ -57,6 +57,9 @@ allFiles
 
 // Make the target path if it isn't already there
 const dir = path.dirname(targetFileName);
-!fs.existsSync(dir) && fs.mkdirSync(dir, { recursive: true });
+!fs.existsSync(dir) &&
+  fs.mkdirSync(dir, {
+    recursive: true //Node V20+
+  });
 
 fs.writeFileSync(targetFileName, JSON.stringify(combo, null, 2));
