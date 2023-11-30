@@ -35,59 +35,47 @@ export default class ca_accordion extends ca_eureka_component {
     if (summaryEl && detailsEl && bodyEl) {
       // trigger the opening and closing height change animation on summary click
 
-      /**
-       * @param {function} func
-       */
-      const debounce = (func, timeout = 300) => {
-        let timer;
-        return (/** @type {any} */ ...args) => {
-          window.clearTimeout(timer);
-          timer = window.setTimeout(() => {
-            func.apply(this, args);
-          }, timeout);
-        };
-      };
-
-      const setHeight = () => {
-        window.requestAnimationFrame(() => {
-          // delay so the desired height is readable in all browsers
-          this.closedHeightInt = summaryEl.scrollHeight + 2;
-          this.closedHeight = `${this.closedHeightInt}px`;
-
-          // apply initial height
-          if (detailsEl.hasAttribute("open")) {
-            // if open get scrollHeight
-            detailsEl.style.height = `${
-              bodyEl.scrollHeight + this.closedHeightInt
-            }px`;
-          } else {
-            // else apply closed height
-            detailsEl.style.height = this.closedHeight;
-          }
-        });
-      };
-
-      const clickHandler = () => {
-        if (detailsEl.hasAttribute("open")) {
-          // was open, now closing
-          detailsEl.style.height = this.closedHeight;
-        } else {
-          // was closed, opening
-          window.requestAnimationFrame(() => {
-            // delay so the desired height is readable in all browsers
-            detailsEl.style.height = `${
-              bodyEl.scrollHeight + this.closedHeightInt
-            }px`;
-          });
-        }
-      };
-
-      summaryEl.addEventListener("click", clickHandler);
       summaryEl.insertAdjacentHTML("beforeend", `<div aria-hidden="true" />`);
 
-      window.addEventListener("resize", debounce(setHeight));
+      /**
+       *
+       * @param {HTMLDetailsElement} details
+       */
+      function setDetailsHeight(details) {
+        const setHeight = (
+          /** @type {HTMLDetailsElement} */ detail,
+          open = false
+        ) => {
+          detail.open = open;
+          const rect = detail.getBoundingClientRect();
+          detail.dataset.width = `${rect.width}`;
+          detail.style.setProperty(
+            open ? `--expanded` : `--collapsed`,
+            `${rect.height}px`
+          );
+        };
 
-      setHeight();
+        const RO = new ResizeObserver(entries =>
+          entries
+            .filter(x => x.target)
+            .forEach(entry => {
+              const detail = /** @type {HTMLDetailsElement} */ (entry.target);
+
+              const width = parseInt(detail.dataset.width || "", 10);
+              if (width !== entry.contentRect.width) {
+                detail.removeAttribute("style");
+                setHeight(detail);
+                setHeight(detail, true);
+                detail.open = false;
+              }
+            })
+        );
+
+        RO.observe(details);
+      }
+
+      /* Run it */
+      setDetailsHeight(detailsEl);
     }
   }
 }
