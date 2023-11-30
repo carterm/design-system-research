@@ -51,8 +51,6 @@ details > summary > div {
   position: absolute;
   left: 0.5rem;
   top: 0.4rem;
-  width: 0;
-  height: 0;
 }
 details > summary > div::before {
   /*font-family: CaGov;*/
@@ -72,32 +70,16 @@ details > :not(summary) {
   border-top: none;
 }
 
-details {
-  transition: height 0.2s;
-}
 summary::-webkit-details-marker {
-  display: none;
+  display: none; /* required for Safari */
 }
 details > summary {
-  list-style: none; /* hide default expansion triangle after js executes */
+  list-style: none; /* hide default expansion triangle */
   border-radius: 4px;
 }
 details[open] > summary {
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
-}
-
-details > summary:hover {
-  color: black;
-}
-details > summary:hover::before,
-details > summary:focus::before {
-  background-color: var(--gray-100, #f3f3f4);
-}
-
-details > summary:focus::after {
-  outline: solid 2px #2ea3f2 !important;
-  outline-offset: -2px;
 }
 
 details[open] > summary:focus::after {

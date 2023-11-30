@@ -44,7 +44,7 @@ export default class ca_accordion extends ca_eureka_component {
                 `${detail.getBoundingClientRect().height}px`
               );
 
-              detail.open = !detail.open;
+              detail.open = !detail.open; //TODO: causes arrow flickering in safari
             });
           }
         })
