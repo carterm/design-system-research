@@ -13,6 +13,43 @@ export default class ca_accordion extends ca_eureka_component {
     return "ca-accordion";
   }
 
+  /** @type {ResizeObserver} */
+  static _resizeObserver;
+
+  /**
+   * @param {Element} target
+   */
+  static observeResize(target) {
+    if (!ca_accordion._resizeObserver) {
+      ca_accordion._resizeObserver = new ResizeObserver(entries =>
+        entries
+          .filter(x => x.target)
+          .forEach(entry => {
+            const detail = /** @type {HTMLDetailsElement} */ (entry.target);
+
+            const width = parseInt(detail.dataset.width || "");
+            if (width !== entry.contentRect.width) {
+              detail.dataset.width = `${entry.contentRect.width}`;
+
+              ["--expanded", "--collapsed"].forEach(s =>
+                detail.style.removeProperty(s)
+              );
+
+              [1, 2].forEach(x => {
+                detail.style.setProperty(
+                  detail.open ? "--expanded" : "--collapsed",
+                  `${detail.getBoundingClientRect().height}px`
+                );
+
+                detail.open = !detail.open;
+              });
+            }
+          })
+      );
+    }
+    ca_accordion._resizeObserver.observe(target);
+  }
+
   constructor() {
     super({
       parent: "ca-body"
@@ -37,42 +74,7 @@ export default class ca_accordion extends ca_eureka_component {
 
       summaryEl.insertAdjacentHTML("beforeend", `<div aria-hidden="true" />`);
 
-      /**
-       *
-       * @param {HTMLDetailsElement} details
-       */
-      function setDetailsHeight(details) {
-        const RO = new ResizeObserver(entries =>
-          entries
-            .filter(x => x.target)
-            .forEach(entry => {
-              const detail = /** @type {HTMLDetailsElement} */ (entry.target);
-
-              const width = parseInt(detail.dataset.width || "");
-              if (width !== entry.contentRect.width) {
-                detail.dataset.width = `${entry.contentRect.width}`;
-
-                ["--expanded", "--collapsed"].forEach(s =>
-                  detail.style.removeProperty(s)
-                );
-
-                [1, 2].forEach(x => {
-                  detail.style.setProperty(
-                    detail.open ? "--expanded" : "--collapsed",
-                    `${detail.getBoundingClientRect().height}px`
-                  );
-
-                  detail.open = !detail.open;
-                });
-              }
-            })
-        );
-
-        RO.observe(details, { box: "border-box" });
-      }
-
-      /* Run it */
-      setDetailsHeight(detailsEl);
+      ca_accordion.observeResize(detailsEl);
     }
   }
 }
