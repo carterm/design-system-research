@@ -56,17 +56,20 @@ export default class ca_accordion extends ca_eureka_component {
                   detail.style.removeProperty(s)
                 );
 
-                [true, false].forEach(open => {
-                  const originalOpen = detail.open;
-                  detail.open = open;
+                const originalOpen = detail.open;
+
+                Array(2).forEach(x => {
+                  console.log(x);
+                  detail.open = !detail.open;
                   const rect = detail.getBoundingClientRect();
 
                   detail.style.setProperty(
-                    open ? "--expanded" : "--collapsed",
+                    detail.open ? "--expanded" : "--collapsed",
                     `${rect.height}px`
                   );
-                  detail.open = originalOpen;
                 });
+
+                detail.open = originalOpen;
               }
             })
         );
