@@ -42,33 +42,34 @@ export default class ca_accordion extends ca_eureka_component {
        * @param {HTMLDetailsElement} details
        */
       function setDetailsHeight(details) {
-        const setHeight = (
-          /** @type {HTMLDetailsElement} */ detail,
-          open = false
-        ) => {
-          const originalOpen = detail.open;
-          detail.open = open;
-          const rect = detail.getBoundingClientRect();
-          console.log(rect);
-          detail.dataset.width = `${rect.width}`;
-          detail.style.setProperty(
-            open ? `--expanded` : `--collapsed`,
-            `${rect.height}px`
-          );
-          detail.open = originalOpen;
-        };
-
         const RO = new ResizeObserver(entries =>
           entries
             .filter(x => x.target)
             .forEach(entry => {
+              const setHeight = (/** @type {boolean} */ open) => {
+                const originalOpen = detail.open;
+                detail.open = open;
+                const rect = detail.getBoundingClientRect();
+
+                detail.style.setProperty(
+                  open ? "--expanded" : "--collapsed",
+                  `${rect.height}px`
+                );
+                detail.open = originalOpen;
+              };
+
               const detail = /** @type {HTMLDetailsElement} */ (entry.target);
 
               const width = parseInt(detail.dataset.width || "", 10);
               if (width !== entry.contentRect.width) {
-                detail.removeAttribute("style");
-                setHeight(detail);
-                setHeight(detail, true);
+                detail.dataset.width = `${entry.contentRect.width}`;
+
+                ["--expanded", "--collapsed"].forEach(s =>
+                  detail.style.removeProperty(s)
+                );
+
+                setHeight(true);
+                setHeight(false);
               }
             })
         );
