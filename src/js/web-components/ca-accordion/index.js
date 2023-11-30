@@ -68,8 +68,7 @@ export default class ca_accordion extends ca_eureka_component {
                   detail.style.removeProperty(s)
                 );
 
-                setHeight(true);
-                setHeight(false);
+                [true, false].forEach(s => setHeight(s));
               }
             })
         );
