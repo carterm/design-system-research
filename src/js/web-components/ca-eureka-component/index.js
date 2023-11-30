@@ -21,7 +21,8 @@ export default class ca_eureka_component extends HTMLElement {
   }
 
   /**
-   * Hashtable for style objects
+   * Private Hashtable for style objects
+   * @private
    */
   static _styles = {};
 
@@ -59,7 +60,10 @@ export default class ca_eureka_component extends HTMLElement {
   constructor(options) {
     super();
 
-    /** @type {ca_eureka_component_options | undefined} */
+    /**
+     * @type {ca_eureka_component_options | undefined}
+     * @private
+     */
     this._options = options;
   }
 
@@ -67,6 +71,7 @@ export default class ca_eureka_component extends HTMLElement {
    * @param {() => void} [connectedCallback]
    */
   setConnectedCallback(connectedCallback) {
+    /** @private */
     this._connectedCallback = connectedCallback;
   }
 
