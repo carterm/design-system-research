@@ -58,7 +58,7 @@ export default class ca_accordion extends ca_eureka_component {
 
                 const originalOpen = detail.open;
 
-                Array(2).forEach(x => {
+                [...Array(2)].forEach(x => {
                   console.log(x);
                   detail.open = !detail.open;
                   const rect = detail.getBoundingClientRect();
