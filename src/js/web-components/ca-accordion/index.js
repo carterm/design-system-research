@@ -13,38 +13,41 @@ export default class ca_accordion extends ca_eureka_component {
     return "ca-accordion";
   }
 
-  /** @type {ResizeObserver} */
+  /**
+   * @type {ResizeObserver}
+   * @private
+   */
   static _resizeObserver;
 
   /**
-   * @param {Element} target
+   * The observer for all accordion control details resizing
+   * @param {HTMLDetailsElement} target
    */
   static observeResize(target) {
     if (!ca_accordion._resizeObserver) {
+      // This declaration should only happen once for all controls
       ca_accordion._resizeObserver = new ResizeObserver(entries =>
-        entries
-          .filter(x => x.target)
-          .forEach(entry => {
-            const detail = /** @type {HTMLDetailsElement} */ (entry.target);
+        entries.forEach(entry => {
+          const detail = /** @type {HTMLDetailsElement} */ (entry.target);
 
-            const width = parseInt(detail.dataset.width || "");
-            if (width !== entry.contentRect.width) {
-              detail.dataset.width = `${entry.contentRect.width}`;
+          const width = parseInt(detail.dataset.width || "");
+          if (width !== entry.contentRect.width) {
+            detail.dataset.width = `${entry.contentRect.width}`;
 
-              ["--expanded", "--collapsed"].forEach(s =>
-                detail.style.removeProperty(s)
+            ["--expanded", "--collapsed"].forEach(s =>
+              detail.style.removeProperty(s)
+            );
+
+            [1, 2].forEach(x => {
+              detail.style.setProperty(
+                detail.open ? "--expanded" : "--collapsed",
+                `${detail.getBoundingClientRect().height}px`
               );
 
-              [1, 2].forEach(x => {
-                detail.style.setProperty(
-                  detail.open ? "--expanded" : "--collapsed",
-                  `${detail.getBoundingClientRect().height}px`
-                );
-
-                detail.open = !detail.open;
-              });
-            }
-          })
+              detail.open = !detail.open;
+            });
+          }
+        })
       );
     }
     ca_accordion._resizeObserver.observe(target);
@@ -70,8 +73,6 @@ export default class ca_accordion extends ca_eureka_component {
     const bodyEl = shadow.querySelector("details > :not(summary)");
 
     if (summaryEl && detailsEl && bodyEl) {
-      // trigger the opening and closing height change animation on summary click
-
       summaryEl.insertAdjacentHTML("beforeend", `<div aria-hidden="true" />`);
 
       ca_accordion.observeResize(detailsEl);
