@@ -46,13 +46,16 @@ export default class ca_accordion extends ca_eureka_component {
           /** @type {HTMLDetailsElement} */ detail,
           open = false
         ) => {
+          const originalOpen = detail.open;
           detail.open = open;
           const rect = detail.getBoundingClientRect();
+          console.log(rect);
           detail.dataset.width = `${rect.width}`;
           detail.style.setProperty(
             open ? `--expanded` : `--collapsed`,
             `${rect.height}px`
           );
+          detail.open = originalOpen;
         };
 
         const RO = new ResizeObserver(entries =>
@@ -66,12 +69,11 @@ export default class ca_accordion extends ca_eureka_component {
                 detail.removeAttribute("style");
                 setHeight(detail);
                 setHeight(detail, true);
-                detail.open = false;
               }
             })
         );
 
-        RO.observe(details);
+        RO.observe(details, { box: "border-box" });
       }
 
       /* Run it */
