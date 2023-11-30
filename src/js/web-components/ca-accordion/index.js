@@ -46,18 +46,6 @@ export default class ca_accordion extends ca_eureka_component {
           entries
             .filter(x => x.target)
             .forEach(entry => {
-              const setHeight = (/** @type {boolean} */ open) => {
-                const originalOpen = detail.open;
-                detail.open = open;
-                const rect = detail.getBoundingClientRect();
-
-                detail.style.setProperty(
-                  open ? "--expanded" : "--collapsed",
-                  `${rect.height}px`
-                );
-                detail.open = originalOpen;
-              };
-
               const detail = /** @type {HTMLDetailsElement} */ (entry.target);
 
               const width = parseInt(detail.dataset.width || "", 10);
@@ -68,7 +56,17 @@ export default class ca_accordion extends ca_eureka_component {
                   detail.style.removeProperty(s)
                 );
 
-                [true, false].forEach(s => setHeight(s));
+                [true, false].forEach(open => {
+                  const originalOpen = detail.open;
+                  detail.open = open;
+                  const rect = detail.getBoundingClientRect();
+
+                  detail.style.setProperty(
+                    open ? "--expanded" : "--collapsed",
+                    `${rect.height}px`
+                  );
+                  detail.open = originalOpen;
+                });
               }
             })
         );
