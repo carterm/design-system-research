@@ -42,7 +42,7 @@ export default class ca_accordion extends ca_eureka_component {
               detail.querySelector("summary > div[aria-hidden]")
             );
 
-            arrow.style.display = "none"; //prevents arrow flickering in Mac Safari
+            arrow.hidden = true; //prevents arrow flickering in Mac Safari while opening details
 
             [1, 2].forEach(x => {
               detail.style.setProperty(
@@ -53,7 +53,7 @@ export default class ca_accordion extends ca_eureka_component {
               detail.open = !detail.open;
             });
 
-            arrow.style.display = "";
+            arrow.hidden = false;
           }
         })
       );
