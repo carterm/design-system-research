@@ -15,14 +15,16 @@ import CssRootStyleString from "./rootstyle.css" assert { type: "css" };
 export default class ca_eureka_component extends HTMLElement {
   /**
    * Get the tagName this class will use
+   * @protected //Will error if not overriddin with a public property
    */
   static get tagName() {
-    return "must override";
+    return ""; //Should never see
   }
 
   /**
    * Private Hashtable for style objects
    * @private
+   * @readonly
    */
   static _styles = {};
 
@@ -30,6 +32,7 @@ export default class ca_eureka_component extends HTMLElement {
    * Add a cachable stylestring to a shadow root
    * @param {ShadowRoot} shadow
    * @param {string} [styleString] leave blank to add the root css
+   * @protected
    */
   static addStyle(shadow, styleString = CssRootStyleString) {
     const hashCode = (/** @type {string} */ s) =>
@@ -68,6 +71,7 @@ export default class ca_eureka_component extends HTMLElement {
   }
 
   /**
+   * @protected
    * @param {() => void} [connectedCallback]
    */
   setConnectedCallback(connectedCallback) {
@@ -76,6 +80,7 @@ export default class ca_eureka_component extends HTMLElement {
   }
 
   /**
+   * @protected
    * Base class connectedCallback
    */
   connectedCallback() {
