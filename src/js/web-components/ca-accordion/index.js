@@ -30,9 +30,10 @@ export default class ca_accordion extends ca_eureka_component {
         entries.forEach(entry => {
           const detail = /** @type {HTMLDetailsElement} */ (entry.target);
 
-          const width = parseInt(detail.dataset.width || "");
-          if (width !== entry.contentRect.width) {
-            detail.dataset.width = `${entry.contentRect.width}`;
+          const contentRectWidth = `${entry.contentRect.width}`;
+
+          if (detail.dataset.width !== contentRectWidth) {
+            detail.dataset.width = contentRectWidth;
 
             ["--expanded", "--collapsed"].forEach(s =>
               detail.style.removeProperty(s)
