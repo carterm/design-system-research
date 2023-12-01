@@ -17,7 +17,7 @@ export default class ca_accordion extends ca_eureka_component {
    * @protected
    * @readonly
    */
-  static observedAttributes = ["data-summary"];
+  static observedAttributes = ["data-summary", "data-expanded"];
 
   /**
    * @type {ResizeObserver}
@@ -77,11 +77,14 @@ export default class ca_accordion extends ca_eureka_component {
    * @protected
    */
   attributeChangedCallback(name, _oldValue, newValue) {
+    const o = ca_accordion.observedAttributes;
     switch (name) {
-      case "data-summary":
-        if (this.summary) {
-          this.summary.innerHTML = newValue + `<div aria-hidden="true" />`;
-        }
+      case o[0]: //"data-summary":
+        this.summary.innerHTML = newValue + `<div aria-hidden="true" />`;
+
+        break;
+      case o[1]: //"data-expanded":
+        this.details.open = newValue.trim().toLowerCase() === "true";
 
         break;
     }
@@ -102,13 +105,19 @@ export default class ca_accordion extends ca_eureka_component {
 
     shadow.appendChild(myTemplate.content.cloneNode(true));
 
-    const detailsEl = /** @type {HTMLDetailsElement} */ (
+    /**
+     * @private
+     */
+    this.details = /** @type {HTMLDetailsElement} */ (
       shadow.querySelector("details")
     );
+    /**
+     * @private
+     */
     this.summary = /** @type {HTMLElement} */ (
-      detailsEl.querySelector(":scope > summary")
+      this.details.querySelector(":scope > summary")
     );
 
-    ca_accordion.observeResize(detailsEl);
+    ca_accordion.observeResize(this.details);
   }
 }
