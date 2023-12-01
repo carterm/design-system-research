@@ -38,14 +38,22 @@ export default class ca_accordion extends ca_eureka_component {
               detail.style.removeProperty(s)
             );
 
+            const arrow = /** @type {HTMLDivElement} */ (
+              detail.querySelector("summary > div[aria-hidden]")
+            );
+
+            arrow.style.display = "none"; //prevents arrow flickering in Mac Safari
+
             [1, 2].forEach(x => {
               detail.style.setProperty(
                 detail.open ? "--expanded" : "--collapsed",
                 `${detail.getBoundingClientRect().height}px`
               );
 
-              detail.open = !detail.open; //TODO: causes arrow flickering in safari
+              detail.open = !detail.open;
             });
+
+            arrow.style.display = "";
           }
         })
       );
