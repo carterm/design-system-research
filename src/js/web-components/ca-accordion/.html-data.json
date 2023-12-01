@@ -6,8 +6,8 @@
       "description": ".html-data.description.md",
       "attributes": [
         {
-          "name": "type",
-          "description": "Root element type",
+          "name": "data-summary",
+          "description": "Summary text visible before expanding",
           "references": [
             {
               "name": "Reference - Eureka",
