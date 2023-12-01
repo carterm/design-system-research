@@ -84,7 +84,8 @@ export default class ca_accordion extends ca_eureka_component {
 
         break;
       case o[1]: //"data-expanded":
-        this.details.open = newValue.trim().toLowerCase() === "true";
+        this.details.open =
+          (newValue ?? "false").trim().toLowerCase() !== "false";
 
         break;
     }
