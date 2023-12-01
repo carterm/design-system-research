@@ -24,6 +24,8 @@ export default class ca_accordion extends ca_eureka_component {
    * @param {HTMLDetailsElement} target
    */
   static observeResize(target) {
+    const cssVars = ["--expanded", "--collapsed"]; //match the CSS vars in CSS
+
     if (!ca_accordion._resizeObserver) {
       // This declaration should only happen once for all controls
       ca_accordion._resizeObserver = new ResizeObserver(entries =>
@@ -35,9 +37,7 @@ export default class ca_accordion extends ca_eureka_component {
           if (detail.dataset.width !== contentRectWidth) {
             detail.dataset.width = contentRectWidth;
 
-            ["--expanded", "--collapsed"].forEach(s =>
-              detail.style.removeProperty(s)
-            );
+            cssVars.forEach(s => detail.style.removeProperty(s));
 
             const arrow = /** @type {HTMLDivElement} */ (
               detail.querySelector("summary > div[aria-hidden]")
@@ -45,9 +45,9 @@ export default class ca_accordion extends ca_eureka_component {
 
             arrow.hidden = true; //prevents arrow flickering in Mac Safari while opening details
 
-            [1, 2].forEach(x => {
+            [0, 0].forEach(() => {
               detail.style.setProperty(
-                detail.open ? "--expanded" : "--collapsed",
+                detail.open ? cssVars[0] : cssVars[1],
                 `${detail.getBoundingClientRect().height}px`
               );
 
