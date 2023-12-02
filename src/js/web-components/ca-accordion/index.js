@@ -13,10 +13,7 @@ export default class ca_accordion extends ca_eureka_component {
     return "ca-accordion";
   }
 
-  /**
-   * @protected
-   * @readonly
-   */
+  /** @protected @readonly */
   static observedAttributes = ["data-summary", "data-expanded"];
 
   /**
@@ -28,6 +25,7 @@ export default class ca_accordion extends ca_eureka_component {
   /**
    * The observer for all accordion control details resizing
    * @param {HTMLDetailsElement} target
+   * @protected
    */
   static observeResize(target) {
     const cssVars = ["--expanded", "--collapsed"]; //match the CSS vars in CSS
@@ -106,15 +104,12 @@ export default class ca_accordion extends ca_eureka_component {
 
     shadow.appendChild(myTemplate.content.cloneNode(true));
 
-    /**
-     * @private
-     */
+    /** @private */
     this.details = /** @type {HTMLDetailsElement} */ (
       shadow.querySelector("details")
     );
-    /**
-     * @private
-     */
+
+    /** @private */
     this.summary = /** @type {HTMLElement} */ (
       this.details.querySelector(":scope > summary")
     );
