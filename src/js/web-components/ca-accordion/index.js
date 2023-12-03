@@ -13,7 +13,7 @@ export default class ca_accordion extends ca_eureka_component {
     return "ca-accordion";
   }
 
-  /** @protected @readonly */
+  /** @protected @readonly @override */
   static observedAttributes = ["data-summary", "data-expanded"];
 
   /**
@@ -73,6 +73,7 @@ export default class ca_accordion extends ca_eureka_component {
    * @param {string} _oldValue
    * @param {string} newValue
    * @protected
+   * @override
    */
   attributeChangedCallback(name, _oldValue, newValue) {
     const o = ca_accordion.observedAttributes;
