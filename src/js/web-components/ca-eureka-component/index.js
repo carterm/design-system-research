@@ -22,23 +22,6 @@ export default class ca_eureka_component extends HTMLElement {
   }
 
   /**
-   * @type {string[] | undefined}
-   * @protected
-   * @readonly
-   * @static
-   */
-  static observedAttributes = undefined;
-
-  /**
-   *
-   * @param {string} name
-   * @param {string} oldValue
-   * @param {string} newValue
-   * @protected
-   */
-  attributeChangedCallback(name, oldValue, newValue) {}
-
-  /**
    * Private Hashtable for style objects
    * @private
    * @readonly
