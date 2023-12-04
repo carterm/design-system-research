@@ -52,7 +52,6 @@ details > summary::before {
   height: 100%;
   width: 2.75rem;
   border-right: 1px solid var(--gray-200, #d4d4d7);
-  background-color: var(--gray-50, #fafafa);
   border-radius: 3px 0 0 3px;
   content: "";
 }
