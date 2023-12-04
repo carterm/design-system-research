@@ -66,7 +66,7 @@ details > summary > div {
   position: absolute;
   top: 0.5rem;
   left: 1rem;
-  transform-origin: 0.55rem 1.1rem;
+  transform-origin: 0.4rem 1.1rem;
   transition: transform 0.2s;
 }
 details[open] > summary > div {
