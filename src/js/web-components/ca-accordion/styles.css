@@ -12,6 +12,14 @@ details {
 details[open] {
   height: var(--expanded);
 }
+
+details > :not(summary) {
+  padding: 1rem;
+  border-radius: 0 0 4px 4px;
+  border: 1px solid var(--gray-200, #d4d4d7);
+  border-top: none;
+}
+
 details > summary {
   cursor: pointer;
   padding: 0.5rem 3rem 0.5rem 3.75rem;
@@ -21,7 +29,34 @@ details > summary {
   font-size: 1.125rem;
   font-weight: bold;
   border: 1px solid var(--gray-200, #d4d4d7);
+  list-style: none; /* hide default expansion triangle */
+  border-radius: 4px;
 }
+
+details[open] > summary {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+details > summary::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: transparent;
+  height: 100%;
+  width: 100%;
+  border-radius: 3px;
+}
+
+details[open] > summary:focus::after {
+  border-radius: 3px 3px 0 0;
+}
+
+details > summary::-webkit-details-marker {
+  display: none; /* required for Safari */
+}
+
 details > summary::before {
   position: absolute;
   height: 100%;
@@ -33,55 +68,24 @@ details > summary::before {
   border-radius: 3px 0 0 3px;
   content: "";
 }
+
 details[open] > summary::before {
   border-bottom-left-radius: 0;
   background-color: var(--gray-100, #f3f3f4);
 }
-details > summary::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  background: transparent;
-  height: 100%;
-  width: 100%;
-  border-radius: 3px;
-}
+
 details > summary > div {
   position: absolute;
-  left: 0.5rem;
-  top: 0.4rem;
-}
-details > summary > div::before {
-  /*font-family: CaGov;*/
-  content: ">";
-  position: absolute;
-  font-size: 1.6rem;
+  top: 0.5rem;
+  left: 1rem;
+  transform-origin: 0.55rem 1.1rem;
   transition: transform 0.2s;
 }
-details[open] > summary > div::before {
-  transform: rotate(90deg) translateY(-0.2rem);
+details[open] > summary > div {
+  transform: rotate(90deg);
 }
 
-details > :not(summary) {
-  padding: 1rem;
-  border-radius: 0 0 4px 4px;
-  border: 1px solid var(--gray-200, #d4d4d7);
-  border-top: none;
-}
-
-summary::-webkit-details-marker {
-  display: none; /* required for Safari */
-}
-details > summary {
-  list-style: none; /* hide default expansion triangle */
-  border-radius: 4px;
-}
-details[open] > summary {
-  border-bottom-left-radius: 0;
-  border-bottom-right-radius: 0;
-}
-
-details[open] > summary:focus::after {
-  border-radius: 3px 3px 0 0;
+details > summary > div::before {
+  content: ">";
+  font-size: 1.6rem;
 }
