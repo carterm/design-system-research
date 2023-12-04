@@ -29,7 +29,6 @@ details > summary {
   font-size: 1.125rem;
   font-weight: bold;
   border: 1px solid var(--gray-200, #d4d4d7);
-
   border-radius: 4px;
 }
 
@@ -65,7 +64,6 @@ details > summary > div {
   position: absolute;
   top: 0.5rem;
   left: 1rem;
-
   transition: transform 0.2s;
 }
 details[open] > summary > div {
