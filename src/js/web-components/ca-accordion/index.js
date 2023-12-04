@@ -43,12 +43,6 @@ export default class ca_accordion extends ca_eureka_component {
 
             cssVars.forEach(cssVar => detail.style.removeProperty(cssVar));
 
-            const arrow = /** @type {HTMLDivElement} */ (
-              detail.querySelector("summary > div[aria-hidden]:last-child")
-            );
-
-            arrow.hidden = true; //prevents arrow flickering in Mac Safari while opening details
-
             //Run 2 times
             [0, 0].forEach(() => {
               detail.style.setProperty(
@@ -58,8 +52,6 @@ export default class ca_accordion extends ca_eureka_component {
 
               detail.open = !detail.open;
             });
-
-            arrow.hidden = false;
           }
         })
       );
