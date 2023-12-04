@@ -29,7 +29,7 @@ details > summary {
   font-size: 1.125rem;
   font-weight: bold;
   border: 1px solid var(--gray-200, #d4d4d7);
-  list-style: none; /* hide default expansion triangle */
+
   border-radius: 4px;
 }
 
@@ -38,32 +38,20 @@ details[open] > summary {
   border-bottom-right-radius: 0;
 }
 
-details > summary::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  background: transparent;
-  height: 100%;
-  width: 100%;
-  border-radius: 3px;
+details > summary::marker {
+  content: ""; /* non-Safari */
 }
-
-details[open] > summary:focus::after {
-  border-radius: 3px 3px 0 0;
-}
-
 details > summary::-webkit-details-marker {
   display: none; /* required for Safari */
 }
 
 details > summary::before {
   position: absolute;
+  top: 0;
+  left: 0;
   height: 100%;
   width: 2.75rem;
   border-right: 1px solid var(--gray-200, #d4d4d7);
-  top: 0;
-  left: 0;
   background-color: var(--gray-50, #fafafa);
   border-radius: 3px 0 0 3px;
   content: "";
