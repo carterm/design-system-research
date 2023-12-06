@@ -56,7 +56,9 @@ export default class ca_accordion extends ca_eureka_component {
         })
       );
     }
-    ca_accordion._resizeObserver.observe(target);
+    ca_accordion._resizeObserver.observe(target, {
+      box: "device-pixel-content-box"
+    });
   }
 
   /**
