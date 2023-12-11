@@ -15,7 +15,7 @@ export default class ca_footer extends ca_eureka_component {
 
   constructor() {
     super({
-      parent: "ca-eureka",
+      parent: "ca-root",
       single: true,
       last: true
     });

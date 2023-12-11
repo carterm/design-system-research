@@ -13,7 +13,7 @@ export default class ca_nav extends ca_eureka_component {
   constructor() {
     super({
       not_after: ["ca-body", "ca-footer"],
-      parent: "ca-eureka",
+      parent: "ca-root",
       single: true
     });
 

@@ -6,7 +6,7 @@ import * as eureka from "./web-components/index.js";
 
 //comment out any elements you are not using
 [
-  eureka.ca_eureka,
+  eureka.ca_root,
   eureka.ca_head,
   eureka.ca_nav,
   eureka.ca_body,

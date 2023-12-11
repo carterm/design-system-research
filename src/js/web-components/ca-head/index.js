@@ -10,7 +10,7 @@ export default class ca_head extends ca_eureka_component {
 
   constructor() {
     super({
-      parent: "ca-eureka",
+      parent: "ca-root",
       single: true
     });
   }
