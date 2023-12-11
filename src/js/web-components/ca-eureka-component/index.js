@@ -6,7 +6,7 @@ import CssRootStyleString from "./rootstyle.css" assert { type: "css" };
 /**
  * Options for ca-eureka components
  * @typedef {Object} ca_eureka_component_options
- * @property {string} [parent] - The required parent tag. Example:```ca-eureka```
+ * @property {string} [parent] - The required parent tag. Example:```ca-root```
  * @property {string[]} [not_after] - Elements this element must not be after
  * @property {boolean} [single] - true if this element must be the only one under a parent
  * @property {boolean} [last] - true if this element must be last under a parent
