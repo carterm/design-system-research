@@ -2,16 +2,26 @@
   "version": 1.1,
   "tags": [
     {
-      "name": "ca-root",
+      "name": "ca-body",
       "description": ".html-data.description.md",
       "attributes": [
         {
-          "name": "type",
-          "description": "Root element type",
+          "name": "layout",
+          "description": "Type of body layout",
           "values": [
             {
               "name": "Type 1",
-              "description": "Whatever Type 1 is",
+              "description": "The Type 1 layout",
+              "references": [
+                {
+                  "name": "Reference - Eureka",
+                  "url": "https://template.webstandards.ca.gov/"
+                }
+              ]
+            },
+            {
+              "name": "Type 2",
+              "description": "The Type 2 layout",
               "references": [
                 {
                   "name": "Reference - Eureka",
