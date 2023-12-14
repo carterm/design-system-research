@@ -7,6 +7,8 @@ import CssStyleString from "./styles.css" assert { type: "css" };
 // @ts-ignore
 import HtmlTemplateString from "./template.html" assert { type: "html" };
 
+const cssVars = ["--expanded", "--collapsed"]; //match the CSS vars in CSS
+
 export default class ca_accordion extends ca_eureka_component {
   /** @override */
   static get tagName() {
@@ -28,8 +30,6 @@ export default class ca_accordion extends ca_eureka_component {
    * @protected
    */
   static observeResize(target) {
-    const cssVars = ["--expanded", "--collapsed"]; //match the CSS vars in CSS
-
     if (!ca_accordion._resizeObserver) {
       // This declaration should only happen once for all controls
       ca_accordion._resizeObserver = new ResizeObserver(entries =>
@@ -56,9 +56,7 @@ export default class ca_accordion extends ca_eureka_component {
         })
       );
     }
-    ca_accordion._resizeObserver.observe(target, {
-      box: "device-pixel-content-box"
-    });
+    ca_accordion._resizeObserver.observe(target);
   }
 
   /**
@@ -107,6 +105,10 @@ export default class ca_accordion extends ca_eureka_component {
     this.summary = /** @type {HTMLElement} */ (
       this.details.querySelector(":scope > summary")
     );
+
+    cssVars.forEach(p => {
+      this.style.setProperty(p, "initial");
+    });
 
     ca_accordion.observeResize(this.details);
   }
