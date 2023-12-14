@@ -5,8 +5,8 @@
 
 :host {
   /* prevents vars from being inherited in nested accordions */
-  --collapsed:;
-  --expanded:;
+  --collapsed: initial;
+  --expanded: initial;
 }
 
 details {
