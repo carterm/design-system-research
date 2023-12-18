@@ -1,6 +1,5 @@
 //@ts-check
 const defaultConfig = require("@11ty/eleventy/src/defaultConfig");
-const path = require("path");
 
 module.exports = function (
   /** @type {import("@11ty/eleventy").UserConfig} **/ eleventyConfig
