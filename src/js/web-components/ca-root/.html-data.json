@@ -26,6 +26,16 @@
               "url": "https://template.webstandards.ca.gov/"
             }
           ]
+        },
+        {
+          "name": "novalidate",
+          "description": "Disables runtime validation",
+          "references": [
+            {
+              "name": "Reference - Eureka",
+              "url": "https://template.webstandards.ca.gov/"
+            }
+          ]
         }
       ],
 
