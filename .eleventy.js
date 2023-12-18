@@ -30,25 +30,5 @@ module.exports = function (
     output: "_site"
   };
 
-  //Adding a transform to make the output work as non-server static files
-  eleventyConfig.addTransform(
-    "staticPaths",
-    /**
-     * @param {string} content
-     * @param {string} outputPath
-     */
-    async function (content, outputPath) {
-      const basePath = config.dir.output;
-
-      const relativePath = path
-        .relative(path.dirname(outputPath), path.dirname(basePath))
-        .slice(0, -2); //removing last 2 dots
-
-      return content
-        .replace(/href="(.*\/)"/g, 'href="$1index.html"') // fixing any root path links
-        .replace(/=\"\//g, `="${relativePath}`); //Replace all ... ="/  ... with new path
-    }
-  );
-
   return config;
 };
