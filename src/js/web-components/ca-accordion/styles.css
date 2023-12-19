@@ -23,7 +23,7 @@ details {
     border: 1px solid var(--gray-200, #d4d4d7);
     border-radius: 4px;
 
-    > div[aria-hidden] {
+    > div[aria-hidden]:last-child {
       position: absolute;
       top: 0.5rem;
       left: 1rem;
@@ -62,6 +62,10 @@ details {
     border-top: none;
   }
 
+  &:not([open]) {
+    height: var(--collapsed);
+  }
+
   &[open] {
     height: var(--expanded);
     overflow: hidden;
@@ -70,7 +74,7 @@ details {
       border-bottom-left-radius: 0;
       border-bottom-right-radius: 0;
 
-      > div[aria-hidden] {
+      > div[aria-hidden]:last-child {
         transform: rotate(90deg);
       }
 
@@ -79,9 +83,5 @@ details {
         background-color: var(--gray-100, #f3f3f4);
       }
     }
-  }
-
-  &:not([open]) {
-    height: var(--collapsed);
   }
 }
