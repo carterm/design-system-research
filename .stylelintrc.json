@@ -1,6 +1,12 @@
 {
   "$schema": "https://json.schemastore.org/stylelintrc",
+  "extends": ["stylelint-config-standard"],
   "rules": {
+    "declaration-property-unit-allowed-list": {
+      "/^border/": ["px"],
+      "/^padding|^gap/": ["rem"]
+    },
+    "unit-allowed-list": ["%", "deg", "px", "rem", "ms"],
     "number-max-precision": 5,
     "font-family-no-missing-generic-family-keyword": [true],
 

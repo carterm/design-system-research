@@ -11,73 +11,77 @@
 
 details {
   transition: height 300ms cubic-bezier(0.4, 0.01, 0.165, 0.99);
-}
-details[open] {
-  height: var(--expanded);
-  overflow: hidden;
-}
-details:not([open]) {
-  height: var(--collapsed);
-}
 
-details > :not(summary) {
-  padding: 1rem;
-  border-radius: 0 0 4px 4px;
-  border: 1px solid var(--gray-200, #d4d4d7);
-  border-top: none;
-}
+  > summary {
+    cursor: pointer;
+    padding: 0.5rem 3rem 0.5rem 3.75rem;
+    background-color: var(--gray-50, #fafafa);
+    position: relative;
+    line-height: 2rem;
+    font-size: 1.125rem;
+    font-weight: bold;
+    border: 1px solid var(--gray-200, #d4d4d7);
+    border-radius: 4px;
 
-details > summary {
-  cursor: pointer;
-  padding: 0.5rem 3rem 0.5rem 3.75rem;
-  background-color: var(--gray-50, #fafafa);
-  position: relative;
-  line-height: 2rem;
-  font-size: 1.125rem;
-  font-weight: bold;
-  border: 1px solid var(--gray-200, #d4d4d7);
-  border-radius: 4px;
-}
+    > div[aria-hidden] {
+      position: absolute;
+      top: 0.5rem;
+      left: 1rem;
+      transition: transform 200ms;
 
-details[open] > summary {
-  border-bottom-left-radius: 0;
-  border-bottom-right-radius: 0;
-}
+      &::before {
+        content: ">";
+        font-size: 1.6rem;
+      }
+    }
 
-details > summary::marker {
-  content: ""; /* non-Safari */
-}
-details > summary::-webkit-details-marker {
-  display: none; /* required for Safari */
-}
+    &::marker {
+      content: ""; /* non-Safari */
+    }
 
-details > summary::before {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 2.75rem;
-  border-right: 1px solid var(--gray-200, #d4d4d7);
-  border-radius: 3px 0 0 3px;
-  content: "";
-}
+    &::-webkit-details-marker {
+      display: none; /* required for Safari */
+    }
 
-details[open] > summary::before {
-  border-bottom-left-radius: 0;
-  background-color: var(--gray-100, #f3f3f4);
-}
+    &::before {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 2.75rem;
+      border-right: 1px solid var(--gray-200, #d4d4d7);
+      border-radius: 3px 0 0 3px;
+      content: "";
+    }
+  }
 
-details > summary > div {
-  position: absolute;
-  top: 0.5rem;
-  left: 1rem;
-  transition: transform 0.2s;
-}
-details[open] > summary > div {
-  transform: rotate(90deg);
-}
+  > :not(summary) {
+    padding: 1rem;
+    border-radius: 0 0 4px 4px;
+    border: 1px solid var(--gray-200, #d4d4d7);
+    border-top: none;
+  }
 
-details > summary > div::before {
-  content: ">";
-  font-size: 1.6rem;
+  &[open] {
+    height: var(--expanded);
+    overflow: hidden;
+
+    > summary {
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+
+      > div[aria-hidden] {
+        transform: rotate(90deg);
+      }
+
+      &::before {
+        border-bottom-left-radius: 0;
+        background-color: var(--gray-100, #f3f3f4);
+      }
+    }
+  }
+
+  &:not([open]) {
+    height: var(--collapsed);
+  }
 }
