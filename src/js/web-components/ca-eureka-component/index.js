@@ -47,11 +47,11 @@ export default class ca_eureka_component extends HTMLElement {
    * @param {string} type
    */
   dispatchComponentEvent(type) {
-    const event = new Event(type, {
-      bubbles: true
-    });
-
-    this.dispatchEvent(event);
+    this.dispatchEvent(
+      new Event(type, {
+        bubbles: true
+      })
+    );
   }
 
   /**
