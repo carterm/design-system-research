@@ -33,8 +33,8 @@ window.addEventListener("eureka_htmltemplate_set", e => {
       e.target
     );
 
-  if (comp.tagName === "CA-ACCORDION") {
-    comp.HTMLTemplateString = comp.HTMLTemplateString?.replace(
+  if (comp.HTMLTemplateString && comp.tagName === "CA-ACCORDION") {
+    comp.HTMLTemplateString = comp.HTMLTemplateString.replace(
       /<div>/g,
       "<div>monkey"
     );
