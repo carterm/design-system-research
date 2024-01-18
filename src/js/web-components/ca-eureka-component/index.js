@@ -12,6 +12,12 @@ import CssRootStyleString from "./rootstyle.css" assert { type: "css" };
  * @property {boolean} [last] - true if this element must be last under a parent
  */
 
+/**
+ * Options for ca-eureka components
+ * @typedef {Object} ca_eureka_component_event_data
+ * @property {ca_eureka_component} component - The calling component
+ */
+
 export default class ca_eureka_component extends HTMLElement {
   /**
    * Get the tagName this class will use
@@ -29,12 +35,46 @@ export default class ca_eureka_component extends HTMLElement {
   static _styles = {};
 
   /**
-   * Add a cachable stylestring to a shadow root
-   * @param {ShadowRoot} shadow
-   * @param {string} [styleString] leave blank to add the root css
-   * @protected
+ 
+   * @param {ca_eureka_component_options} [options]
    */
-  static addStyle(shadow, styleString = CssRootStyleString) {
+  constructor(options) {
+    super();
+
+    /**
+     * @type {ca_eureka_component_options | undefined}
+     * @private
+     */
+    this._options = options;
+  }
+
+  /**
+   * @protected
+   * @param {string} type
+   */
+  dispatchComponentEvent(type) {
+    /** @type {ca_eureka_component_event_data} */
+    const detail = {
+      component: this
+    };
+
+    const event = new CustomEvent(type, {
+      bubbles: true,
+      detail
+    });
+
+    this.dispatchEvent(event);
+  }
+
+  /**
+   * Add a cachable stylestring to a shadow root
+   * @param {string} [styleString] leave blank to add the root css
+   * @public
+   */
+  addStyle(styleString = CssRootStyleString) {
+    if (!this.shadowRoot)
+      throw new Error("AddStyle only works with open shadowRoots");
+
     const hashCode = (/** @type {string} */ s) =>
       s.split("").reduce((a, b) => {
         a = (a << 5) - a + b.charCodeAt(0);
@@ -53,21 +93,7 @@ export default class ca_eureka_component extends HTMLElement {
       ca_eureka_component._styles[hash] = style;
     }
 
-    shadow.adoptedStyleSheets.push(style);
-  }
-
-  /**
- 
-   * @param {ca_eureka_component_options} [options]
-   */
-  constructor(options) {
-    super();
-
-    /**
-     * @type {ca_eureka_component_options | undefined}
-     * @private
-     */
-    this._options = options;
+    this.shadowRoot.adoptedStyleSheets.push(style);
   }
 
   /**
@@ -84,6 +110,7 @@ export default class ca_eureka_component extends HTMLElement {
    * Base class connectedCallback
    */
   connectedCallback() {
+    this.dispatchComponentEvent("eureka_connectedCallback_start");
     if (this._options && this.parentElement) {
       const options = this._options;
       const parentElement = this.parentElement;
@@ -123,5 +150,6 @@ export default class ca_eureka_component extends HTMLElement {
 
       this._connectedCallback();
     }
+    this.dispatchComponentEvent("eureka_connectedCallback_end");
   }
 }

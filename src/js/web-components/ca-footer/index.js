@@ -21,7 +21,7 @@ export default class ca_footer extends ca_eureka_component {
     });
 
     const shadow = this.attachShadow({ mode: "open" });
-    ca_footer.addStyle(shadow, styles);
+    this.addStyle(styles);
 
     shadow.innerHTML = template;
   }

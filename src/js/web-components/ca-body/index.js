@@ -20,8 +20,8 @@ export default class ca_body extends ca_eureka_component {
       single: true
     });
 
-    const shadow = this.attachShadow({ mode: "closed" });
-    ca_body.addStyle(shadow, styles);
+    const shadow = this.attachShadow({ mode: "open" });
+    this.addStyle(styles);
     shadow.innerHTML = template;
   }
 }

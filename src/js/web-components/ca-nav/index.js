@@ -17,10 +17,10 @@ export default class ca_nav extends ca_eureka_component {
       single: true
     });
 
-    const shadow = this.attachShadow({ mode: "open" });
+    this.attachShadow({ mode: "open" });
     this.setConnectedCallback(this.contentChanged);
 
-    ca_nav.addStyle(shadow, styles);
+    this.addStyle(styles);
 
     // Callback function to execute when mutations are observed
     /** @type {MutationCallback} */

@@ -85,10 +85,10 @@ export default class ca_accordion extends ca_eureka_component {
       parent: "ca-body"
     });
 
-    const shadow = this.attachShadow({ mode: "closed" });
+    const shadow = this.attachShadow({ mode: "open" });
 
-    ca_accordion.addStyle(shadow);
-    ca_accordion.addStyle(shadow, CssStyleString);
+    this.addStyle();
+    this.addStyle(CssStyleString);
 
     const myTemplate = document.createElement("template");
     myTemplate.innerHTML = HtmlTemplateString;
