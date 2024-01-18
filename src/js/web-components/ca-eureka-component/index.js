@@ -12,12 +12,6 @@ import CssRootStyleString from "./rootstyle.css" assert { type: "css" };
  * @property {boolean} [last] - true if this element must be last under a parent
  */
 
-/**
- * Options for ca-eureka components
- * @typedef {Object} ca_eureka_component_event_data
- * @property {ca_eureka_component} component - The calling component
- */
-
 export default class ca_eureka_component extends HTMLElement {
   /**
    * Get the tagName this class will use
@@ -53,14 +47,8 @@ export default class ca_eureka_component extends HTMLElement {
    * @param {string} type
    */
   dispatchComponentEvent(type) {
-    /** @type {ca_eureka_component_event_data} */
-    const detail = {
-      component: this
-    };
-
-    const event = new CustomEvent(type, {
-      bubbles: true,
-      detail
+    const event = new Event(type, {
+      bubbles: true
     });
 
     this.dispatchEvent(event);
