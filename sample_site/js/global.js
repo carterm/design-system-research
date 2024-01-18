@@ -14,10 +14,9 @@ window.addEventListener("eureka_connectedCallback_end", e => {
     }
 
     if (comp.shadowRoot) {
-      comp.shadowRoot.innerHTML = comp.shadowRoot.innerHTML.replace(
-        /Accordion/g,
-        "Accordion Customized"
-      );
+      const testItem = document.createElement("em");
+      testItem.innerHTML = "custom added to shadow root";
+      comp.shadowRoot.querySelector("details")?.appendChild(testItem);
     }
 
     comp.innerHTML = comp.innerHTML.replace(
