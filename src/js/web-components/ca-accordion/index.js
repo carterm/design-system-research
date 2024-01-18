@@ -89,9 +89,9 @@ export default class ca_accordion extends ca_eureka_component {
 
     this.addStyle();
     this.addStyle(CssStyleString);
-
+    
     const myTemplate = document.createElement("template");
-    myTemplate.innerHTML = HtmlTemplateString;
+    myTemplate.innerHTML = this.setHTMLTemplateString(HtmlTemplateString);
 
     shadow.appendChild(myTemplate.content.cloneNode(true));
 

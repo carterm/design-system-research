@@ -86,6 +86,23 @@ export default class ca_eureka_component extends HTMLElement {
 
   /**
    * @protected
+   * @param {string} html
+   */
+  setHTMLTemplateString(html) {
+    /**
+     * @public
+     * change this in the `eureka_htmltemplate_set` event if you want to update the source HTML
+     */
+
+    this.HTMLTemplateString = html;
+
+    this.dispatchComponentEvent("eureka_htmltemplate_set");
+
+    return this.HTMLTemplateString;
+  }
+
+  /**
+   * @protected
    * @param {() => void} [connectedCallback]
    */
   setConnectedCallback(connectedCallback) {

@@ -26,3 +26,18 @@ window.addEventListener("eureka_connectedCallback_end", e => {
     );
   }
 });
+
+window.addEventListener("eureka_htmltemplate_set", e => {
+  const comp =
+    /** @type {import("../../src/js/web-components").ca_eureka_component} **/ (
+      e.target
+    );
+
+  if (comp.tagName === "CA-ACCORDION") {
+    console.log(comp.HTMLTemplateString);
+    comp.HTMLTemplateString = comp.HTMLTemplateString?.replace(
+      /<div>/g,
+      "<div>monkey"
+    );
+  }
+});
