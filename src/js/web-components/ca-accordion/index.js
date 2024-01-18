@@ -13,7 +13,7 @@ export default class ca_accordion extends ca_eureka_component {
     return "ca-accordion";
   }
 
-  /** @protected @readonly */
+  /** @protected @readonly @override */
   static observedAttributes = ["data-summary", "data-expanded"];
 
   /**
@@ -64,15 +64,16 @@ export default class ca_accordion extends ca_eureka_component {
    * @param {string} _oldValue
    * @param {string} newValue
    * @protected
+   * @override
    */
   attributeChangedCallback(name, _oldValue, newValue) {
     const o = ca_accordion.observedAttributes;
     switch (name) {
-      case o[0]: //"data-summary":
+      case "data-summary":
         this.summary.innerHTML = newValue + `<div aria-hidden="true" />`;
 
         break;
-      case o[1]: //"data-expanded":
+      case "data-expanded":
         this.details.open =
           (newValue ?? "false").trim().toLowerCase() !== "false";
 
@@ -89,7 +90,7 @@ export default class ca_accordion extends ca_eureka_component {
 
     this.addStyle();
     this.addStyle(CssStyleString);
-    
+
     const myTemplate = document.createElement("template");
     myTemplate.innerHTML = this.setHTMLTemplateString(HtmlTemplateString);
 

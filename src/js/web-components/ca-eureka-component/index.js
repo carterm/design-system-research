@@ -14,6 +14,13 @@ import CssRootStyleString from "./rootstyle.css" assert { type: "css" };
 
 export default class ca_eureka_component extends HTMLElement {
   /**
+   * @protected //Will error if not overriddin with a public property
+   * @readonly
+   * @type {string[] | undefined}
+   */
+  static observedAttributes = undefined;
+
+  /**
    * Get the tagName this class will use
    * @protected //Will error if not overriddin with a public property
    */
@@ -157,4 +164,13 @@ export default class ca_eureka_component extends HTMLElement {
     }
     this.dispatchComponentEvent("eureka_connectedCallback_end");
   }
+
+  /**
+   *
+   * @param {string} _name
+   * @param {string} _oldValues
+   * @param {string} _newValue
+   * @protected
+   */
+  attributeChangedCallback(_name, _oldValues, _newValue) {}
 }

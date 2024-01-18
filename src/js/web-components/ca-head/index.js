@@ -21,6 +21,7 @@ export default class ca_head extends ca_eureka_component {
    * @param {string} name
    * @param {string} _oldValue
    * @param {string} newValue
+   * @override
    */
   attributeChangedCallback(name, _oldValue, newValue) {
     switch (name) {
