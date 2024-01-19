@@ -1,5 +1,6 @@
 //@ts-check
 const defaultConfig = require("@11ty/eleventy/src/defaultConfig");
+const fs = require("node:fs");
 
 module.exports = function (
   /** @type {import("@11ty/eleventy").UserConfig} **/ eleventyConfig
@@ -19,8 +20,6 @@ module.exports = function (
      * {% same_page_script page %}
      */
     (/** @type {{ inputPath: string; }} */ page) => {
-      const fs = require("node:fs");
-
       const filepath = page.inputPath + ".js";
       //console.log(filepath);
       if (fs.existsSync(filepath)) {
