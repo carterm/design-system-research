@@ -12,6 +12,23 @@ module.exports = function (
     //"src/css": "css"
   });
 
+  eleventyConfig.addShortcode(
+    "same_page_script",
+    /**
+     * @example
+     * {% same_page_script page %}
+     */
+    (/** @type {{ inputPath: string; }} */ page) => {
+      const fs = require("node:fs");
+
+      const filepath = page.inputPath + ".js";
+      //console.log(filepath);
+      if (fs.existsSync(filepath)) {
+        return `<script>\n${fs.readFileSync(filepath, "utf8")}</script>\n`;
+      }
+    }
+  );
+
   //Start with default config, easier to configure 11ty later
   const config = defaultConfig(eleventyConfig);
 
