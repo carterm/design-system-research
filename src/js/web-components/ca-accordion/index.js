@@ -17,6 +17,7 @@ export default class ca_accordion extends ca_eureka_component {
   static observedAttributes = ["data-summary", "data-expanded"];
 
   /**
+   * A single static observer for all accordions on the page
    * @type {ResizeObserver}
    * @private
    */
@@ -59,7 +60,6 @@ export default class ca_accordion extends ca_eureka_component {
   }
 
   /**
-   *
    * @param {string} name
    * @param {string} _oldValue
    * @param {string} newValue

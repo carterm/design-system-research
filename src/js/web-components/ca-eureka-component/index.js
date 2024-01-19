@@ -17,11 +17,11 @@ export default class ca_eureka_component extends HTMLElement {
    * Used with `attributeChangedCallback` to track changes to attributes
    *
    * Should be overridden in extended component
-   * @example //@protected //@readonly //@override
-   * static observedAttributes = ["data-summary", "data-expanded"];
    * @protected
    * @readonly
    * @type {string[] | undefined}
+   * @example //@protected //@readonly //@override
+   * static observedAttributes = ["data-summary", "data-expanded"];
    */
   static observedAttributes = undefined;
 
@@ -71,6 +71,7 @@ export default class ca_eureka_component extends HTMLElement {
    * Add a cachable stylestring to a shadow root
    * @param {string} [styleString] leave blank to add the root css
    * @public
+   * @example myComponent.addStyle("p{background-color:pink}");
    */
   addStyle(styleString = CssRootStyleString) {
     if (!this.shadowRoot)
@@ -172,7 +173,9 @@ export default class ca_eureka_component extends HTMLElement {
   }
 
   /**
+   * Used with `observedAttributes` to track attribute changes
    *
+   * Should be overridden in extended component
    * @param {string} _name
    * @param {string} _oldValues
    * @param {string} _newValue
