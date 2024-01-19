@@ -14,7 +14,7 @@ import CssRootStyleString from "./rootstyle.css" assert { type: "css" };
 
 export default class ca_eureka_component extends HTMLElement {
   /**
-   * @protected //Will error if not overriddin with a public property
+   * @protected
    * @readonly
    * @type {string[] | undefined}
    */
@@ -22,7 +22,7 @@ export default class ca_eureka_component extends HTMLElement {
 
   /**
    * Get the tagName this class will use
-   * @protected //Will error if not overriddin with a public property
+   * @protected
    */
   static get tagName() {
     return ""; //Should never see
