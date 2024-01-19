@@ -14,6 +14,11 @@ import CssRootStyleString from "./rootstyle.css" assert { type: "css" };
 
 export default class ca_eureka_component extends HTMLElement {
   /**
+   * Used with `attributeChangedCallback` to track changes to attributes
+   *
+   * Should be overridden in extended component
+   * @example //@protected //@readonly //@override
+   * static observedAttributes = ["data-summary", "data-expanded"];
    * @protected
    * @readonly
    * @type {string[] | undefined}
@@ -50,6 +55,7 @@ export default class ca_eureka_component extends HTMLElement {
   }
 
   /**
+   * Dispatch a bubbling event for the page to listen for
    * @protected
    * @param {string} type
    */
