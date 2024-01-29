@@ -31,10 +31,6 @@ export default class ca_eureka_component extends HTMLElement {
    */
   static _styles = {};
 
-  constructor() {
-    super();
-  }
-
   /**
    * Dispatch a bubbling event for the page to listen for
    * @protected

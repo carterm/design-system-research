@@ -11,15 +11,12 @@ export default class ca_nav extends ca_eureka_component {
   }
 
   constructor() {
-    super({
-      not_after: ["ca-body", "ca-footer"],
-      parent: "ca-root",
-      single: true
-    });
+    super();
 
     this.attachShadow({ mode: "open" });
     this.setConnectedCallback(this.contentChanged);
 
+    this.addStyle();
     this.addStyle(styles);
 
     // Callback function to execute when mutations are observed
