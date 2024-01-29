@@ -14,13 +14,10 @@ export default class ca_footer extends ca_eureka_component {
   }
 
   constructor() {
-    super({
-      parent: "ca-root",
-      single: true,
-      last: true
-    });
+    super();
 
     const shadow = this.attachShadow({ mode: "open" });
+    this.addStyle();
     this.addStyle(styles);
 
     shadow.innerHTML = template;

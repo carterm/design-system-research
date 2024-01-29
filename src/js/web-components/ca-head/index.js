@@ -8,13 +8,6 @@ export default class ca_head extends ca_eureka_component {
     return "ca-head";
   }
 
-  constructor() {
-    super({
-      parent: "ca-root",
-      single: true
-    });
-  }
-
   static observedAttributes = ["data-title", "data-description"];
   /**
    *

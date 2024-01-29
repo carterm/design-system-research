@@ -82,9 +82,7 @@ export default class ca_accordion extends ca_eureka_component {
   }
 
   constructor() {
-    super({
-      parent: "ca-body"
-    });
+    super();
 
     const shadow = this.attachShadow({ mode: "open" });
 
