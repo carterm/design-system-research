@@ -1,48 +1,35 @@
 {% same_page_script page %}
-<ca-root type="Type 1">
-  <ca-head
-    data-title="My Page Title"
-    data-description="MY DESCRIPTION"></ca-head>
 
-  <ca-body layout="Type 1">
-    <p>My body content</p>
+<ca-head data-title="My Page Title" data-description="MY DESCRIPTION"></ca-head>
 
-    <ca-accordion data-summary="test <em>HTML</em>" data-expanded>
-      My accordion content
-      <p>P1</p>
-      <p>P2</p>
-    </ca-accordion>
+<ca-accordion data-summary="test <em>HTML</em>" data-expanded>
+  My accordion content
+  <p>P1</p>
+  <p>P2</p>
+</ca-accordion>
 
-    <ca-accordion data-summary="Accordion 1" data-expanded="false">
-      My accordion content
-      <p>P1</p>
-      <p>P2</p>
-    </ca-accordion>
-    <ca-accordion data-summary="Accordion 2">
-      My accordion content
-      <p>P1</p>
-      <p>P2</p>
-    </ca-accordion>
-    <ca-accordion data-summary="Accordion 5">
-      My accordion content
-      <p>P1</p>
-      <p>P2</p>
-      <ca-accordion data-summary="Accordion Child" data-expanded>
-        My accordion Child content
-        <p>P1</p>
-        <p>P2</p>
-      </ca-accordion>
-    </ca-accordion>
+<ca-accordion data-summary="Accordion 1" data-expanded="false">
+  My accordion content
+  <p>P1</p>
+  <p>P2</p>
+</ca-accordion>
+<ca-accordion data-summary="Accordion 2">
+  My accordion content
+  <p>P1</p>
+  <p>P2</p>
+</ca-accordion>
+<ca-accordion data-summary="Accordion 5">
+  My accordion content
+  <p>P1</p>
+  <p>P2</p>
+  <ca-accordion data-summary="Accordion Child" data-expanded>
+    My accordion Child content
+    <p>P1</p>
+    <p>P2</p>
+  </ca-accordion>
+</ca-accordion>
 
-    <ca-table>
-      <ca-row>
-        <ca-cell cols="2"> </ca-cell>
-        <ca-cell cols="1"> </ca-cell>
-      </ca-row>
-    </ca-table>
-  </ca-body>
-  <ca-nav>
-    <p>My Nav</p>
-  </ca-nav>
-  <ca-footer> My footer </ca-footer>
-</ca-root>
+<ca-nav>
+  <p>My Nav</p>
+</ca-nav>
+<ca-footer> My footer </ca-footer>
