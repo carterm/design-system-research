@@ -3,22 +3,36 @@
 // @ts-ignore
 import CssRootStyleString from "./rootstyle.css" assert { type: "css" };
 
+/**
+ * Options for ca-eureka components
+ * @typedef {Object} ca_eureka_component_options
+ * @property {boolean} [use_shadow] - Create a shadow DOM?
+ * @property {string} [custom_css] - CSS to apply to component
+ * @property {string} [html_template] - HTML to apply to component (Event configurable)
+ */
+
 export default class ca_eureka_component extends HTMLElement {
-  constructor(use_shadow = false, custom_css = "", html_template = "") {
+  /**
+   *
+   * @param {ca_eureka_component_options} [options]
+   */
+  constructor(options) {
     super();
 
-    if (use_shadow) {
+    if (options?.use_shadow) {
       const shadow = this.attachShadow({ mode: "open" });
       this.addStyle(CssRootStyleString);
       document.querySelectorAll("ca-custom-css > style").forEach(s => {
         this.addStyle(s.innerHTML);
       });
-      if (custom_css) {
-        this.addStyle(custom_css);
+      if (options.custom_css) {
+        this.addStyle(options.custom_css);
       }
-      if (html_template) {
+      if (options.html_template) {
         const myTemplate = document.createElement("template");
-        myTemplate.innerHTML = this.setHTMLTemplateString(html_template);
+        myTemplate.innerHTML = this.setHTMLTemplateString(
+          options.html_template
+        );
 
         shadow.appendChild(myTemplate.content.cloneNode(true));
       }

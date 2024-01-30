@@ -2,10 +2,10 @@
 import ca_eureka_component from "../ca-eureka-component/index.js";
 
 // @ts-ignore
-import styles from "./styles.css" assert { type: "css" };
+import custom_css from "./styles.css" assert { type: "css" };
 
 // @ts-ignore
-import template from "./template.html" assert { type: "html" };
+import html_template from "./template.html" assert { type: "html" };
 
 export default class ca_footer extends ca_eureka_component {
   /** @override */
@@ -14,6 +14,6 @@ export default class ca_footer extends ca_eureka_component {
   }
 
   constructor() {
-    super(true, styles, template);
+    super({ use_shadow: true, custom_css, html_template });
   }
 }
