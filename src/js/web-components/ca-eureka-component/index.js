@@ -4,6 +4,14 @@
 import CssRootStyleString from "./rootstyle.css" assert { type: "css" };
 
 export default class ca_eureka_component extends HTMLElement {
+  constructor() {
+    super();
+
+    document.querySelectorAll("ca-custom-css > style").forEach(s => {
+      ca_eureka_component.defaultStyleCss.push(s.innerHTML);
+    });
+  }
+
   /**
    * Used with `attributeChangedCallback` to track changes to attributes
    *
@@ -30,6 +38,11 @@ export default class ca_eureka_component extends HTMLElement {
    * @readonly
    */
   static _styles = {};
+
+  /**
+   *  @public
+   *  @type {string[]} */
+  static defaultStyleCss = [];
 
   /**
    * Dispatch a bubbling event for the page to listen for

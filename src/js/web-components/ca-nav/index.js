@@ -43,6 +43,9 @@ export default class ca_nav extends ca_eureka_component {
   contentChanged() {
     if (this.shadowRoot) {
       this.shadowRoot.innerHTML = this.innerHTML;
+
+      ca_eureka_component.defaultStyleCss.forEach(s => this.addStyle(s));
+
       //const sheet = document.createElement("style");
       //sheet.innerHTML = styles;
       //this.shadowRoot.getRootNode().appendChild(sheet);
