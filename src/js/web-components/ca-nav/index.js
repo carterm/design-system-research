@@ -2,7 +2,7 @@
 import ca_eureka_component from "../ca-eureka-component/index.js";
 
 // @ts-ignore
-import css from "./styles.css" assert { type: "css" };
+import css from "./styles.css";
 
 export default class ca_nav extends ca_eureka_component {
   /** @override */
@@ -19,13 +19,13 @@ export default class ca_nav extends ca_eureka_component {
     this.setConnectedCallback(this.contentChanged);
 
     // Callback function to execute when mutations are observed
+    // eslint-disable-next-line jsdoc/no-undefined-types
     /** @type {MutationCallback} */
-    const callback = mutationsList => {
-      for (let mutation of mutationsList) {
+    const callback = mutationsList =>
+      mutationsList.forEach(mutation => {
         console.log(mutation.type);
         this.contentChanged();
-      }
-    };
+      });
 
     // Create an observer instance linked to the callback function
     const observer = new MutationObserver(callback);

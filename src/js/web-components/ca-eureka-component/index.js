@@ -1,11 +1,11 @@
 //@ts-check
 
 // @ts-ignore
-import CssRootStyleString from "./rootstyle.css" assert { type: "css" };
+import CssRootStyleString from "./rootstyle.css";
 
 /**
  * Options for ca-eureka components
- * @typedef {Object} ca_eureka_component_options
+ * @typedef {object} ca_eureka_component_options
  * @property {boolean} [shadow] - Create a shadow DOM?
  * @property {string} [css] - CSS to apply to component
  * @property {string} [html] - HTML to apply to component (Event configurable)
@@ -66,7 +66,8 @@ export default class ca_eureka_component extends HTMLElement {
 
   /**
    *  @public
-   *  @type {string[]} */
+   *  @type {string[]}
+   */
   static defaultStyleCss = [];
 
   /**
@@ -119,8 +120,8 @@ export default class ca_eureka_component extends HTMLElement {
    */
   setHTMLTemplateString(html) {
     /**
-     * @public
      * change this in the `eureka_htmltemplate_set` event if you want to update the source HTML
+     * @public
      */
 
     this.HTMLTemplateString = html;
@@ -140,8 +141,8 @@ export default class ca_eureka_component extends HTMLElement {
   }
 
   /**
-   * @protected
    * Base class connectedCallback
+   * @protected
    */
   connectedCallback() {
     this.dispatchComponentEvent("eureka_connectedCallback_start");
@@ -161,5 +162,6 @@ export default class ca_eureka_component extends HTMLElement {
    * @param {string} _newValue
    * @protected
    */
+  // eslint-disable-next-line class-methods-use-this, no-unused-vars
   attributeChangedCallback(_name, _oldValues, _newValue) {}
 }

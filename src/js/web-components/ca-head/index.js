@@ -16,19 +16,29 @@ export default class ca_head extends ca_eureka_component {
    * @param {string} newValue
    * @override
    */
+  // eslint-disable-next-line class-methods-use-this
   attributeChangedCallback(name, _oldValue, newValue) {
     switch (name) {
       case "data-title":
         document.title = newValue;
         break;
       case "data-description":
-        const metaDescription =
-          document.head.querySelector(`meta[name="description" i]`) ||
-          Object.assign(document.createElement("meta"), {
-            name: "description"
-          });
+        {
+          const metaDescription = document.head.querySelector(
+            `meta[name="description" i]`
+          );
 
-        metaDescription.attributes["content"].value = newValue;
+          if (metaDescription) {
+            metaDescription.attributes["content"].value = newValue;
+          } else {
+            document.head.append(
+              Object.assign(document.createElement("meta"), {
+                name: "description",
+                content: newValue
+              })
+            );
+          }
+        }
         break;
     }
   }

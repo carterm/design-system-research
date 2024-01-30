@@ -16,11 +16,12 @@ module.exports = function (
   eleventyConfig.addShortcode(
     "same_page_script",
     /**
+     * @param {{ inputPath: string; }} page
      * @example
      * {% same_page_script page %}
      */
-    (/** @type {{ inputPath: string; }} */ page) => {
-      const filepath = page.inputPath + ".js";
+    page => {
+      const filepath = `${page.inputPath}.js`;
       //console.log(filepath);
       if (fs.existsSync(filepath)) {
         return `<script>\n${fs.readFileSync(filepath, "utf8")}</script>\n`;
