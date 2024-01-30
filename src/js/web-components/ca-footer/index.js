@@ -14,12 +14,6 @@ export default class ca_footer extends ca_eureka_component {
   }
 
   constructor() {
-    super();
-
-    const shadow = this.attachShadow({ mode: "open" });
-    this.addStyle();
-    this.addStyle(styles);
-
-    shadow.innerHTML = template;
+    super(true, styles, template);
   }
 }

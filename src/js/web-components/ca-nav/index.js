@@ -11,13 +11,9 @@ export default class ca_nav extends ca_eureka_component {
   }
 
   constructor() {
-    super();
+    super(true, styles);
 
-    this.attachShadow({ mode: "open" });
     this.setConnectedCallback(this.contentChanged);
-
-    this.addStyle();
-    this.addStyle(styles);
 
     // Callback function to execute when mutations are observed
     /** @type {MutationCallback} */
@@ -43,8 +39,6 @@ export default class ca_nav extends ca_eureka_component {
   contentChanged() {
     if (this.shadowRoot) {
       this.shadowRoot.innerHTML = this.innerHTML;
-
-      ca_eureka_component.defaultStyleCss.forEach(s => this.addStyle(s));
 
       //const sheet = document.createElement("style");
       //sheet.innerHTML = styles;
