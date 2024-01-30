@@ -11,6 +11,9 @@ import CssRootStyleString from "./rootstyle.css";
  * @property {string} [html] - HTML to apply to component (Event configurable)
  */
 
+/**
+ * @abstract
+ */
 export default class ca_eureka_component extends HTMLElement {
   /**
    *
@@ -39,8 +42,7 @@ export default class ca_eureka_component extends HTMLElement {
 
   /**
    * Used with `attributeChangedCallback` to track changes to attributes
-   *
-   * Should be overridden in extended component
+   * @abstract
    * @protected
    * @readonly
    * @type {string[] | undefined}
@@ -51,6 +53,7 @@ export default class ca_eureka_component extends HTMLElement {
 
   /**
    * Get the tagName this class will use
+   * @abstract
    * @protected
    */
   static get tagName() {
@@ -161,6 +164,7 @@ export default class ca_eureka_component extends HTMLElement {
    * @param {string} _oldValues
    * @param {string} _newValue
    * @protected
+   * @abstract
    */
   // eslint-disable-next-line class-methods-use-this, no-unused-vars
   attributeChangedCallback(_name, _oldValues, _newValue) {}
