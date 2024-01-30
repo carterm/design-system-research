@@ -9,7 +9,7 @@ export default class ca_eureka_component extends HTMLElement {
 
     if (use_shadow) {
       const shadow = this.attachShadow({ mode: "open" });
-      this.addStyle();
+      this.addStyle(CssRootStyleString);
       document.querySelectorAll("ca-custom-css > style").forEach(s => {
         this.addStyle(s.innerHTML);
       });
@@ -72,11 +72,11 @@ export default class ca_eureka_component extends HTMLElement {
 
   /**
    * Add a cachable stylestring to a shadow root
-   * @param {string} [styleString] leave blank to add the root css
+   * @param {string} styleString css to add
    * @public
    * @example myComponent.addStyle("p{background-color:pink}");
    */
-  addStyle(styleString = CssRootStyleString) {
+  addStyle(styleString) {
     if (!this.shadowRoot)
       throw new Error("AddStyle only works with open shadowRoots");
 
