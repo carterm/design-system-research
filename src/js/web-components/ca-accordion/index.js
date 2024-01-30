@@ -82,21 +82,11 @@ export default class ca_accordion extends ca_eureka_component {
   }
 
   constructor() {
-    super();
-
-    const shadow = this.attachShadow({ mode: "open" });
-
-    this.addStyle();
-    this.addStyle(CssStyleString);
-
-    const myTemplate = document.createElement("template");
-    myTemplate.innerHTML = this.setHTMLTemplateString(HtmlTemplateString);
-
-    shadow.appendChild(myTemplate.content.cloneNode(true));
+    super(true, CssStyleString, HtmlTemplateString);
 
     /** @private */
     this.details = /** @type {HTMLDetailsElement} */ (
-      shadow.querySelector("details")
+      this.shadowRoot?.querySelector("details")
     );
 
     /** @private */

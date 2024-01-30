@@ -4,6 +4,27 @@
 import CssRootStyleString from "./rootstyle.css" assert { type: "css" };
 
 export default class ca_eureka_component extends HTMLElement {
+  constructor(use_shadow = false, custom_css = "", html_template = "") {
+    super();
+
+    if (use_shadow) {
+      const shadow = this.attachShadow({ mode: "open" });
+      this.addStyle();
+      document.querySelectorAll("ca-custom-css > style").forEach(s => {
+        this.addStyle(s.innerHTML);
+      });
+      if (custom_css) {
+        this.addStyle(custom_css);
+      }
+      if (html_template) {
+        const myTemplate = document.createElement("template");
+        myTemplate.innerHTML = this.setHTMLTemplateString(html_template);
+
+        shadow.appendChild(myTemplate.content.cloneNode(true));
+      }
+    }
+  }
+
   /**
    * Used with `attributeChangedCallback` to track changes to attributes
    *
@@ -30,6 +51,11 @@ export default class ca_eureka_component extends HTMLElement {
    * @readonly
    */
   static _styles = {};
+
+  /**
+   *  @public
+   *  @type {string[]} */
+  static defaultStyleCss = [];
 
   /**
    * Dispatch a bubbling event for the page to listen for

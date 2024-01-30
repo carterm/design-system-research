@@ -1,5 +1,16 @@
 {% same_page_script page %}
 
+<ca-custom-css>
+  <style>
+    p {
+      color: orange
+    }
+    :host(ca-nav) p {
+      color: pink
+    }
+  </style>
+</ca-custom-css>
+
 <ca-head data-title="My Page Title" data-description="MY DESCRIPTION"></ca-head>
 
 <ca-accordion data-summary="test <em>HTML</em>" data-expanded>
