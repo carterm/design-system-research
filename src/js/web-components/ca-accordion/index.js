@@ -2,10 +2,10 @@
 import ca_eureka_component from "../ca-eureka-component/index.js";
 
 // @ts-ignore
-import custom_css from "./styles.css" assert { type: "css" };
+import css from "./styles.css" assert { type: "css" };
 
 // @ts-ignore
-import html_template from "./template.html" assert { type: "html" };
+import html from "./template.html" assert { type: "html" };
 
 export default class ca_accordion extends ca_eureka_component {
   /** @override */
@@ -83,9 +83,9 @@ export default class ca_accordion extends ca_eureka_component {
 
   constructor() {
     super({
-      use_shadow: true,
-      custom_css,
-      html_template
+      shadow: true,
+      css,
+      html
     });
 
     /** @private */

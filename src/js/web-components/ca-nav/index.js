@@ -2,7 +2,7 @@
 import ca_eureka_component from "../ca-eureka-component/index.js";
 
 // @ts-ignore
-import custom_css from "./styles.css" assert { type: "css" };
+import css from "./styles.css" assert { type: "css" };
 
 export default class ca_nav extends ca_eureka_component {
   /** @override */
@@ -12,8 +12,8 @@ export default class ca_nav extends ca_eureka_component {
 
   constructor() {
     super({
-      use_shadow: true,
-      custom_css
+      shadow: true,
+      css
     });
 
     this.setConnectedCallback(this.contentChanged);
