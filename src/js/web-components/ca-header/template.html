@@ -1,0 +1,51 @@
+<header>
+  <!-- Avatar and department name for deskop -->
+  <div class="flex-align-center container show-lg">
+    <div class="avatar">
+      <img
+        src="https://california.azureedge.net/cdt/statetemplate/global/images/ca-seal.png"
+        alt="Department logo" />
+    </div>
+    <div class="department-name light-text">
+      <h2>California</h2>
+      <h4><slot name="department-name">Department of Website</slot></h4>
+    </div>
+  </div>
+
+  <!-- Mobile hamburger menu -->
+  <div class="flex-align-center container show-mobile">
+    <div class="mobile-menu">
+      <img src="/images/hamburger-menu.svg" alt="Hamburger menu icon" />
+    </div>
+    <div class="department-name light-text">
+      <h2>California</h2>
+      <div>Department of Website</div>
+    </div>
+  </div>
+
+  <!-- Search, login, cagov menu for desktop -->
+  <div class="flex-align-center m-t-1 m-r-1 show-lg">
+    <div class="search-icon-container">
+      <img
+        src="/images/magnifying-glass.svg"
+        alt="Magifying glass icon"
+        class="search-icon" />
+    </div>
+    <div class="login">
+      <button>Login</button>
+    </div>
+    <div class="cagov-menu">
+      <img src="/images/ca-menu-icon.svg" alt="CA.gov icon" />
+    </div>
+  </div>
+
+  <!-- Login, cagov menu for mobile -->
+  <div class="flex-align-center m-t-1 m-r-1 show-mobile">
+    <div class="login-icon">
+      <img src="/images/login-icon.svg" alt="Login icon" />
+    </div>
+    <div class="cagov-menu">
+      <img src="/images/ca-menu-icon.svg" alt="CA.gov icon" />
+    </div>
+  </div>
+</header>

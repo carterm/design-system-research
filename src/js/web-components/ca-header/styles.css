@@ -1,0 +1,293 @@
+/* stylelint-disable alpha-value-notation */
+/* stylelint-disable color-function-notation */
+/* stylelint-disable declaration-property-unit-allowed-list */
+/* stylelint-disable unit-allowed-list */
+* {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+:host {
+  --primary: #2d2d2d;
+  --secondary: #fff;
+
+  /* Change this for overall font size */
+  --font-size: 1rem;
+
+  /* Font characteristics */
+  font-size: clamp(0.5rem, var(--base), 5rem);
+
+  --ratio: 1.24;
+  --s0: calc(var(--font-size) - 0.3rem) + 0.17vw;
+
+  /* Typography calculations, please do not change */
+
+  /* Small-text to allow for more control */
+  --st: calc(var(--s0) * var(--ratio));
+
+  /*The font size of standard paragraph text */
+  --base: calc(var(--st) * var(--ratio));
+
+  /*()Lead-text to allow for more control*/
+  --lt: calc(var(--base) * var(--ratio));
+  --h6: calc(var(--s0) * var(--ratio));
+  --h5: calc(var(--h6) * var(--ratio));
+  --h4: calc(var(--h5) * var(--ratio));
+  --h3: calc(var(--h4) * var(--ratio));
+  --h2: calc(var(--h3) * var(--ratio));
+  --h1: calc(var(--h2) * var(--ratio) * var(--ratio));
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  color: #323232;
+
+  /* the last font listed is the one used */
+
+  /* font-family: "Inter"; */
+
+  /* font-family: "Roboto"; */
+
+  /* font-family: "Public Sans"; */
+
+  font-family: "Noto Sans", sans-serif;
+  letter-spacing: 0.02rem;
+  line-height: 1.6rem;
+
+  /* Change font weight for the base: Imported 100, 200, 300, 400, 500, 600, 700 */
+  font-weight: 300;
+  margin: 0;
+}
+
+main {
+  margin: 0 auto;
+  max-width: calc(60ch + 2rem);
+  padding: 1rem;
+}
+
+/* Global margin */
+* + * {
+  margin-bottom: 1rem;
+}
+
+/* Sets rule for small text */
+h6 ~ p {
+  font-size: calc(var(--st) - 0.1rem);
+}
+
+h1 {
+  font-weight: 600;
+  font-size: var(--h1);
+  line-height: 1.619;
+}
+
+h2 {
+  font-weight: 600;
+  font-size: var(--h2);
+  line-height: 1.619;
+}
+
+h3 {
+  font-weight: 600;
+  font-size: var(--h3);
+  line-height: 1.619;
+}
+
+h4 {
+  font-weight: 600;
+  font-size: var(--h4);
+  line-height: 1.619;
+}
+
+h5 {
+  font-weight: 500;
+  font-size: var(--h5);
+}
+
+h6 {
+  font-weight: 500;
+  font-size: var(--h5) - 0.2rem;
+}
+
+/* Adjustment to give h1 the global margin */
+h1:has(+ p, + lt) {
+  margin-bottom: 1rem;
+}
+
+/* Sets rule for lead text */
+h1 + p {
+  font-size: var(--lt);
+  line-height: 1.5;
+}
+
+li + li {
+  margin-top: 0.5rem;
+}
+
+blockquote {
+  border-left: rgba(0, 0, 0, 0.12) 2px solid;
+  margin-left: 0;
+  padding-left: calc(2ch + 0.5rem);
+}
+
+footer {
+  background-color: rgba(0, 0, 0, 0.12);
+  font-size: 0.9rem;
+  font-weight: 200;
+  text-align: center;
+  padding: 1rem;
+}
+
+article > header ~ * {
+  margin-top: 0.15rem;
+}
+
+/* html,
+body {
+  box-sizing: border-box;
+  font-family: "Noto Sans", sans-serif;
+  height: 100%;
+  padding: 0;
+  margin: 0rem;
+} */
+
+header {
+  align-items: center;
+  background-color: var(--primary);
+  color: #fff;
+  display: flex;
+  height: var(--header-space-height, 6rem);
+  justify-content: space-between;
+  padding: var(--search-icon-height, 0) 1rem;
+  text-align: center;
+}
+
+header div {
+  margin-bottom: 0;
+}
+
+header .avatar {
+  align-self: flex-end;
+  border-radius: 58%;
+  margin-right: 1rem;
+  margin-top: 3rem;
+  z-index: 10;
+}
+
+header .avatar > img {
+  border-radius: 50%;
+  height: 104px;
+  width: 104px;
+}
+
+header .container {
+  margin: 0 1.25rem;
+}
+
+header .department-name {
+  text-align: left;
+}
+
+header .department-name * {
+  margin-block-end: 0;
+}
+
+.flex,
+.flex-align-center {
+  display: flex;
+}
+
+.flex-align-center {
+  align-items: center;
+}
+
+.flex-item {
+  margin: 5rem;
+}
+
+.left-nav {
+  background: #d9d9d9;
+  flex-direction: column;
+  padding-right: 2rem;
+  padding-top: 4rem;
+  text-align: center;
+  width: 12rem;
+}
+
+.left-nav ul {
+  font-size: 1.125rem;
+  list-style-type: none;
+}
+
+.left-nav li {
+  padding: 0.5rem;
+}
+
+.light-text {
+  color: white;
+}
+
+.login {
+  margin-right: 10vw;
+}
+
+.login > button {
+  background: var(--v-6-gray-200, #d4d4d7);
+  border-radius: 1.875rem;
+  color: var(--v-6-gray-600, #72717c);
+  cursor: pointer;
+  font-size: 1.125rem;
+  padding: 0.25rem 2rem;
+}
+
+.login-icon {
+  margin-right: 1rem;
+}
+
+.m-r-1 {
+  margin-right: 1rem;
+}
+
+.m-t-1 {
+  margin-top: 1rem;
+}
+
+.mobile-menu {
+  margin-right: 2rem;
+}
+
+.page-container {
+  display: flex;
+}
+
+.search-icon {
+  cursor: pointer;
+  margin-top: 0.5rem;
+  padding: 0 0.3rem;
+}
+
+.search-icon-container {
+  border: 1px solid white;
+  border-radius: 50%;
+  margin-right: 2rem;
+}
+
+.show-lg {
+  display: flex;
+}
+
+.show-mobile {
+  display: none;
+}
+
+@media screen and (max-width: 816px) {
+  .show-lg {
+    display: none;
+  }
+
+  .show-mobile {
+    display: flex;
+  }
+}

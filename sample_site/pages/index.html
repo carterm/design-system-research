@@ -3,46 +3,51 @@
   <ca-head
     data-title="My Page Title"
     data-description="MY DESCRIPTION"></ca-head>
-
+  <ca-header data-department="Department of Technology"></ca-header>
   <ca-body layout="Type 1">
-    <p>My body content</p>
-
-    <ca-accordion data-summary="test <em>HTML</em>" data-expanded>
-      My accordion content
-      <p>P1</p>
-      <p>P2</p>
-    </ca-accordion>
-
-    <ca-accordion data-summary="Accordion 1" data-expanded="false">
-      My accordion content
-      <p>P1</p>
-      <p>P2</p>
-    </ca-accordion>
-    <ca-accordion data-summary="Accordion 2">
-      My accordion content
-      <p>P1</p>
-      <p>P2</p>
-    </ca-accordion>
-    <ca-accordion data-summary="Accordion 5">
-      My accordion content
-      <p>P1</p>
-      <p>P2</p>
-      <ca-accordion data-summary="Accordion Child" data-expanded>
-        My accordion Child content
-        <p>P1</p>
-        <p>P2</p>
-      </ca-accordion>
-    </ca-accordion>
-
-    <ca-table>
-      <ca-row>
-        <ca-cell cols="2"> </ca-cell>
-        <ca-cell cols="1"> </ca-cell>
-      </ca-row>
-    </ca-table>
+    <div class="row">
+      <div class="card">Card #1</div>
+      <!-- <div class="card">Card #2</div> -->
+      <!-- <div class="card">Card #3</div> -->
+      <!-- <div class="card">Card #4</div> -->
+    </div>
+    <div class="row">
+      <div class="card">Card #1</div>
+      <div class="card">Card #2</div>
+      <!-- <div class="card">Card #3</div> -->
+      <!-- <div class="card">Card #4</div> -->
+    </div>
+    <div class="row">
+      <div class="card">Card #1</div>
+      <div class="card">Card #2</div>
+      <div class="card">Card #3</div>
+      <!-- <div class="card">Card #4</div> -->
+    </div>
+    <div class="row">
+      <div class="card">Card #1</div>
+      <div class="card">Card #2</div>
+      <div class="card">Card #3</div>
+      <div class="card">Card #4</div>
+    </div>
+    <!-- <ca-accordion data-summary="Very Nice Accordion">
+      <h2>H2 content here</h2>
+      <p>Paragraph content inside of this accordion</p>
+    </ca-accordion> -->
   </ca-body>
-  <ca-nav>
-    <p>My Nav</p>
-  </ca-nav>
-  <ca-footer> My footer </ca-footer>
 </ca-root>
+
+<style>
+    .card {
+    border: 2px solid red;
+    max-width: 18rem;
+    padding: 2rem;
+    text-align: center;
+    width: 18rem;
+  }
+
+  .row {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 2rem;
+  }
+</style>
