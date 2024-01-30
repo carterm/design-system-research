@@ -1,18 +1,42 @@
 //@ts-check
 
 // @ts-ignore
-import CssRootStyleString from "./rootstyle.css" assert { type: "css" };
+import CssRootStyleString from "./rootstyle.css";
 
 /**
  * Options for ca-eureka components
- * @typedef {Object} ca_eureka_component_options
- * @property {string} [parent] - The required parent tag. Example:```ca-root```
- * @property {string[]} [not_after] - Elements this element must not be after
- * @property {boolean} [single] - true if this element must be the only one under a parent
- * @property {boolean} [last] - true if this element must be last under a parent
+ * @typedef {object} ca_eureka_component_options
+ * @property {boolean} [shadow] - Create a shadow DOM?
+ * @property {string} [css] - CSS to apply to component
+ * @property {string} [html] - HTML to apply to component (Event configurable)
  */
 
 export default class ca_eureka_component extends HTMLElement {
+  /**
+   *
+   * @param {ca_eureka_component_options} [options]
+   */
+  constructor(options) {
+    super();
+
+    if (options?.shadow) {
+      const shadow = this.attachShadow({ mode: "open" });
+      this.addStyle(CssRootStyleString);
+      document.querySelectorAll("ca-custom-css > style").forEach(s => {
+        this.addStyle(s.innerHTML);
+      });
+      if (options.css) {
+        this.addStyle(options.css);
+      }
+      if (options.html) {
+        const myTemplate = document.createElement("template");
+        myTemplate.innerHTML = this.setHTMLTemplateString(options.html);
+
+        shadow.appendChild(myTemplate.content.cloneNode(true));
+      }
+    }
+  }
+
   /**
    * Used with `attributeChangedCallback` to track changes to attributes
    *
@@ -41,18 +65,10 @@ export default class ca_eureka_component extends HTMLElement {
   static _styles = {};
 
   /**
- 
-   * @param {ca_eureka_component_options} [options]
+   *  @public
+   *  @type {string[]}
    */
-  constructor(options) {
-    super();
-
-    /**
-     * @type {ca_eureka_component_options | undefined}
-     * @private
-     */
-    this._options = options;
-  }
+  static defaultStyleCss = [];
 
   /**
    * Dispatch a bubbling event for the page to listen for
@@ -69,11 +85,11 @@ export default class ca_eureka_component extends HTMLElement {
 
   /**
    * Add a cachable stylestring to a shadow root
-   * @param {string} [styleString] leave blank to add the root css
+   * @param {string} styleString css to add
    * @public
    * @example myComponent.addStyle("p{background-color:pink}");
    */
-  addStyle(styleString = CssRootStyleString) {
+  addStyle(styleString) {
     if (!this.shadowRoot)
       throw new Error("AddStyle only works with open shadowRoots");
 
@@ -104,8 +120,8 @@ export default class ca_eureka_component extends HTMLElement {
    */
   setHTMLTemplateString(html) {
     /**
-     * @public
      * change this in the `eureka_htmltemplate_set` event if you want to update the source HTML
+     * @public
      */
 
     this.HTMLTemplateString = html;
@@ -125,48 +141,13 @@ export default class ca_eureka_component extends HTMLElement {
   }
 
   /**
-   * @protected
    * Base class connectedCallback
+   * @protected
    */
   connectedCallback() {
     this.dispatchComponentEvent("eureka_connectedCallback_start");
-    if (this._options && this.parentElement) {
-      const options = this._options;
-      const parentElement = this.parentElement;
-      const tagName = this.tagName;
-
-      const reportError = (/** @type {string} */ message) =>
-        console.error(tagName + ": " + message);
-
-      if (options.parent) {
-        const parent = options.parent.toUpperCase();
-        if (parentElement.tagName.toUpperCase() !== parent) {
-          reportError(`Must be contained within ${parent}`);
-        }
-      }
-
-      options.not_after?.forEach(t => {
-        if (parentElement.querySelectorAll(tagName + "," + t)[0] !== this) {
-          reportError(`Cannot be after ${t.toUpperCase()}`);
-        }
-      });
-
-      if (options.single) {
-        if (parentElement.querySelector(tagName) !== this) {
-          reportError(`Only one allowed.`);
-        }
-      }
-
-      if (options.last) {
-        if (parentElement.querySelector(tagName + ":last-child") !== this) {
-          reportError(`Must be last`);
-        }
-      }
-    }
 
     if (this._connectedCallback) {
-      console.log(this.tagName + " connectedCallback");
-
       this._connectedCallback();
     }
     this.dispatchComponentEvent("eureka_connectedCallback_end");
@@ -181,5 +162,6 @@ export default class ca_eureka_component extends HTMLElement {
    * @param {string} _newValue
    * @protected
    */
+  // eslint-disable-next-line class-methods-use-this, no-unused-vars
   attributeChangedCallback(_name, _oldValues, _newValue) {}
 }

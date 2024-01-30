@@ -11,6 +11,7 @@ export default function () {
 
   // Minify in normal build only
   //const plugins = process.env["ROLLUP_WATCH"] === "true" ? [] : [terser({ module: true })];
+  // @ts-ignore
   const plugins = [terser({ module: true })];
 
   return {
@@ -39,7 +40,9 @@ export default function () {
         banner
       }
     ],
-    onwarn: function (warning) {
+    onwarn: function (
+      /** @type {{ code: string; message: string; }} */ warning
+    ) {
       // should intercept warnings but doesn't in some rollup versions
       if (warning.code === "THIS_IS_UNDEFINED") {
         return;
