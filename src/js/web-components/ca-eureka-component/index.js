@@ -111,7 +111,7 @@ export default class ca_eureka_component extends HTMLElement {
       style = new CSSStyleSheet();
       style.replaceSync(styleString);
 
-      //Safari does not support remembering adoptedStyleSheets here
+      //Safari 17.2.1 does not support remembering adoptedStyleSheets here
       //ca_eureka_component._styles[hash] = style;
     }
 
