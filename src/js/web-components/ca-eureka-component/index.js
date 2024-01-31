@@ -51,17 +51,22 @@ export default class ca_eureka_component extends HTMLElement {
    */
   static observedAttributes = undefined;
 
-  /** @type {CSSStyleSheet} */
-  static _shareCss;
+  /** @type {CSSStyleSheet[]} */
+  static _shareCss = [];
   static get shareCss() {
-    if (!this._shareCss) {
-      this._shareCss = new CSSStyleSheet();
-      this._shareCss.replaceSync(CssRootStyleString);
+    if (this._shareCss.length == 0) {
+      const newCss = new CSSStyleSheet();
+      newCss.replaceSync(CssRootStyleString);
+
+      this._shareCss.push(newCss);
     } else {
       console.log("reuse");
     }
-    return this._shareCss;
+    return this._shareCss[0];
   }
+
+  /** @type {string[]} */
+  static _shareCssText = [];
 
   /**
    * Get the tagName this class will use
