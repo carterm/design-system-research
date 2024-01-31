@@ -24,7 +24,7 @@ export default class ca_eureka_component extends HTMLElement {
 
     if (options?.shadow) {
       const shadow = this.attachShadow({ mode: "open" });
-      this.addStyle(CssRootStyleString);
+      this.shadowRoot?.adoptedStyleSheets.push(ca_eureka_component.shareCss);
       document.querySelectorAll("ca-custom-css > style").forEach(s => {
         this.addStyle(s.innerHTML);
       });
@@ -50,6 +50,18 @@ export default class ca_eureka_component extends HTMLElement {
    * static observedAttributes = ["data-summary", "data-expanded"];
    */
   static observedAttributes = undefined;
+
+  /** @type {CSSStyleSheet} */
+  static _shareCss;
+  static get shareCss() {
+    if (!this._shareCss) {
+      this._shareCss = new CSSStyleSheet();
+      this._shareCss.replaceSync(CssRootStyleString);
+    } else {
+      console.log("reuse");
+    }
+    return this._shareCss;
+  }
 
   /**
    * Get the tagName this class will use
