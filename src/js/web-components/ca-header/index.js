@@ -27,12 +27,18 @@ export default class ca_header extends ca_eureka_component {
     const o = ca_header.observedAttributes;
     console.log("attribute changed: ", o);
     console.log(this);
+    console.log("name is: ", name);
     switch (name) {
       case o[0]: //"data-department":
-        this.slot = `${newValue}`;
+        {
+          const selector = this.shadowRoot?.querySelector("#desktop-header");
+          console.log("selector before if: ", selector);
+          if (selector) {
+            console.log("selector is: ", selector);
+            selector.innerHTML = newValue;
+          }
+        }
         break;
-      default:
-        this.slot = `Department of Website`;
     }
   }
   constructor() {
