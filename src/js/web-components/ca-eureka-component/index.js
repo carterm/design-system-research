@@ -68,12 +68,6 @@ export default class ca_eureka_component extends HTMLElement {
   static _styles = {};
 
   /**
-   *  @public
-   *  @type {string[]}
-   */
-  static defaultStyleCss = [];
-
-  /**
    * Dispatch a bubbling event for the page to listen for
    * @protected
    * @param {string} type

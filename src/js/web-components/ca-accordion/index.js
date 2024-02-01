@@ -105,16 +105,17 @@ export default class ca_accordion extends ca_eureka_component {
       html
     });
 
-    /** @private */
-    this.details = /** @type {HTMLDetailsElement} */ (
+    const detail = /** @type {HTMLDetailsElement} */ (
       this.shadowRoot?.querySelector("details")
     );
 
     /** @private */
+    this.details = detail;
+
+    /** @private */
     this.summary = /** @type {HTMLElement} */ (
-      this.details.querySelector(":scope > summary")
+      detail.querySelector(":scope > summary")
     );
-    const detail = this.details;
 
     ca_accordion.observeResize(detail);
 
