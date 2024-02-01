@@ -21,6 +21,43 @@ export default class ca_accordion extends ca_eureka_component {
   static observedAttributes = ["data-summary", "data-expanded"];
 
   /**
+   *
+   * @param {HTMLDetailsElement} detail
+   */
+  static setSizes = detail => {
+    /**
+     *
+     * @param {string} prop
+     * @param {number} value
+     */
+    const setOnlyIfChanged = (prop, value) => {
+      const pxvalue = `${value}px`;
+
+      if (detail.style.getPropertyValue(prop) !== pxvalue) {
+        detail.style.setProperty(prop, pxvalue);
+      }
+    };
+
+    const shadow = /** @type {ShadowRoot} */ (detail.parentNode);
+
+    const innerDiv = /** @type {HTMLDivElement} */ (
+      shadow.querySelector("details > div")
+    );
+
+    const summary = /** @type {HTMLElement} */ (
+      shadow.querySelector("details > summary")
+    );
+
+    setOnlyIfChanged(
+      "--expanded",
+      summary.clientHeight +
+        Math.max(summary.clientHeight * 2, innerDiv.clientHeight)
+    );
+
+    setOnlyIfChanged("--collapsed", summary.clientHeight);
+  };
+
+  /**
    * A single static observer for all accordions on the page
    * @type {ResizeObserver}
    * @private
@@ -33,7 +70,6 @@ export default class ca_accordion extends ca_eureka_component {
    * @protected
    */
   static observeResize(target) {
-    const cssVars = ["--expanded", "--collapsed"]; //match the CSS vars in CSS
     if (!ca_accordion._resizeObserver) {
       // This declaration should only happen once for all controls
       ca_accordion._resizeObserver = new ResizeObserver(entries =>
@@ -45,17 +81,7 @@ export default class ca_accordion extends ca_eureka_component {
           if (detail.dataset.width !== contentRectWidth) {
             detail.dataset.width = contentRectWidth;
 
-            cssVars.forEach(cssVar => detail.style.removeProperty(cssVar));
-
-            //Run 2 times
-            [0, 0].forEach(() => {
-              detail.style.setProperty(
-                detail.open ? cssVars[0] : cssVars[1],
-                `${detail.getBoundingClientRect().height}px`
-              );
-
-              detail.open = !detail.open;
-            });
+            ca_accordion.setSizes(detail);
           }
         })
       );
@@ -101,7 +127,12 @@ export default class ca_accordion extends ca_eureka_component {
     this.summary = /** @type {HTMLElement} */ (
       this.details.querySelector(":scope > summary")
     );
+    const detail = this.details;
 
-    ca_accordion.observeResize(this.details);
+    ca_accordion.observeResize(detail);
+
+    detail.addEventListener("transitionstart", e => {
+      if (e.target === detail) ca_accordion.setSizes(detail);
+    });
   }
 }

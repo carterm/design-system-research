@@ -24,13 +24,16 @@ export default class ca_eureka_component extends HTMLElement {
 
     if (options?.shadow) {
       const shadow = this.attachShadow({ mode: "open" });
-      this.shadowRoot?.adoptedStyleSheets.push(ca_eureka_component.shareCss);
-      document.querySelectorAll("ca-custom-css > style").forEach(s => {
-        this.addStyle(s.innerHTML);
-      });
+
+      this.addStyle(CssRootStyleString);
+
       if (options.css) {
         this.addStyle(options.css);
       }
+      document.querySelectorAll("ca-custom-css > style").forEach(s => {
+        this.addStyle(s.innerHTML);
+      });
+
       if (options.html) {
         const myTemplate = document.createElement("template");
         myTemplate.innerHTML = this.setHTMLTemplateString(options.html);
@@ -50,23 +53,6 @@ export default class ca_eureka_component extends HTMLElement {
    * static observedAttributes = ["data-summary", "data-expanded"];
    */
   static observedAttributes = undefined;
-
-  /** @type {CSSStyleSheet[]} */
-  static _shareCss = [];
-  static get shareCss() {
-    if (this._shareCss.length == 0) {
-      const newCss = new CSSStyleSheet();
-      newCss.replaceSync(CssRootStyleString);
-
-      this._shareCss.push(newCss);
-    } else {
-      console.log("reuse");
-    }
-    return this._shareCss[0];
-  }
-
-  /** @type {string[]} */
-  static _shareCssText = [];
 
   /**
    * Get the tagName this class will use
@@ -103,6 +89,37 @@ export default class ca_eureka_component extends HTMLElement {
     );
   }
 
+  /** @type {CSSStyleSheet[]} */
+  static _shareCss = [];
+  /** @type {number[]} */
+  static _shareCssHash = [];
+
+  /**
+   * @param {string} styleString
+   */
+  static cacheCss(styleString) {
+    const hashCode = (/** @type {string} */ s) =>
+      s.split("").reduce((a, b) => {
+        a = (a << 5) - a + b.charCodeAt(0);
+        return a & a;
+      }, 0);
+
+    const hash = hashCode(styleString);
+
+    const i = this._shareCssHash.findIndex(x => x === hash);
+
+    if (i === -1) {
+      const newCss = new CSSStyleSheet();
+      newCss.replaceSync(styleString);
+
+      this._shareCss.push(newCss);
+      this._shareCssHash.push(hash);
+      return newCss;
+    } else {
+      return this._shareCss[i];
+    }
+  }
+
   /**
    * Add a cachable stylestring to a shadow root
    * @param {string} styleString css to add
@@ -113,24 +130,7 @@ export default class ca_eureka_component extends HTMLElement {
     if (!this.shadowRoot)
       throw new Error("AddStyle only works with open shadowRoots");
 
-    const hashCode = (/** @type {string} */ s) =>
-      s.split("").reduce((a, b) => {
-        a = (a << 5) - a + b.charCodeAt(0);
-        return a & a;
-      }, 0);
-
-    const hash = hashCode(styleString);
-
-    /** @type {CSSStyleSheet} */
-    let style = ca_eureka_component._styles[hash];
-
-    if (!style) {
-      style = new CSSStyleSheet();
-      style.replaceSync(styleString);
-
-      //Safari 17.2.1 does not support remembering adoptedStyleSheets here
-      //ca_eureka_component._styles[hash] = style;
-    }
+    const style = ca_eureka_component.cacheCss(styleString);
 
     this.shadowRoot.adoptedStyleSheets.push(style);
   }
