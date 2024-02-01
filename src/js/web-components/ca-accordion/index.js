@@ -21,8 +21,9 @@ export default class ca_accordion extends ca_eureka_component {
   static observedAttributes = ["data-summary", "data-expanded"];
 
   /**
-   *
+   * Updates the css vars to match the size of the control
    * @param {HTMLDetailsElement} detail
+   * @private
    */
   static setSizes = detail => {
     /**
@@ -38,22 +39,16 @@ export default class ca_accordion extends ca_eureka_component {
       }
     };
 
-    const shadow = /** @type {ShadowRoot} */ (detail.parentNode);
+    const summary_clientHeight = /** @type {HTMLElement} */ (
+      detail.querySelector(":scope > summary")
+    ).clientHeight;
 
-    const innerDiv = /** @type {HTMLDivElement} */ (
-      shadow.querySelector("details > div")
-    );
+    const allKids_clientHeight = [...detail.querySelectorAll(":scope > *")]
+      .map(x => x.clientHeight)
+      .reduce((a, b) => a + b, 0);
 
-    const summary = /** @type {HTMLElement} */ (
-      shadow.querySelector("details > summary")
-    );
-
-    setOnlyIfChanged(
-      "--expanded",
-      summary.clientHeight + Math.max(1, innerDiv.clientHeight)
-    );
-
-    setOnlyIfChanged("--collapsed", summary.clientHeight);
+    setOnlyIfChanged("--collapsed", summary_clientHeight);
+    setOnlyIfChanged("--expanded", summary_clientHeight + allKids_clientHeight);
   };
 
   /**
