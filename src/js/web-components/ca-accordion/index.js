@@ -50,8 +50,7 @@ export default class ca_accordion extends ca_eureka_component {
 
     setOnlyIfChanged(
       "--expanded",
-      summary.clientHeight +
-        Math.max(summary.clientHeight * 2, innerDiv.clientHeight)
+      summary.clientHeight + Math.max(1, innerDiv.clientHeight)
     );
 
     setOnlyIfChanged("--collapsed", summary.clientHeight);
@@ -71,18 +70,12 @@ export default class ca_accordion extends ca_eureka_component {
    */
   static observeResize(target) {
     if (!ca_accordion._resizeObserver) {
-      // This declaration should only happen once for all controls
+      // This declaration will only happen once for all controls
       ca_accordion._resizeObserver = new ResizeObserver(entries =>
         entries.forEach(entry => {
-          const detail = /** @type {HTMLDetailsElement} */ (entry.target);
-
-          const contentRectWidth = `${entry.contentRect.width}`;
-
-          if (detail.dataset.width !== contentRectWidth) {
-            detail.dataset.width = contentRectWidth;
-
-            ca_accordion.setSizes(detail);
-          }
+          ca_accordion.setSizes(
+            /** @type {HTMLDetailsElement} */ (entry.target)
+          );
         })
       );
     }
@@ -132,6 +125,7 @@ export default class ca_accordion extends ca_eureka_component {
     ca_accordion.observeResize(detail);
 
     detail.addEventListener("transitionstart", e => {
+      //Sets the size right as the animation starts
       if (e.target === detail) ca_accordion.setSizes(detail);
     });
   }
