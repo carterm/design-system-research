@@ -27,7 +27,6 @@ export default class ca_accordion extends ca_eureka_component {
    */
   static setSizes = detail => {
     /**
-     *
      * @param {string} prop
      * @param {number} value
      */
@@ -39,16 +38,16 @@ export default class ca_accordion extends ca_eureka_component {
       }
     };
 
-    const summary_clientHeight = /** @type {HTMLElement} */ (
+    const summary_Height = /** @type {HTMLElement} */ (
       detail.querySelector(":scope > summary")
     ).clientHeight;
 
-    const allKids_clientHeight = [...detail.querySelectorAll(":scope > *")]
-      .map(x => x.clientHeight)
+    const allKids_Height = [...detail.querySelectorAll(":scope > *")]
+      .map(x => /** @type {HTMLElement} */ (x).offsetHeight)
       .reduce((a, b) => a + b, 0);
 
-    setOnlyIfChanged("--collapsed", summary_clientHeight);
-    setOnlyIfChanged("--expanded", summary_clientHeight + allKids_clientHeight);
+    setOnlyIfChanged("--collapsed", summary_Height);
+    setOnlyIfChanged("--expanded", allKids_Height);
   };
 
   /**
