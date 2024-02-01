@@ -90,13 +90,11 @@ export default class ca_eureka_component extends HTMLElement {
     if (!this.shadowRoot)
       throw new Error("AddStyle only works with open shadowRoots");
 
-    const hashCode = (/** @type {string} */ s) =>
-      s.split("").reduce((a, b) => {
-        a = (a << 5) - a + b.charCodeAt(0);
-        return a & a;
-      }, 0);
-
-    const hash = hashCode(styleString);
+    // Hash Algorithm
+    const hash = [...styleString].reduce(
+      (a, b) => (a = (a << 5) - a + b.charCodeAt(0)) & a,
+      0
+    );
 
     /** @type {CSSStyleSheet} */
     let style = ca_eureka_component._styles[hash];
