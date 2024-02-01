@@ -24,16 +24,13 @@ export default class ca_eureka_component extends HTMLElement {
 
     if (options?.shadow) {
       const shadow = this.attachShadow({ mode: "open" });
-
       this.addStyle(CssRootStyleString);
-
-      if (options.css) {
-        this.addStyle(options.css);
-      }
       document.querySelectorAll("ca-custom-css > style").forEach(s => {
         this.addStyle(s.innerHTML);
       });
-
+      if (options.css) {
+        this.addStyle(options.css);
+      }
       if (options.html) {
         const myTemplate = document.createElement("template");
         myTemplate.innerHTML = this.setHTMLTemplateString(options.html);
@@ -89,37 +86,6 @@ export default class ca_eureka_component extends HTMLElement {
     );
   }
 
-  /** @type {CSSStyleSheet[]} */
-  static _shareCss = [];
-  /** @type {number[]} */
-  static _shareCssHash = [];
-
-  /**
-   * @param {string} styleString
-   */
-  static cacheCss(styleString) {
-    const hashCode = (/** @type {string} */ s) =>
-      s.split("").reduce((a, b) => {
-        a = (a << 5) - a + b.charCodeAt(0);
-        return a & a;
-      }, 0);
-
-    const hash = hashCode(styleString);
-
-    const i = this._shareCssHash.findIndex(x => x === hash);
-
-    if (i === -1) {
-      const newCss = new CSSStyleSheet();
-      newCss.replaceSync(styleString);
-
-      this._shareCss.push(newCss);
-      this._shareCssHash.push(hash);
-      return newCss;
-    } else {
-      return this._shareCss[i];
-    }
-  }
-
   /**
    * Add a cachable stylestring to a shadow root
    * @param {string} styleString css to add
@@ -130,7 +96,23 @@ export default class ca_eureka_component extends HTMLElement {
     if (!this.shadowRoot)
       throw new Error("AddStyle only works with open shadowRoots");
 
-    const style = ca_eureka_component.cacheCss(styleString);
+    const hashCode = (/** @type {string} */ s) =>
+      s.split("").reduce((a, b) => {
+        a = (a << 5) - a + b.charCodeAt(0);
+        return a & a;
+      }, 0);
+
+    const hash = hashCode(styleString);
+
+    /** @type {CSSStyleSheet} */
+    let style = ca_eureka_component._styles[hash];
+
+    if (!style) {
+      style = new CSSStyleSheet();
+      style.replaceSync(styleString);
+
+      ca_eureka_component._styles[hash] = style;
+    }
 
     this.shadowRoot.adoptedStyleSheets.push(style);
   }
