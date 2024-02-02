@@ -11,7 +11,7 @@ details {
     position: relative;
     line-height: 2rem;
     font-size: 1.125rem;
-    font-weight: bold;
+    font-weight: 600;
     border: 1px solid var(--gray-200, #d4d4d7);
     border-radius: 4px;
 
