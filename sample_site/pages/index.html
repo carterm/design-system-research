@@ -3,25 +3,21 @@
   <ca-head
     data-title="My Page Title"
     data-description="MY DESCRIPTION"></ca-head>
-  <ca-header data-department="Department of Technology"></ca-header>
+  <ca-header
+    data-department="Department of Technology"
+    data-avatar="https://california.azureedge.net/cdt/statetemplate/global/images/ca-seal.png"></ca-header>
   <ca-body layout="Type 1">
     <div class="row">
       <div class="card">Row #1 - Card #1</div>
-      <!-- <div class="card">Card #2</div> -->
-      <!-- <div class="card">Card #3</div> -->
-      <!-- <div class="card">Card #4</div> -->
     </div>
     <div class="row">
       <div class="card">Row #2 - Card #1</div>
       <div class="card">Row #2 - Card #2</div>
-      <!-- <div class="card">Card #3</div> -->
-      <!-- <div class="card">Card #4</div> -->
     </div>
     <div class="row">
       <div class="card">Row #3 - Card #1</div>
       <div class="card">Row #3 - Card #2</div>
       <div class="card">Row #3 - Card #3</div>
-      <!-- <div class="card">Card #4</div> -->
     </div>
     <div class="row">
       <div class="card">Row #4 - Card #1</div>
@@ -29,22 +25,16 @@
       <div class="card">Row #4 - Card #3</div>
       <div class="card">Row #4 - Card #4</div>
     </div>
-    <!-- <ca-accordion data-summary="Very Nice Accordion">
-      <h2>H2 content here</h2>
-      <p>Paragraph content inside of this accordion</p>
-    </ca-accordion> -->
   </ca-body>
 </ca-root>
 
 <style>
     .card {
-    border: 2px solid red;
-    /* max-width: 18rem; */
-    padding: 2rem;
-    text-align: center;
-    /* width: 18rem; */
-    flex-grow: 1;
-    /* justify-content: space-around; */
+      background-color: lightgray;
+      border: 2px solid red;
+      padding: 2rem;
+      text-align: center;
+      flex-grow: 1;
   }
 
   .row {

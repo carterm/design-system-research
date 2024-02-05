@@ -13,8 +13,9 @@ export default class ca_header extends ca_eureka_component {
     return "ca-header";
   }
 
+  // eslint-disable-next-line jsdoc/empty-tags
   /** @protected @readonly @override */
-  static observedAttributes = ["data-department"];
+  static observedAttributes = ["data-department", "data-avatar"];
 
   /**
    * @param {string} name
@@ -24,23 +25,28 @@ export default class ca_header extends ca_eureka_component {
    * @override
    */
   attributeChangedCallback(name, _oldValue, newValue) {
-    const o = ca_header.observedAttributes;
-    console.log("attribute changed: ", o);
-    console.log(this);
-    console.log("name is: ", name);
     switch (name) {
-      case o[0]: //"data-department":
+      case "data-department":
         {
-          const selector = this.shadowRoot?.querySelector("#desktop-header");
-          console.log("selector before if: ", selector);
+          const selector = this.shadowRoot?.querySelectorAll(
+            ".department-name > h4"
+          );
           if (selector) {
-            console.log("selector is: ", selector);
-            selector.innerHTML = newValue;
+            selector.forEach(item => (item.innerHTML = newValue));
+          }
+        }
+        break;
+      case "data-avatar":
+        {
+          const selector = this.shadowRoot?.querySelectorAll(".avatar > img");
+          if (selector) {
+            selector.forEach(item => item.setAttribute("src", newValue));
           }
         }
         break;
     }
   }
+
   constructor() {
     super({
       shadow: true,
