@@ -77,13 +77,27 @@ export default class ca_accordion extends ca_eureka_component {
     ca_accordion._resizeObserver.observe(target);
   }
 
+  /** @public */
+  get details() {
+    return /** @type {HTMLDetailsElement} */ (
+      this.shadowRoot?.querySelector("details")
+    );
+  }
+
+  /** @public */
+  get summary() {
+    return /** @type {HTMLElement} */ (
+      this.details.querySelector(":scope > summary")
+    );
+  }
+
   constructor() {
     /**
      * @param {string} name
      * @param {string} _oldValue
      * @param {string} newValue
      */
-    const myAttributeCallback = (name, _oldValue, newValue) => {
+    const attributeChangedCallback = (name, _oldValue, newValue) => {
       const o = ca_accordion.observedAttributes;
       switch (name) {
         case o[0]: //"data-summary":
@@ -102,20 +116,10 @@ export default class ca_accordion extends ca_eureka_component {
       shadow: true,
       css,
       html,
-      attributeChangedCallback: myAttributeCallback
+      attributeChangedCallback
     });
 
-    const detail = /** @type {HTMLDetailsElement} */ (
-      this.shadowRoot?.querySelector("details")
-    );
-
-    /** @private */
-    this.details = detail;
-
-    /** @private */
-    this.summary = /** @type {HTMLElement} */ (
-      detail.querySelector(":scope > summary")
-    );
+    const detail = this.details;
 
     ca_accordion.observeResize(detail);
 
