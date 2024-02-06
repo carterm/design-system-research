@@ -15,10 +15,11 @@ export default class ca_accordion extends ca_eureka_component {
 
   /**
    * @protected
-   * @readonly
    * @override
    */
-  static observedAttributes = ["data-summary", "data-expanded"];
+  static get observedAttributes() {
+    return ["data-summary", "data-expanded"];
+  }
 
   /**
    * Updates the css vars to match the size of the control
@@ -76,33 +77,32 @@ export default class ca_accordion extends ca_eureka_component {
     ca_accordion._resizeObserver.observe(target);
   }
 
-  /**
-   * @param {string} name
-   * @param {string} _oldValue
-   * @param {string} newValue
-   * @protected
-   * @override
-   */
-  attributeChangedCallback(name, _oldValue, newValue) {
-    const o = ca_accordion.observedAttributes;
-    switch (name) {
-      case o[0]: //"data-summary":
-        this.summary.innerHTML = `${newValue}<div aria-hidden="true" />`;
-
-        break;
-      case o[1]: //"data-expanded":
-        this.details.open =
-          (newValue ?? "false").trim().toLowerCase() !== "false";
-
-        break;
-    }
-  }
-
   constructor() {
+    /**
+     * @param {string} name
+     * @param {string} _oldValue
+     * @param {string} newValue
+     */
+    const myAttributeCallback = (name, _oldValue, newValue) => {
+      const o = ca_accordion.observedAttributes;
+      switch (name) {
+        case o[0]: //"data-summary":
+          this.summary.innerHTML = `${newValue}<div aria-hidden="true" />`;
+
+          break;
+        case o[1]: //"data-expanded":
+          this.details.open =
+            (newValue ?? "false").trim().toLowerCase() !== "false";
+
+          break;
+      }
+    };
+
     super({
       shadow: true,
       css,
-      html
+      html,
+      attributeChangedCallback: myAttributeCallback
     });
 
     const detail = /** @type {HTMLDetailsElement} */ (

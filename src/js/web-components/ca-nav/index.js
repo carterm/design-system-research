@@ -11,12 +11,17 @@ export default class ca_nav extends ca_eureka_component {
   }
 
   constructor() {
+    const contentChanged = () => {
+      if (this.shadowRoot) {
+        this.shadowRoot.innerHTML = this.innerHTML;
+      }
+    };
+
     super({
       shadow: true,
-      css
+      css,
+      connectedCallback: contentChanged
     });
-
-    this.setConnectedCallback(this.contentChanged);
 
     // Callback function to execute when mutations are observed
     // eslint-disable-next-line jsdoc/no-undefined-types
@@ -24,7 +29,7 @@ export default class ca_nav extends ca_eureka_component {
     const callback = mutationsList =>
       mutationsList.forEach(mutation => {
         console.log(mutation.type);
-        this.contentChanged();
+        contentChanged();
       });
 
     // Create an observer instance linked to the callback function
@@ -37,19 +42,5 @@ export default class ca_nav extends ca_eureka_component {
       subtree: true,
       characterData: true
     });
-  }
-
-  contentChanged() {
-    if (this.shadowRoot) {
-      this.shadowRoot.innerHTML = this.innerHTML;
-
-      //const sheet = document.createElement("style");
-      //sheet.innerHTML = styles;
-      //this.shadowRoot.getRootNode().appendChild(sheet);
-
-      //const sheet = new CSSStyleSheet();
-      //sheet.replaceSync(styles);
-      //this.shadowRoot.adoptedStyleSheets = [sheet];
-    }
   }
 }

@@ -8,7 +8,14 @@ export default class ca_head extends ca_eureka_component {
     return "ca-head";
   }
 
-  static observedAttributes = ["data-title", "data-description"];
+  /**
+   * @protected
+   * @override
+   */
+  static get observedAttributes() {
+    return ["data-title", "data-description"];
+  }
+
   /**
    *
    * @param {string} name
