@@ -31,9 +31,20 @@ export default class ca_eureka_component extends HTMLElement {
       if (options.css) {
         this.addStyle(options.css);
       }
+
       if (options.html) {
+        /**
+         * change this in the `eureka_htmltemplate_set` event if you want to update the source HTML
+         * @public
+         * @type {string | undefined}
+         */
+        this.HTMLTemplateString = options.html;
+
+        // Triggers an event to get a custom TemplateString if asked for
+        this.dispatchComponentEvent("eureka_htmltemplate_set");
+
         const myTemplate = document.createElement("template");
-        myTemplate.innerHTML = this.setHTMLTemplateString(options.html);
+        myTemplate.innerHTML = this.HTMLTemplateString;
 
         shadow.appendChild(myTemplate.content.cloneNode(true));
       }
@@ -107,23 +118,6 @@ export default class ca_eureka_component extends HTMLElement {
     }
 
     this.shadowRoot.adoptedStyleSheets.push(style);
-  }
-
-  /**
-   * @protected
-   * @param {string} html
-   */
-  setHTMLTemplateString(html) {
-    /**
-     * change this in the `eureka_htmltemplate_set` event if you want to update the source HTML
-     * @public
-     */
-
-    this.HTMLTemplateString = html;
-
-    this.dispatchComponentEvent("eureka_htmltemplate_set");
-
-    return this.HTMLTemplateString;
   }
 
   /**
