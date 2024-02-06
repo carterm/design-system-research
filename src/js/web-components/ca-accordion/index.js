@@ -123,5 +123,9 @@ export default class ca_accordion extends ca_eureka_component {
       //Sets the size right as the animation starts
       if (e.target === detail) ca_accordion.setSizes(detail);
     });
+
+    detail.addEventListener("toggle", () => {
+      this.dataset.expanded = detail.open.toString();
+    });
   }
 }
