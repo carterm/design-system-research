@@ -187,14 +187,13 @@ export default class ca_eureka_component extends HTMLElement {
    * @readonly
    */
   connectedCallback() {
-    const eventHeader = "eureka_connectedCallback_";
-    this.dispatchComponentEvent(`${eventHeader}start`);
+    this.dispatchComponentEvent("eureka_connectedCallback_start");
 
     if (this.options?.connectedCallback) {
       this.options.connectedCallback();
     }
 
-    this.dispatchComponentEvent(`${eventHeader}end`);
+    this.dispatchComponentEvent("eureka_connectedCallback_end");
   }
 
   /**
@@ -205,12 +204,11 @@ export default class ca_eureka_component extends HTMLElement {
    * @protected
    */
   attributeChangedCallback(_name, _oldValue, _newValue) {
-    const eventHeader = "eureka_attributeChangedCallback_";
-    this.dispatchComponentEvent(`${eventHeader}start`);
+    this.dispatchComponentEvent("eureka_attributeChangedCallback_start");
 
     if (this.options?.attributeChangedCallback) {
       this.options.attributeChangedCallback(_name, _oldValue, _newValue);
     }
-    this.dispatchComponentEvent(`${eventHeader}end`);
+    this.dispatchComponentEvent("eureka_attributeChangedCallback_end");
   }
 }
