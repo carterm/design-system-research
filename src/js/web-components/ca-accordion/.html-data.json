@@ -6,16 +6,6 @@
       "description": ".html-data.description.md",
       "attributes": [
         {
-          "name": "data-summary",
-          "description": "Summary text visible before expanding",
-          "references": [
-            {
-              "name": "Reference - Eureka",
-              "url": "https://template.webstandards.ca.gov/"
-            }
-          ]
-        },
-        {
           "name": "data-expanded",
           "description": "true to show this accordion expanded on load",
 

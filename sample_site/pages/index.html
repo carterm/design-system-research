@@ -13,29 +13,32 @@
 
 <ca-head data-title="My Page Title" data-description="MY DESCRIPTION"></ca-head>
 
-<ca-accordion data-summary="test <em>HTML</em>" data-expanded>
+<ca-accordion data-expanded>
+  <span slot="summary">test <em>HTML</em></span>
   My accordion content
   <p>P1</p>
   <p>P2</p>
 </ca-accordion>
 
-<ca-accordion data-summary="Accordion 1" data-expanded="false">
+<ca-accordion data-expanded="false">
+  <span slot="summary">Accordion 1</span>
   My accordion content
   <p>P1</p>
   <p>P2</p>
 </ca-accordion>
-<ca-accordion
-  id="longer"
-  data-summary="Accordion 2 With Much Longer Summary Text">
+<ca-accordion id="longer">
+  <span slot="summary">Accordion 2 With Much Longer Summary Text</span>
   My accordion content
   <p>P1</p>
   <p>P2</p>
 </ca-accordion>
-<ca-accordion data-summary="Accordion 5">
+<ca-accordion>
+  <span slot="summary">Accordion 5</span>
   My accordion content
   <p>P1</p>
   <p>P2</p>
-  <ca-accordion data-summary="Accordion Child" data-expanded>
+  <ca-accordion data-expanded>
+    <span slot="summary">Accordion Child</span>
     My accordion Child content
     <p>P1</p>
     <p>P2</p>

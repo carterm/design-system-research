@@ -16,6 +16,9 @@
       body {
         background-color: #ddf;
       }
+      *:not(:defined) {
+        display:none; /* Prevents Flicker for Eureka components before they are defined */
+      }
     </style>
   </head>
   <body>

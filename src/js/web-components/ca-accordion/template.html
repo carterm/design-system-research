@@ -1,5 +1,8 @@
 <details>
-  <summary aria-roledescription="Accordion"></summary>
+  <summary aria-roledescription="Accordion">
+    <slot name="summary"></slot>
+    <div aria-hidden="true"></div>
+  </summary>
   <div>
     <slot></slot>
   </div>

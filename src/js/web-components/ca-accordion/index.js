@@ -18,7 +18,7 @@ export default class ca_accordion extends ca_eureka_component {
    * @override
    */
   static get observedAttributes() {
-    return ["data-summary", "data-expanded"];
+    return ["data-expanded"];
   }
 
   /**
@@ -100,11 +100,7 @@ export default class ca_accordion extends ca_eureka_component {
     const attributeChangedCallback = (name, _oldValue, newValue) => {
       const o = ca_accordion.observedAttributes;
       switch (name) {
-        case o[0]: //"data-summary":
-          this.summary.innerHTML = `${newValue}<div aria-hidden="true" />`;
-
-          break;
-        case o[1]: //"data-expanded":
+        case o[0]: //"data-expanded":
           this.details.open =
             (newValue ?? "false").trim().toLowerCase() !== "false";
 
