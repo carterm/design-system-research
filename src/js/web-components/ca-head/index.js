@@ -65,26 +65,25 @@ export default class ca_head extends ca_eureka_component {
           break;
         case "data-canonical-params":
           {
-            const metaNames = ["canonical", "og:url", "twitter:url"];
+            let href = null;
 
-            if (newValue === null) {
-              metaNames.forEach(m => setMeta(m, newValue));
-            } else {
+            if (newValue !== null) {
               const u = new URL(location.href.toLowerCase());
               const qs = newValue
                 .split(",")
                 .map(t => t.trim())
                 .filter(p => u.searchParams.has(p.toLowerCase()));
-              const href = `${u.origin}${u.pathname}${
+              href = `${u.origin}${u.pathname}${
                 qs.length
                   ? `?${qs
                       .map(q => `${q}=${u.searchParams.get(q.toLowerCase())}`)
                       .join("&")}`
                   : ""
               }`;
-
-              metaNames.forEach(m => setMeta(m, href));
             }
+            ["canonical", "og:url", "twitter:url"].forEach(m =>
+              setMeta(m, href)
+            );
           }
 
           break;
