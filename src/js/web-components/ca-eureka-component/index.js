@@ -42,10 +42,13 @@ export default class ca_eureka_component extends HTMLElement {
       if (options.shadow) {
         //Shadow Dom requested
         const shadow = this.attachShadow({ mode: "open" });
+
         this.addStyle(CssRootStyleString);
-        document.querySelectorAll("ca-custom-css > style").forEach(s => {
-          this.addStyle(s.innerHTML);
-        });
+
+        document
+          .querySelectorAll("ca-custom-css > style")
+          .forEach(s => this.addStyle(s.innerHTML));
+
         if (options.css) {
           this.addStyle(options.css);
         }
@@ -143,14 +146,16 @@ export default class ca_eureka_component extends HTMLElement {
   /**
    * Base class connectedCallback
    * @protected
+   * @readonly
    */
   connectedCallback() {
-    this.dispatchComponentEvent("eureka_connectedCallback_start");
+    const eventHeader = "eureka_connectedCallback_";
+    this.dispatchComponentEvent(`${eventHeader}start`);
 
     if (this._connectedCallback) {
       this._connectedCallback();
     }
-    this.dispatchComponentEvent("eureka_connectedCallback_end");
+    this.dispatchComponentEvent(`${eventHeader}end`);
   }
 
   /**
@@ -160,13 +165,13 @@ export default class ca_eureka_component extends HTMLElement {
    * @param {string} _newValue
    * @protected
    */
-  // eslint-disable-next-line class-methods-use-this, no-unused-vars
   attributeChangedCallback(_name, _oldValue, _newValue) {
-    this.dispatchComponentEvent("eureka_attributeChangedCallback_start");
+    const eventHeader = "eureka_attributeChangedCallback_";
+    this.dispatchComponentEvent(`${eventHeader}start`);
 
     if (this._attributeChangedCallback) {
       this._attributeChangedCallback(_name, _oldValue, _newValue);
     }
-    this.dispatchComponentEvent("eureka_attributeChangedCallback_end");
+    this.dispatchComponentEvent(`${eventHeader}end`);
   }
 }
