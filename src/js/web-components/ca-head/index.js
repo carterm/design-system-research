@@ -25,27 +25,40 @@ export default class ca_head extends ca_eureka_component {
    */
   // eslint-disable-next-line class-methods-use-this
   attributeChangedCallback(name, _oldValue, newValue) {
+    /**
+     * @param {string} metaName
+     * @param {string} metaValue
+     */
+    const setMeta = (metaName, metaValue) => {
+      const existingMeta = document.head.querySelector(
+        `meta[name="${metaName}" i]`
+      );
+
+      if (existingMeta) {
+        existingMeta.attributes["content"].value = newValue;
+      } else {
+        document.head.append(
+          Object.assign(document.createElement("meta"), {
+            name: metaName,
+            content: metaValue
+          })
+        );
+      }
+    };
+
     switch (name) {
       case "data-title":
         document.title = newValue;
+        ["title", "og:title", "twitter:title"].forEach(m =>
+          setMeta(m, newValue)
+        );
+
         break;
       case "data-description":
-        {
-          const metaDescription = document.head.querySelector(
-            `meta[name="description" i]`
-          );
+        ["description", "og:description", "twitter:description"].forEach(m =>
+          setMeta(m, newValue)
+        );
 
-          if (metaDescription) {
-            metaDescription.attributes["content"].value = newValue;
-          } else {
-            document.head.append(
-              Object.assign(document.createElement("meta"), {
-                name: "description",
-                content: newValue
-              })
-            );
-          }
-        }
         break;
     }
   }
