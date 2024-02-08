@@ -26,7 +26,7 @@ export default class ca_head extends ca_eureka_component {
     const attributeChangedCallback = (name, _oldValue, newValue) => {
       /**
        * @param {string} metaName
-       * @param {string} [metaValue]
+       * @param {string | null} metaValue
        */
       const setMeta = (metaName, metaValue) => {
         const existingMeta = document.head.querySelector(
@@ -34,12 +34,12 @@ export default class ca_head extends ca_eureka_component {
         );
 
         if (existingMeta) {
-          if (metaValue === undefined || metaValue === null) {
+          if (metaValue === null) {
             existingMeta.remove();
           } else {
             existingMeta.attributes["content"].value = metaValue;
           }
-        } else if (metaValue !== undefined) {
+        } else if (metaValue !== null) {
           document.head.append(
             Object.assign(document.createElement("meta"), {
               name: metaName,
@@ -68,7 +68,7 @@ export default class ca_head extends ca_eureka_component {
             const metaNames = ["canonical", "og:url", "twitter:url"];
 
             if (newValue === null) {
-              metaNames.forEach(m => setMeta(m));
+              metaNames.forEach(m => setMeta(m, newValue));
             } else {
               const u = new URL(location.href.toLowerCase());
               const qs = newValue
