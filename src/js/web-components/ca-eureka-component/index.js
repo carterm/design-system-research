@@ -35,19 +35,16 @@ export default class ca_eureka_component extends HTMLElement {
     if (options.shadow) {
       //Shadow Dom requested
       const shadow = this.attachShadow({ mode: "open" });
+      this.dCE("shadow_constructed_start");
 
       this.addStyle(CssRootStyleString);
-
-      document
-        .querySelectorAll("ca-custom-css > style")
-        .forEach(s => this.addStyle(s.innerHTML));
 
       if (options.css) {
         this.addStyle(options.css);
       }
 
       // Triggers an event to get a custom TemplateString if asked for
-      this.dispatchComponentEvent("eureka_htmltemplate_set");
+      this.dCE("htmltemplate_set");
 
       if (this.HTMLTemplateString) {
         const myTemplate = document.createElement("template");
@@ -55,6 +52,8 @@ export default class ca_eureka_component extends HTMLElement {
 
         shadow.appendChild(myTemplate.content.cloneNode(true));
       }
+
+      this.dCE("shadow_constructed_end");
     }
   }
 
@@ -108,9 +107,9 @@ export default class ca_eureka_component extends HTMLElement {
    * @protected
    * @param {string} type
    */
-  dispatchComponentEvent(type) {
+  dCE(type) {
     this.dispatchEvent(
-      new Event(type, {
+      new Event(`eureka_${type}`, {
         bubbles: true
       })
     );
@@ -151,13 +150,15 @@ export default class ca_eureka_component extends HTMLElement {
    * @readonly
    */
   connectedCallback() {
-    const eventHeader = "eureka_connectedCallback_";
-    this.dispatchComponentEvent(`${eventHeader}start`);
+    const eventHeader = "connectedCallback_";
+    this.dCE(`${eventHeader}start`);
 
     if (this.options?.connectedCallback) {
       this.options.connectedCallback();
     }
-    this.dispatchComponentEvent(`${eventHeader}end`);
+
+    console.log(`${this.tagName} connected`);
+    this.dCE(`${eventHeader}end`);
   }
 
   /**
@@ -168,12 +169,12 @@ export default class ca_eureka_component extends HTMLElement {
    * @protected
    */
   attributeChangedCallback(_name, _oldValue, _newValue) {
-    const eventHeader = "eureka_attributeChangedCallback_";
-    this.dispatchComponentEvent(`${eventHeader}start`);
+    const eventHeader = "attributeChangedCallback_";
+    this.dCE(`${eventHeader}start`);
 
     if (this.options?.attributeChangedCallback) {
       this.options.attributeChangedCallback(_name, _oldValue, _newValue);
     }
-    this.dispatchComponentEvent(`${eventHeader}end`);
+    this.dCE(`${eventHeader}end`);
   }
 }

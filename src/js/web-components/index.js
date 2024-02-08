@@ -8,9 +8,9 @@ import ca_custom_css from "./ca-custom-css/index.js";
 
 export {
   ca_eureka_component,
+  ca_custom_css,
   ca_head,
   ca_nav,
   ca_footer,
-  ca_accordion,
-  ca_custom_css
+  ca_accordion
 };
