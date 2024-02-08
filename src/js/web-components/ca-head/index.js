@@ -13,7 +13,7 @@ export default class ca_head extends ca_eureka_component {
    * @override
    */
   static get observedAttributes() {
-    return ["data-title", "data-description"];
+    return ["data-title", "data-description", "data-canonical-params"];
   }
 
   constructor() {
@@ -26,7 +26,7 @@ export default class ca_head extends ca_eureka_component {
     const attributeChangedCallback = (name, _oldValue, newValue) => {
       /**
        * @param {string} metaName
-       * @param {string} metaValue
+       * @param {string} [metaValue]
        */
       const setMeta = (metaName, metaValue) => {
         const existingMeta = document.head.querySelector(
@@ -34,8 +34,12 @@ export default class ca_head extends ca_eureka_component {
         );
 
         if (existingMeta) {
-          existingMeta.attributes["content"].value = newValue;
-        } else {
+          if (metaValue === undefined || metaValue === null) {
+            existingMeta.remove();
+          } else {
+            existingMeta.attributes["content"].value = metaValue;
+          }
+        } else if (metaValue !== undefined) {
           document.head.append(
             Object.assign(document.createElement("meta"), {
               name: metaName,
@@ -47,7 +51,7 @@ export default class ca_head extends ca_eureka_component {
 
       switch (name) {
         case "data-title":
-          document.title = newValue;
+          document.title = newValue || "";
           ["title", "og:title", "twitter:title"].forEach(m =>
             setMeta(m, newValue)
           );
@@ -57,6 +61,31 @@ export default class ca_head extends ca_eureka_component {
           ["description", "og:description", "twitter:description"].forEach(m =>
             setMeta(m, newValue)
           );
+
+          break;
+        case "data-canonical-params":
+          {
+            const metaNames = ["canonical", "og:url", "twitter:url"];
+
+            if (newValue === null) {
+              metaNames.forEach(m => setMeta(m));
+            } else {
+              const u = new URL(location.href.toLowerCase());
+              const qs = newValue
+                .split(",")
+                .map(t => t.trim())
+                .filter(p => u.searchParams.has(p.toLowerCase()));
+              const href = `${u.origin}${u.pathname}${
+                qs.length
+                  ? `?${qs
+                      .map(q => `${q}=${u.searchParams.get(q.toLowerCase())}`)
+                      .join("&")}`
+                  : ""
+              }`;
+
+              metaNames.forEach(m => setMeta(m, href));
+            }
+          }
 
           break;
       }

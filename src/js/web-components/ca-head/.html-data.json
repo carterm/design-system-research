@@ -24,6 +24,16 @@
               "url": "https://template.webstandards.ca.gov/"
             }
           ]
+        },
+        {
+          "name": "data-canonical-params",
+          "description": "Canonical parmameters to filter by",
+          "references": [
+            {
+              "name": "Reference - Eureka",
+              "url": "https://template.webstandards.ca.gov/"
+            }
+          ]
         }
       ],
 
