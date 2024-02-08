@@ -21,56 +21,58 @@ export default class ca_eureka_component extends HTMLElement {
    *
    * @param {ca_eureka_component_options} [options]
    */
-  constructor(options) {
+  constructor(options = {}) {
     super();
 
-    if (options) {
-      if (options.connectedCallback) {
-        /**
-         * @private
-         * @type {()=>void | undefined}
-         */
-        this._connectedCallback = options.connectedCallback;
+    /**
+     * Private options defined in the constructor
+     * @type {ca_eureka_component_options}
+     * @private
+     * @readonly
+     */
+    this.options = options;
+
+    if (options.shadow) {
+      //Shadow Dom requested
+      const shadow = this.attachShadow({ mode: "open" });
+
+      this.addStyle(CssRootStyleString);
+
+      document
+        .querySelectorAll("ca-custom-css > style")
+        .forEach(s => this.addStyle(s.innerHTML));
+
+      if (options.css) {
+        this.addStyle(options.css);
       }
-      if (options.attributeChangedCallback) {
-        /**
-         * @private
-         * @type {(name:string,oldValue:string,newValue:string) => void | undefined}
-         */
-        this._attributeChangedCallback = options.attributeChangedCallback;
-      }
-      if (options.shadow) {
-        //Shadow Dom requested
-        const shadow = this.attachShadow({ mode: "open" });
 
-        this.addStyle(CssRootStyleString);
+      // Triggers an event to get a custom TemplateString if asked for
+      this.dispatchComponentEvent("eureka_htmltemplate_set");
 
-        document
-          .querySelectorAll("ca-custom-css > style")
-          .forEach(s => this.addStyle(s.innerHTML));
+      if (this.HTMLTemplateString) {
+        const myTemplate = document.createElement("template");
+        myTemplate.innerHTML = this.HTMLTemplateString;
 
-        if (options.css) {
-          this.addStyle(options.css);
-        }
-
-        if (options.html) {
-          /**
-           * change this in the `eureka_htmltemplate_set` event if you want to update the source HTML
-           * @public
-           * @type {string | undefined}
-           */
-          this.HTMLTemplateString = options.html;
-
-          // Triggers an event to get a custom TemplateString if asked for
-          this.dispatchComponentEvent("eureka_htmltemplate_set");
-
-          const myTemplate = document.createElement("template");
-          myTemplate.innerHTML = this.HTMLTemplateString;
-
-          shadow.appendChild(myTemplate.content.cloneNode(true));
-        }
+        shadow.appendChild(myTemplate.content.cloneNode(true));
       }
     }
+  }
+
+  /**
+   * Returns the HTML Template String that will be used to render the component
+   * @public
+   */
+  get HTMLTemplateString() {
+    return this.options.html;
+  }
+
+  /**
+   * Sets the HTML Template String that will be used to render the component
+   * change this in the `eureka_htmltemplate_set` event if you want to update the source HTML
+   * @public
+   */
+  set HTMLTemplateString(value) {
+    this.options.html = value;
   }
 
   /**
@@ -152,8 +154,8 @@ export default class ca_eureka_component extends HTMLElement {
     const eventHeader = "eureka_connectedCallback_";
     this.dispatchComponentEvent(`${eventHeader}start`);
 
-    if (this._connectedCallback) {
-      this._connectedCallback();
+    if (this.options?.connectedCallback) {
+      this.options.connectedCallback();
     }
     this.dispatchComponentEvent(`${eventHeader}end`);
   }
@@ -169,8 +171,8 @@ export default class ca_eureka_component extends HTMLElement {
     const eventHeader = "eureka_attributeChangedCallback_";
     this.dispatchComponentEvent(`${eventHeader}start`);
 
-    if (this._attributeChangedCallback) {
-      this._attributeChangedCallback(_name, _oldValue, _newValue);
+    if (this.options?.attributeChangedCallback) {
+      this.options.attributeChangedCallback(_name, _oldValue, _newValue);
     }
     this.dispatchComponentEvent(`${eventHeader}end`);
   }
