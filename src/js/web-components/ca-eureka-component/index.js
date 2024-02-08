@@ -133,12 +133,14 @@ export default class ca_eureka_component extends HTMLElement {
    * @overload
    * @param {ca_eureka_events} EventName
    * @param {ca_eureka_event_handler} handler
+   * @returns {void}
    */
   /**
    * Add a window event handler for a component event (string)
    * @overload
    * @param {string} EventName
    * @param {ca_eureka_event_handler} handler
+   * @returns {void}
    */
   /**
    * @param {ca_eureka_events | string} EventName
