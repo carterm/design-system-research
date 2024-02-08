@@ -14,6 +14,19 @@ import CssRootStyleString from "./rootstyle.css";
  */
 
 /**
+ * @typedef {"eureka_connectedCallback_end"
+ * | "eureka_connectedCallback_start"
+ * | "eureka_htmltemplate_set"
+ * | "eureka_shadow_constructed_start"
+ * | "eureka_shadow_constructed_end"
+ * | "eureka_attributeChangedCallback_start"
+ * | "eureka_attributeChangedCallback_end"
+ * } ca_eureka_events
+ */
+
+/** @typedef {(target:ca_eureka_component,e:Event) => void} ca_eureka_event_handler */
+
+/**
  * @abstract
  */
 export default class ca_eureka_component extends HTMLElement {
@@ -35,7 +48,7 @@ export default class ca_eureka_component extends HTMLElement {
     if (options.shadow) {
       //Shadow Dom requested
       const shadow = this.attachShadow({ mode: "open" });
-      this.dCE("shadow_constructed_start");
+      this.dCE("eureka_shadow_constructed_start");
 
       this.addStyle(CssRootStyleString);
 
@@ -44,7 +57,7 @@ export default class ca_eureka_component extends HTMLElement {
       }
 
       // Triggers an event to get a custom TemplateString if asked for
-      this.dCE("htmltemplate_set");
+      this.dCE("eureka_htmltemplate_set");
 
       if (this.HTMLTemplateString) {
         const myTemplate = document.createElement("template");
@@ -53,7 +66,7 @@ export default class ca_eureka_component extends HTMLElement {
         shadow.appendChild(myTemplate.content.cloneNode(true));
       }
 
-      this.dCE("shadow_constructed_end");
+      this.dCE("eureka_shadow_constructed_end");
     }
   }
 
@@ -105,13 +118,35 @@ export default class ca_eureka_component extends HTMLElement {
   /**
    * Dispatch a bubbling event for the page to listen for
    * @protected
-   * @param {string} type
+   * @param {ca_eureka_events} type
    */
   dCE(type) {
     this.dispatchEvent(
-      new Event(`eureka_${type}`, {
+      new Event(type, {
         bubbles: true
       })
+    );
+  }
+
+  /**
+   * Add a window event handler for a component event (choose from enum)
+   * @overload
+   * @param {ca_eureka_events} EventName
+   * @param {ca_eureka_event_handler} handler
+   */
+  /**
+   * Add a window event handler for a component event (string)
+   * @overload
+   * @param {string} EventName
+   * @param {ca_eureka_event_handler} handler
+   */
+  /**
+   * @param {ca_eureka_events | string} EventName
+   * @param {ca_eureka_event_handler} handler
+   */
+  static addCEventListener(EventName, handler) {
+    window.addEventListener(EventName, e =>
+      handler(/** @type {ca_eureka_component} **/ (e.target), e)
     );
   }
 
@@ -150,14 +185,13 @@ export default class ca_eureka_component extends HTMLElement {
    * @readonly
    */
   connectedCallback() {
-    const eventHeader = "connectedCallback_";
+    const eventHeader = "eureka_connectedCallback_";
     this.dCE(`${eventHeader}start`);
 
     if (this.options?.connectedCallback) {
       this.options.connectedCallback();
     }
 
-    console.log(`${this.tagName} connected`);
     this.dCE(`${eventHeader}end`);
   }
 
@@ -169,7 +203,7 @@ export default class ca_eureka_component extends HTMLElement {
    * @protected
    */
   attributeChangedCallback(_name, _oldValue, _newValue) {
-    const eventHeader = "attributeChangedCallback_";
+    const eventHeader = "eureka_attributeChangedCallback_";
     this.dCE(`${eventHeader}start`);
 
     if (this.options?.attributeChangedCallback) {

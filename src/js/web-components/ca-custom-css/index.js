@@ -10,12 +10,11 @@ export default class ca_custom_css extends ca_eureka_component {
   constructor() {
     super();
 
-    window.addEventListener("eureka_shadow_constructed_end", e => {
-      const comp = /** @type {import("..").ca_eureka_component} **/ (e.target);
-
-      if (comp !== this) {
-        this.querySelectorAll("style").forEach(s => comp.addStyle(s.innerHTML));
-      }
-    });
+    //Push the styles on anything with a shadow
+    ca_eureka_component.addCEventListener(
+      "eureka_shadow_constructed_end",
+      comp =>
+        this.querySelectorAll("style").forEach(s => comp.addStyle(s.innerHTML))
+    );
   }
 }
