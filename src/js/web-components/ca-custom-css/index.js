@@ -13,8 +13,10 @@ export default class ca_custom_css extends ca_eureka_component {
     //Push the styles on anything with a shadow
     ca_eureka_component.addCEventListener(
       "eureka_shadow_constructed_end",
-      comp =>
-        this.querySelectorAll("style").forEach(s => comp.addStyle(s.innerHTML))
+      comp => {
+        this.querySelectorAll("style").forEach(s => comp.addStyle(s.innerHTML));
+        console.log(comp.tagName);
+      }
     );
   }
 }
