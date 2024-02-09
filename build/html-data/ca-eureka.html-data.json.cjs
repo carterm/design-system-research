@@ -8,14 +8,15 @@ const path = require("path");
 
 /**
  * Default root for html-data.json
- * @typedef {Object} html_data
+ * @typedef {object} html_data
  * @property {number} version
  * @property {{}[]} tags
  */
 
 /**
  * Starting template for html-data.json
- * @type {html_data} */
+ * @type {html_data}
+ */
 const combo = {
   version: 1.1,
   tags: []
@@ -30,7 +31,7 @@ const allFiles = fs.readdirSync(srcPath, {
 allFiles
   .filter(d => d.name.endsWith(".html-data.json"))
   .forEach(f => {
-    let jsonText = fs.readFileSync(f.path + "/" + f.name, {
+    let jsonText = fs.readFileSync(`${f.path}/${f.name}`, {
       encoding: "utf-8"
     });
 
@@ -45,7 +46,7 @@ allFiles
         jsonText = jsonText.replace(
           `"${r.name}"`,
           JSON.stringify(
-            fs.readFileSync(r.path + "/" + r.name, {
+            fs.readFileSync(`${r.path}/${r.name}`, {
               encoding: "utf-8"
             })
           )
