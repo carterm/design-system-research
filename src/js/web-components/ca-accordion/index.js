@@ -7,7 +7,7 @@ import css from "./styles.css";
 // @ts-ignore
 import html from "./template.html";
 
-export default class ca_accordion extends ca_eureka_component {
+export default class my extends ca_eureka_component {
   /** @override */
   static get tagName() {
     return "ca-accordion";
@@ -64,17 +64,15 @@ export default class ca_accordion extends ca_eureka_component {
    * @protected
    */
   static observeResize(target) {
-    if (!ca_accordion._resizeObserver) {
+    if (!my._resizeObserver) {
       // This declaration will only happen once for all controls
-      ca_accordion._resizeObserver = new ResizeObserver(entries =>
+      my._resizeObserver = new ResizeObserver(entries =>
         entries.forEach(entry => {
-          ca_accordion.setSizes(
-            /** @type {HTMLDetailsElement} */ (entry.target)
-          );
+          my.setSizes(/** @type {HTMLDetailsElement} */ (entry.target));
         })
       );
     }
-    ca_accordion._resizeObserver.observe(target);
+    my._resizeObserver.observe(target);
   }
 
   /** @public */
@@ -98,9 +96,8 @@ export default class ca_accordion extends ca_eureka_component {
      * @param {string} newValue
      */
     const attributeChangedCallback = (name, _oldValue, newValue) => {
-      const o = ca_accordion.observedAttributes;
       switch (name) {
-        case o[0]: //"data-expanded":
+        case "data-expanded":
           this.details.open =
             (newValue ?? "false").trim().toLowerCase() !== "false";
 
@@ -117,11 +114,11 @@ export default class ca_accordion extends ca_eureka_component {
 
     const detail = this.details;
 
-    ca_accordion.observeResize(detail);
+    my.observeResize(detail);
 
     detail.addEventListener("transitionstart", e => {
       //Sets the size right as the animation starts
-      if (e.target === detail) ca_accordion.setSizes(detail);
+      if (e.target === detail) my.setSizes(detail);
     });
 
     detail.addEventListener("toggle", () => {
