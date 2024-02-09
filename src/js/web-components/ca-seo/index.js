@@ -68,20 +68,23 @@ export default class ca_seo extends ca_eureka_component {
             let href = null;
 
             if (newValue !== null) {
-              const url = new URL(location.href.toLowerCase());
+              const currentUrl = new URL(location.href.toLowerCase());
 
-              const qs = newValue
+              const desiredQueryItems = newValue
                 .split(",")
-                .map(t => t.trim())
-                .filter(p => url.searchParams.has(p.toLowerCase()));
-              href =
-                url.origin +
-                url.pathname +
-                (qs.length
-                  ? `?${qs
-                      .map(q => `${q}=${url.searchParams.get(q.toLowerCase())}`)
-                      .join("&")}`
-                  : "");
+                .map(t => t.trim().toLowerCase());
+
+              const newUrl = new URL(currentUrl.host + currentUrl.pathname);
+
+              //Rebuild the query in desired order
+              desiredQueryItems.forEach(k => {
+                const v = currentUrl.searchParams.get(k);
+                if (v) {
+                  newUrl.searchParams.set(k, v);
+                }
+              });
+
+              href = newUrl.href;
             }
             ["canonical", "og:url", "twitter:url"].forEach(m =>
               setMeta(m, href)
