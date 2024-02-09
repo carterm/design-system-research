@@ -68,18 +68,20 @@ export default class ca_seo extends ca_eureka_component {
             let href = null;
 
             if (newValue !== null) {
-              const u = new URL(location.href.toLowerCase());
+              const url = new URL(location.href.toLowerCase());
+
               const qs = newValue
                 .split(",")
                 .map(t => t.trim())
-                .filter(p => u.searchParams.has(p.toLowerCase()));
-              href = `${u.origin}${u.pathname}${
-                qs.length
+                .filter(p => url.searchParams.has(p.toLowerCase()));
+              href =
+                url.origin +
+                url.pathname +
+                (qs.length
                   ? `?${qs
-                      .map(q => `${q}=${u.searchParams.get(q.toLowerCase())}`)
+                      .map(q => `${q}=${url.searchParams.get(q.toLowerCase())}`)
                       .join("&")}`
-                  : ""
-              }`;
+                  : "");
             }
             ["canonical", "og:url", "twitter:url"].forEach(m =>
               setMeta(m, href)
