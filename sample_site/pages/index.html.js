@@ -2,7 +2,7 @@
 
 window.addEventListener("eureka_connectedCallback_end", e => {
   const comp =
-    /** @type {import("../../src/js/web-components").ca_eureka_component} **/ (
+    /** @type {import("../../src/js/web-components/_ca-eureka-component").default} **/ (
       e.target
     );
 
@@ -28,7 +28,7 @@ window.addEventListener("eureka_connectedCallback_end", e => {
 
 window.addEventListener("eureka_shadow_constructed_start", e => {
   const comp =
-    /** @type {import("../../src/js/web-components").ca_eureka_component} **/ (
+    /** @type {import("../../src/js/web-components/_ca-eureka-component").default} **/ (
       e.target
     );
 
