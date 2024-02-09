@@ -16,7 +16,6 @@ import CssRootStyleString from "./rootstyle.css";
 /**
  * @typedef {"eureka_connectedCallback_end"
  * | "eureka_connectedCallback_start"
- * | "eureka_htmltemplate_set"
  * | "eureka_shadow_constructed_start"
  * | "eureka_shadow_constructed_end"
  * | "eureka_attributeChangedCallback_start"
@@ -56,9 +55,6 @@ export default class ca_eureka_component extends HTMLElement {
         this.addStyle(options.css);
       }
 
-      // Triggers an event to get a custom TemplateString if asked for
-      this.dispatchComponentEvent("eureka_htmltemplate_set");
-
       if (this.HTMLTemplateString) {
         const myTemplate = document.createElement("template");
         myTemplate.innerHTML = this.HTMLTemplateString;
@@ -80,7 +76,7 @@ export default class ca_eureka_component extends HTMLElement {
 
   /**
    * Sets the HTML Template String that will be used to render the component
-   * change this in the `eureka_htmltemplate_set` event if you want to update the source HTML
+   * change this in the `eureka_shadow_constructed_start` event if you want to update the source HTML
    * @public
    */
   set HTMLTemplateString(value) {
