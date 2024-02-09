@@ -1,5 +1,5 @@
 //@ts-check
-import ca_eureka_component from "../ca-eureka-component/index.js";
+import ca_eureka_component from "../_ca-eureka-component/index.js";
 
 // @ts-ignore
 import css from "./styles.css";
