@@ -8,7 +8,7 @@ import * as all from "./index";
 //Definition order matters!!!  Code will run in this order
 [
   all.ca_custom_css,
-  all.ca_head,
+  all.ca_seo,
   all.ca_nav,
   all.ca_footer,
   all.ca_accordion

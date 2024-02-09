@@ -2,10 +2,10 @@
 
 import ca_eureka_component from "../_ca-eureka-component/index";
 
-export default class ca_head extends ca_eureka_component {
+export default class ca_seo extends ca_eureka_component {
   /** @override */
   static get tagName() {
-    return "ca-head";
+    return "ca-seo";
   }
 
   /**
