@@ -4,7 +4,7 @@ import ca_eureka_component from "../_ca-eureka-component/index";
 // @ts-ignore
 import css from "./styles.css";
 
-export default class ca_nav extends ca_eureka_component {
+export default class extends ca_eureka_component {
   /** @override */
   static get tagName() {
     return "ca-nav";

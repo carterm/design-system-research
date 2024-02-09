@@ -1,7 +1,7 @@
 //@ts-check
 import ca_eureka_component from "../_ca-eureka-component/index";
 
-export default class ca_custom_css extends ca_eureka_component {
+export default class extends ca_eureka_component {
   /** @override */
   static get tagName() {
     return "ca-custom-css";
