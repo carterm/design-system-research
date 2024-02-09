@@ -2,7 +2,7 @@
 
 // https://developer.mozilla.org/en-US/docs/Web/API/Web_Components/Using_custom_elements
 
-import * as eureka from "./web-components/index.js";
+import * as eureka from "./web-components/index";
 
 //comment out any elements you are not using
 //Definition order matters!!!  Code will run in this order
