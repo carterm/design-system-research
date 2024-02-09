@@ -26,7 +26,7 @@ export default function () {
         }
       })
     ],
-    input: "src/js/index.js",
+    input: "src/js/bundle.js",
     output: [
       {
         file: "_site/js/eureka.core.js",

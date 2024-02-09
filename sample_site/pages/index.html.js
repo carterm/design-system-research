@@ -1,10 +1,9 @@
 //@ts-check
 
 window.addEventListener("eureka_connectedCallback_end", e => {
-  const comp =
-    /** @type {import("../../src/js/web-components/_ca-eureka-component").default} **/ (
-      e.target
-    );
+  const comp = /** @type {import("../../src/js").ca_eureka_component} **/ (
+    e.target
+  );
 
   if (comp.tagName === "CA-ACCORDION") {
     comp.addStyle("details{background-color:pink}");
@@ -27,10 +26,9 @@ window.addEventListener("eureka_connectedCallback_end", e => {
 });
 
 window.addEventListener("eureka_shadow_constructed_start", e => {
-  const comp =
-    /** @type {import("../../src/js/web-components/_ca-eureka-component").default} **/ (
-      e.target
-    );
+  const comp = /** @type {import("../../src/js").ca_eureka_component} **/ (
+    e.target
+  );
 
   if (comp.tagName === "CA-ACCORDION") {
     comp.HTMLTemplateString = comp.HTMLTemplateString?.replace(
