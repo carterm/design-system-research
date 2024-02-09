@@ -68,12 +68,11 @@ export default class ca_seo extends ca_eureka_component {
             let href = null;
 
             if (newValue !== null) {
-              const currentUrl = new URL(location.href.toLowerCase());
-
               const desiredQueryItems = newValue
                 .split(",")
                 .map(t => t.trim().toLowerCase());
 
+              const currentUrl = new URL(location.href.toLowerCase());
               const newUrl = new URL(currentUrl.host + currentUrl.pathname);
 
               //Rebuild the query in desired order
