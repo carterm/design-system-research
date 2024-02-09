@@ -40,7 +40,7 @@
     "eslint": "^8.56.0",
     "eslint-plugin-jsdoc": "^48.0.4",
     "prettier": "^3.0.3",
-    "stylelint": "^16.0.2",
+    "stylelint": "^16.2.1",
     "stylelint-config-standard": "^35.0.0"
   }
 }

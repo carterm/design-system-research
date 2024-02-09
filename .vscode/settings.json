@@ -21,8 +21,7 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "css.validate": false,
-  "scss.validate": false,
-  "stylelint.validate": ["css", "scss"],
+  "stylelint.validate": ["css", "js"],
   "search.useIgnoreFiles": true,
   "html.customData": ["./_site/html-data/ca-eureka.html-data.json"]
 }
