@@ -3,4 +3,5 @@
   margin: 1rem 0.25rem;
   padding: 2rem;
   border: solid black;
+  box-shadow: 5px 5px 10px #000a;
 }
