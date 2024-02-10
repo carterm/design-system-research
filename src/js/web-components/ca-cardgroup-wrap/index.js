@@ -3,6 +3,9 @@
 // @ts-ignore
 import css from "./styles.css";
 
+// @ts-ignore
+import html from "./template.html";
+
 import ca_eureka_component from "../_ca-eureka-component/index";
 
 export default class extends ca_eureka_component {
@@ -12,6 +15,6 @@ export default class extends ca_eureka_component {
   }
 
   constructor() {
-    super({ shadow: true, css });
+    super({ shadow: true, css, html });
   }
 }

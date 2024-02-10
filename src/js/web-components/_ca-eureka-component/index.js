@@ -1,7 +1,7 @@
 //@ts-check
 
 // @ts-ignore
-import CssRootStyleString from "./rootstyle.css";
+import CssBaseStyleString from "./basestyle.css";
 
 /**
  * Options for ca-eureka components
@@ -49,7 +49,7 @@ export default class ca_eureka_component extends HTMLElement {
       const shadow = this.attachShadow({ mode: "open" });
       this.dispatchComponentEvent("eureka_shadow_constructed_start");
 
-      this.addStyle(CssRootStyleString);
+      this.addStyle(CssBaseStyleString); //Adds the base style for ALL components
 
       if (options.css) {
         this.addStyle(options.css);
