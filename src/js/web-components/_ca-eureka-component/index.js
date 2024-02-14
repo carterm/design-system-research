@@ -46,6 +46,7 @@ export default class ca_eureka_component extends HTMLElement {
 
     if (options.shadow) {
       //Shadow Dom requested
+      delete this.options.shadow; //Clear once used to save RAM
       const shadow = this.attachShadow({ mode: "open" });
       this.dispatchComponentEvent("eureka_shadow_constructed_start");
 
@@ -53,11 +54,14 @@ export default class ca_eureka_component extends HTMLElement {
 
       if (options.css) {
         this.addStyle(options.css);
+        delete this.options.css; //Clear once used to save RAM
       }
 
       if (this.HTMLTemplateString) {
         const myTemplate = document.createElement("template");
         myTemplate.innerHTML = this.HTMLTemplateString;
+        delete this.options.html; //Clear once used to save RAM
+        // Check ram savings by using console.log(window.performance.memory.usedJSHeapSize/1000000);
 
         shadow.appendChild(myTemplate.content.cloneNode(true));
       }
