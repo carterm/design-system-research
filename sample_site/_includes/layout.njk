@@ -4,24 +4,23 @@
     <title>{{ title }}</title>
     <meta charset="utf-8" />
     <meta name="Author" content="Carter Medlin" />
-    <meta name="title" content="{{ title }}" />
-    <meta name="Description" content="{{ description }}" />
     <meta
       name="viewport"
       content="width=device-width, initial-scale=1.0, minimum-scale=1.0" />
 
     <script type="module" src="/js/eureka.core.min.js"></script>
-    <style title="Global Style">
-      /* Custom Global Styles to test Web Component Scope */
-      body {
-        background-color: #ddf;
-      }
+    <style>
       *:not(:defined) {
-        display:none; /* Prevents Flicker for Eureka components before they are defined */
+       display:none; /* Prevents Flicker for Eureka components before they are defined */
       }
     </style>
   </head>
   <body>
+    <a href="/">Home</a>
+    <ca-seo
+      data-title="{{ title }}"
+      data-description="{{ description }}"
+      data-canonical-params="id,q"></ca-seo>
     {% block content -%} {{ content | safe }} {%- endblock -%}
   </body>
 </html>

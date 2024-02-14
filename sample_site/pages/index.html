@@ -1,54 +1,10 @@
-{% same_page_script page %}
+---
+title: Design System Sandbox Homepage
+description: Homepage for Design System Sandbox
+---
 
-<ca-custom-css>
-  <style>
-    p {
-      color: orange
-    }
-    :host(ca-nav) p {
-      color: pink
-    }
-  </style>
-</ca-custom-css>
-
-<ca-seo
-  data-title="My Page Title"
-  data-description="MY DESCRIPTION"
-  data-canonical-params="id,q"></ca-seo>
-
-<ca-accordion data-expanded>
-  <span slot="summary">test <em>HTML</em></span>
-  My accordion content
-  <p>P1</p>
-  <p>P2</p>
-</ca-accordion>
-
-<ca-accordion data-expanded="false">
-  <span slot="summary">Accordion 1</span>
-  My accordion content
-  <p>P1</p>
-  <p>P2</p>
-</ca-accordion>
-<ca-accordion id="longer">
-  <span slot="summary">Accordion 2 With Much Longer Summary Text</span>
-  My accordion content
-  <p>P1</p>
-  <p>P2</p>
-</ca-accordion>
-<ca-accordion>
-  <span slot="summary">Accordion 5</span>
-  My accordion content
-  <p>P1</p>
-  <p>P2</p>
-  <ca-accordion data-expanded>
-    <span slot="summary">Accordion Child</span>
-    My accordion Child content
-    <p>P1</p>
-    <p>P2</p>
-  </ca-accordion>
-</ca-accordion>
-
-<ca-nav>
-  <p>My Nav</p>
-</ca-nav>
-<ca-footer> My footer </ca-footer>
+<h1>Design System Sandbox</h1>
+<ul>
+  <li><a href="/accordion/">Accordion</a></li>
+  <li><a href="/cards/">Cards</a></li>
+</ul>

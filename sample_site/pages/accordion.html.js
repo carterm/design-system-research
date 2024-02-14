@@ -14,7 +14,7 @@ window.addEventListener("eureka_connectedCallback_end", e => {
 
     if (comp.shadowRoot) {
       const testItem = document.createElement("em");
-      testItem.innerHTML = "custom added to shadow root";
+      testItem.innerHTML = "JavaScript added to shadow root";
       comp.shadowRoot.querySelector("details")?.appendChild(testItem);
     }
 
@@ -33,7 +33,7 @@ window.addEventListener("eureka_shadow_constructed_start", e => {
   if (comp.tagName === "CA-ACCORDION") {
     comp.HTMLTemplateString = comp.HTMLTemplateString?.replace(
       /<div>/g,
-      "<div>monkey"
+      "<div>JavaScript Event added"
     );
   }
 });
