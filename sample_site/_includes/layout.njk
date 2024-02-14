@@ -4,8 +4,6 @@
     <title>{{ title }}</title>
     <meta charset="utf-8" />
     <meta name="Author" content="Carter Medlin" />
-    <meta name="title" content="{{ title }}" />
-    <meta name="Description" content="{{ description }}" />
     <meta
       name="viewport"
       content="width=device-width, initial-scale=1.0, minimum-scale=1.0" />
@@ -19,6 +17,10 @@
   </head>
   <body>
     <a href="/">Home</a>
+    <ca-seo
+      data-title="{{ title }}"
+      data-description="{{ description }}"
+      data-canonical-params="id,q"></ca-seo>
     {% block content -%} {{ content | safe }} {%- endblock -%}
   </body>
 </html>
