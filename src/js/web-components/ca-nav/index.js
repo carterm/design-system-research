@@ -26,14 +26,14 @@ export default class extends ca_eureka_component {
     // Callback function to execute when mutations are observed
     // eslint-disable-next-line jsdoc/no-undefined-types
     /** @type {MutationCallback} */
-    const callback = mutationsList =>
+    const mutationCallback = mutationsList =>
       mutationsList.forEach(mutation => {
         console.log(mutation.type);
         contentChanged();
       });
 
     // Create an observer instance linked to the callback function
-    const observer = new MutationObserver(callback);
+    const observer = new MutationObserver(mutationCallback);
 
     // Start observing the target node for configured mutations
     observer.observe(this, {

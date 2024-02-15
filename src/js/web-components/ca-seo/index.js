@@ -2,7 +2,7 @@
 
 import ca_eureka_component from "../_ca-eureka-component/index";
 
-export default class extends ca_eureka_component {
+export default class my extends ca_eureka_component {
   /** @override */
   static get tagName() {
     return "ca-seo";
@@ -15,15 +15,18 @@ export default class extends ca_eureka_component {
   static get observedAttributes() {
     return ["data-title", "data-description", "data-canonical-params"];
   }
-
-  constructor() {
+  /**
+   *  attributeChangedCallback, static so it can be a reference
+   *  @private
+   *  @readonly
+   */
+  static _callback =
     /**
-     *
      * @param {string} name
      * @param {string} _oldValue
      * @param {string} newValue
      */
-    const attributeChangedCallback = (name, _oldValue, newValue) => {
+    (name, _oldValue, newValue) => {
       /**
        * @param {string} metaName
        * @param {string | null} metaValue
@@ -94,6 +97,7 @@ export default class extends ca_eureka_component {
       }
     };
 
-    super({ attributeChangedCallback });
+  constructor() {
+    super({ attributeChangedCallback: my._callback });
   }
 }
