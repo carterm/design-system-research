@@ -1,20 +1,18 @@
 //@ts-check
-import ca_eureka_component from "../_ca-eureka-component/index";
+import cal_ds_base from "../_cal-ds-base/index";
 
-export default class extends ca_eureka_component {
+export default class extends cal_ds_base {
   /** @override */
   static get tagName() {
-    return "ca-custom-css";
+    return "cal-ds-custom-css";
   }
 
   constructor() {
     super();
 
     //Push the styles on anything with a shadow
-    ca_eureka_component.addCEventListener(
-      "eureka_shadow_constructed_end",
-      comp =>
-        this.querySelectorAll("style").forEach(s => comp.addStyle(s.innerHTML))
+    cal_ds_base.addCEventListener("cal_ds_shadow_constructed_end", comp =>
+      this.querySelectorAll("style").forEach(s => comp.addStyle(s.innerHTML))
     );
   }
 }

@@ -1,11 +1,11 @@
 //@ts-check
 
-import ca_eureka_component from "../_ca-eureka-component/index";
+import cal_ds_base from "../_cal-ds-base/index";
 
-export default class my extends ca_eureka_component {
+export default class my extends cal_ds_base {
   /** @override */
   static get tagName() {
-    return "ca-seo";
+    return "cal-ds-seo";
   }
 
   /**

@@ -1,5 +1,5 @@
 //@ts-check
-import ca_eureka_component from "../_ca-eureka-component/index";
+import cal_ds_base from "../_cal-ds-base/index";
 
 // @ts-ignore
 import css from "./styles.css";
@@ -7,10 +7,10 @@ import css from "./styles.css";
 // @ts-ignore
 import html from "./template.html";
 
-export default class my extends ca_eureka_component {
+export default class my extends cal_ds_base {
   /** @override */
   static get tagName() {
-    return "ca-accordion";
+    return "cal-ds-accordion";
   }
 
   /**

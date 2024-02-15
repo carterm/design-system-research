@@ -5,7 +5,7 @@ import CssBaseStyleString from "./basestyle.css";
 
 /**
  * Options for ca-eureka components
- * @typedef {object} ca_eureka_component_options
+ * @typedef {object} cal_ds_options
  * @property {boolean} [shadow] - Create a shadow DOM?
  * @property {string} [css] - CSS to apply to component
  * @property {string} [html] - HTML to apply to component (Event configurable)
@@ -14,31 +14,31 @@ import CssBaseStyleString from "./basestyle.css";
  */
 
 /**
- * @typedef {"eureka_connectedCallback_end"
- * | "eureka_connectedCallback_start"
- * | "eureka_shadow_constructed_start"
- * | "eureka_shadow_constructed_end"
- * | "eureka_attributeChangedCallback_start"
- * | "eureka_attributeChangedCallback_end"
- * } ca_eureka_events
+ * @typedef {"cal_ds_connectedCallback_end"
+ * | "cal_ds_connectedCallback_start"
+ * | "cal_ds_shadow_constructed_start"
+ * | "cal_ds_shadow_constructed_end"
+ * | "cal_ds_attributeChangedCallback_start"
+ * | "cal_ds_attributeChangedCallback_end"
+ * } cal_ds_events
  */
 
-/** @typedef {(target:ca_eureka_component,e:Event) => void} ca_eureka_event_handler */
+/** @typedef {(target:cal_ds_base,e:Event) => void} cal_ds_event_handler */
 
 /**
  * @abstract
  */
-export default class ca_eureka_component extends HTMLElement {
+export default class cal_ds_base extends HTMLElement {
   /**
    *
-   * @param {ca_eureka_component_options} [options]
+   * @param {cal_ds_options} [options]
    */
   constructor(options = {}) {
     super();
 
     /**
      * Private options defined in the constructor
-     * @type {ca_eureka_component_options}
+     * @type {cal_ds_options}
      * @private
      * @readonly
      */
@@ -48,7 +48,7 @@ export default class ca_eureka_component extends HTMLElement {
       //Shadow Dom requested
       delete this.options.shadow; //Clear once used to save RAM
       const shadow = this.attachShadow({ mode: "open" });
-      this.dispatchComponentEvent("eureka_shadow_constructed_start");
+      this.dispatchComponentEvent("cal_ds_shadow_constructed_start");
 
       this.addStyle(CssBaseStyleString); //Adds the base style for ALL components
 
@@ -66,7 +66,7 @@ export default class ca_eureka_component extends HTMLElement {
         shadow.appendChild(myTemplate.content.cloneNode(true));
       }
 
-      this.dispatchComponentEvent("eureka_shadow_constructed_end");
+      this.dispatchComponentEvent("cal_ds_shadow_constructed_end");
     }
   }
 
@@ -80,7 +80,7 @@ export default class ca_eureka_component extends HTMLElement {
 
   /**
    * Sets the HTML Template String that will be used to render the component
-   * change this in the `eureka_shadow_constructed_start` event if you want to update the source HTML
+   * change this in the `cal_ds_shadow_constructed_start` event if you want to update the source HTML
    * @public
    */
   set HTMLTemplateString(value) {
@@ -118,7 +118,7 @@ export default class ca_eureka_component extends HTMLElement {
   /**
    * Dispatch a bubbling event for the page to listen for
    * @protected
-   * @param {ca_eureka_events} type
+   * @param {cal_ds_events} type
    */
   dispatchComponentEvent(type) {
     this.dispatchEvent(
@@ -131,24 +131,24 @@ export default class ca_eureka_component extends HTMLElement {
   /**
    * Add a window event handler for a component event (choose from enum)
    * @overload
-   * @param {ca_eureka_events} EventName
-   * @param {ca_eureka_event_handler} handler
+   * @param {cal_ds_events} EventName
+   * @param {cal_ds_event_handler} handler
    * @returns {void}
    */
   /**
    * Add a window event handler for a component event (string)
    * @overload
    * @param {string} EventName
-   * @param {ca_eureka_event_handler} handler
+   * @param {cal_ds_event_handler} handler
    * @returns {void}
    */
   /**
-   * @param {ca_eureka_events | string} EventName
-   * @param {ca_eureka_event_handler} handler
+   * @param {cal_ds_events | string} EventName
+   * @param {cal_ds_event_handler} handler
    */
   static addCEventListener(EventName, handler) {
     window.addEventListener(EventName, e =>
-      handler(/** @type {ca_eureka_component} **/ (e.target), e)
+      handler(/** @type {cal_ds_base} **/ (e.target), e)
     );
   }
 
@@ -169,13 +169,13 @@ export default class ca_eureka_component extends HTMLElement {
     );
 
     /** @type {CSSStyleSheet} */
-    let style = ca_eureka_component._styles[hash];
+    let style = cal_ds_base._styles[hash];
 
     if (!style) {
       style = new CSSStyleSheet();
       style.replaceSync(styleString);
 
-      ca_eureka_component._styles[hash] = style;
+      cal_ds_base._styles[hash] = style;
     }
 
     this.shadowRoot.adoptedStyleSheets.push(style);
@@ -187,13 +187,13 @@ export default class ca_eureka_component extends HTMLElement {
    * @readonly
    */
   connectedCallback() {
-    this.dispatchComponentEvent("eureka_connectedCallback_start");
+    this.dispatchComponentEvent("cal_ds_connectedCallback_start");
 
     if (this.options?.connectedCallback) {
       this.options.connectedCallback();
     }
 
-    this.dispatchComponentEvent("eureka_connectedCallback_end");
+    this.dispatchComponentEvent("cal_ds_connectedCallback_end");
   }
 
   /**
@@ -204,11 +204,11 @@ export default class ca_eureka_component extends HTMLElement {
    * @protected
    */
   attributeChangedCallback(_name, _oldValue, _newValue) {
-    this.dispatchComponentEvent("eureka_attributeChangedCallback_start");
+    this.dispatchComponentEvent("cal_ds_attributeChangedCallback_start");
 
     if (this.options?.attributeChangedCallback) {
       this.options.attributeChangedCallback(_name, _oldValue, _newValue);
     }
-    this.dispatchComponentEvent("eureka_attributeChangedCallback_end");
+    this.dispatchComponentEvent("cal_ds_attributeChangedCallback_end");
   }
 }

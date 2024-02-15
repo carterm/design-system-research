@@ -8,13 +8,13 @@ import * as all from "./index";
 //Definition order matters!!!  Code will run in this order
 
 const my_bundle = [
-  all.ca_custom_css,
-  all.ca_seo,
-  all.ca_nav,
-  all.ca_footer,
-  all.ca_accordion,
-  all.ca_card_simple,
-  all.ca_cardgroup_wrap
+  all.cal_ds_custom_css,
+  all.cal_ds_seo,
+  all.cal_ds_nav,
+  all.cal_ds_footer,
+  all.cal_ds_accordion,
+  all.cal_ds_card_simple,
+  all.cal_ds_cardgroup_wrap
 ];
 
 for (const c of my_bundle) {
