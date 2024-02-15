@@ -52,21 +52,23 @@ export default class my extends cal_ds_base {
         }
       };
 
+      const observedAttributes = my.observedAttributes; // const will minify
+
       switch (name) {
-        case "data-title":
+        case observedAttributes[0]: //"data-title":
           document.title = newValue || "";
           ["title", "og:title", "twitter:title"].forEach(m =>
             setMeta(m, newValue)
           );
 
           break;
-        case "data-description":
+        case observedAttributes[1]: //"data-description":
           ["description", "og:description", "twitter:description"].forEach(m =>
             setMeta(m, newValue)
           );
 
           break;
-        case "data-canonical-params":
+        case observedAttributes[2]: //"data-canonical-params":
           {
             let href = null;
 

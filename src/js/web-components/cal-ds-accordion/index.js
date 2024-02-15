@@ -97,7 +97,7 @@ export default class my extends cal_ds_base {
      */
     const attributeChangedCallback = (name, _oldValue, newValue) => {
       switch (name) {
-        case "data-expanded":
+        case my.observedAttributes[0]: //"data-expanded":
           this.details.open =
             (newValue ?? "false").trim().toLowerCase() !== "false";
 
