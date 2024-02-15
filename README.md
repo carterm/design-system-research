@@ -15,6 +15,7 @@ Here are some reasons why using JavaScript "Web Components" is an improvement ov
 - **Performance**:
 
 ### Possible Design Features
+
 - **html-data**: The Design System includes a html-data file that gives developers dropdown menus for possible tags, attributes and attribute values.
-- **runtime validation**: The Design System can validate for proper tag placement at run-time.  The feature is enabled by default, and can be turned off in the `ca-root` element by specifying the `novalidate` attribute.
+- **runtime validation**: The Design System can validate for proper tag placement at run-time. The feature is enabled by default, and can be turned off in the `cal-ds-root` element by specifying the `novalidate` attribute.
 - **Guide Rails**: ...

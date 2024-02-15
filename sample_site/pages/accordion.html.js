@@ -1,11 +1,9 @@
 //@ts-check
 
-window.addEventListener("eureka_connectedCallback_end", e => {
-  const comp = /** @type {import("../../src/js").ca_eureka_component} **/ (
-    e.target
-  );
+window.addEventListener("cal_ds_connectedCallback_end", e => {
+  const comp = /** @type {import("../../src/js").cal_ds_base} **/ (e.target);
 
-  if (comp.tagName === "CA-ACCORDION") {
+  if (comp.tagName === "CAL-DS-ACCORDION") {
     comp.addStyle("details{background-color:pink}");
 
     if (comp.dataset.summary?.includes("1")) {
@@ -25,12 +23,10 @@ window.addEventListener("eureka_connectedCallback_end", e => {
   }
 });
 
-window.addEventListener("eureka_shadow_constructed_start", e => {
-  const comp = /** @type {import("../../src/js").ca_eureka_component} **/ (
-    e.target
-  );
+window.addEventListener("cal_ds_shadow_constructed_start", e => {
+  const comp = /** @type {import("../../src/js").cal_ds_base} **/ (e.target);
 
-  if (comp.tagName === "CA-ACCORDION") {
+  if (comp.tagName === "CAL-DS-ACCORDION") {
     comp.HTMLTemplateString = comp.HTMLTemplateString?.replace(
       /<div>/g,
       "<div>JavaScript Event added"

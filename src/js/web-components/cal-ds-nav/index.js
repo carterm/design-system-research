@@ -1,13 +1,13 @@
 //@ts-check
-import ca_eureka_component from "../_ca-eureka-component/index";
+import cal_ds_base from "../_cal-ds-base/index";
 
 // @ts-ignore
 import css from "./styles.css";
 
-export default class extends ca_eureka_component {
+export default class extends cal_ds_base {
   /** @override */
   static get tagName() {
-    return "ca-nav";
+    return "cal-ds-nav";
   }
 
   constructor() {

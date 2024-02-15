@@ -1,5 +1,4 @@
 //@ts-check
-import ca_eureka_component from "../_ca-eureka-component/index";
 
 // @ts-ignore
 import css from "./styles.css";
@@ -7,10 +6,12 @@ import css from "./styles.css";
 // @ts-ignore
 import html from "./template.html";
 
-export default class extends ca_eureka_component {
+import cal_ds_base from "../_cal-ds-base/index";
+
+export default class extends cal_ds_base {
   /** @override */
   static get tagName() {
-    return "ca-footer";
+    return "cal-ds-card-simple";
   }
 
   constructor() {
