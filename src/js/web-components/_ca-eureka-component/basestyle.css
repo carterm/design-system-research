@@ -1,3 +1,8 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+}
+
 :host {
   font-family:
     system-ui,
@@ -13,4 +18,126 @@
   --gray-50: #f66; /* #fafafa; */
   --gray-100: #fa0; /* #f3f3f4; */
   --gray-200: #ff0; /* #d4d4d7; */
+  --primary: #2d2d2d;
+  --secondary: #fff;
+
+  /* Change this for overall font size */
+  --font-size: 1rem;
+
+  /* Font characteristics */
+  font-size: clamp(0.5rem, var(--base), 5rem);
+
+  --ratio: 1.24;
+  --s0: calc(var(--font-size) - 0.3rem) + 0.17vw;
+
+  /* Typography calculations, please do not change */
+
+  /* Small-text to allow for more control */
+  --st: calc(var(--s0) * var(--ratio));
+
+  /*The font size of standard paragraph text */
+  --base: calc(var(--st) * var(--ratio));
+
+  /*()Lead-text to allow for more control*/
+  --lt: calc(var(--base) * var(--ratio));
+  --h6: calc(var(--s0) * var(--ratio));
+  --h5: calc(var(--h6) * var(--ratio));
+  --h4: calc(var(--h5) * var(--ratio));
+  --h3: calc(var(--h4) * var(--ratio));
+  --h2: calc(var(--h3) * var(--ratio));
+  --h1: calc(var(--h2) * var(--ratio) * var(--ratio));
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  color: #323232;
+
+  /* the last font listed is the one used */
+
+  /* font-family: "Inter"; */
+
+  /* font-family: "Roboto"; */
+
+  /* font-family: "Public Sans"; */
+
+  font-family: "Noto Sans", sans-serif;
+  letter-spacing: 0.02rem;
+  line-height: 1.6rem;
+
+  /* Change font weight for the base: Imported 100, 200, 300, 400, 500, 600, 700 */
+  font-weight: 300;
+  margin: 0;
+}
+
+main {
+  margin: 0 auto;
+  max-width: calc(60ch + 2rem);
+  padding: 1rem;
+}
+
+/* Global margin */
+* + * {
+  margin-bottom: 1rem;
+}
+
+/* Sets rule for small text */
+h6 ~ p {
+  font-size: calc(var(--st) - 0.1rem);
+}
+
+h1 {
+  font-weight: 600;
+  font-size: var(--h1);
+  line-height: 1.619;
+}
+
+h2 {
+  font-weight: 600;
+  font-size: var(--h2);
+  line-height: 1.619;
+}
+
+h3 {
+  font-weight: 600;
+  font-size: var(--h3);
+  line-height: 1.619;
+}
+
+h4 {
+  font-weight: 600;
+  font-size: var(--h4);
+  line-height: 1.619;
+}
+
+h5 {
+  font-weight: 500;
+  font-size: var(--h5);
+}
+
+h6 {
+  font-weight: 500;
+  font-size: var(--h5) - 0.2rem;
+}
+
+/* Adjustment to give h1 the global margin */
+h1:has(+ p, + lt) {
+  margin-bottom: 1rem;
+}
+
+/* Sets rule for lead text */
+h1 + p {
+  font-size: var(--lt);
+  line-height: 1.5;
+}
+
+li + li {
+  margin-top: 0.5rem;
+}
+
+blockquote {
+  border-left: rgba(0, 0, 0, 0.12) 2px solid;
+  margin-left: 0;
+  padding-left: calc(2ch + 0.5rem);
 }

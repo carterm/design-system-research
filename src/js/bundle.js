@@ -13,5 +13,6 @@ import * as all from "./index";
   all.ca_footer,
   all.ca_accordion,
   all.ca_card_simple,
-  all.ca_cardgroup_wrap
+  all.ca_cardgroup_wrap,
+  all.ca_header
 ].forEach(c => window.customElements.define(c.tagName, c));

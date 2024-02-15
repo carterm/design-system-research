@@ -8,6 +8,7 @@ import ca_footer from "./web-components/ca-footer/index";
 import ca_accordion from "./web-components/ca-accordion/index";
 import ca_cardgroup_wrap from "./web-components/ca-cardgroup-wrap/index";
 import ca_card_simple from "./web-components/ca-card-simple/index";
+import ca_header from "./web-components/ca-header/index";
 
 /**
  * All Components for bundle referencing
@@ -20,5 +21,6 @@ export {
   ca_footer,
   ca_accordion,
   ca_card_simple,
-  ca_cardgroup_wrap
+  ca_cardgroup_wrap,
+  ca_header
 };
