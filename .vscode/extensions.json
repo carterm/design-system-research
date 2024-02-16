@@ -4,6 +4,7 @@
     "esbenp.prettier-vscode",
     "eseom.nunjucks-template",
     "tombonnike.vscode-status-bar-format-toggle",
-    "stylelint.vscode-stylelint"
+    "stylelint.vscode-stylelint",
+    "ambooth.git-rename"
   ]
 }
