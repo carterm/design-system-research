@@ -17,7 +17,6 @@ export default function () {
     module: true,
     mangle: {
       properties: {
-        builtins: false,
         reserved: [
           "observedAttributes",
           "connectedCallback",
