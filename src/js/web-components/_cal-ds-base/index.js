@@ -37,16 +37,27 @@ export default class cal_ds_base extends HTMLElement {
     super();
 
     /**
-     * Private options defined in the constructor
-     * @type {cal_ds_options}
+     * @type {(() => void) | undefined}
      * @private
-     * @readonly
      */
-    this.options = options;
+    this._connectedCallback = options.connectedCallback;
+
+    /**
+     * @type {((name:string,oldValue:string,newValue:string)=> void) | undefined}
+     * @private
+     */
+    this._attributeChangedCallback = options.attributeChangedCallback;
+
+    /**
+     * Sets the HTML Template String that will be used to render the component
+     * change this in the `cal_ds_shadow_constructed_start` event if you want to update the source HTML
+     * @public
+     * @type {string | undefined}
+     */
+    this.HTMLTemplateString = options.html;
 
     if (options.shadow) {
       //Shadow Dom requested
-      delete this.options.shadow; //Clear once used to save RAM
       const shadow = this.attachShadow({ mode: "open" });
       this.dispatchComponentEvent("cal_ds_shadow_constructed_start");
 
@@ -54,13 +65,11 @@ export default class cal_ds_base extends HTMLElement {
 
       if (options.css) {
         this.addStyle(options.css);
-        delete this.options.css; //Clear once used to save RAM
       }
 
       if (this.HTMLTemplateString) {
         const myTemplate = document.createElement("template");
         myTemplate.innerHTML = this.HTMLTemplateString;
-        delete this.options.html; //Clear once used to save RAM
         // Check ram savings by using console.log(window.performance.memory.usedJSHeapSize/1000000);
 
         shadow.appendChild(myTemplate.content.cloneNode(true));
@@ -68,23 +77,6 @@ export default class cal_ds_base extends HTMLElement {
 
       this.dispatchComponentEvent("cal_ds_shadow_constructed_end");
     }
-  }
-
-  /**
-   * Returns the HTML Template String that will be used to render the component
-   * @public
-   */
-  get HTMLTemplateString() {
-    return this.options.html;
-  }
-
-  /**
-   * Sets the HTML Template String that will be used to render the component
-   * change this in the `cal_ds_shadow_constructed_start` event if you want to update the source HTML
-   * @public
-   */
-  set HTMLTemplateString(value) {
-    this.options.html = value;
   }
 
   /**
@@ -189,8 +181,8 @@ export default class cal_ds_base extends HTMLElement {
   connectedCallback() {
     this.dispatchComponentEvent("cal_ds_connectedCallback_start");
 
-    if (this.options?.connectedCallback) {
-      this.options.connectedCallback();
+    if (this._connectedCallback) {
+      this._connectedCallback();
     }
 
     this.dispatchComponentEvent("cal_ds_connectedCallback_end");
@@ -206,8 +198,8 @@ export default class cal_ds_base extends HTMLElement {
   attributeChangedCallback(_name, _oldValue, _newValue) {
     this.dispatchComponentEvent("cal_ds_attributeChangedCallback_start");
 
-    if (this.options?.attributeChangedCallback) {
-      this.options.attributeChangedCallback(_name, _oldValue, _newValue);
+    if (this._attributeChangedCallback) {
+      this._attributeChangedCallback(_name, _oldValue, _newValue);
     }
     this.dispatchComponentEvent("cal_ds_attributeChangedCallback_end");
   }
