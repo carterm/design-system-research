@@ -17,13 +17,7 @@ export default function () {
     module: true,
     mangle: {
       properties: {
-        reserved: [
-          "observedAttributes",
-          "connectedCallback",
-          "addStyle",
-          "attributeChangedCallback",
-          "HTMLTemplateString"
-        ]
+        regex: "^_"
       }
     }
   };

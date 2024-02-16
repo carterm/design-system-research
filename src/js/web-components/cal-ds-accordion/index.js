@@ -26,7 +26,7 @@ export default class my extends cal_ds_base {
    * @param {HTMLDetailsElement} detail
    * @private
    */
-  static setSizes = detail => {
+  static _setSizes = detail => {
     /**
      * @param {string} prop
      * @param {number} value
@@ -61,31 +61,24 @@ export default class my extends cal_ds_base {
   /**
    * The observer for all accordion control details resizing
    * @param {HTMLDetailsElement} target
-   * @protected
+   * @private
    */
-  static observeResize(target) {
+  static _observeResize(target) {
     if (!my._resizeObserver) {
       // This declaration will only happen once for all controls
       my._resizeObserver = new ResizeObserver(entries =>
         entries.forEach(entry => {
-          my.setSizes(/** @type {HTMLDetailsElement} */ (entry.target));
+          my._setSizes(/** @type {HTMLDetailsElement} */ (entry.target));
         })
       );
     }
     my._resizeObserver.observe(target);
   }
 
-  /** @public */
-  get details() {
+  /** @private */
+  get _details() {
     return /** @type {HTMLDetailsElement} */ (
       this.shadowRoot?.querySelector("details")
-    );
-  }
-
-  /** @public */
-  get summary() {
-    return /** @type {HTMLElement} */ (
-      this.details.querySelector(":scope > summary")
     );
   }
 
@@ -98,7 +91,7 @@ export default class my extends cal_ds_base {
     const attributeChangedCallback = (name, _oldValue, newValue) => {
       switch (name) {
         case my.observedAttributes[0]: //"data-expanded":
-          this.details.open =
+          this._details.open =
             (newValue ?? "false").trim().toLowerCase() !== "false";
 
           break;
@@ -112,13 +105,13 @@ export default class my extends cal_ds_base {
       attributeChangedCallback
     });
 
-    const detail = this.details;
+    const detail = this._details;
 
-    my.observeResize(detail);
+    my._observeResize(detail);
 
     detail.addEventListener("transitionstart", e => {
       //Sets the size right as the animation starts
-      if (e.target === detail) my.setSizes(detail);
+      if (e.target === detail) my._setSizes(detail);
     });
 
     detail.addEventListener("toggle", () => {
