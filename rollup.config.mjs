@@ -11,8 +11,26 @@ export default function () {
 
   // Minify in normal build only
   //const plugins = process.env["ROLLUP_WATCH"] === "true" ? [] : [terser({ module: true })];
+
+  /** @type {terser.Options} */
+  const terserOptions = {
+    module: true,
+    mangle: {
+      properties: {
+        builtins: false,
+        reserved: [
+          "observedAttributes",
+          "connectedCallback",
+          "addStyle",
+          "attributeChangedCallback",
+          "HTMLTemplateString"
+        ]
+      }
+    }
+  };
+
   // @ts-ignore
-  const plugins = [terser({ module: true })];
+  const plugins = [terser(terserOptions)];
 
   return {
     plugins: [
