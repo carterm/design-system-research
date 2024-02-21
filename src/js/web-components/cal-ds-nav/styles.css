@@ -2,6 +2,6 @@ a {
   font-size: xx-large;
 
   &[aria-current="page"] {
-    border: 1px solid;
+    font-weight: 900;
   }
 }

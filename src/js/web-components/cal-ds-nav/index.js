@@ -7,6 +7,9 @@ import cal_ds_base from "../_cal-ds-base/index";
 // @ts-ignore
 import css from "./styles.css";
 
+// @ts-ignore
+import html from "./template.html";
+
 export default class extends cal_ds_base {
   /** @override */
   static get tagName() {
@@ -18,23 +21,31 @@ export default class extends cal_ds_base {
       const myTemplate = this.querySelector("template");
 
       if (myTemplate && this.shadowRoot) {
-        this.shadowRoot.innerHTML = "";
+        this.shadowRoot.innerHTML = html;
 
         const dom = /** @type {DocumentFragment} */ (
           myTemplate.content.cloneNode(true)
         );
 
-        const anchors = dom.querySelectorAll("a");
+        const ul = /** @type {HTMLElement} */ (
+          this.shadowRoot.querySelector("ul")
+        );
+        ul.appendChild(dom);
+
+        const anchors = ul.querySelectorAll("a");
 
         anchors.forEach(a => {
+          const li = document.createElement("li");
+
+          a.parentElement?.appendChild(li);
+          li.appendChild(a);
+
           const anchorUrl = new URL(a.href, window.location.origin);
 
           if (anchorUrl.href === window.location.href) {
             a.ariaCurrent = "page";
           }
         });
-
-        this.shadowRoot.appendChild(dom);
       }
     };
 
