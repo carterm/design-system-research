@@ -15,19 +15,15 @@ export default class extends cal_ds_base {
       const myTemplate = this.querySelector("template");
 
       if (myTemplate && this.shadowRoot) {
+        const root = this.shadowRoot.firstElementChild;
+        if (root) {
+          this.shadowRoot.removeChild(root);
+        }
+
         this.shadowRoot.appendChild(myTemplate.content.cloneNode(true));
       }
     };
 
     super({ shadow: true, connectedCallback });
-  }
-
-  disconnectedCallback() {
-    if (this.shadowRoot) {
-      const root = this.shadowRoot.firstElementChild;
-      if (root) {
-        this.shadowRoot.removeChild(root);
-      }
-    }
   }
 }
