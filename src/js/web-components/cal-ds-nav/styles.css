@@ -1,11 +1,3 @@
-::slotted(*) {
-  all: inherit;
-}
-
-ul {
-  background-color: yellow;
-}
-
 a {
   font-size: xx-large;
 }

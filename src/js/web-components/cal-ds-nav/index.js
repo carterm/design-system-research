@@ -4,6 +4,9 @@
 //@ts-check
 import cal_ds_base from "../_cal-ds-base/index";
 
+// @ts-ignore
+import css from "./styles.css";
+
 export default class extends cal_ds_base {
   /** @override */
   static get tagName() {
@@ -21,7 +24,7 @@ export default class extends cal_ds_base {
       }
     };
 
-    super({ shadow: true, connectedCallback: contentChanged });
+    super({ shadow: true, css, connectedCallback: contentChanged });
 
     const myTemplate = this.querySelector("template");
     if (myTemplate) {
