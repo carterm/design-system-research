@@ -30,7 +30,7 @@ export default class extends cal_ds_base {
           const anchorUrl = new URL(a.href, window.location.origin);
 
           if (anchorUrl.href === window.location.href) {
-            a.style.backgroundColor = "red";
+            a.ariaCurrent = "page";
           }
         });
 
