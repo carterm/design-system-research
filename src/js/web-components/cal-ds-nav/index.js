@@ -11,7 +11,7 @@ export default class extends cal_ds_base {
   }
 
   constructor() {
-    const connectedCallback = () => {
+    const contentChanged = () => {
       const myTemplate = this.querySelector("template");
 
       if (myTemplate && this.shadowRoot) {
@@ -24,6 +24,13 @@ export default class extends cal_ds_base {
       }
     };
 
-    super({ shadow: true, connectedCallback });
+    super({ shadow: true, connectedCallback: contentChanged });
+
+    const myTemplate = this.querySelector("template");
+    if (myTemplate) {
+      myTemplate.content.addEventListener("change", () =>
+        console.log("change")
+      );
+    }
   }
 }
