@@ -35,10 +35,10 @@ export default class extends cal_ds_base {
         const anchors = ul.querySelectorAll("a");
 
         anchors.forEach(a => {
-          const li = document.createElement("li");
+          //const li = document.createElement("li");
 
-          a.parentElement?.appendChild(li);
-          li.appendChild(a);
+          //a.parentElement?.appendChild(li);
+          //li.appendChild(a);
 
           const anchorUrl = new URL(a.href, window.location.origin);
 
