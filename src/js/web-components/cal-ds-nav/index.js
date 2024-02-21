@@ -15,10 +15,7 @@ export default class extends cal_ds_base {
       const myTemplate = this.querySelector("template");
 
       if (myTemplate && this.shadowRoot) {
-        const root = this.shadowRoot.firstElementChild;
-        if (root) {
-          this.shadowRoot.removeChild(root);
-        }
+        this.shadowRoot.innerHTML = "";
 
         this.shadowRoot.appendChild(myTemplate.content.cloneNode(true));
       }
@@ -28,9 +25,22 @@ export default class extends cal_ds_base {
 
     const myTemplate = this.querySelector("template");
     if (myTemplate) {
-      myTemplate.content.addEventListener("change", () =>
-        console.log("change")
-      );
+      // Callback function to execute when mutations are observed
+      // eslint-disable-next-line jsdoc/no-undefined-types
+      /** @type {MutationCallback} */
+      const mutationCallback = mutationsList =>
+        mutationsList.forEach(contentChanged);
+
+      // Create an observer instance linked to the callback function
+      const observer = new MutationObserver(mutationCallback);
+
+      // Start observing the target node for configured mutations
+      observer.observe(myTemplate.content, {
+        attributes: true,
+        childList: true,
+        subtree: true,
+        characterData: true
+      });
     }
   }
 }
