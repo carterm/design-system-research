@@ -20,7 +20,21 @@ export default class extends cal_ds_base {
       if (myTemplate && this.shadowRoot) {
         this.shadowRoot.innerHTML = "";
 
-        this.shadowRoot.appendChild(myTemplate.content.cloneNode(true));
+        const dom = /** @type {DocumentFragment} */ (
+          myTemplate.content.cloneNode(true)
+        );
+
+        const anchors = dom.querySelectorAll("a");
+
+        anchors.forEach(a => {
+          const anchorUrl = new URL(a.href, window.location.origin);
+
+          if (anchorUrl.href === window.location.href) {
+            a.style.backgroundColor = "red";
+          }
+        });
+
+        this.shadowRoot.appendChild(dom);
       }
     };
 
