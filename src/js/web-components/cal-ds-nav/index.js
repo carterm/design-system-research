@@ -17,7 +17,7 @@ export default class extends cal_ds_base {
   }
 
   constructor() {
-    const contentChanged = () => {
+    const _contentChanged = () => {
       const myTemplate = this.querySelector("template");
 
       if (myTemplate && this.shadowRoot) {
@@ -35,10 +35,10 @@ export default class extends cal_ds_base {
         const anchors = ul.querySelectorAll("a");
 
         anchors.forEach(a => {
-          //const li = document.createElement("li");
+          const li = document.createElement("li");
 
-          //a.parentElement?.appendChild(li);
-          //li.appendChild(a);
+          a.parentElement?.appendChild(li);
+          li.appendChild(a);
 
           const anchorUrl = new URL(a.href, window.location.origin);
 
@@ -49,7 +49,7 @@ export default class extends cal_ds_base {
       }
     };
 
-    super({ shadow: true, css, connectedCallback: contentChanged });
+    super({ shadow: true, css, connectedCallback: _contentChanged });
 
     const myTemplate = this.querySelector("template");
     if (myTemplate) {
@@ -57,7 +57,7 @@ export default class extends cal_ds_base {
       // eslint-disable-next-line jsdoc/no-undefined-types
       /** @type {MutationCallback} */
       const mutationCallback = mutationsList =>
-        mutationsList.forEach(contentChanged);
+        mutationsList.forEach(_contentChanged);
 
       // Create an observer instance linked to the callback function
       const observer = new MutationObserver(mutationCallback);
