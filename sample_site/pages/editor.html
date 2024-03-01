@@ -3,10 +3,15 @@ title: Editor
 description: Editing tool
 ---
 
+<style>
+  body {
+    background-color: #ddf;
+  }
+</style>
+<h1>Nav</h1>
 <cal-ds-dev-editor
-  data-target-selector="h1 + cal-ds-nav > template"></cal-ds-dev-editor>
+  data-target-selector="cal-ds-dev-editor + cal-ds-nav > template"></cal-ds-dev-editor>
 
-<h1>Preview Area</h1>
 <cal-ds-nav>
   <template>
     <a href="/">Home</a>
@@ -15,3 +20,14 @@ description: Editing tool
     <a href="/editor/">Editor</a>
   </template>
 </cal-ds-nav>
+
+<h1>Accordion</h1>
+<cal-ds-dev-editor
+  data-target-selector="cal-ds-dev-editor + cal-ds-accordion"></cal-ds-dev-editor>
+
+<cal-ds-accordion data-expanded>
+  <span slot="summary">Accordion Summary</span>
+  My accordion content
+  <p>P1</p>
+  <p>P2</p>
+</cal-ds-accordion>
