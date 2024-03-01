@@ -40,9 +40,15 @@ export default class extends cal_ds_base {
           a.parentElement?.appendChild(li);
           li.appendChild(a);
 
-          const anchorUrl = new URL(a.href, window.location.origin);
+          const validUrl = (/** @type {string} */ href) => {
+            try {
+              return new URL(a.href, window.location.origin).href;
+            } catch (e) {
+              return href;
+            }
+          };
 
-          if (anchorUrl.href === window.location.href) {
+          if (validUrl(a.href) === window.location.href) {
             a.ariaCurrent = "page";
             a.tabIndex = -1;
           } else {
