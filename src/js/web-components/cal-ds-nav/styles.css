@@ -1,7 +1,19 @@
-a {
-  font-size: xx-large;
+:host > nav > ul {
+  display: flex;
+  list-style: none;
 
-  &[aria-current="page"] {
-    font-weight: 900;
+  & > li > a {
+    font-size: xx-large;
+    padding: 1rem;
+    text-decoration: none;
+
+    &[aria-current="page"] {
+      font-weight: 900;
+      pointer-events: none;
+    }
+
+    &:hover {
+      background-color: #fafafa;
+    }
   }
 }

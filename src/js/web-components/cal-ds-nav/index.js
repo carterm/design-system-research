@@ -44,6 +44,9 @@ export default class extends cal_ds_base {
 
           if (anchorUrl.href === window.location.href) {
             a.ariaCurrent = "page";
+            a.tabIndex = -1;
+          } else {
+            a.role = "menuitem";
           }
         });
       }
