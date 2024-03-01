@@ -17,8 +17,17 @@
   </head>
   <body>
     <h1>{{ title }}</h1>
-    <p>{{description}}</p>
-    <a href="/">Home</a>
+    <p>{{ description }}</p>
+
+    <cal-ds-nav>
+      <template>
+        <a href="/">Home</a>
+        <a href="/accordion/">Accordion</a>
+        <a href="/cards/">Cards</a>
+        <a href="/about/">About</a>
+      </template>
+    </cal-ds-nav>
+
     <cal-ds-seo
       data-title="{{ title }}"
       data-description="{{ description }}"

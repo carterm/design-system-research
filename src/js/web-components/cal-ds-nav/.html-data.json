@@ -1,0 +1,17 @@
+{
+  "version": 1.1,
+  "tags": [
+    {
+      "name": "cal-ds-nav",
+      "description": ".html-data.description.md",
+      "attributes": [],
+
+      "references": [
+        {
+          "name": "Reference - Eureka",
+          "url": "https://template.webstandards.ca.gov/"
+        }
+      ]
+    }
+  ]
+}

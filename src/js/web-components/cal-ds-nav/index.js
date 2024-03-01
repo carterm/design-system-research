@@ -1,8 +1,14 @@
+// from
+// https://www.cssscript.com/create-a-multi-level-drop-down-menu-with-pure-css/
+
 //@ts-check
 import cal_ds_base from "../_cal-ds-base/index";
 
 // @ts-ignore
 import css from "./styles.css";
+
+// @ts-ignore
+import html from "./template.html";
 
 export default class extends cal_ds_base {
   /** @override */
@@ -11,36 +17,61 @@ export default class extends cal_ds_base {
   }
 
   constructor() {
-    const contentChanged = () => {
-      if (this.shadowRoot) {
-        this.shadowRoot.innerHTML = this.innerHTML;
+    const _contentChanged = () => {
+      const myTemplate = this.querySelector("template");
+
+      if (myTemplate && this.shadowRoot) {
+        this.shadowRoot.innerHTML = html;
+
+        const dom = /** @type {DocumentFragment} */ (
+          myTemplate.content.cloneNode(true)
+        );
+
+        const ul = /** @type {HTMLElement} */ (
+          this.shadowRoot.querySelector("ul")
+        );
+        ul.appendChild(dom);
+
+        const anchors = ul.querySelectorAll("a");
+
+        anchors.forEach(a => {
+          const li = document.createElement("li");
+
+          a.parentElement?.appendChild(li);
+          li.appendChild(a);
+
+          const anchorUrl = new URL(a.href, window.location.origin);
+
+          if (anchorUrl.href === window.location.href) {
+            a.ariaCurrent = "page";
+            a.tabIndex = -1;
+          } else {
+            a.role = "menuitem";
+          }
+        });
       }
     };
 
-    super({
-      shadow: true,
-      css,
-      connectedCallback: contentChanged
-    });
+    super({ shadow: true, css, connectedCallback: _contentChanged });
 
-    // Callback function to execute when mutations are observed
-    // eslint-disable-next-line jsdoc/no-undefined-types
-    /** @type {MutationCallback} */
-    const mutationCallback = mutationsList =>
-      mutationsList.forEach(mutation => {
-        console.log(mutation.type);
-        contentChanged();
+    const myTemplate = this.querySelector("template");
+    if (myTemplate) {
+      // Callback function to execute when mutations are observed
+      // eslint-disable-next-line jsdoc/no-undefined-types
+      /** @type {MutationCallback} */
+      const mutationCallback = mutationsList =>
+        mutationsList.forEach(_contentChanged);
+
+      // Create an observer instance linked to the callback function
+      const observer = new MutationObserver(mutationCallback);
+
+      // Start observing the target node for configured mutations
+      observer.observe(myTemplate.content, {
+        attributes: true,
+        childList: true,
+        subtree: true,
+        characterData: true
       });
-
-    // Create an observer instance linked to the callback function
-    const observer = new MutationObserver(mutationCallback);
-
-    // Start observing the target node for configured mutations
-    observer.observe(this, {
-      attributes: true,
-      childList: true,
-      subtree: true,
-      characterData: true
-    });
+    }
   }
 }
