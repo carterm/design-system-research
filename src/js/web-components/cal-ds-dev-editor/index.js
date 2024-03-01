@@ -24,6 +24,9 @@ export default class my extends cal_ds_base {
     return ["data-target-selector"];
   }
 
+  /**
+   * @private
+   */
   get _textarea() {
     return /** @type {HTMLTextAreaElement} */ (
       this.shadowRoot?.querySelector("textarea")
@@ -58,15 +61,17 @@ export default class my extends cal_ds_base {
         }
       };
 
+    const _keylistener = () => {
+      console.log("key");
+      if (this._target) {
+        this._target.innerHTML = this._textarea.value;
+      }
+    };
     const _connectedCallback = () => {
       if (this._target) {
         this._textarea.value = this._target.innerHTML;
 
-        this._textarea.addEventListener("keyup", () => {
-          if (this._target) {
-            this._target.innerHTML = this._textarea.value;
-          }
-        });
+        this._textarea.addEventListener("keyup", _keylistener);
       }
     };
 
@@ -78,7 +83,10 @@ export default class my extends cal_ds_base {
       connectedCallback: _connectedCallback
     });
 
-    /** @type {Element | undefined} */
+    /**
+     * @type {Element | undefined}
+     * @private
+     */
     this._target = undefined;
   }
 }
