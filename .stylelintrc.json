@@ -1,6 +1,7 @@
 {
   "$schema": "https://json.schemastore.org/stylelintrc",
-  "extends": ["stylelint-config-standard"],
+  "extends": "stylelint-config-standard",
+  "plugins": ["stylelint-use-nesting"],
   "rules": {
     "declaration-property-unit-allowed-list": {
       "/^border/": ["px"],
@@ -8,12 +9,8 @@
     },
     "unit-allowed-list": ["%", "deg", "px", "rem", "ms"],
     "number-max-precision": 5,
-    "font-family-no-missing-generic-family-keyword": [true],
-
-    "selector-class-pattern": null,
-    "selector-id-pattern": null,
-
-    "no-descending-specificity": [true, { "ignore": "selectors-within-list" }],
+    "csstools/use-nesting": "always",
+    "selector-max-universal": 0,
 
     "property-no-vendor-prefix": [
       true,
