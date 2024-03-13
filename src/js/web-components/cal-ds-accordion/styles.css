@@ -4,6 +4,8 @@ details {
   --collapsed: initial; /* prevents vars from being inherited in nested accordions */
   --expanded: initial;
 
+  background-color: #eee;
+
   > summary {
     cursor: pointer;
     padding: 0.5rem 3rem 0.5rem 3.75rem;
