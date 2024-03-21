@@ -1,4 +1,4 @@
-var CssBaseStyleString = ":host{font-family:system-ui,-apple-system,\"Segoe UI\",Roboto,\"Helvetica Neue\",\"Noto Sans\",\"Liberation Sans\",Arial,sans-serif;--gray-50:#f66;--gray-100:#fa0;--gray-200:#ff0;}";
+var CssBaseStyleString = ":host{font-family:system-ui,-apple-system,\"Segoe UI\",Roboto,\"Helvetica Neue\",\"Noto Sans\",\"Liberation Sans\",Arial,sans-serif;--gov-header:#071645;--brand-primary:#13394b;--brand-secondary:#0070a3;--banner-light:#d5dbde;--banner-dark:#09202b;--brand-hover-light:#3ca3d3;--brand-hover-dark:#246c8e;--background-primary-light:#d9d8cf;--background-secondary-light:#f5f3eb;--background-primary-dark:#43433f;--background-secondary-dark:#65645f;--action-primary:#fec335;--action-secondary:#fae2ad;--text-white:#fff;--grey:#ccc;--grey-text:#323232;--grey-background:#eee;--gutter-gap:1.674vw;--flow-space:1rem;--radius:1rem;--shadow:0.2rem 0.2rem 0.5rem 0 rgba(0 0 0 / 25%);--shadow-focus:0.1rem 0.1rem 0.25rem 0 rgba(0 0 0 / 10%);--shadow-active:0.2rem 0.2rem 0.5rem 0 rgba(0 0 0 / 60%);--font-size:1rem;--ratio:1.24;--s0:calc(var(--font-size) - 0.3rem) + 0.2vw;--st:calc(var(--s0) * var(--ratio));--base:calc(var(--st) * var(--ratio));--lt:calc(var(--base) * var(--ratio));--h6:calc(var(--s0) * var(--ratio));--h5:calc(var(--h6) * var(--ratio));--h4:calc(var(--h5) * var(--ratio));--h3:calc(var(--h4) * var(--ratio));--h2:calc(var(--h3) * var(--ratio));--h1:calc(var(--h2) * var(--ratio) * var(--ratio));}";
 
 //@ts-check
 
@@ -205,7 +205,7 @@ class cal_ds_base extends HTMLElement {
   }
 }
 
-var css = ":host > nav > ul{display:flex;list-style:none;& > li > a{font-size:xx-large;padding:1rem;text-decoration:none;&[aria-current=\"page\"]{font-weight:900;pointer-events:none;}&:hover{background-color:#fafafa;}}}";
+var css = ":host > nav{background-color:var(--gov-header);padding-bottom:0.03rem;> ul{display:flex;list-style:none;> li{> a{color:var(--text-white);text-decoration:none;font-size:0.9rem;margin-right:2.5rem;&[aria-current=\"page\"]{pointer-events:none;text-decoration:solid underline var(--action-primary) 0.3rem;}&:hover{background-color:var(--brand-hover-dark);}}}}}";
 
 var html = "<nav role=\"navigation\"> <ul role=\"menubar\"></ul> </nav> ";
 
@@ -213,7 +213,7 @@ var html = "<nav role=\"navigation\"> <ul role=\"menubar\"></ul> </nav> ";
 // https://www.cssscript.com/create-a-multi-level-drop-down-menu-with-pure-css/
 
 
-class index extends cal_ds_base {
+class my_component extends cal_ds_base {
   /** @override */
   static get tagName() {
     return "cal-ds-nav";
@@ -239,6 +239,7 @@ class index extends cal_ds_base {
 
         anchors.forEach(a => {
           const li = document.createElement("li");
+          li.role = "menuitem";
 
           a.parentElement?.appendChild(li);
           li.appendChild(a);
@@ -254,8 +255,6 @@ class index extends cal_ds_base {
           if (validUrl(a.href) === window.location.href) {
             a.ariaCurrent = "page";
             a.tabIndex = -1;
-          } else {
-            a.role = "menuitem";
           }
         });
       }
@@ -285,4 +284,15 @@ class index extends cal_ds_base {
   }
 }
 
-export { index as default };
+//@ts-check
+
+
+//comment out any elements you are not using
+//Definition order matters!!!  Code will run in this order
+
+const my_bundle = [my_component];
+
+for (const c of my_bundle) {
+  //sync "for", to ensure define order
+  window.customElements.define(c.tagName, c);
+}

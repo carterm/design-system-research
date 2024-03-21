@@ -1,23 +1,48 @@
 {
   "name": "@cagovweb/cal-ds-nav",
-  "version": "0.0.0-beta1",
+  "version": "0.0.1-beta2",
   "description": "cal-ds-nav navigation menu",
+  "type": "module",
   "main": "dist/index.js",
+  "homepage": "https://template.webstandards.ca.gov/",
   "repository": {
     "type": "git",
     "url": "https://github.com/carterm/design-system-research.git",
     "directory": "src/js/web-components/cal-ds-nav"
   },
+  "bugs": "https://github.com/carterm/design-system-research/issues",
   "keywords": [
-    "web component",
     "Eureka",
     "design system",
     "ca.gov",
-    "california"
+    "California",
+    "State",
+    "CA",
+    "Government",
+    "gov",
+    "Template",
+    "state-template",
+    "ca web template",
+    "CDT",
+    "department of technology",
+    "web component"
   ],
-  "author": "ca.gov",
+  "author": {
+    "name": "Carter Medlin",
+    "email": "carter.medlin@state.ca.gov",
+    "url": "https://github.com/carterm"
+  },
+  "publishConfig": {
+    "access": "public",
+    "tag": "beta"
+  },
   "license": "ISC",
   "scripts": {
-    "build": "rollup --config src/rollup.config.mjs"
+    "build": "rollup --config src/rollup.config.mjs",
+    "NPM Publish (dry run)": "npm publish --dry-run",
+    "NPM Publish (view package)": "npm pack",
+    "NPM publish": "npm publish",
+    "NPM remove beta tag": "npm dist-tag rm @cagovweb/cal-ds-nav beta",
+    "NPM deprecate old version": "npm deprecate @cagovweb/cal-ds-nav@1.0.0 \"Version no longer supported. Upgrade to @latest\""
   }
 }

@@ -3,7 +3,7 @@ import css from "rollup-plugin-import-css";
 import htmlString from "rollup-plugin-html-string";
 
 export default {
-  input: "src/index.js",
+  input: "src/bundle.mjs",
   output: {
     file: "dist/index.js",
     format: "esm"
