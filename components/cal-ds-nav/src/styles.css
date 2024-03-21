@@ -1,5 +1,6 @@
 :host > nav {
   background-color: var(--gov-header);
+  padding-bottom: 0.03rem;
 
   > ul {
     display: flex;
@@ -14,7 +15,7 @@
 
         &[aria-current="page"] {
           pointer-events: none;
-          text-decoration: solid underline var(--action-primary) 5px;
+          text-decoration: solid underline var(--action-primary) 0.3rem;
         }
 
         &:hover {
