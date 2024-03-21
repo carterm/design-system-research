@@ -6,10 +6,6 @@ window.addEventListener("cal_ds_connectedCallback_end", e => {
   if (comp.tagName === "CAL-DS-ACCORDION") {
     comp.addStyle("details{background-color:pink}");
 
-    if (comp.dataset.summary?.includes("1")) {
-      comp.addStyle("details{background-color:yellow}");
-    }
-
     if (comp.shadowRoot) {
       const testItem = document.createElement("em");
       testItem.innerHTML = "JavaScript added to shadow root";

@@ -6,14 +6,16 @@ description: description for Accordion Sandbox
 {% same_page_script page %}
 
 <cal-ds-custom-css>
-  <style>
-    p {
-      color: orange
-    }
-    :host(cal-ds-nav) p {
-      color: pink
-    }
-  </style>
+  <template>
+    <style>
+      a {
+        color: black;
+      }
+      :host(cal-ds-accordion) summary {
+        color: blue;
+      }
+    </style>
+  </template>
 </cal-ds-custom-css>
 
 <cal-ds-accordion data-expanded>
