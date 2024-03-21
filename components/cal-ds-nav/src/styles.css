@@ -1,20 +1,25 @@
 :host > nav {
+  background-color: var(--gov-header);
+
   > ul {
     display: flex;
     list-style: none;
 
-    & > li > a {
-      font-size: xx-large;
-      padding: 1rem;
-      text-decoration: none;
+    > li {
+      > a {
+        color: var(--text-white);
+        text-decoration: none;
+        font-size: 0.9rem;
+        margin-right: 2.5rem;
 
-      &[aria-current="page"] {
-        font-weight: 900;
-        pointer-events: none;
-      }
+        &[aria-current="page"] {
+          pointer-events: none;
+          text-decoration: solid underline var(--action-primary) 5px;
+        }
 
-      &:hover {
-        background-color: #fafafa;
+        &:hover {
+          background-color: var(--brand-hover-dark);
+        }
       }
     }
   }

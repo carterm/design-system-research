@@ -7,7 +7,7 @@
       "/^border/": ["px"],
       "/^padding|^gap/": ["rem"]
     },
-    "unit-allowed-list": ["%", "deg", "px", "rem", "ms"],
+    "unit-allowed-list": ["%", "deg", "px", "rem", "ms", "vw"],
     "number-max-precision": 5,
     "csstools/use-nesting": "always",
     "selector-max-universal": 0,
