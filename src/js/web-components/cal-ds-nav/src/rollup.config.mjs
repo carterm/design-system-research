@@ -3,13 +3,13 @@ import css from "rollup-plugin-import-css";
 import htmlString from "rollup-plugin-html-string";
 
 export default {
-  input: "src/js/web-components/cal-ds-nav/src/index.js",
+  input: "src/index.js",
   output: {
-    file: "src/js/web-components/cal-ds-nav/dist/index.js",
+    file: "dist/index.js",
     format: "esm"
   },
   plugins: [
-    css(),
+    css({ minify: true, modules: false }),
     htmlString({
       htmlMinifierOptions: {
         collapseWhitespace: true,

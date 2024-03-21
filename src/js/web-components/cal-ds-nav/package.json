@@ -9,8 +9,15 @@
     "directory": "src/js/web-components/cal-ds-nav"
   },
   "keywords": [
-    "web component"
+    "web component",
+    "Eureka",
+    "design system",
+    "ca.gov",
+    "california"
   ],
   "author": "ca.gov",
-  "license": "ISC"
+  "license": "ISC",
+  "scripts": {
+    "build": "rollup --config src/rollup.config.mjs"
+  }
 }

@@ -1,4 +1,4 @@
-var CssBaseStyleString = ":host {\n  font-family:\n    system-ui,\n    -apple-system,\n    \"Segoe UI\",\n    Roboto,\n    \"Helvetica Neue\",\n    \"Noto Sans\",\n    \"Liberation Sans\",\n    Arial,\n    sans-serif;\n\n  --gray-50: #f66; /* #fafafa; */\n  --gray-100: #fa0; /* #f3f3f4; */\n  --gray-200: #ff0; /* #d4d4d7; */\n}\n";
+var CssBaseStyleString = ":host{font-family:system-ui,-apple-system,\"Segoe UI\",Roboto,\"Helvetica Neue\",\"Noto Sans\",\"Liberation Sans\",Arial,sans-serif;--gray-50:#f66;--gray-100:#fa0;--gray-200:#ff0;}";
 
 //@ts-check
 
@@ -205,7 +205,7 @@ class cal_ds_base extends HTMLElement {
   }
 }
 
-var css = ":host > nav > ul {\n  display: flex;\n  list-style: none;\n\n  & > li > a {\n    font-size: xx-large;\n    padding: 1rem;\n    text-decoration: none;\n\n    &[aria-current=\"page\"] {\n      font-weight: 900;\n      pointer-events: none;\n    }\n\n    &:hover {\n      background-color: #fafafa;\n    }\n  }\n}\n";
+var css = ":host > nav > ul{display:flex;list-style:none;& > li > a{font-size:xx-large;padding:1rem;text-decoration:none;&[aria-current=\"page\"]{font-weight:900;pointer-events:none;}&:hover{background-color:#fafafa;}}}";
 
 var html = "<nav role=\"navigation\"> <ul role=\"menubar\"></ul> </nav> ";
 
