@@ -36,12 +36,7 @@ allFiles
     });
 
     allFiles
-      .filter(
-        d =>
-          d.path === f.path &&
-          d.name.startsWith(".html-data.") &&
-          d.name.endsWith(".md")
-      )
+      .filter(d => d.path === f.path && d.name.endsWith(".md"))
       .forEach(r => {
         jsonText = jsonText.replace(
           `"${r.name}"`,
