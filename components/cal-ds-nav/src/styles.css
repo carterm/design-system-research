@@ -1,19 +1,21 @@
-:host > nav > ul {
-  display: flex;
-  list-style: none;
+:host > nav {
+  > ul {
+    display: flex;
+    list-style: none;
 
-  & > li > a {
-    font-size: xx-large;
-    padding: 1rem;
-    text-decoration: none;
+    & > li > a {
+      font-size: xx-large;
+      padding: 1rem;
+      text-decoration: none;
 
-    &[aria-current="page"] {
-      font-weight: 900;
-      pointer-events: none;
-    }
+      &[aria-current="page"] {
+        font-weight: 900;
+        pointer-events: none;
+      }
 
-    &:hover {
-      background-color: #fafafa;
+      &:hover {
+        background-color: #fafafa;
+      }
     }
   }
 }
