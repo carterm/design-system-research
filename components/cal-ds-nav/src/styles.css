@@ -1,19 +1,27 @@
-:host > nav > ul {
-  display: flex;
-  list-style: none;
+:host > nav {
+  background-color: var(--gov-header);
+  padding-bottom: 0.03rem;
 
-  & > li > a {
-    font-size: xx-large;
-    padding: 1rem;
-    text-decoration: none;
+  > ul {
+    display: flex;
+    list-style: none;
 
-    &[aria-current="page"] {
-      font-weight: 900;
-      pointer-events: none;
-    }
+    > li {
+      > a {
+        color: var(--text-white);
+        text-decoration: none;
+        font-size: 0.9rem;
+        margin-right: 2.5rem;
 
-    &:hover {
-      background-color: #fafafa;
+        &[aria-current="page"] {
+          pointer-events: none;
+          text-decoration: solid underline var(--action-primary) 0.3rem;
+        }
+
+        &:hover {
+          background-color: var(--brand-hover-dark);
+        }
+      }
     }
   }
 }
