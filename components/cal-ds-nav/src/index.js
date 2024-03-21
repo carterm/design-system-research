@@ -36,6 +36,7 @@ export default class extends cal_ds_base {
 
         anchors.forEach(a => {
           const li = document.createElement("li");
+          li.role = "menuitem";
 
           a.parentElement?.appendChild(li);
           li.appendChild(a);
@@ -51,8 +52,6 @@ export default class extends cal_ds_base {
           if (validUrl(a.href) === window.location.href) {
             a.ariaCurrent = "page";
             a.tabIndex = -1;
-          } else {
-            a.role = "menuitem";
           }
         });
       }
