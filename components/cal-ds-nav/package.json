@@ -1,0 +1,23 @@
+{
+  "name": "@cagovweb/cal-ds-nav",
+  "version": "0.0.0-beta1",
+  "description": "cal-ds-nav navigation menu",
+  "main": "dist/index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/carterm/design-system-research.git",
+    "directory": "src/js/web-components/cal-ds-nav"
+  },
+  "keywords": [
+    "web component",
+    "Eureka",
+    "design system",
+    "ca.gov",
+    "california"
+  ],
+  "author": "ca.gov",
+  "license": "ISC",
+  "scripts": {
+    "build": "rollup --config src/rollup.config.mjs"
+  }
+}

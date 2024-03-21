@@ -1,7 +1,7 @@
 //@ts-check
 
 const targetFileName = "./_site/html-data/ca-eureka.html-data.json";
-const srcPath = "./src/js/web-components/";
+const srcPath = "./components/";
 
 const fs = require("node:fs");
 const path = require("path");
@@ -36,12 +36,7 @@ allFiles
     });
 
     allFiles
-      .filter(
-        d =>
-          d.path === f.path &&
-          d.name.startsWith(".html-data.") &&
-          d.name.endsWith(".md")
-      )
+      .filter(d => d.path === f.path && d.name.endsWith(".md"))
       .forEach(r => {
         jsonText = jsonText.replace(
           `"${r.name}"`,
