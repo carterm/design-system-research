@@ -1,7 +1,7 @@
 //@ts-check
 
 const targetFileName = "./_site/html-data/ca-eureka.html-data.json";
-const srcPath = "./src/js/web-components/";
+const srcPath = "./components/";
 
 const fs = require("node:fs");
 const path = require("path");
