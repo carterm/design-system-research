@@ -18,7 +18,7 @@ export default class extends cal_ds_base {
 
   constructor() {
     const _contentChanged = () => {
-      const myTemplate = this.querySelector("template");
+      const myTemplate = this.template;
 
       if (myTemplate && this.shadowRoot) {
         this.shadowRoot.innerHTML = html;
@@ -59,24 +59,6 @@ export default class extends cal_ds_base {
 
     super({ shadow: true, css, connectedCallback: _contentChanged });
 
-    const myTemplate = this.querySelector("template");
-    if (myTemplate) {
-      // Callback function to execute when mutations are observed
-      // eslint-disable-next-line jsdoc/no-undefined-types
-      /** @type {MutationCallback} */
-      const mutationCallback = mutationsList =>
-        mutationsList.forEach(_contentChanged);
-
-      // Create an observer instance linked to the callback function
-      const observer = new MutationObserver(mutationCallback);
-
-      // Start observing the target node for configured mutations
-      observer.observe(myTemplate.content, {
-        attributes: true,
-        childList: true,
-        subtree: true,
-        characterData: true
-      });
-    }
+    this.observeTemplate(_contentChanged);
   }
 }

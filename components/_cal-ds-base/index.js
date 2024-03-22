@@ -203,4 +203,35 @@ export default class cal_ds_base extends HTMLElement {
     }
     this.dispatchComponentEvent("cal_ds_attributeChangedCallback_end");
   }
+
+  /**
+   * Starts a MutationObserver on the content of the <template> tag
+   * @param {() => void} contentChanged
+   * @protected
+   */
+  observeTemplate(contentChanged) {
+    const template = this.template;
+    if (template) {
+      // Create an observer instance linked to the callback function
+      const observer = new MutationObserver(contentChanged);
+
+      // Start observing the target node for configured mutations
+      observer.observe(template.content, {
+        attributes: true,
+        childList: true,
+        subtree: true,
+        characterData: true
+      });
+    } else {
+      console.error(`${this.tagName} missing <template> tag`);
+    }
+  }
+
+  /**
+   * returns the template tag for this component
+   * @protected
+   */
+  get template() {
+    return this.querySelector("template");
+  }
 }
