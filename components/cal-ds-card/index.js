@@ -11,7 +11,7 @@ import cal_ds_base from "../_cal-ds-base/index";
 export default class extends cal_ds_base {
   /** @override */
   static get tagName() {
-    return "cal-ds-card-simple";
+    return "cal-ds-card";
   }
 
   constructor() {

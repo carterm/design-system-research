@@ -13,8 +13,8 @@ const my_bundle = [
   all.cal_ds_nav,
   all.cal_ds_footer,
   all.cal_ds_accordion,
-  all.cal_ds_card_simple,
-  all.cal_ds_cardgroup_wrap,
+  all.cal_ds_card,
+  all.cal_ds_cardgroup,
   all.cal_ds_dev_editor
 ];
 
