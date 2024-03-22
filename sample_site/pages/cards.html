@@ -11,26 +11,65 @@ description: description for Cards Sandbox
 <div>page text not in component</div>
 
 <cal-ds-cardgroup>
-  <cal-ds-card>Card 1</cal-ds-card>
-  <cal-ds-card>Card 2</cal-ds-card>
-  <cal-ds-card>Card 3</cal-ds-card>
   <cal-ds-card>
-    <div>test</div>
+    <template>
+      <h2>Grizzly Bear</h2>
+      <p>Description</p>
+      <a class="action" href="#">Call to action</a>
+      <img
+        src="https://live.staticflickr.com/5609/15596534729_9c240ff83a_b.jpg"
+        alt="Brown bear" />
+    </template>
+  </cal-ds-card>
+  <cal-ds-card>
+    <template>
+      <h2>Redwoods</h2>
+      <p>Description</p>
+      <p>I'm NOT a quote</p>
+      <p>I'm a problem</p>
 
-    Big Card 4 Long Text Long Text Long Text Long Text Long Text Long Text Long
-    Text<br />
-    Next line <br />
-    Long Text Long Text Long Text Long Text Long Text Long Text Long Text
+      <a href="#" class="action">Call to action</a>
+      <img
+        src="https://live.staticflickr.com/5718/30570616183_8c044d2a85_b.jpg"
+        alt="Enjoy the silence in the red wood forest" />
+    </template>
   </cal-ds-card>
-  <cal-ds-card>Card 5</cal-ds-card>
-  <cal-ds-card>Card 6</cal-ds-card>
-  <cal-ds-card>Card 7</cal-ds-card>
   <cal-ds-card>
-    Card 8
-    <cal-ds-accordion>
-      <span slot="summary">Accordion in a card</span>
-      This accordion is in a card.
-    </cal-ds-accordion>
+    <template>
+      <h2>Poppy</h2>
+      <p>Stuff</p>
+
+      <a class="action" href="#">Call to action</a>
+      <img
+        src="https://live.staticflickr.com/5718/30570616183_8c044d2a85_b.jpg"
+        alt="Enjoy the silence in the red wood forest" />
+    </template>
   </cal-ds-card>
-  <cal-ds-card>Card 9</cal-ds-card>
+</cal-ds-cardgroup>
+
+<cal-ds-cardgroup data-orientation="media-" data-action="interactive">
+  <cal-ds-card>
+    <template>
+      <h2>
+        <a href="#">Card Test 1</a>
+      </h2>
+      <p>This is only a test.</p>
+
+      <img
+        src="https://live.staticflickr.com/5609/15596534729_9c240ff83a_b.jpg"
+        alt="Brown bear" />
+    </template>
+  </cal-ds-card>
+  <cal-ds-card>
+    <template>
+      <h2>
+        <a href="#">Card Test 2</a>
+      </h2>
+      <p>This is only another test.</p>
+
+      <img
+        src="https://live.staticflickr.com/5609/15596534729_9c240ff83a_b.jpg"
+        alt="Brown bear" />
+    </template>
+  </cal-ds-card>
 </cal-ds-cardgroup>

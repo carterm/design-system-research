@@ -4,6 +4,62 @@
     {
       "name": "cal-ds-cardgroup",
       "description": ".html-data.description.md",
+      "attributes": [
+        {
+          "name": "data-action",
+          "description": "determines how the user will interact with card",
+          "values": [
+            {
+              "name": "interactive",
+              "description": "The entire card will be selectable",
+              "references": [
+                {
+                  "name": "Reference - Eureka",
+                  "url": "https://template.webstandards.ca.gov/"
+                }
+              ]
+            }
+          ],
+          "references": [
+            {
+              "name": "Reference - Eureka",
+              "url": "https://template.webstandards.ca.gov/"
+            }
+          ]
+        },
+        {
+          "name": "data-orientation",
+          "description": "determines where the image will be placed",
+          "values": [
+            {
+              "name": "media-",
+              "description": "Image in front",
+              "references": [
+                {
+                  "name": "Reference - Eureka",
+                  "url": "https://template.webstandards.ca.gov/"
+                }
+              ]
+            },
+            {
+              "name": "media-end",
+              "description": "image at end",
+              "references": [
+                {
+                  "name": "Reference - Eureka",
+                  "url": "https://template.webstandards.ca.gov/"
+                }
+              ]
+            }
+          ],
+          "references": [
+            {
+              "name": "Reference - Eureka",
+              "url": "https://template.webstandards.ca.gov/"
+            }
+          ]
+        }
+      ],
       "references": [
         {
           "name": "Reference - Eureka",
