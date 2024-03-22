@@ -23,7 +23,7 @@
     "watch:eleventy": "npx @11ty/eleventy --serve",
     "build:js": "rollup --config rollup.config.mjs",
     "build:eleventy": "npx @11ty/eleventy",
-    "build:html-data": "node build/html-data/ca-eureka.html-data.json.cjs",
+    "build:html-data": "node src/html-data/ca-eureka.html-data.json.cjs",
     "build-npm:cal-ds-nav": "npm run build --prefix components/cal-ds-nav",
     "GIT cleanup": "git clean -fd",
     "stylelint run fix": "npx stylelint '**/*.css' --fix"
