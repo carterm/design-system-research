@@ -1,5 +1,6 @@
 :host {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: flex-start;
+  padding: 0;
+  font-size: 0.85rem;
+
+  --card-spacing: 1.5rem;
 }
