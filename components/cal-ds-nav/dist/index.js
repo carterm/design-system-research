@@ -8,6 +8,7 @@ var CssBaseStyleString = ":host{font-family:system-ui,-apple-system,\"Segoe UI\"
  * @typedef {object} cal_ds_options
  * @property {boolean} [shadow] - Create a shadow DOM?
  * @property {string} [css] - CSS to apply to component
+ * @property {string} [global_css] - CSS to merge into the main DOM
  * @property {string} [html] - HTML to apply to component (Event configurable)
  * @property {() => void} [connectedCallback]
  * @property {(name:string,oldValue:string,newValue:string) => void} [attributeChangedCallback]
@@ -76,6 +77,16 @@ class cal_ds_base extends HTMLElement {
       }
 
       this.dispatchComponentEvent("cal_ds_shadow_constructed_end");
+    }
+
+    if (options.global_css) {
+      //TODO: make this only happen one per unique sheet
+      // Create a new style node
+      const styleSheet = document.createElement("style");
+      styleSheet.innerText = options.global_css;
+
+      // Append the style node to the document head
+      document.head.appendChild(styleSheet);
     }
 
     /***
