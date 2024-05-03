@@ -9,7 +9,7 @@ import cal_ds_accordion from "../../components/cal-ds-accordion/index";
 import cal_ds_cardgroup_wrap from "../../components/cal-ds-cardgroup-wrap/index";
 import cal_ds_card_simple from "../../components/cal-ds-card-simple/index";
 import cal_ds_dev_editor from "../../components/cal-ds-dev-editor/index";
-import cal_ds_banner from "../../components/cal-ds-banner/index";
+import cal_ds_banner from "../../components/cal-ds-banner/src/index";
 
 /**
  * All Components for bundle referencing

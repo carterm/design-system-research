@@ -1,0 +1,50 @@
+{
+  "name": "@cagovweb/cal-ds-banner",
+  "version": "0.0.1-beta2",
+  "description": "cal-ds-banner top banner",
+  "type": "module",
+  "main": "dist/index.js",
+  "homepage": "https://template.webstandards.ca.gov/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/carterm/design-system-research.git",
+    "directory": "src/js/web-components/cal-ds-banner"
+  },
+  "bugs": "https://github.com/carterm/design-system-research/issues",
+  "keywords": [
+    "Banner",
+    "Eureka",
+    "design system",
+    "ca.gov",
+    "California",
+    "State",
+    "CA",
+    "Government",
+    "gov",
+    "Template",
+    "state-template",
+    "ca web template",
+    "CDT",
+    "department of technology",
+    "web component"
+  ],
+  "author": {
+    "name": "Carter Medlin",
+    "email": "carter.medlin@state.ca.gov",
+    "url": "https://github.com/carterm"
+  },
+  "publishConfig": {
+    "access": "public",
+    "tag": "beta"
+  },
+  "license": "ISC",
+  "scripts": {
+    "build": "rollup --config src/rollup.config.mjs",
+    "NPM Publish (dry run)": "npm publish --dry-run",
+    "NPM Publish (view package)": "npm pack",
+    "NPM publish": "npm publish",
+    "NPM mark latest": "npm dist-tag add @cagovweb/cal-ds-banner@0.0.1-beta2 latest",
+    "NPM remove beta tag": "npm dist-tag rm @cagovweb/cal-ds-banner beta",
+    "NPM deprecate old version": "npm deprecate @cagovweb/cal-ds-banner@0.0.1-beta1 \"Version no longer supported. Upgrade to @latest\""
+  }
+}
