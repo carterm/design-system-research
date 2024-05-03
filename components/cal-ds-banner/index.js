@@ -30,9 +30,17 @@ export default class extends cal_ds_base {
 
         ul.appendChild(dom);
       }
+
+      //Move itself to the top
+      if (document.body.firstElementChild !== this) document.body.prepend(this);
     };
 
-    super({ shadow: true, css, html, connectedCallback: _contentChanged });
+    super({
+      shadow: true,
+      css,
+      html,
+      connectedCallback: _contentChanged
+    });
 
     if (this.UserTemplate) {
       // Callback function to execute when mutations are observed
