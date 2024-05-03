@@ -10,13 +10,33 @@ import css from "./styles.css";
 // @ts-ignore
 import html from "./template.html";
 
-export default class extends cal_ds_base {
+export default class my extends cal_ds_base {
   /** @override */
   static get tagName() {
     return "cal-ds-banner";
   }
 
+  /**
+   * @protected
+   * @override
+   */
+  static get observedAttributes() {
+    return ["data-target"];
+  }
+
   constructor() {
+    /**
+     * @param {string} name
+     */
+    const attributeChangedCallback = name => {
+      switch (name) {
+        case my.observedAttributes[0]: //"data-target":
+          _contentChanged();
+
+          break;
+      }
+    };
+
     const _contentChanged = () => {
       if (this.UserTemplate && this.shadowRoot && this.HTMLTemplateString) {
         this.shadowRoot.innerHTML = this.HTMLTemplateString;
@@ -31,15 +51,22 @@ export default class extends cal_ds_base {
         ul.appendChild(dom);
       }
 
-      //Move itself to the top
-      if (document.body.firstElementChild !== this) document.body.prepend(this);
+      const target = document.querySelector(
+        this.dataset.target || ":scope > body"
+      );
+      if (!target)
+        throw new Error(`Can't find data-target - ${this.dataset.target}`);
+
+      //Move itself to the target
+      if (target.firstElementChild !== this) target.prepend(this);
     };
 
     super({
       shadow: true,
       css,
       html,
-      connectedCallback: _contentChanged
+      connectedCallback: _contentChanged,
+      attributeChangedCallback
     });
 
     if (this.UserTemplate) {

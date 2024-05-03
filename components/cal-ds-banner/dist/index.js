@@ -223,21 +223,41 @@ class cal_ds_base extends HTMLElement {
   }
 }
 
-var css = ".alert-section{background-color:#fdbc5b;border:none;min-height:2rem;}.alert-container{> p{margin-top:0;margin-bottom:0;font-size:1.4rem;a{color:#0057ad;text-decoration:underline;&:hover,&:focus{color:#20367c;text-decoration:none;}&:focus{outline:2px solid #0057ad;}}}> svg{width:1rem;height:1rem;enable-background:new 0 0 18 17.6;}@media (width >= 576px){max-width:576px!important;}@media (width >= 768px){max-width:768px!important;}@media (width >= 992px){max-width:992px!important;}@media (width >= 1200px){max-width:1200px!important;}@media (width >= 1280px){max-width:1280px!important;}display:flex;gap:5px;align-items:center;margin-right:auto;margin-left:auto;padding-left:15px;padding-right:15px;padding-top:0.5rem;padding-bottom:0.5rem;width:100%;max-width:1280px;font-family:\"Noto Sans\",system-ui,-apple-system,\"Segoe UI\",Roboto,\"Helvetica Neue\",sans-serif;}";
+var css = ":host > div{background-color:#fdbc5b;border:none;min-height:2rem;> div{display:flex;gap:0.3rem;align-items:center;margin:0 auto;padding:0.5rem 1rem;width:100%;max-width:1280px;font-family:\"Noto Sans\",system-ui,-apple-system,\"Segoe UI\",Roboto,\"Helvetica Neue\",sans-serif;> p{margin:0;font-size:1.4rem;a{color:#0057ad;text-decoration:underline;&:hover,&:focus{color:#20367c;text-decoration:none;}&:focus{outline:2px solid #0057ad;}}}@media (width >= 576px){max-width:576px!important;}@media (width >= 768px){max-width:768px!important;}@media (width >= 992px){max-width:992px!important;}@media (width >= 1200px){max-width:1200px!important;}@media (width >= 1280px){max-width:1280px!important;}}}";
 
-var html = "<div class=\"alert-section\"> <div class=\"alert-container\"> <svg class=\"alert-icon-red\" aria-hidden=\"true\" version=\"1.1\" id=\"Layer_1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" x=\"0px\" y=\"0px\" viewBox=\"0 0 18 17.6\" xml:space=\"preserve\"> <style type=\"text/css\"> .st0{fill:url(#SVGID_1_);} </style> <g> <radialGradient id=\"SVGID_1_\" cx=\"7.6553\" cy=\"6.5485\" r=\"7.5719\" gradientUnits=\"userSpaceOnUse\"> <stop offset=\"0.4356\" style=\"stop-color:#FF0000\"/> <stop offset=\"0.8402\" style=\"stop-color:#AB0000\"/> </radialGradient> <circle class=\"st0\" cx=\"9\" cy=\"8.7\" r=\"8\"/> </g> </svg> <p></p> </div> </div> ";
+var html = "<div> <div> <svg aria-hidden=\"true\" version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" x=\"0px\" y=\"0px\" viewBox=\"0 0 18 17.6\" style=\"width: 1rem; height: 1rem;\"> <g> <radialGradient id=\"SVGID_1_\" cx=\"7.6553\" cy=\"6.5485\" r=\"7.5719\" gradientUnits=\"userSpaceOnUse\"> <stop offset=\"0.4356\" style=\"stop-color:#FF0000\"/> <stop offset=\"0.8402\" style=\"stop-color:#AB0000\"/> </radialGradient> <circle style=\"fill:url(#SVGID_1_);\" cx=\"9\" cy=\"8.7\" r=\"8\"/> </g> </svg> <p></p> </div> </div> ";
 
 // from
 // https://www.cssscript.com/create-a-multi-level-drop-down-menu-with-pure-css/
 
 
-class my_component extends cal_ds_base {
+class my extends cal_ds_base {
   /** @override */
   static get tagName() {
     return "cal-ds-banner";
   }
 
+  /**
+   * @protected
+   * @override
+   */
+  static get observedAttributes() {
+    return ["data-target"];
+  }
+
   constructor() {
+    /**
+     * @param {string} name
+     */
+    const attributeChangedCallback = name => {
+      switch (name) {
+        case my.observedAttributes[0]: //"data-target":
+          _contentChanged();
+
+          break;
+      }
+    };
+
     const _contentChanged = () => {
       if (this.UserTemplate && this.shadowRoot && this.HTMLTemplateString) {
         this.shadowRoot.innerHTML = this.HTMLTemplateString;
@@ -252,15 +272,22 @@ class my_component extends cal_ds_base {
         ul.appendChild(dom);
       }
 
-      //Move itself to the top
-      if (document.body.firstElementChild !== this) document.body.prepend(this);
+      const target = document.querySelector(
+        this.dataset.target || ":scope > body"
+      );
+      if (!target)
+        throw new Error(`Can't find data-target - ${this.dataset.target}`);
+
+      //Move itself to the target
+      if (target.firstElementChild !== this) target.prepend(this);
     };
 
     super({
       shadow: true,
       css,
       html,
-      connectedCallback: _contentChanged
+      connectedCallback: _contentChanged,
+      attributeChangedCallback
     });
 
     if (this.UserTemplate) {
@@ -290,7 +317,7 @@ class my_component extends cal_ds_base {
 //comment out any elements you are not using
 //Definition order matters!!!  Code will run in this order
 
-const my_bundle = [my_component];
+const my_bundle = [my];
 
 for (const c of my_bundle) {
   //sync "for", to ensure define order

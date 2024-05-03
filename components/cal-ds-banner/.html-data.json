@@ -4,7 +4,18 @@
     {
       "name": "cal-ds-banner",
       "description": "README.md",
-      "attributes": [],
+      "attributes": [
+        {
+          "name": "data-target",
+          "description": "a query for where this banner should be placed instead of top of BODY.",
+          "references": [
+            {
+              "name": "Reference - Eureka",
+              "url": "https://template.webstandards.ca.gov/"
+            }
+          ]
+        }
+      ],
 
       "references": [
         {
