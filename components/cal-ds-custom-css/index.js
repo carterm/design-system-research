@@ -14,10 +14,8 @@ export default class my extends cal_ds_base {
     cal_ds_base.addCEventListener("cal_ds_shadow_constructed_end", comp => {
       // expecting <template><style>
 
-      const myTemplate = this.querySelector("template");
-
-      if (myTemplate) {
-        const style = myTemplate.content.querySelector("style");
+      if (this.UserTemplate) {
+        const style = this.UserTemplate.querySelector("style");
 
         if (style) {
           comp.addStyle(style.innerHTML);
