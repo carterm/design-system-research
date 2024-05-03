@@ -24,3 +24,11 @@ Banner for the top of any page
       </template>
     </cal-ds-banner>
 ```
+
+## Try this on any page on the web!
+
+Place this in the web console
+
+```javascript
+document.head.appendChild(Object.assign(document.createElement("script"), {src: "https://cdn.jsdelivr.net/npm/@cagovweb/cal-ds-banner",type:"module"}));document.body.innerHTML += `<cal-ds-banner><template><strong>Live now:</strong> Press conference | <a href="">Priorities</a></template></cal-ds-banner>`;
+```
