@@ -77,6 +77,13 @@ export default class cal_ds_base extends HTMLElement {
 
       this.dispatchComponentEvent("cal_ds_shadow_constructed_end");
     }
+
+    /***
+     * The TEMPLATE tag inside the component
+     * @public
+     * @type {DocumentFragment | undefined}
+     */
+    this.UserTemplate = this.querySelector("template")?.content;
   }
 
   /**
