@@ -18,18 +18,20 @@
       }
     </style>
   </head>
-  <body>
-    <h1>{{ title }}</h1>
-    <p>{{ description }}</p>
-
+  <body style="margin:0">
+    <p style="background-color: blue; color:white; margin: 0">TOP</p>
     <cal-ds-nav>
       <template>
         <a href="/">Home</a>
         <a href="/accordion/">Accordion</a>
         <a href="/cards/">Cards</a>
         <a href="/editor/">Editor</a>
+        <a href="/banner/">Banner</a>
       </template>
     </cal-ds-nav>
+
+    <h1>{{ title }}</h1>
+    <p>{{ description }}</p>
 
     <cal-ds-seo
       data-title="{{ title }}"

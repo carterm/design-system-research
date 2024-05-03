@@ -13,49 +13,34 @@ import html from "./template.html";
 export default class extends cal_ds_base {
   /** @override */
   static get tagName() {
-    return "cal-ds-nav";
+    return "cal-ds-banner";
   }
 
   constructor() {
     const _contentChanged = () => {
-      if (this.UserTemplate && this.shadowRoot) {
-        this.shadowRoot.innerHTML = html;
+      if (this.UserTemplate && this.shadowRoot && this.HTMLTemplateString) {
+        this.shadowRoot.innerHTML = this.HTMLTemplateString;
 
+        const ul = /** @type {HTMLElement} */ (
+          this.shadowRoot.querySelector("p")
+        );
         const dom = /** @type {DocumentFragment} */ (
           this.UserTemplate.cloneNode(true)
         );
 
-        const ul = /** @type {HTMLElement} */ (
-          this.shadowRoot.querySelector("ul")
-        );
         ul.appendChild(dom);
-
-        const anchors = ul.querySelectorAll("a");
-
-        anchors.forEach(a => {
-          const li = document.createElement("li");
-          li.role = "menuitem";
-
-          a.parentElement?.appendChild(li);
-          li.appendChild(a);
-
-          const validUrl = (/** @type {string} */ href) => {
-            try {
-              return new URL(a.href, window.location.origin).href;
-            } catch (e) {
-              return href;
-            }
-          };
-
-          if (validUrl(a.href) === window.location.href) {
-            a.ariaCurrent = "page";
-            a.tabIndex = -1;
-          }
-        });
       }
+
+      //Move itself to the top
+      if (document.body.firstElementChild !== this) document.body.prepend(this);
     };
 
-    super({ shadow: true, css, connectedCallback: _contentChanged });
+    super({
+      shadow: true,
+      css,
+      html,
+      connectedCallback: _contentChanged
+    });
 
     if (this.UserTemplate) {
       // Callback function to execute when mutations are observed

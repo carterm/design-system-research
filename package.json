@@ -25,6 +25,7 @@
     "build:eleventy": "npx @11ty/eleventy",
     "build:html-data": "node src/html-data/ca-eureka.html-data.json.cjs",
     "build-npm:cal-ds-nav": "npm run build --prefix components/cal-ds-nav",
+    "build-npm:cal-ds-banner": "npm run build --prefix components/cal-ds-banner",
     "GIT cleanup": "git clean -fd",
     "stylelint run fix": "npx stylelint '**/*.css' --fix"
   },

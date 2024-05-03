@@ -223,9 +223,9 @@ class cal_ds_base extends HTMLElement {
   }
 }
 
-var css = ":host > nav{background-color:var(--gov-header);padding-bottom:0.03rem;> ul{display:flex;list-style:none;> li{> a{color:var(--text-white);text-decoration:none;font-size:0.9rem;margin-right:2.5rem;&[aria-current=\"page\"]{pointer-events:none;text-decoration:solid underline var(--action-primary) 0.3rem;}&:hover{background-color:var(--brand-hover-dark);}}}}}";
+var css = ".alert-section{background-color:#fdbc5b;border:none;min-height:2rem;}.alert-container{> p{margin-top:0;margin-bottom:0;font-size:1.4rem;a{color:#0057ad;text-decoration:underline;&:hover,&:focus{color:#20367c;text-decoration:none;}&:focus{outline:2px solid #0057ad;}}}> svg{width:1rem;height:1rem;enable-background:new 0 0 18 17.6;}@media (width >= 576px){max-width:576px!important;}@media (width >= 768px){max-width:768px!important;}@media (width >= 992px){max-width:992px!important;}@media (width >= 1200px){max-width:1200px!important;}@media (width >= 1280px){max-width:1280px!important;}display:flex;gap:5px;align-items:center;margin-right:auto;margin-left:auto;padding-left:15px;padding-right:15px;padding-top:0.5rem;padding-bottom:0.5rem;width:100%;max-width:1280px;font-family:\"Noto Sans\",system-ui,-apple-system,\"Segoe UI\",Roboto,\"Helvetica Neue\",sans-serif;}";
 
-var html = "<nav role=\"navigation\"> <ul role=\"menubar\"></ul> </nav> ";
+var html = "<div class=\"alert-section\"> <div class=\"alert-container\"> <svg class=\"alert-icon-red\" aria-hidden=\"true\" version=\"1.1\" id=\"Layer_1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" x=\"0px\" y=\"0px\" viewBox=\"0 0 18 17.6\" xml:space=\"preserve\"> <style type=\"text/css\"> .st0{fill:url(#SVGID_1_);} </style> <g> <radialGradient id=\"SVGID_1_\" cx=\"7.6553\" cy=\"6.5485\" r=\"7.5719\" gradientUnits=\"userSpaceOnUse\"> <stop offset=\"0.4356\" style=\"stop-color:#FF0000\"/> <stop offset=\"0.8402\" style=\"stop-color:#AB0000\"/> </radialGradient> <circle class=\"st0\" cx=\"9\" cy=\"8.7\" r=\"8\"/> </g> </svg> <p></p> </div> </div> ";
 
 // from
 // https://www.cssscript.com/create-a-multi-level-drop-down-menu-with-pure-css/
@@ -234,49 +234,34 @@ var html = "<nav role=\"navigation\"> <ul role=\"menubar\"></ul> </nav> ";
 class my_component extends cal_ds_base {
   /** @override */
   static get tagName() {
-    return "cal-ds-nav";
+    return "cal-ds-banner";
   }
 
   constructor() {
     const _contentChanged = () => {
-      if (this.UserTemplate && this.shadowRoot) {
-        this.shadowRoot.innerHTML = html;
+      if (this.UserTemplate && this.shadowRoot && this.HTMLTemplateString) {
+        this.shadowRoot.innerHTML = this.HTMLTemplateString;
 
+        const ul = /** @type {HTMLElement} */ (
+          this.shadowRoot.querySelector("p")
+        );
         const dom = /** @type {DocumentFragment} */ (
           this.UserTemplate.cloneNode(true)
         );
 
-        const ul = /** @type {HTMLElement} */ (
-          this.shadowRoot.querySelector("ul")
-        );
         ul.appendChild(dom);
-
-        const anchors = ul.querySelectorAll("a");
-
-        anchors.forEach(a => {
-          const li = document.createElement("li");
-          li.role = "menuitem";
-
-          a.parentElement?.appendChild(li);
-          li.appendChild(a);
-
-          const validUrl = (/** @type {string} */ href) => {
-            try {
-              return new URL(a.href, window.location.origin).href;
-            } catch (e) {
-              return href;
-            }
-          };
-
-          if (validUrl(a.href) === window.location.href) {
-            a.ariaCurrent = "page";
-            a.tabIndex = -1;
-          }
-        });
       }
+
+      //Move itself to the top
+      if (document.body.firstElementChild !== this) document.body.prepend(this);
     };
 
-    super({ shadow: true, css, connectedCallback: _contentChanged });
+    super({
+      shadow: true,
+      css,
+      html,
+      connectedCallback: _contentChanged
+    });
 
     if (this.UserTemplate) {
       // Callback function to execute when mutations are observed
