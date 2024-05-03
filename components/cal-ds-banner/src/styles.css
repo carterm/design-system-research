@@ -67,27 +67,22 @@
   margin-bottom: 0;
   font-size: 1.4rem;
 }
-.alert-link {
+
+a {
   color: #0057ad;
   text-decoration: underline;
-}
 
-.alert-link:hover,
-.alert-link:focus {
-  color: #20367c;
-  text-decoration: none;
-}
-
-.alert-link:focus {
-  outline: 2px solid #0057ad;
-}
-
-.bold {
-  font-weight: bold;
-}
-
-@media (min-width: 1280px) {
-  .alert-container {
-    max-width: 1280px !important;
+  &:hover,
+  &:focus {
+    color: #20367c;
+    text-decoration: none;
   }
+
+  &:focus {
+    outline: 2px solid #0057ad;
+  }
+}
+
+strong {
+  font-weight: bold;
 }
