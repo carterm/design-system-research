@@ -223,9 +223,9 @@ class cal_ds_base extends HTMLElement {
   }
 }
 
-var css = ":host > p{background-color:red;margin:0;}";
+var css = ".alert-section{background-color:#fdbc5b;border:none;min-height:2rem;}.alert-container{display:flex;gap:5px;align-items:center;margin-right:auto;margin-left:auto;padding-left:15px;padding-right:15px;padding-top:0.5rem;padding-bottom:0.5rem;width:100%;max-width:1280px;font-family:\"Noto Sans\",system-ui,-apple-system,\"Segoe UI\",\"Roboto\",\"Helvetica Neue\",\"Noto Sans\",sans-serif;}@media (min-width:576px){.alert-container{max-width:576px!important;}}@media (min-width:768px){.alert-container{max-width:768px!important;}}@media (min-width:992px){.alert-container{max-width:992px!important;}}@media (min-width:1200px){.alert-container{max-width:1200px!important;}}@media (min-width:1280px){.alert-container{max-width:1280px!important;}}.alert-icon-red{width:1rem;height:1rem;}.alert-text{margin-top:0;margin-bottom:0;font-size:1.4rem;}.alert-link{color:#0057ad;text-decoration:underline;}.alert-link:hover,.alert-link:focus{color:#20367c;text-decoration:none;}.alert-link:focus{outline:2px solid #0057ad;}.bold{font-weight:bold;}@media (min-width:1280px){.alert-container{max-width:1280px!important;}}";
 
-var html = "<p></p> ";
+var html = "<div class=\"alert-section\"> <div class=\"alert-container\"> <?xml version=\"1.0\" encoding=\"utf-8\"?> <svg class=\"alert-icon-red\" aria-hidden=\"true\" version=\"1.1\" id=\"Layer_1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" x=\"0px\" y=\"0px\" viewBox=\"0 0 18 17.6\" style=\"enable-background:new 0 0 18 17.6;\" xml:space=\"preserve\"> <style type=\"text/css\"> .st0{fill:url(#SVGID_1_);} </style> <g> <radialGradient id=\"SVGID_1_\" cx=\"7.6553\" cy=\"6.5485\" r=\"7.5719\" gradientUnits=\"userSpaceOnUse\"> <stop offset=\"0.4356\" style=\"stop-color:#FF0000\"/> <stop offset=\"0.8402\" style=\"stop-color:#AB0000\"/> </radialGradient> <circle class=\"st0\" cx=\"9\" cy=\"8.7\" r=\"8\"/> </g> </svg> <p class=\"alert-text\"></p> </div> </div> ";
 
 // from
 // https://www.cssscript.com/create-a-multi-level-drop-down-menu-with-pure-css/
