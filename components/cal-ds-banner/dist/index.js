@@ -10,8 +10,9 @@ var CssBaseStyleString = ":host{font-family:system-ui,-apple-system,\"Segoe UI\"
  * @property {string} [css] - CSS to apply to component
  * @property {string} [global_css] - CSS to merge into the main DOM
  * @property {string} [html] - HTML to apply to component (Event configurable)
- * @property {() => void} [connectedCallback]
- * @property {(name:string,oldValue:string,newValue:string) => void} [attributeChangedCallback]
+ * @property {() => void} [connectedCallback] - Callback to use when the component is added to DOM
+ * @property {() => void} [templateChangedCallback] - callback to use when the TEMPLATE content changes
+ * @property {(name:string,oldValue:string,newValue:string) => void} [attributeChangedCallback] - Callback to use when attribute changes
  */
 
 /**
@@ -95,6 +96,22 @@ class cal_ds_base extends HTMLElement {
      * @type {DocumentFragment | undefined}
      */
     this.UserTemplate = this.querySelector("template")?.content;
+    const templateChangedCallback = options.templateChangedCallback;
+
+    if (this.UserTemplate && templateChangedCallback) {
+      // Create an observer instance linked to the callback function
+      const observer = new MutationObserver(mutationsList =>
+        mutationsList.forEach(templateChangedCallback)
+      );
+
+      // Start observing the target node for configured mutations
+      observer.observe(this.UserTemplate, {
+        attributes: true,
+        childList: true,
+        subtree: true,
+        characterData: true
+      });
+    }
   }
 
   /**
@@ -287,27 +304,9 @@ class my extends cal_ds_base {
       css,
       html,
       connectedCallback: _contentChanged,
+      templateChangedCallback: _contentChanged,
       attributeChangedCallback
     });
-
-    if (this.UserTemplate) {
-      // Callback function to execute when mutations are observed
-      // eslint-disable-next-line jsdoc/no-undefined-types
-      /** @type {MutationCallback} */
-      const mutationCallback = mutationsList =>
-        mutationsList.forEach(_contentChanged);
-
-      // Create an observer instance linked to the callback function
-      const observer = new MutationObserver(mutationCallback);
-
-      // Start observing the target node for configured mutations
-      observer.observe(this.UserTemplate, {
-        attributes: true,
-        childList: true,
-        subtree: true,
-        characterData: true
-      });
-    }
   }
 }
 

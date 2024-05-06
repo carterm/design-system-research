@@ -2,7 +2,7 @@
 // https://www.cssscript.com/create-a-multi-level-drop-down-menu-with-pure-css/
 
 //@ts-check
-import cal_ds_base from "../../_cal-ds-base/src/index";
+import cal_ds_base from "../node_modules/@cagovweb/cal-ds-base/src/index.js";
 
 // @ts-ignore
 import css from "./styles.css";
