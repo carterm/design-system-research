@@ -2,7 +2,7 @@
 // https://www.cssscript.com/create-a-multi-level-drop-down-menu-with-pure-css/
 
 //@ts-check
-import cal_ds_base from "../_cal-ds-base/index";
+import cal_ds_base from "../_cal-ds-base/src/index";
 
 // @ts-ignore
 import html from "./template.html";
@@ -62,7 +62,6 @@ export default class my extends cal_ds_base {
       };
 
     const _keylistener = () => {
-      console.log("key");
       if (this._target) {
         this._target.innerHTML = this._textarea.value;
       }
