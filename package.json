@@ -26,6 +26,7 @@
     "build:html-data": "node src/html-data/ca-eureka.html-data.json.cjs",
     "build-npm:cal-ds-nav": "npm run build --prefix components/cal-ds-nav",
     "build-npm:cal-ds-banner": "npm run build --prefix components/cal-ds-banner",
+    "build-npm:cal-ds-base": "npm run build --prefix components/_cal-ds-base",
     "GIT cleanup": "git clean -fd",
     "stylelint run fix": "npx stylelint '**/*.css' --fix"
   },

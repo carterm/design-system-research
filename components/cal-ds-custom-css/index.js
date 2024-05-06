@@ -1,5 +1,5 @@
 //@ts-check
-import cal_ds_base from "../_cal-ds-base/index";
+import cal_ds_base from "../_cal-ds-base/src/index";
 
 export default class my extends cal_ds_base {
   /** @override */

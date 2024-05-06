@@ -1,6 +1,6 @@
 //@ts-check
 
-import cal_ds_base from "../../components/_cal-ds-base/index";
+import cal_ds_base from "../../components/_cal-ds-base/src/index";
 import cal_ds_custom_css from "../../components/cal-ds-custom-css/index";
 import cal_ds_seo from "../../components/cal-ds-seo/index";
 import cal_ds_nav from "../../components/cal-ds-nav/src/index";
