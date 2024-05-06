@@ -7,7 +7,7 @@
   "homepage": "https://template.webstandards.ca.gov/",
   "repository": {
     "type": "git",
-    "url": "https://github.com/carterm/design-system-research.git",
+    "url": "git+https://github.com/carterm/design-system-research.git",
     "directory": "src/js/web-components/_cal-ds-base"
   },
   "bugs": "https://github.com/carterm/design-system-research/issues",
