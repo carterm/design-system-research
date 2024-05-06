@@ -62,7 +62,6 @@ export default class my extends cal_ds_base {
       };
 
     const _keylistener = () => {
-      console.log("key");
       if (this._target) {
         this._target.innerHTML = this._textarea.value;
       }
