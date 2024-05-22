@@ -44,13 +44,14 @@ export default class my extends cal_ds_base {
     const summary_Height = /** @type {HTMLElement} */ (
       detail.querySelector(":scope > summary")
     ).clientHeight;
+    setOnlyIfChanged("--collapsed", summary_Height);
 
-    const allKids_Height = [...detail.querySelectorAll(":scope > *")]
-      .map(x => /** @type {HTMLElement} */ (x).offsetHeight)
-      .reduce((a, b) => a + b, 0);
-
-    if (detail.open) setOnlyIfChanged("--expanded", allKids_Height);
-    else setOnlyIfChanged("--collapsed", summary_Height);
+    if (detail.open) {
+      const allKids_Height = [...detail.querySelectorAll(":scope > *")]
+        .map(x => /** @type {HTMLElement} */ (x).offsetHeight)
+        .reduce((a, b) => a + b, 0);
+      setOnlyIfChanged("--expanded", allKids_Height);
+    }
   };
 
   /**
