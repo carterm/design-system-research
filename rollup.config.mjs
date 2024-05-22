@@ -25,16 +25,20 @@ export default function () {
   // @ts-ignore
   const plugins = [terser(terserOptions)];
 
+  /** @type {import("html-minifier").Options} **/
+  const htmlMinifierOptions = {
+    collapseWhitespace: true,
+    collapseBooleanAttributes: true,
+    conservativeCollapse: true,
+    minifyJS: true,
+    removeComments: true
+  };
+
   return {
     plugins: [
       css({ minify: true, modules: false }),
       htmlString({
-        htmlMinifierOptions: {
-          collapseWhitespace: true,
-          collapseBooleanAttributes: true,
-          conservativeCollapse: true,
-          minifyJS: true
-        }
+        htmlMinifierOptions
       })
     ],
     input: "src/js/bundle.js",
