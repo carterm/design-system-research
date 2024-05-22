@@ -89,6 +89,20 @@ export default class my extends cal_ds_base {
     const connectedCallback = () => {
       window.setTimeout(() => {
         my._setSizes(/** @type {HTMLDetailsElement} */ (detail));
+
+        const shouldBeOpen =
+          (this.dataset.expanded ?? "false").trim().toLowerCase() !== "false";
+        console.log(shouldBeOpen);
+        if (this._details.open !== shouldBeOpen) {
+          this._details.open = shouldBeOpen;
+        }
+
+        detail.addEventListener("toggle", () => {
+          console.log("toggle");
+          this.dataset.expanded = detail.open.toString();
+        });
+
+        this.connectedCallbackCalled = true;
       });
     };
 
@@ -103,11 +117,12 @@ export default class my extends cal_ds_base {
           // data-expanded
           const shouldBeOpen =
             (newValue ?? "false").trim().toLowerCase() !== "false";
-
-          if (this._details.open !== shouldBeOpen) {
-            window.setTimeout(() => {
-              this._details.open = shouldBeOpen;
-            }, 1);
+          console.log(shouldBeOpen);
+          if (
+            this.connectedCallbackCalled &&
+            this._details.open !== shouldBeOpen
+          ) {
+            this._details.open = shouldBeOpen;
           }
 
           break;
@@ -123,12 +138,10 @@ export default class my extends cal_ds_base {
       connectedCallback
     });
 
+    this.connectedCallbackCalled = false;
+
     const detail = this._details;
 
     my._observeResize(detail);
-
-    detail.addEventListener("toggle", () => {
-      this.dataset.expanded = detail.open.toString();
-    });
   }
 }
