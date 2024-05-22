@@ -31,12 +31,12 @@ export default class my extends cal_ds_base {
      * @param {string} prop
      * @param {number} value
      */
-    const setOnlyIfBigger = (prop, value) => {
+    const setOnlyIfChanged = (prop, value) => {
       const numValue = Number(
         detail.style.getPropertyValue(prop).replace("px", "")
       );
 
-      if (value > numValue) {
+      if (value !== numValue) {
         detail.style.setProperty(prop, `${value}px`);
       }
     };
@@ -49,8 +49,8 @@ export default class my extends cal_ds_base {
       .map(x => /** @type {HTMLElement} */ (x).offsetHeight)
       .reduce((a, b) => a + b, 0);
 
-    setOnlyIfBigger("--collapsed", summary_Height);
-    setOnlyIfBigger("--expanded", allKids_Height);
+    if (detail.open) setOnlyIfChanged("--expanded", allKids_Height);
+    else setOnlyIfChanged("--collapsed", summary_Height);
   };
 
   /**
@@ -85,6 +85,12 @@ export default class my extends cal_ds_base {
   }
 
   constructor() {
+    const connectedCallback = () => {
+      window.setTimeout(() => {
+        my._setSizes(/** @type {HTMLDetailsElement} */ (detail));
+      });
+    };
+
     /**
      * @param {string} name
      * @param {string} _oldValue
@@ -92,11 +98,19 @@ export default class my extends cal_ds_base {
      */
     const attributeChangedCallback = (name, _oldValue, newValue) => {
       switch (name) {
-        case my.observedAttributes[0]: //"data-expanded":
-          this._details.open =
+        case my.observedAttributes[0]: {
+          // data-expanded
+          const shouldBeOpen =
             (newValue ?? "false").trim().toLowerCase() !== "false";
 
+          if (this._details.open !== shouldBeOpen) {
+            window.setTimeout(() => {
+              this._details.open = shouldBeOpen;
+            }, 1);
+          }
+
           break;
+        }
       }
     };
 
@@ -104,17 +118,13 @@ export default class my extends cal_ds_base {
       shadow: true,
       css,
       html,
-      attributeChangedCallback
+      attributeChangedCallback,
+      connectedCallback
     });
 
     const detail = this._details;
 
     my._observeResize(detail);
-
-    detail.addEventListener("transitionstart", e => {
-      //Sets the size right as the animation starts
-      if (e.target === detail) my._setSizes(detail);
-    });
 
     detail.addEventListener("toggle", () => {
       this.dataset.expanded = detail.open.toString();
