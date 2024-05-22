@@ -31,11 +31,13 @@ export default class my extends cal_ds_base {
      * @param {string} prop
      * @param {number} value
      */
-    const setOnlyIfChanged = (prop, value) => {
-      const pxvalue = `${value}px`;
+    const setOnlyIfBigger = (prop, value) => {
+      const numValue = Number(
+        detail.style.getPropertyValue(prop).replace("px", "")
+      );
 
-      if (detail.style.getPropertyValue(prop) !== pxvalue) {
-        detail.style.setProperty(prop, pxvalue);
+      if (value > numValue) {
+        detail.style.setProperty(prop, `${value}px`);
       }
     };
 
@@ -47,8 +49,8 @@ export default class my extends cal_ds_base {
       .map(x => /** @type {HTMLElement} */ (x).offsetHeight)
       .reduce((a, b) => a + b, 0);
 
-    setOnlyIfChanged("--collapsed", summary_Height);
-    setOnlyIfChanged("--expanded", allKids_Height);
+    setOnlyIfBigger("--collapsed", summary_Height);
+    setOnlyIfBigger("--expanded", allKids_Height);
   };
 
   /**
