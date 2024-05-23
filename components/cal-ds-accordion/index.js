@@ -92,15 +92,15 @@ export default class my extends cal_ds_base {
 
         _setOpenToMatchProperty();
 
-        detail.addEventListener(
-          "toggle",
-          () => (this.dataset.expanded = detail.open.toString())
-        );
+        detail.addEventListener("toggle", () => {
+          this.dataset.expanded = detail.open.toString();
+        });
 
         _connectedCallbackCalled = true;
       });
 
     const attributeChangedCallback = () => {
+      // for data-expanded
       if (_connectedCallbackCalled) _setOpenToMatchProperty();
     };
 
