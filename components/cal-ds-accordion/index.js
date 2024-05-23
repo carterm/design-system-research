@@ -86,40 +86,22 @@ export default class my extends cal_ds_base {
   }
 
   constructor() {
-    const connectedCallback = () => {
+    const connectedCallback = () =>
       window.setTimeout(() => {
         my._setSizes(detail);
 
-        detail.open =
-          (this.dataset.expanded ?? "false").trim().toLowerCase() !== "false";
+        _setOpenToMatchProperty();
 
-        detail.addEventListener("toggle", () => {
-          this.dataset.expanded = detail.open.toString();
-        });
+        detail.addEventListener(
+          "toggle",
+          () => (this.dataset.expanded = detail.open.toString())
+        );
 
         _connectedCallbackCalled = true;
       });
-    };
 
-    /**
-     * @param {string} name
-     * @param {string} _oldValue
-     * @param {string} newValue
-     */
-    const attributeChangedCallback = (name, _oldValue, newValue) => {
-      switch (name) {
-        case my.observedAttributes[0]: {
-          // data-expanded
-          const shouldBeOpen =
-            (newValue ?? "false").trim().toLowerCase() !== "false";
-
-          if (_connectedCallbackCalled && detail.open !== shouldBeOpen) {
-            detail.open = shouldBeOpen;
-          }
-
-          break;
-        }
-      }
+    const attributeChangedCallback = () => {
+      if (_connectedCallbackCalled) _setOpenToMatchProperty();
     };
 
     super({
@@ -129,6 +111,13 @@ export default class my extends cal_ds_base {
       attributeChangedCallback,
       connectedCallback
     });
+
+    const _setOpenToMatchProperty = () => {
+      const shouldBeOpen =
+        (this.dataset.expanded ?? "false").trim().toLowerCase() !== "false";
+
+      if (detail.open !== shouldBeOpen) detail.open = shouldBeOpen;
+    };
 
     const detail = this._details;
     let _connectedCallbackCalled = false;
