@@ -90,15 +90,10 @@ export default class my extends cal_ds_base {
       window.setTimeout(() => {
         my._setSizes(/** @type {HTMLDetailsElement} */ (detail));
 
-        const shouldBeOpen =
+        detail.open =
           (this.dataset.expanded ?? "false").trim().toLowerCase() !== "false";
-        console.log(shouldBeOpen);
-        if (this._details.open !== shouldBeOpen) {
-          this._details.open = shouldBeOpen;
-        }
 
         detail.addEventListener("toggle", () => {
-          console.log("toggle");
           this.dataset.expanded = detail.open.toString();
         });
 
@@ -117,12 +112,9 @@ export default class my extends cal_ds_base {
           // data-expanded
           const shouldBeOpen =
             (newValue ?? "false").trim().toLowerCase() !== "false";
-          console.log(shouldBeOpen);
-          if (
-            this.connectedCallbackCalled &&
-            this._details.open !== shouldBeOpen
-          ) {
-            this._details.open = shouldBeOpen;
+
+          if (this.connectedCallbackCalled && detail.open !== shouldBeOpen) {
+            detail.open = shouldBeOpen;
           }
 
           break;
