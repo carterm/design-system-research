@@ -32,11 +32,11 @@ export default class my extends cal_ds_base {
      * @param {number} value
      */
     const setOnlyIfChanged = (prop, value) => {
-      const numValue = Number(
+      const oldValue = Number(
         detail.style.getPropertyValue(prop).replace("px", "")
       );
 
-      if (value !== numValue) {
+      if (value !== oldValue) {
         detail.style.setProperty(prop, `${value}px`);
       }
     };
@@ -70,9 +70,9 @@ export default class my extends cal_ds_base {
     if (!my._resizeObserver) {
       // This declaration will only happen once for all controls
       my._resizeObserver = new ResizeObserver(entries =>
-        entries.forEach(entry => {
-          my._setSizes(/** @type {HTMLDetailsElement} */ (entry.target));
-        })
+        entries.forEach(entry =>
+          my._setSizes(/** @type {HTMLDetailsElement} */ (entry.target))
+        )
       );
     }
     my._resizeObserver.observe(target);
@@ -88,7 +88,7 @@ export default class my extends cal_ds_base {
   constructor() {
     const connectedCallback = () => {
       window.setTimeout(() => {
-        my._setSizes(/** @type {HTMLDetailsElement} */ (detail));
+        my._setSizes(detail);
 
         detail.open =
           (this.dataset.expanded ?? "false").trim().toLowerCase() !== "false";
@@ -97,7 +97,7 @@ export default class my extends cal_ds_base {
           this.dataset.expanded = detail.open.toString();
         });
 
-        this.connectedCallbackCalled = true;
+        _connectedCallbackCalled = true;
       });
     };
 
@@ -113,7 +113,7 @@ export default class my extends cal_ds_base {
           const shouldBeOpen =
             (newValue ?? "false").trim().toLowerCase() !== "false";
 
-          if (this.connectedCallbackCalled && detail.open !== shouldBeOpen) {
+          if (_connectedCallbackCalled && detail.open !== shouldBeOpen) {
             detail.open = shouldBeOpen;
           }
 
@@ -130,9 +130,8 @@ export default class my extends cal_ds_base {
       connectedCallback
     });
 
-    this.connectedCallbackCalled = false;
-
     const detail = this._details;
+    let _connectedCallbackCalled = false;
 
     my._observeResize(detail);
   }
