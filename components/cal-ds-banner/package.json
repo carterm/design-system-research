@@ -1,6 +1,6 @@
 {
   "name": "@cagovweb/cal-ds-banner",
-  "version": "0.0.1-beta3",
+  "version": "0.0.1-beta4",
   "description": "cal-ds-banner top banner",
   "type": "module",
   "main": "dist/index.js",
