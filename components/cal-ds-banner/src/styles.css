@@ -28,7 +28,7 @@
 
         &:hover,
         &:focus {
-          color: #004972;
+          text-decoration: none;
         }
 
         &:focus {
