@@ -49,5 +49,8 @@
   },
   "dependencies": {
     "@cagovweb/cal-ds-base": "^0.0.1"
+  },
+  "devDependencies": {
+    "@cagovweb/cal-ds-base": "file:../_cal-ds-base"
   }
 }
