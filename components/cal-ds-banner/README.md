@@ -1,6 +1,6 @@
 # `cal-ds-banner`
 
-Banner for the top of any page
+Banner for the top of any page. Place the code anywhere in your HTML and it will move to the top.
 
 ```html
 <html>
