@@ -23,6 +23,7 @@
       margin: 0;
       font-size: 1.144rem;
 
+      /* stylelint-disable-next-line selector-nested-pattern */
       a {
         color: #203673;
 
