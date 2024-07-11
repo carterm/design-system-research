@@ -6,7 +6,7 @@ details {
 
   background-color: var(--background-primary-light);
 
-  > summary {
+  & > summary {
     cursor: pointer;
     padding: 0.5rem 3rem 0.5rem 3.75rem;
     background-color: var(--gray);
@@ -17,7 +17,7 @@ details {
     border: 1px solid var(--gray-text);
     border-radius: 4px;
 
-    > div[aria-hidden]:last-child {
+    & > div[aria-hidden]:last-child {
       position: absolute;
       top: 0.5rem;
       left: 1rem;
@@ -49,7 +49,7 @@ details {
     }
   }
 
-  > :not(summary) {
+  & > :not(summary) {
     padding: 1rem;
     border-radius: 0 0 4px 4px;
     border: 1px solid var(--action-primary);
@@ -64,11 +64,11 @@ details {
     height: var(--expanded);
     overflow: hidden;
 
-    > summary {
+    & > summary {
       border-bottom-left-radius: 0;
       border-bottom-right-radius: 0;
 
-      > div[aria-hidden]:last-child {
+      & > div[aria-hidden]:last-child {
         transform: rotate(90deg);
       }
 
