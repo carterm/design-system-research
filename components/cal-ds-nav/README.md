@@ -22,7 +22,8 @@ Try this anywhere
 Place this in the web console
 
 ```javascript
-document.head.appendChild(Object.assign(document.createElement("script"), {src: "https://cdn.jsdelivr.net/npm/@cagovweb/cal-ds-nav",type:"module"}));document.body.innerHTML = `
+document.head.appendChild(Object.assign(document.createElement("script"), {src: "https://cdn.jsdelivr.net/npm/@cagovweb/cal-ds-nav",type:"module"}));
+document.body.innerHTML = `
 
 <cal-ds-nav>
   <template>
