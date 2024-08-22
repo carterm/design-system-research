@@ -1,0 +1,65 @@
+:host > div {
+  background-color: #fdbc5b;
+  min-height: 2rem;
+
+  > div {
+    display: flex;
+    align-items: baseline;
+    gap: 0.3rem;
+    margin: 0 auto;
+    padding: 0.5rem 1rem;
+    width: 100%;
+    max-width: 1820px;
+    font-family:
+      "Noto Sans",
+      system-ui,
+      -apple-system,
+      "Segoe UI",
+      Roboto,
+      "Helvetica Neue",
+      sans-serif;
+
+    > p {
+      margin: 0;
+      font-size: 1.144rem;
+
+      /* stylelint-disable-next-line selector-nested-pattern */
+      a {
+        color: #203673;
+
+        &:hover,
+        &:focus {
+          text-decoration: none;
+        }
+
+        &:focus {
+          outline: 2px solid #004972;
+        }
+      }
+    }
+
+    @media (width >= 576px) {
+      max-width: 576px !important;
+    }
+
+    @media (width >= 768px) {
+      max-width: 768px !important;
+    }
+
+    @media (width >= 992px) {
+      max-width: 992px !important;
+    }
+
+    @media (width >= 1200px) {
+      max-width: 1200px !important;
+    }
+
+    @media (width >= 1280px) {
+      max-width: 1280px !important;
+    }
+
+    @media (width >= 1400px) {
+      max-width: 1820px !important;
+    }
+  }
+}
