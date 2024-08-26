@@ -252,6 +252,16 @@ header {
     position: sticky;
   }
 
+  /* theme light header */
+  &.theme-light {
+    --banner-bg: var(--white);
+
+    /* stylelint-disable-next-line selector-combinator-allowed-list */
+    & a {
+      --header-link-color: var(--text-dark);
+    }
+  }
+
   > div.site-header {
     background-color: var(--banner-bg);
     border-color: var(--border-color);
@@ -407,6 +417,10 @@ header {
             background-size: 1.125rem 1.125rem;
             background-position: center;
             cursor: pointer;
+
+            &.theme-light {
+              background-image: var(--search-icon-dark);
+            }
           }
         }
 
@@ -444,7 +458,7 @@ header a.login-button {
   display: block;
 }
 
-header a.login-button span.login-text {
+header a.login-button > span.login-text {
   position: absolute;
   overflow: hidden;
   clip: rect(0, 0, 0, 0);
@@ -453,23 +467,10 @@ header a.login-button span.login-text {
   margin: -1px;
 }
 
-/* theme light header */
-header .theme-light {
-  --banner-bg: var(--white);
-}
-
-header .theme-light a {
-  --header-link-color: var(--text-dark);
-}
-
 header .site-header.theme-light .hamburger,
 header .site-header.theme-light .hamburger::before,
 header .site-header.theme-light .hamburger::after {
   --bg: var(--banner-dark);
-}
-
-header .theme-light .search-toggle {
-  background-image: var(--search-icon-dark);
 }
 
 header .theme-light a.login-button {
@@ -486,7 +487,7 @@ header .theme-light button.cagov-toggle {
     position: sticky;
   }
 
-  header .main-navigation-button {
+  header button.main-navigation-button {
     display: none;
   }
 
@@ -516,7 +517,7 @@ header .theme-light button.cagov-toggle {
     display: none;
   }
 
-  header a.login-button span.login-text {
+  header a.login-button > span.login-text {
     position: relative;
     overflow: visible;
     clip: unset;
