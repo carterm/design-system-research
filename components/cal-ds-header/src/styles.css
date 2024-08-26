@@ -435,7 +435,7 @@ header a {
   --header-link-color: var(--white);
 }
 
-header .login-button {
+header a.login-button {
   background-image: var(--login-icon-white);
   background-repeat: no-repeat;
   background-size: 2rem 2rem;
@@ -444,7 +444,7 @@ header .login-button {
   display: block;
 }
 
-header .login-button span.login-text {
+header a.login-button span.login-text {
   position: absolute;
   overflow: hidden;
   clip: rect(0, 0, 0, 0);
@@ -472,7 +472,7 @@ header .theme-light .search-toggle {
   background-image: var(--search-icon-dark);
 }
 
-header .theme-light .login-button {
+header .theme-light a.login-button {
   background-image: var(--login-icon-dark);
 }
 
@@ -490,7 +490,7 @@ header .theme-light button.cagov-toggle {
     display: none;
   }
 
-  header .login-button {
+  header a.login-button {
     background-color: var(--action-secondary);
     border-radius: var(--rounded-buttons);
     padding: var(--space-unit-1)
@@ -500,13 +500,13 @@ header .theme-light button.cagov-toggle {
     font-size: 1.125rem;
   }
 
-  header .login-button,
-  header .theme-light .login-button {
+  header a.login-button,
+  header .theme-light a.login-button {
     background-image: none;
   }
 
-  header .login-button:hover,
-  header .login-button:focus {
+  header a.login-button:hover,
+  header a.login-button:focus {
     color: var(--black);
     background-color: var(--action-secondary-hover);
     box-shadow: 0 4px 4px 0 rgb(0 0 0 / 25%);
@@ -516,7 +516,7 @@ header .theme-light button.cagov-toggle {
     display: none;
   }
 
-  header .login-button span.login-text {
+  header a.login-button span.login-text {
     position: relative;
     overflow: visible;
     clip: unset;
