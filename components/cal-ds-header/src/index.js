@@ -60,6 +60,7 @@ export default class my extends cal_ds_base {
 
     super({
       shadow: true,
+      ignore_base_css: true,
       css,
       html,
       connectedCallback: _contentChanged,
