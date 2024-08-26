@@ -10,6 +10,7 @@ import cal_ds_cardgroup_wrap from "../../components/cal-ds-cardgroup-wrap/index"
 import cal_ds_card_simple from "../../components/cal-ds-card-simple/index";
 import cal_ds_dev_editor from "../../components/cal-ds-dev-editor/index";
 import cal_ds_banner from "../../components/cal-ds-banner/src/index";
+import cal_ds_header from "../../components/cal-ds-header/src/index";
 
 /**
  * All Components for bundle referencing
@@ -24,5 +25,6 @@ export {
   cal_ds_card_simple,
   cal_ds_cardgroup_wrap,
   cal_ds_dev_editor,
-  cal_ds_banner
+  cal_ds_banner,
+  cal_ds_header
 };
