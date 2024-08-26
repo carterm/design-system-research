@@ -322,6 +322,53 @@ header {
           }
         }
       }
+
+      > a.site-logo {
+        display: flex;
+        align-items: flex-start;
+        gap: var(--space-unit-x4);
+        text-decoration: none;
+
+        > img.logo-image {
+          max-width: 100%;
+          min-height: auto;
+          height: clamp(4.5rem, 1.9286rem + 3.8095vw, 6.5rem);
+          object-fit: contain;
+          transform: translateY(var(--space-unit-x2));
+          display: none;
+
+          @media (width >= 1080px) {
+            display: block;
+          }
+
+          &.no-overflow {
+            transform: translateY(0);
+            padding: var(--space-unit-1) 0;
+          }
+        }
+
+        > div.site-branding-text {
+          padding-top: var(--space-unit-x2);
+          padding-bottom: var(--space-unit-x2);
+
+          > span {
+            display: block;
+            letter-spacing: 1px;
+
+            &.state {
+              font-size: clamp(1.5rem, 1.1786rem + 0.4762vw, 1.75rem);
+              font-weight: 600;
+              margin-top: clamp(0rem, -1.2857rem + 1.9048vw, 1rem);
+            }
+
+            &.department {
+              font-size: clamp(1rem, 0.6786rem + 0.4762vw, 1.25rem);
+              font-weight: 400;
+              margin-top: clamp(0.5rem, -0.4643rem + 1.4286vw, 1.25rem);
+            }
+          }
+        }
+      }
     }
   }
 }
@@ -330,50 +377,6 @@ header a {
   color: var(--header-link-color);
 
   --header-link-color: var(--white);
-}
-
-header a.site-logo {
-  display: flex;
-  align-items: flex-start;
-  gap: var(--space-unit-x4);
-  text-decoration: none;
-}
-
-/* logo image */
-header .logo-image {
-  max-width: 100%;
-  min-height: auto;
-  height: clamp(4.5rem, 1.9286rem + 3.8095vw, 6.5rem);
-  object-fit: contain;
-  transform: translateY(var(--space-unit-x2));
-  display: none;
-}
-
-header .logo-image.no-overflow {
-  transform: translateY(0);
-  padding: var(--space-unit-1) 0;
-}
-
-/* logo text */
-header .site-branding-text {
-  padding-top: var(--space-unit-x2);
-  padding-bottom: var(--space-unit-x2);
-}
-
-header .site-branding-text .state {
-  font-size: clamp(1.5rem, 1.1786rem + 0.4762vw, 1.75rem);
-  font-weight: 600;
-  display: block;
-  letter-spacing: 1px;
-  margin-top: clamp(0rem, -1.2857rem + 1.9048vw, 1rem);
-}
-
-header .site-branding-text .department {
-  font-size: clamp(1rem, 0.6786rem + 0.4762vw, 1.25rem);
-  font-weight: 400;
-  display: block;
-  letter-spacing: 1px;
-  margin-top: clamp(0.5rem, -0.4643rem + 1.4286vw, 1.25rem);
 }
 
 /* site header utility links */
@@ -474,10 +477,6 @@ header .theme-light button.cagov-toggle {
 
   header .main-navigation-button {
     display: none;
-  }
-
-  header .logo-image {
-    display: block;
   }
 
   /* site header utility links */
