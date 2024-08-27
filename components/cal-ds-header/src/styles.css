@@ -301,7 +301,7 @@ header {
                 }
 
                 &::-webkit-search-cancel-button {
-                  display: none;
+                  display: none; /* Needed for Safari */
                 }
               }
 
