@@ -278,7 +278,7 @@ header {
           > form > input.search-input {
             outline: 1px solid; /* Needed for Safari */
             border: 0; /* Needed for Safari */
-            width: 2rem;
+            width: 10rem; /* Adjust the expanded width as needed */
             height: 2rem;
             padding-left: 0.5rem; /* Add padding for text input */
             transition:
@@ -286,15 +286,10 @@ header {
               padding 300ms ease;
           }
 
-          &:focus-within > form {
-            > input.search-input {
-              width: 10rem; /* Adjust the expanded width as needed */
-            }
-          }
-
           &:not(:focus-within) > form {
             /* shrink into a search icon */
             > input.search-input {
+              width: 2rem;
               background: transparent var(--search-icon) no-repeat center /
                 1.125rem;
               cursor: pointer;
