@@ -204,10 +204,7 @@ header {
           > div.hamburger {
             transform: rotate(45deg);
 
-            &::before {
-              transform: rotate(90deg) translateX(0);
-            }
-
+            &::before,
             &::after {
               transform: rotate(90deg) translateX(0);
             }
@@ -287,20 +284,13 @@ header {
             width: 2rem;
             height: 2rem;
             border: none;
-            background-color: transparent;
-            background-image: var(--search-icon);
-            background-repeat: no-repeat;
-            background-size: 1.125rem 1.125rem;
-            background-position: center;
-            cursor: pointer;
+            background: transparent var(--search-icon) no-repeat center /
+              1.125rem;
           }
         }
 
         > a.login-button {
-          background-image: var(--login-icon);
-          background-repeat: no-repeat;
-          background-size: 2rem 2rem;
-          background-position: center;
+          background: var(--login-icon) no-repeat center / 2rem;
           padding: var(--space-unit-x2);
           display: block;
 
@@ -323,8 +313,7 @@ header {
           }
 
           @media (min-width: 1080px) {
-            background-image: none;
-            background-color: var(--action-secondary);
+            background: var(--action-secondary);
             border-radius: var(--rounded-buttons);
             padding: var(--space-unit-1)
               calc(var(--space-unit-1) + (30 * ((100vw - 48rem) / 1200)));
@@ -343,12 +332,9 @@ header {
 
         > button.cagov-toggle {
           border: none;
-          background: transparent;
-          background-image: var(--cagov-icon);
-          background-repeat: no-repeat;
+          background: transparent var(--cagov-icon) no-repeat center;
           background-size: clamp(2rem, 0.7143rem + 1.9048vw, 3rem)
             clamp(2rem, 0.7143rem + 1.9048vw, 3rem);
-          background-position: center;
           height: clamp(2rem, 0.7143rem + 1.9048vw, 3rem);
           width: clamp(2rem, 0.7143rem + 1.9048vw, 3rem);
           margin-left: auto;
