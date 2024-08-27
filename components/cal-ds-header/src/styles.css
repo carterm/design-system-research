@@ -437,6 +437,15 @@ header {
             width: 1px;
             height: 1px;
             margin: -1px;
+
+            @media (min-width: 1080px) {
+              position: relative;
+              overflow: visible;
+              clip: unset;
+              width: unset;
+              height: unset;
+              margin: unset;
+            }
           }
 
           @media (min-width: 1080px) {
@@ -454,15 +463,6 @@ header {
               color: var(--black);
               background-color: var(--action-secondary-hover);
               box-shadow: 0 4px 4px 0 rgb(0 0 0 / 25%);
-            }
-
-            > span.login-text {
-              position: relative;
-              overflow: visible;
-              clip: unset;
-              width: unset;
-              height: unset;
-              margin: unset;
             }
           }
         }
