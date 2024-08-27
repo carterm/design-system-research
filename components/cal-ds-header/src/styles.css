@@ -161,7 +161,7 @@ header {
         background: transparent;
         border: none;
         padding: 0;
-        margin: 0 var(--space-unit-1) 0 var(--space-unit-1);
+        margin: 0 var(--space-unit-1);
 
         @media (min-width: 1080px) {
           display: none;
@@ -174,6 +174,7 @@ header {
           transition: all 200ms ease;
           position: relative;
 
+          /* All 3 lines */
           &,
           &::before,
           &::after {
