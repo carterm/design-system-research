@@ -168,17 +168,17 @@ header {
         }
 
         > div.hamburger {
-          width: 100%;
           height: 4px;
-          border-radius: 5px;
-          transition: all 200ms ease;
           position: relative;
 
           /* All 3 lines */
           &,
           &::before,
           &::after {
+            width: 100%;
             background-color: var(--bg);
+            border-radius: 5px;
+            transition: all 200ms ease;
           }
 
           &::before,
@@ -186,10 +186,7 @@ header {
             content: "";
             position: absolute;
             left: 0;
-            width: 100%;
             height: 100%;
-            border-radius: 5px;
-            transition: all 200ms ease;
           }
 
           &::before {
