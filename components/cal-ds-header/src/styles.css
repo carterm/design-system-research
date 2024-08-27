@@ -31,32 +31,32 @@
   --main-dark: #242424;
   --navigation-submenu-dark: #6d6d6d;
   --navigation-submenu-light: #dbdbdb;
-  --utility-dark: #111111;
+  --utility-dark: #111;
   --utility-dark-grey: #494949;
   --utility-mid-grey: #929292;
   --utility-light-grey: #b6b6b6;
   --text-dark: #323232;
-  --text-white: #ffffff;
+  --text-white: #fff;
   --hyperlink-light: #0057ad;
   --hyperlink-activated-light: #8a0071;
   --hyperlink-dark: #87cefa;
   --hyperlink-activated-dark: #f692b9;
-  --white: #ffffff;
-  --gray-10: #eeeeee;
-  --gray-25: #dddddd;
-  --gray-50: #cccccc;
-  --gray-75: #bbbbbb;
-  --gray-100: #aaaaaa;
-  --gray-200: #999999;
-  --gray-300: #888888;
-  --gray-400: #777777;
-  --gray-500: #666666;
-  --gray-600: #555555;
-  --gray-700: #444444;
-  --gray-800: #333333;
-  --gray-900: #222222;
-  --gray-1000: #111111;
-  --black: #000000;
+  --white: #fff;
+  --gray-10: #eee;
+  --gray-25: #ddd;
+  --gray-50: #ccc;
+  --gray-75: #bbb;
+  --gray-100: #aaa;
+  --gray-200: #999;
+  --gray-300: #888;
+  --gray-400: #777;
+  --gray-500: #666;
+  --gray-600: #555;
+  --gray-700: #444;
+  --gray-800: #333;
+  --gray-900: #222;
+  --gray-1000: #111;
+  --black: #000;
 
   /* border variables */
   --border-1px: 1px;
@@ -77,7 +77,7 @@
   --space-unit-x16: calc(0.5rem * 16);
 
   /* typography variables */
-  --font-family: Noto Sans;
+  --font-family: noto sans;
   --text-max-width: 48rem;
   --font-size-base: 1rem;
   --font-weight-base: 400;
@@ -88,7 +88,7 @@
   );
 
   /* small text font  */
-  --small-text: calc(var(--font-size-base-plus-viewport-adjustment) - 0.1em);
+  --small-text: calc(var(--font-size-base-plus-viewport-adjustment) - 0.1rem);
   --small-text-font-weight: 500;
   --small-text-line-height: 2.619;
 
@@ -395,7 +395,7 @@ header {
         align-items: flex-end;
         gap: calc(var(--space-unit-x2) / 1.5);
 
-        @media (width >= 1080px) {
+        @media (min-width: 1080px) {
           gap: var(--space-unit-x4);
         }
 
@@ -422,6 +422,51 @@ header {
           }
         }
 
+        > a.login-button {
+          background-image: var(--login-icon);
+          background-repeat: no-repeat;
+          background-size: 2rem 2rem;
+          background-position: center;
+          padding: var(--space-unit-x2);
+          display: block;
+
+          > span.login-text {
+            position: absolute;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            width: 1px;
+            height: 1px;
+            margin: -1px;
+          }
+
+          @media (min-width: 1080px) {
+            background-image: none;
+            background-color: var(--action-secondary);
+            border-radius: var(--rounded-buttons);
+            padding: var(--space-unit-1)
+              calc(var(--space-unit-1) + (30 * ((100vw - 48rem) / 1200)));
+            text-decoration: none;
+            color: var(--text-dark);
+            font-size: 1.125rem;
+
+            &:hover,
+            &:focus {
+              color: var(--black);
+              background-color: var(--action-secondary-hover);
+              box-shadow: 0 4px 4px 0 rgb(0 0 0 / 25%);
+            }
+
+            > span.login-text {
+              position: relative;
+              overflow: visible;
+              clip: unset;
+              width: unset;
+              height: unset;
+              margin: unset;
+            }
+          }
+        }
+
         > button.cagov-toggle {
           border: none;
           background: transparent;
@@ -438,62 +483,5 @@ header {
         }
       }
     }
-  }
-}
-
-header a {
-  color: var(--header-link-color);
-
-  --header-link-color: var(--white);
-}
-
-header a.login-button {
-  background-image: var(--login-icon);
-  background-repeat: no-repeat;
-  background-size: 2rem 2rem;
-  background-position: center;
-  padding: var(--space-unit-x2);
-  display: block;
-}
-
-header a.login-button > span.login-text {
-  position: absolute;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  width: 1px;
-  height: 1px;
-  margin: -1px;
-}
-
-/* Site header desktop styles */
-@media (min-width: 1080px) {
-  header a.login-button {
-    background-color: var(--action-secondary);
-    border-radius: var(--rounded-buttons);
-    padding: var(--space-unit-1)
-      calc(var(--space-unit-1) + (30 * ((100vw - 48rem) / 1200)));
-    text-decoration: none;
-    color: var(--text-dark);
-    font-size: 1.125rem;
-  }
-
-  header a.login-button {
-    background-image: none;
-  }
-
-  header a.login-button:hover,
-  header a.login-button:focus {
-    color: var(--black);
-    background-color: var(--action-secondary-hover);
-    box-shadow: 0 4px 4px 0 rgb(0 0 0 / 25%);
-  }
-
-  header a.login-button > span.login-text {
-    position: relative;
-    overflow: visible;
-    clip: unset;
-    width: unset;
-    height: unset;
-    margin: unset;
   }
 }
