@@ -295,7 +295,7 @@ header {
               color: transparent;
 
               &::placeholder {
-                opacity: 0;
+                visibility: hidden; /* Hide the search placeholder as an icon */
               }
 
               &::-webkit-search-cancel-button {
