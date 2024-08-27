@@ -288,7 +288,7 @@ header {
             }
 
             &:not(:focus-within) {
-              /* shrink into a search icon */
+              /* Shrink into a search icon */
               > input.search-input {
                 width: 2rem;
                 background: transparent var(--search-icon) no-repeat center /
