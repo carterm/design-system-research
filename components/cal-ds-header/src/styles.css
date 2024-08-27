@@ -277,13 +277,32 @@ header {
             display: block;
           }
 
-          > button.search-toggle {
-            width: 2rem;
+          > form > input.search-input {
+            display: flex; /* Safari */
+            width: 10rem; /* Adjust the expanded width as needed */
             height: 2rem;
-            border: none;
-            background: transparent var(--search-icon) no-repeat center /
-              1.125rem;
-            cursor: pointer;
+            padding-left: 1rem; /* Add padding for text input */
+            transition:
+              width 300ms ease,
+              padding 300ms ease;
+
+            /* shrink into a search icon */
+            &:not(:focus) {
+              width: 2rem;
+              border: none;
+              background: transparent var(--search-icon) no-repeat center /
+                1.125rem;
+              cursor: pointer;
+              color: transparent;
+
+              &::placeholder {
+                opacity: 0;
+              }
+
+              &::-webkit-search-cancel-button {
+                display: none;
+              }
+            }
           }
         }
 
