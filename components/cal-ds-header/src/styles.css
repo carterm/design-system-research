@@ -248,7 +248,7 @@ header {
   position: relative;
   top: 0;
 
-  @media (width >= 1080px) {
+  @media (min-width: 1080px) {
     position: sticky;
   }
 
@@ -286,6 +286,10 @@ header {
         border: none;
         padding: 0;
         margin: 0 var(--space-unit-1) 0 var(--space-unit-1);
+
+        @media (min-width: 1080px) {
+          display: none;
+        }
 
         > div.hamburger {
           width: 100%;
@@ -351,7 +355,7 @@ header {
           transform: translateY(var(--space-unit-x2));
           display: none;
 
-          @media (width >= 1080px) {
+          @media (min-width: 1080px) {
             display: block;
           }
 
@@ -403,7 +407,7 @@ header {
             border-color: var(--text-dark);
           }
 
-          @media (width >= 1080px) {
+          @media (min-width: 1080px) {
             display: block;
           }
 
@@ -482,15 +486,7 @@ header .theme-light button.cagov-toggle {
 }
 
 /* Site header desktop styles */
-@media (width >= 1080px) {
-  header {
-    position: sticky;
-  }
-
-  header button.main-navigation-button {
-    display: none;
-  }
-
+@media (min-width: 1080px) {
   header a.login-button {
     background-color: var(--action-secondary);
     border-radius: var(--rounded-buttons);
@@ -511,10 +507,6 @@ header .theme-light button.cagov-toggle {
     color: var(--black);
     background-color: var(--action-secondary-hover);
     box-shadow: 0 4px 4px 0 rgb(0 0 0 / 25%);
-  }
-
-  header .login-icon {
-    display: none;
   }
 
   header a.login-button > span.login-text {
