@@ -237,8 +237,7 @@ header {
         }
 
         > div.site-branding-text {
-          padding-top: var(--space-unit-x2);
-          padding-bottom: var(--space-unit-x2);
+          padding: var(--space-unit-x2) 0;
           color: var(--text-color);
 
           > span {
