@@ -278,12 +278,22 @@ header {
           > form {
             > input.search-input {
               /* Full size search bar */
-              outline: 1px solid; /* Needed for Safari */
+              outline: 2px solid var(--search-input-outline); /* Needed for Safari */
+              outline-offset: -4px;
+              border-top-left-radius: var(--rounded-buttons);
+              border-bottom-left-radius: var(--rounded-buttons);
               border: 0; /* Needed for Safari */
-              width: 10rem;
-              height: 2rem;
-              padding-left: 0.5rem;
-              transition: width 300ms ease;
+              width: clamp(10rem, -6.7143rem + 24.7619vw, 23rem);
+              height: var(--space-unit-x4);
+              padding-left: 3rem;
+              padding-right: 1rem;
+              background: transparent var(--search-icon) no-repeat;
+              background-size: 1.125rem 1.125rem;
+              background-position: 1rem center;
+              color: var(--search-input-color);
+              transition:
+                width 300ms ease,
+                padding 300ms ease;
 
               &::-webkit-search-cancel-button {
                 -webkit-appearance: none; /* Remove default styling */
