@@ -323,6 +323,7 @@ header {
             }
 
             &:has(> input.search-input:placeholder-shown) {
+              /* Hide the search button when no text entered */
               > button.search-submit {
                 display: none;
               }
