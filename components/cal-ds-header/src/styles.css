@@ -311,6 +311,14 @@ header {
                 width 300ms ease,
                 padding 300ms ease;
 
+              &:-webkit-autofill,
+              &:autofill,
+              &:-webkit-autofill:hover,
+              &:-webkit-autofill:focus {
+                -webkit-box-shadow: 0 0 0px 1000px var(--banner-bg) inset;
+                -webkit-text-fill-color: var(--search-input-color);
+              }
+
               &::-webkit-search-cancel-button {
                 -webkit-appearance: none; /* Remove default styling */
                 height: 10px;
