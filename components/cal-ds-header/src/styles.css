@@ -286,6 +286,12 @@ header {
               transition: width 300ms ease;
             }
 
+            > button.search-submit {
+              /* TODO: Better button style */
+              border: 0;
+              background: none;
+            }
+
             &:not(:focus-within) {
               /* Shrink into a search icon */
               > input.search-input {
