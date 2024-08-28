@@ -322,18 +322,18 @@ header {
               }
             }
 
-            &:has(> input.search-input:placeholder-shown) {
-              /* Hide the search button when no text entered */
+            &:has(> input.search-input:placeholder-shown)
               > button.search-submit:not([tabindex]) {
-                display: none;
-              }
+              /* No search text entered */
+
+              display: none;
             }
 
-            &:not(:has(> input.search-input:placeholder-shown)) {
-              /* Hide the search button when no text entered */
+            &:not(:has(> input.search-input:placeholder-shown))
               > button.search-submit[tabindex] {
-                display: none;
-              }
+              /* Search text entered */
+
+              display: none;
             }
           }
         }
