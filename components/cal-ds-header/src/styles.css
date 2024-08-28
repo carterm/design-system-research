@@ -284,6 +284,13 @@ header {
               height: 2rem;
               padding-left: 0.5rem;
               transition: width 300ms ease;
+
+              &::-webkit-search-cancel-button {
+                -webkit-appearance: none; /* Remove default styling */
+                height: 10px;
+                width: 10px;
+                background: red; /* Change this to your desired color */
+              }
             }
 
             > button.search-submit {
@@ -310,6 +317,12 @@ header {
                 }
               }
 
+              > button.search-submit {
+                display: none;
+              }
+            }
+
+            &:has(> input.search-input:placeholder-shown) {
               > button.search-submit {
                 display: none;
               }
