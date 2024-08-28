@@ -277,14 +277,13 @@ header {
 
           > form {
             > input.search-input {
+              /* Full size search bar */
               outline: 1px solid; /* Needed for Safari */
               border: 0; /* Needed for Safari */
-              width: 10rem; /* Adjust the expanded width as needed */
+              width: 10rem;
               height: 2rem;
-              padding-left: 0.5rem; /* Add padding for text input */
-              transition:
-                width 300ms ease,
-                padding 300ms ease;
+              padding-left: 0.5rem;
+              transition: width 300ms ease;
             }
 
             &:not(:focus-within) {
@@ -301,7 +300,7 @@ header {
                 }
 
                 &::-webkit-search-cancel-button {
-                  display: none; /* Needed for Safari */
+                  display: none; /* Needed for Safari, Chrome clears on blur */
                 }
               }
 
