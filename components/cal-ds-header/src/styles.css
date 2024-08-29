@@ -171,15 +171,16 @@ header {
       overflow: visible;
 
       > nav.mobile-nav-menu {
-        width: 24px;
-        height: 24px;
+        display: flex;
         border: none;
         padding: 0;
-        margin: 0 var(--space-unit-1);
+        margin: 0;
         color: var(--header-link-color);
 
         > a.main-navigation-button {
           padding: 1rem;
+          width: 24px;
+          height: 24px;
 
           > div.hamburger {
             height: 4px;
