@@ -84,14 +84,14 @@
   /* Light Theme variables (default) */
   --background-color: var(--main-light);
   --text-color: var(--text-dark);
-  --link-color: var(--hyperlink-light);
+  --header-link-color: var(--hyperlink-light);
   --active-link-color: var(--hyperlink-activated-light);
   --cagov-icon: var(--cagov-icon-dark);
   --search-icon: var(--search-icon-dark);
   --login-icon: var(--login-icon-dark);
   --banner: var(--banner-dark);
-  --bg: var(--banner-dark);
-  --banner-bg: var(--banner-light);
+  --hamburger-bg: var(--banner-dark);
+  --header-bg: var(--banner-light);
   --search-border-color: var(--navigation-submenu-dark);
   --search-placeholder-color: var(--navigation-submenu-dark);
   --search-input-color: var(--black);
@@ -105,14 +105,14 @@
   :host {
     --background-color: var(--main-dark);
     --text-color: var(--text-light);
-    --link-color: var(--hyperlink-dark);
+    --header-link-color: var(--hyperlink-dark);
     --active-link-color: var(--hyperlink-activated-dark);
     --cagov-icon: var(--cagov-icon-light);
     --search-icon: var(--search-icon-light);
     --login-icon: var(--login-icon-light);
     --banner: var(--banner-light);
-    --bg: var(--banner-light);
-    --banner-bg: var(--banner-dark);
+    --hamburger-bg: var(--banner-light);
+    --header-bg: var(--banner-dark);
     --search-border-color: var(--navigation-submenu-light);
     --search-placeholder-color: var(--navigation-submenu-light);
     --search-input-color: var(--white);
@@ -133,6 +133,10 @@ span.visually-hidden {
   padding: 0 !important;
   white-space: nowrap !important;
   border: 0 !important;
+}
+
+a {
+  color: var(--header-link-color);
 }
 
 header {
@@ -156,7 +160,7 @@ header {
   }
 
   > div.site-header {
-    background-color: var(--banner-bg);
+    background-color: var(--header-bg);
 
     > div.site-header-container {
       max-width: var(--desktop-max-width);
@@ -189,7 +193,7 @@ header {
           &::before,
           &::after {
             width: 100%;
-            background-color: var(--bg);
+            background-color: var(--hamburger-bg);
             border-radius: 5px;
             transition: all 200ms ease;
           }
@@ -291,6 +295,17 @@ header {
 
           > form {
             display: flex;
+            position: relative;
+
+            &::after {
+              content: "";
+
+              position: absolute;
+              width: var(--space-unit-x4);
+              height: var(--space-unit-x4);
+              cursor: pointer;
+              left: var(--space-unit-1);
+            }
 
             > input.search-input {
               /* Full size search bar */
@@ -301,11 +316,9 @@ header {
               border: 0; /* Needed for Safari */
               width: clamp(10rem, -6.7143rem + 24.7619vw, 23rem);
               height: var(--space-unit-x4);
-              padding-left: 3rem;
-              padding-right: 1rem;
-              background: transparent var(--search-icon) no-repeat;
-              background-size: 1.125rem 1.125rem;
-              background-position: 1rem center;
+              padding-left: calc(var(--space-unit-x2) * 3);
+              padding-right: var(--space-unit-1);
+              background: transparent;
               color: var(--search-input-color);
               transition:
                 width 300ms ease,
@@ -313,29 +326,36 @@ header {
 
               &:autofill {
                 /* Keeps the autofill consistent with theme */
-                box-shadow: 0 0 0 1000px var(--banner-bg) inset;
+                box-shadow: 0 0 0 1000px var(--header-bg) inset;
                 -webkit-text-fill-color: var(--search-input-color);
+              }
+
+              &::placeholder {
+                color: var(--search-placeholder-color);
+                opacity: 1; /* Firefox */
+              }
+
+              /* stylelint-disable-next-line selector-no-vendor-prefix */
+              &::-ms-input-placeholder {
+                /* Edge 12 -18 */
+                color: var(--search-placeholder-color);
               }
 
               &::-webkit-search-cancel-button {
                 -webkit-appearance: none; /* Remove default styling */
-                height: 10px;
-                width: 10px;
-                background: red; /* Change this to your desired color */
+                height: var(--space-unit-x2);
+                width: var(--space-unit-x2);
+                background: transparent var(--search-input-clear-icon) no-repeat;
               }
             }
 
             > button.search-submit {
-              /* TODO: Better button style */
               padding: 0 1.5rem;
               border: none;
               border-top-right-radius: var(--rounded-buttons);
               border-bottom-right-radius: var(--rounded-buttons);
-              background-color: var(--search-submit-button-color);
-              background-image: var(--search-submit-icon);
-              background-repeat: no-repeat;
-              background-size: 1.125rem 1.125rem;
-              background-position: center;
+              background: var(--search-submit-button-color)
+                var(--search-submit-icon) no-repeat center/1.125rem 1.125rem;
               cursor: pointer;
             }
 
@@ -344,11 +364,7 @@ header {
               > input.search-input {
                 outline: none;
                 padding: 0;
-                width: 2rem;
-                background: transparent var(--search-icon) no-repeat
-                  center/1.125rem;
-                cursor: pointer;
-                color: transparent;
+                width: var(--space-unit-x4);
 
                 &::placeholder {
                   visibility: hidden; /* Hide the search placeholder as an icon */
