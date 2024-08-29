@@ -299,11 +299,10 @@ header {
 
             > input.search-input {
               /* Full size search bar */
-              outline: 2px solid var(--search-input-outline); /* Needed for Safari */
+              outline: 2px solid var(--search-input-outline);
               outline-offset: -4px;
-              border-top-left-radius: var(--rounded-buttons);
-              border-bottom-left-radius: var(--rounded-buttons);
-              border: 0; /* Needed for Safari */
+              border-radius: var(--rounded-buttons) 0 0 var(--rounded-buttons);
+              border: 0;
               width: clamp(10rem, -6.7143rem + 24.7619vw, 23rem);
               height: var(--space-unit-x4);
               padding-left: calc(var(--space-unit-x2) * 3);
@@ -320,19 +319,15 @@ header {
                 -webkit-text-fill-color: var(--search-input-color);
               }
 
+              /* stylelint-disable-next-line selector-no-vendor-prefix */
+              &::-ms-input-placeholder, /* -ms-input-placeholder for Edge 12 -18 */
               &::placeholder {
                 color: var(--search-placeholder-color);
                 opacity: 1; /* Firefox */
               }
 
-              /* stylelint-disable-next-line selector-no-vendor-prefix */
-              &::-ms-input-placeholder {
-                /* Edge 12 -18 */
-                color: var(--search-placeholder-color);
-              }
-
               &::-webkit-search-cancel-button {
-                -webkit-appearance: none; /* Remove default styling */
+                -webkit-appearance: none;
                 height: var(--space-unit-x2);
                 width: var(--space-unit-x2);
                 background: transparent var(--search-input-clear-icon) no-repeat;
@@ -346,8 +341,8 @@ header {
               cursor: pointer;
               height: var(--space-unit-x4);
               width: var(--space-unit-x4);
-              background: transparent var(--search-icon) no-repeat
-                center/1.125rem;
+              background: transparent var(--search-icon) no-repeat center /
+                1.125rem;
               top: 0;
               left: 0;
             }
@@ -355,10 +350,9 @@ header {
             > button.search-submit {
               padding: 0 1.5rem;
               border: none;
-              border-top-right-radius: var(--rounded-buttons);
-              border-bottom-right-radius: var(--rounded-buttons);
+              border-radius: 0 var(--rounded-buttons) var(--rounded-buttons) 0;
               background: var(--search-submit-button-color)
-                var(--search-submit-icon) no-repeat center/1.125rem 1.125rem;
+                var(--search-submit-icon) no-repeat center / 1.125rem;
               cursor: pointer;
             }
 
@@ -371,8 +365,7 @@ header {
                 background: transparent;
                 cursor: pointer;
                 color: transparent;
-                border-top-right-radius: var(--rounded-buttons);
-                border-bottom-right-radius: var(--rounded-buttons);
+                border-radius: var(--rounded-buttons);
 
                 &:autofill {
                   /* Keeps the autofill consistent with theme */
