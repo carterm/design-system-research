@@ -163,8 +163,7 @@ header {
 
     > div.site-header-container {
       max-width: var(--desktop-max-width);
-      margin-right: auto;
-      margin-left: auto;
+      margin: 0 auto;
       padding: 0 var(--space-unit-x2);
       display: flex;
       align-items: center;
@@ -178,7 +177,7 @@ header {
         background: transparent;
         border: none;
         padding: 0;
-        margin: 0 var(--space-unit-1) 0 var(--space-unit-1);
+        margin: 0 var(--space-unit-1);
 
         @media (min-width: 1080px) {
           display: none;
@@ -253,7 +252,6 @@ header {
 
         > div.site-branding-text {
           padding: var(--space-unit-x2) 0;
-          color: var(--text-color);
 
           > span {
             display: block;
