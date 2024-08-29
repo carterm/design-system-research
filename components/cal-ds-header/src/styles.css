@@ -170,52 +170,97 @@ header {
       gap: var(--space-unit-x4);
       overflow: visible;
 
-      > button.main-navigation-button {
+      > nav.mobile-nav-menu {
         width: 24px;
         height: 24px;
-        cursor: pointer;
-        background: transparent;
         border: none;
         padding: 0;
         margin: 0 var(--space-unit-1);
+        color: var(--header-link-color);
 
-        @media (min-width: 1080px) {
-          display: none;
-        }
-
-        > div.hamburger {
-          height: 4px;
-          position: relative;
-
-          /* All 3 lines */
-          &,
-          &::before,
-          &::after {
-            width: 100%;
-            background-color: var(--hamburger-bg);
-            border-radius: 5px;
-          }
-
-          &::before,
-          &::after {
-            content: "";
-            position: absolute;
-            left: 0;
-            height: 100%;
-            transition: all 200ms ease;
-          }
-
-          &::before {
-            transform: translateY(-7px);
-          }
-
-          &::after {
-            transform: translateY(7px);
-          }
-        }
-
-        &.open {
+        > a.main-navigation-button {
           > div.hamburger {
+            height: 4px;
+            position: relative;
+
+            /* All 3 lines */
+            &,
+            &::before,
+            &::after {
+              width: 100%;
+              background-color: var(--hamburger-bg);
+              border-radius: 5px;
+            }
+
+            &::before,
+            &::after {
+              content: "";
+              position: absolute;
+              left: 0;
+              height: 100%;
+              transition: all 200ms ease;
+            }
+
+            &::before {
+              transform: translateY(-7px);
+            }
+
+            &::after {
+              transform: translateY(7px);
+            }
+          }
+        }
+
+        > ul {
+          background-color: var(--header-bg);
+          position: absolute;
+          top: 100%;
+          left: 0;
+          list-style: none;
+          padding: 0;
+          display: none;
+
+          > li {
+            > details {
+              display: block;
+              transition: all 200ms ease;
+
+              > summary {
+                padding: 2rem;
+
+                &:focus {
+                  background-color: #666;
+                }
+              }
+
+              > ul {
+                list-style: none;
+                padding: 0;
+
+                > li {
+                  margin: 0;
+
+                  > a {
+                    padding: 2rem;
+                    text-decoration: none;
+                    display: block;
+
+                    &:focus {
+                      background-color: #666;
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+
+        &:focus-within {
+          > ul {
+            display: block;
+          }
+
+          > a.main-navigation-button > div.hamburger {
             transform: rotate(45deg);
 
             &::before,
@@ -223,6 +268,10 @@ header {
               transform: rotate(90deg) translateX(0);
             }
           }
+        }
+
+        @media (min-width: 1080px) {
+          display: none;
         }
       }
 

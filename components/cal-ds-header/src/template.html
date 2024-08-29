@@ -2,12 +2,35 @@
   <!-- Add class "theme-light" to use light header version -->
   <div class="site-header">
     <div class="site-header-container">
-      <button
-        class="main-navigation-button"
-        onclick="this.classList.toggle('open')">
-        <div class="hamburger"></div>
-        <span class="visually-hidden">Main menu</span>
-      </button>
+      <nav class="mobile-nav-menu">
+        <a href="#" tabindex="0" class="main-navigation-button">
+          <div class="hamburger"></div>
+          <span class="visually-hidden">Main menu</span>
+        </a>
+        <ul>
+          <li>
+            <details>
+              <summary>Level 1 menu - 1</summary>
+              <ul>
+                <li><a href="#" role="menuitem">Submenu 1A</a></li>
+                <li><a href="#" role="menuitem">Submenu 1B</a></li>
+                <li><a href="#" role="menuitem">Submenu 1C</a></li>
+              </ul>
+            </details>
+          </li>
+          <li>
+            <details>
+              <summary>Level 1 menu - 2</summary>
+              <ul>
+                <li><a href="#" role="menuitem">Submenu 2A</a></li>
+                <li><a href="#" role="menuitem">Submenu 2B</a></li>
+                <li><a href="#" role="menuitem">Submenu 2C</a></li>
+              </ul>
+            </details>
+          </li>
+        </ul>
+      </nav>
+
       <a href="index.html" class="site-logo">
         <!-- add class "no-overflow" to remove image's bottom overflow-->
         <img
