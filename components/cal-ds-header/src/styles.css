@@ -256,6 +256,8 @@ header {
         }
 
         &:focus-within {
+          pointer-events: none; /* Lets us click the icon to close menu */
+
           > ul {
             display: block;
           }
