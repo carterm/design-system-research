@@ -179,6 +179,8 @@ header {
         color: var(--header-link-color);
 
         > a.main-navigation-button {
+          padding: 1rem;
+
           > div.hamburger {
             height: 4px;
             position: relative;
@@ -256,18 +258,20 @@ header {
         }
 
         &:focus-within {
-          pointer-events: none; /* Lets us click the icon to close menu */
-
           > ul {
             display: block;
           }
 
-          > a.main-navigation-button > div.hamburger {
-            transform: rotate(45deg);
+          > a.main-navigation-button {
+            pointer-events: none; /* Lets us click the icon to close menu */
 
-            &::before,
-            &::after {
-              transform: rotate(90deg) translateX(0);
+            > div.hamburger {
+              transform: rotate(45deg);
+
+              &::before,
+              &::after {
+                transform: rotate(90deg) translateX(0);
+              }
             }
           }
         }
