@@ -2,11 +2,17 @@
   <!-- Add class "theme-light" to use light header version -->
   <div class="site-header">
     <div class="site-header-container">
-      <nav class="mobile-nav-menu">
-        <a href="#" tabindex="0" class="main-navigation-button">
+      <nav class="mobile-nav-menu" role="navigation">
+        <a href="#" tabindex="0" class="main-navigation-button" role="button">
           <div class="hamburger"></div>
           <span class="visually-hidden">Main menu</span>
         </a>
+        <a
+          href="#"
+          tabindex="-1"
+          class="main-navigation-cancel"
+          role="button"
+          aria-label="Close menu"></a>
         <ul>
           <li>
             <details name="MobileMenu">

@@ -177,11 +177,19 @@ header {
         margin: 0;
         color: var(--header-link-color);
 
+        > a.main-navigation-cancel,
         > a.main-navigation-button {
           padding: 1rem;
           width: 24px;
           height: 24px;
+        }
 
+        > a.main-navigation-cancel {
+          position: absolute;
+          display: none;
+        }
+
+        > a.main-navigation-button {
           > div.hamburger {
             height: 4px;
             position: relative;
@@ -273,6 +281,14 @@ header {
               &::after {
                 transform: rotate(90deg) translateX(0);
               }
+            }
+          }
+
+          > a.main-navigation-cancel {
+            display: block;
+
+            &:focus {
+              display: none;
             }
           }
         }
