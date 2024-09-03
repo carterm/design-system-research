@@ -2,7 +2,18 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "Run npm start",
+      "name": "Start",
+      "type": "node",
+      "request": "launch",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "start"],
+      "cwd": "${workspaceFolder}",
+      "console": "integratedTerminal",
+      "noDebug": true,
+      "autoAttachChildProcesses": false
+    },
+    {
+      "name": "Start (Debug)",
       "type": "node",
       "request": "launch",
       "runtimeExecutable": "npm",
