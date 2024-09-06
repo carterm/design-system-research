@@ -8,7 +8,7 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0, minimum-scale=1.0" />
 
-    <script type="module" src="/js/eureka.core.min.js"></script>
+    <script type="module" src="/js/eureka.core.js"></script>
     <style>
       *:not(:defined) {
         display:none; /* Prevents Flicker for Eureka components before they are defined */
@@ -26,32 +26,10 @@
       data-apps-link-tooltip="Link to www.ca.gov website">
       <template>
         <!-- Site Branding -->
-        <a href="/">
-          <!-- Branding logo -->
-          <img
-            src="https://cdn.cdt.ca.gov/cdt/CAWeb/site-logo-circle.svg"
-            alt="Eureka Design System logo" />
-          <!-- Branding text -->
-          <span>California</span>
-          <span>Department Website</span>
+        <a>
+          <span>California Custom</span>
+          <span>Department Website Custom</span>
         </a>
-
-        <!-- Nav links -->
-        <nav>
-          <a href="/home/">Home</a>
-          <a>Level 2 Menu</a>
-          <a href="/level2/option1" data-level="2">Level 2 Option 1</a>
-          <a href="/level2/option2" data-level="2">Level 2 Option 2</a>
-          <a href="/about/">About</a>
-        </nav>
-
-        <!-- Search Form -->
-        <form action="/serp.html">
-          <input placeholder="Search" />
-        </form>
-
-        <!-- Additional header links -->
-        <a href="#" class="login-button">Login</a>
       </template>
     </cal-ds-header>
     <p style="background-color: blue; color:white; margin: 0">TOP</p>
