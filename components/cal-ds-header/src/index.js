@@ -121,14 +121,39 @@ export default class my extends cal_ds_base {
             source_site_logo.querySelectorAll(":scope > span");
 
           if (source_site_branding_spans.length) {
-            const target_site_branding_spans = my.querySelectorAllRequre(
+            const target_site_branding = my.querySelectorRequre(
               target_site_logo,
-              ":scope > div.site-branding-text > span"
+              ":scope > div.site-branding-text"
             );
 
-            source_site_branding_spans.forEach((x, i) => {
-              my.updateElement(target_site_branding_spans[i], x);
-            });
+            const target_site_branding_state = /** @type {HTMLSpanElement } */ (
+              my.querySelectorRequre(
+                target_site_branding,
+                ":scope  > span.state"
+              )
+            );
+
+            const target_site_branding_department =
+              /** @type {HTMLSpanElement } */ (
+                my.querySelectorRequre(
+                  target_site_branding,
+                  ":scope > span.department"
+                )
+              );
+
+            my.updateElement(
+              target_site_branding_state,
+              source_site_branding_spans[0]
+            );
+
+            if (source_site_branding_spans.length > 1) {
+              my.updateElement(
+                target_site_branding_department,
+                source_site_branding_spans[1]
+              );
+            } else {
+              target_site_branding_department.innerHTML = "";
+            }
           }
         }
       }
