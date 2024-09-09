@@ -125,3 +125,26 @@ Banner for the top of any page. Place the code anywhere in your HTML and it will
 </header>
 
 ```
+
+# Try this on your site
+
+```JavaScript
+document.head.appendChild(Object.assign(document.createElement("script"), {src: "https://cdn.jsdelivr.net/npm/@cagovweb/cal-ds-header",type:"module"}));
+document.body.innerHTML = `
+
+<cal-ds-header>
+  <template>
+    <!-- Site Branding -->
+    <a href="www.ca.gov">
+      <img
+        src="https://template.webstandards.ca.gov/images/template-logo.png"
+        alt="Custom Image"
+        title="Custom Image" />
+      <span>California Custom</span>
+      <span>Department Website Custom</span>
+    </a>
+  </template>
+</cal-ds-header>
+
+`+document.body.innerHTML;
+```
