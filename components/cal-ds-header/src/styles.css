@@ -156,6 +156,7 @@ header {
 
   @media (min-width: 1080px) {
     position: sticky;
+    z-index: 100;
   }
 
   > div.site-header {
@@ -224,6 +225,8 @@ header {
 
         > ul {
           background-color: var(--header-bg);
+          border: #000 solid 1px;
+          margin: 0;
           position: absolute;
           top: 100%;
           left: 0;
