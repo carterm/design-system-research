@@ -23,10 +23,5 @@
   "css.validate": false,
   "stylelint.validate": ["css", "js"],
   "search.useIgnoreFiles": true,
-  "html.customData": ["./_site/html-data/ca-eureka.html-data.json"],
-
-  "files.exclude": {
-    "_site": true,
-    "**/node_modules": true
-  }
+  "html.customData": ["./_site/html-data/ca-eureka.html-data.json"]
 }
