@@ -8,7 +8,7 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0, minimum-scale=1.0" />
 
-    <script type="module" src="/js/eureka.core.min.js"></script>
+    <script type="module" src="/js/eureka.core.js"></script>
     <style>
       *:not(:defined) {
         display:none; /* Prevents Flicker for Eureka components before they are defined */
@@ -19,7 +19,24 @@
     </style>
   </head>
   <body style="margin:0">
-    <p style="background-color: blue; color:white; margin: 0">TOP</p>
+    <cal-ds-header
+      data-logo-overflow="true"
+      data-apps-link-style="link"
+      data-apps-link-url="https://www.ca.gov"
+      data-apps-link-tooltip="Link to www.ca.gov website">
+      <template>
+        <!-- Site Branding -->
+        <a href="www.ca.gov">
+          <img
+            src="https://template.webstandards.ca.gov/images/template-logo.png"
+            alt="Custom Image"
+            title="Custom Image" />
+          <span>California Custom</span>
+          <span>Department Website Custom</span>
+        </a>
+      </template>
+    </cal-ds-header>
+
     <cal-ds-nav>
       <template>
         <a href="/">Home</a>
@@ -27,6 +44,7 @@
         <a href="/cards/">Cards</a>
         <a href="/editor/">Editor</a>
         <a href="/banner/">Banner</a>
+        <a href="/header/">header</a>
       </template>
     </cal-ds-nav>
 
