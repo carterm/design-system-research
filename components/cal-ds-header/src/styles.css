@@ -148,6 +148,7 @@ header {
   color: var(--text-color);
   position: relative;
   top: 0;
+  z-index: 100;
 
   /* stylelint-disable-next-line selector-nested-pattern */
   a {
@@ -156,7 +157,6 @@ header {
 
   @media (min-width: 1080px) {
     position: sticky;
-    z-index: 100;
   }
 
   > div.site-header {
