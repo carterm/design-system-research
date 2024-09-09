@@ -1,6 +1,6 @@
 {
   "name": "@cagovweb/cal-ds-header",
-  "version": "0.0.1-beta1",
+  "version": "0.0.1-beta2",
   "description": "cal-ds-header top header",
   "type": "module",
   "main": "dist/index.js",
