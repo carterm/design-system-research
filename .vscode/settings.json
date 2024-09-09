@@ -22,9 +22,9 @@
   },
   "css.validate": false,
   "stylelint.validate": ["css", "js"],
+  "search.useIgnoreFiles": true,
   "html.customData": ["./_site/html-data/ca-eureka.html-data.json"],
 
-  "search.useIgnoreFiles": false,
   "files.exclude": {
     "_site": true,
     "**/node_modules": true
