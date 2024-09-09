@@ -115,6 +115,16 @@ export default class my extends cal_ds_base {
 
           my.updateElement(target_site_logo, source_site_logo);
 
+          const source_site_logo_img =
+            source_site_logo.querySelector(":scope > img");
+          if (source_site_logo_img) {
+            const target_site_logo_img = /** @type {HTMLAnchorElement} */ (
+              my.querySelectorRequre(target_site_logo, ":scope > img")
+            );
+
+            my.updateElement(target_site_logo_img, source_site_logo_img);
+          }
+
           // eslint-disable-next-line jsdoc/no-undefined-types
           /** @type {NodeListOf<HTMLSpanElement> } */
           const source_site_branding_spans =
