@@ -7,6 +7,7 @@ var CssBaseStyleString = ":host{font-family:system-ui,-apple-system,\"Segoe UI\"
  * Options for ca-eureka components
  * @typedef {object} cal_ds_options
  * @property {boolean} [shadow] - Create a shadow DOM?
+ * @property {boolean} [ignore_base_css] - true to skip including the base style for a standalone component
  * @property {string} [css] - CSS to apply to component
  * @property {string} [global_css] - CSS to merge into the main DOM
  * @property {string} [html] - HTML to apply to component (Event configurable)
@@ -63,7 +64,7 @@ class cal_ds_base extends HTMLElement {
       const shadow = this.attachShadow({ mode: "open" });
       this.dispatchComponentEvent("cal_ds_shadow_constructed_start");
 
-      this.addStyle(CssBaseStyleString); //Adds the base style for ALL components
+      if (!options.ignore_base_css) this.addStyle(CssBaseStyleString); //Adds the base style for ALL components
 
       if (options.css) {
         this.addStyle(options.css);

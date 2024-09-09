@@ -1,6 +1,6 @@
 {
   "name": "@cagovweb/cal-ds-base",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "cal-ds-nav base class",
   "type": "module",
   "main": "dist/index.js",
