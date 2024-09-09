@@ -148,6 +148,7 @@ header {
   color: var(--text-color);
   position: relative;
   top: 0;
+  z-index: 100;
 
   /* stylelint-disable-next-line selector-nested-pattern */
   a {
@@ -224,6 +225,8 @@ header {
 
         > ul {
           background-color: var(--header-bg);
+          border: #000 solid 1px;
+          margin: 0;
           position: absolute;
           top: 100%;
           left: 0;
