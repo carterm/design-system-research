@@ -4,7 +4,40 @@
     {
       "name": "cal-ds-header",
       "description": "README.md",
-      "attributes": [],
+      "attributes": [
+        {
+          "name": "data-logo-overflow",
+          "description": "true to let logo expand beyond the vertical boundary of the header. \n\n```html\n<cal-ds-header data-logo-overflow=\"true\">\n```",
+          "references": [
+            {
+              "name": "Reference - Eureka",
+              "url": "https://template.webstandards.ca.gov/"
+            }
+          ],
+          "values": [
+            {
+              "name": "true",
+              "description": "let the logo expand beyond the vertical boundary of the header",
+              "references": [
+                {
+                  "name": "Reference - Eureka",
+                  "url": "https://template.webstandards.ca.gov/"
+                }
+              ]
+            },
+            {
+              "name": "false",
+              "description": "the logo stays within the vertical boundary of the header",
+              "references": [
+                {
+                  "name": "Reference - Eureka",
+                  "url": "https://template.webstandards.ca.gov/"
+                }
+              ]
+            }
+          ]
+        }
+      ],
       "references": [
         {
           "name": "Reference - Eureka",
