@@ -123,7 +123,14 @@ Banner for the top of any page. Place the code anywhere in your HTML and it will
     </div>
   </div>
 </header>
+```
 
+# Adding HTML SCRIPT reference
+
+```HTML
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/@cagovweb/cal-ds-header" type="module"></script>
+</head>
 ```
 
 # Try this on your site
@@ -135,7 +142,7 @@ document.body.innerHTML = `
 <cal-ds-header>
   <template>
     <!-- Site Branding -->
-    <a href="www.ca.gov">
+    <a href="https://www.ca.gov">
       <img
         src="https://template.webstandards.ca.gov/images/template-logo.png"
         alt="Custom Image"
@@ -147,12 +154,4 @@ document.body.innerHTML = `
 </cal-ds-header>
 
 `+document.body.innerHTML;
-```
-
-# Adding HTML SCRIPT reference
-
-```HTML
-<head>
-  <script src="https://cdn.jsdelivr.net/npm/@cagovweb/cal-ds-header" type="module"></script>
-</head>
 ```
