@@ -24,6 +24,10 @@ export default class my extends cal_ds_base {
     return ["data-logo-overflow"];
   }
 
+  /**
+   * @param {Element} target
+   * @param {Element} source
+   */
   static updateAttributes(target, source) {
     if (source.attributes)
       // Update attributes
@@ -35,7 +39,7 @@ export default class my extends cal_ds_base {
     if (
       !target.childElementCount &&
       !source.childElementCount &&
-      source.textContent.trim()
+      source.textContent?.trim()
     ) {
       target.textContent = source.textContent;
     }
