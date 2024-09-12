@@ -148,3 +148,11 @@ document.body.innerHTML = `
 
 `+document.body.innerHTML;
 ```
+
+# Adding HTML SCRIPT reference
+
+```HTML
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/@cagovweb/cal-ds-header" type="module"></script>
+</head>
+```
