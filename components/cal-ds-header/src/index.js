@@ -125,7 +125,6 @@ export default class my extends cal_ds_base {
             my.updateElement(target_site_logo_img, source_site_logo_img);
           }
 
-          // eslint-disable-next-line jsdoc/no-undefined-types
           /** @type {NodeListOf<HTMLSpanElement> } */
           const source_site_branding_spans =
             source_site_logo.querySelectorAll(":scope > span");
