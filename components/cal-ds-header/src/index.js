@@ -69,25 +69,25 @@ export default class my extends cal_ds_base {
   }
 
   /**
-   *
+   * @template {HTMLElement} T
    * @param {DocumentFragment | Element} element
    * @param {string} selectors
    */
   static querySelectorRequre = (element, selectors) => {
     const result = element.querySelector(selectors);
     if (!result) throw Error(`Can't find selector "${selectors}"`);
-    return result;
+    return /** @type {T} */ (result);
   };
 
   /**
-   *
+   * @template {NodeListOf<HTMLElement>} T
    * @param {DocumentFragment | Element} element
    * @param {string} selectors
    */
   static querySelectorAllRequre = (element, selectors) => {
     const result = element.querySelectorAll(selectors);
     if (result.length === 0) throw Error(`Can't find selector "${selectors}"`);
-    return result;
+    return /** @type {T} */ (result);
   };
 
   constructor() {
@@ -96,11 +96,9 @@ export default class my extends cal_ds_base {
         const target = this.shadowRoot;
         target.innerHTML = html;
 
-        const target_site_header_container = /** @type {HTMLDivElement} */ (
-          my.querySelectorRequre(
-            target,
-            "header > div.site-header > div.site-header-container"
-          )
+        const target_site_header_container = my.querySelectorRequre(
+          target,
+          "header > div.site-header > div.site-header-container"
         );
 
         const source = document.createElement("div");
@@ -109,8 +107,9 @@ export default class my extends cal_ds_base {
         const source_site_logo = source.querySelector(":scope > a");
 
         if (source_site_logo) {
-          const target_site_logo = /** @type {HTMLAnchorElement} */ (
-            my.querySelectorRequre(target_site_header_container, ":scope > a")
+          const target_site_logo = my.querySelectorRequre(
+            target_site_header_container,
+            ":scope > a"
           );
 
           my.updateElement(target_site_logo, source_site_logo);
@@ -118,14 +117,14 @@ export default class my extends cal_ds_base {
           const source_site_logo_img =
             source_site_logo.querySelector(":scope > img");
           if (source_site_logo_img) {
-            const target_site_logo_img = /** @type {HTMLAnchorElement} */ (
-              my.querySelectorRequre(target_site_logo, ":scope > img")
+            const target_site_logo_img = my.querySelectorRequre(
+              target_site_logo,
+              ":scope > img"
             );
 
             my.updateElement(target_site_logo_img, source_site_logo_img);
           }
 
-          /** @type {NodeListOf<HTMLSpanElement> } */
           const source_site_branding_spans =
             source_site_logo.querySelectorAll(":scope > span");
 
@@ -135,20 +134,15 @@ export default class my extends cal_ds_base {
               ":scope > div.site-branding-text"
             );
 
-            const target_site_branding_state = /** @type {HTMLSpanElement } */ (
-              my.querySelectorRequre(
-                target_site_branding,
-                ":scope  > span.state"
-              )
+            const target_site_branding_state = my.querySelectorRequre(
+              target_site_branding,
+              ":scope  > span.state"
             );
 
-            const target_site_branding_department =
-              /** @type {HTMLSpanElement } */ (
-                my.querySelectorRequre(
-                  target_site_branding,
-                  ":scope > span.department"
-                )
-              );
+            const target_site_branding_department = my.querySelectorRequre(
+              target_site_branding,
+              ":scope > span.department"
+            );
 
             my.updateElement(
               target_site_branding_state,
