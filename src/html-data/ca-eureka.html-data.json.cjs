@@ -4,7 +4,7 @@ const targetFileName = "./_site/html-data/ca-eureka.html-data.json";
 const srcPath = "./components/";
 
 const fs = require("node:fs");
-const path = require("path");
+const path = require("node:path");
 
 /**
  * Default root for html-data.json

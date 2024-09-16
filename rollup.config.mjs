@@ -12,7 +12,7 @@ export default function () {
   // Minify in normal build only
   //const plugins = process.env["ROLLUP_WATCH"] === "true" ? [] : [terser({ module: true })];
 
-  /** @type {terser.Options} */
+  /** @type {import("@rollup/plugin-terser").Options} */
   const terserOptions = {
     module: true,
     mangle: {
