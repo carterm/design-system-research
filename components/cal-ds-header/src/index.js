@@ -113,7 +113,7 @@ export default class my extends cal_ds_base {
         if (source_site_logo) {
           const target_site_logo = my.querySelectorRequre(
             target_site_header_container,
-            ":scope > a"
+            ":scope > a.site-logo"
           );
 
           my.updateElement(target_site_logo, source_site_logo);
@@ -123,7 +123,7 @@ export default class my extends cal_ds_base {
           if (source_site_logo_img) {
             const target_site_logo_img = my.querySelectorRequre(
               target_site_logo,
-              ":scope > img"
+              ":scope > img.logo-image"
             );
 
             my.updateElement(target_site_logo_img, source_site_logo_img);
