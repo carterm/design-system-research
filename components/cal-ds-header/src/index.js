@@ -95,6 +95,20 @@ export default class my extends cal_ds_base {
   };
 
   constructor() {
+    /**
+     * Used with `observedAttributes` to track attribute changes
+     * @param {string} _name
+     * @protected
+     */
+    const _attributeChangedCallback = _name => {
+      switch (_name) {
+        case my.observedAttributes[0]: //"data-logo-overflow";
+          _contentChanged();
+
+          break;
+      }
+    };
+
     const _contentChanged = () => {
       if (this.UserTemplate && this.shadowRoot) {
         const target = this.shadowRoot;
@@ -118,15 +132,19 @@ export default class my extends cal_ds_base {
 
           my.updateElement(target_site_logo, source_site_logo);
 
+          const target_site_logo_img = my.querySelectorRequre(
+            target_site_logo,
+            ":scope > img.logo-image"
+          );
+
           const source_site_logo_img =
             source_site_logo.querySelector(":scope > img");
           if (source_site_logo_img) {
-            const target_site_logo_img = my.querySelectorRequre(
-              target_site_logo,
-              ":scope > img.logo-image"
-            );
-
             my.updateElement(target_site_logo_img, source_site_logo_img);
+          }
+
+          if (this.dataset.logoOverflow?.toLowerCase() === "false") {
+            target_site_logo_img.classList.add("no-overflow");
           }
 
           const source_site_branding_spans =
@@ -140,7 +158,7 @@ export default class my extends cal_ds_base {
 
             const target_site_branding_state = my.querySelectorRequre(
               target_site_branding,
-              ":scope  > span.state"
+              ":scope > span.state"
             );
 
             my.updateElement(
@@ -171,7 +189,8 @@ export default class my extends cal_ds_base {
       ignore_base_css: true,
       css,
       connectedCallback: _contentChanged,
-      templateChangedCallback: _contentChanged
+      templateChangedCallback: _contentChanged,
+      attributeChangedCallback: _attributeChangedCallback
     });
   }
 }
