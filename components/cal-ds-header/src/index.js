@@ -81,7 +81,7 @@ export default class my extends cal_ds_base {
    * @template {HTMLElement} T
    * @param {DocumentFragment | Element} element
    * @param {string} selectors
-   * @param {boolean} scope
+   * @param {boolean} scope true if automatically addings ":scope > " to selectors
    */
   static querySelectorRequre = (element, selectors, scope = true) => {
     if (scope) selectors = `:scope > ${selectors}`;
