@@ -12,6 +12,9 @@
     "sourceType": "module"
   },
   "ignorePatterns": ["_site", "dist"],
+  "globals": {
+    "NodeListOf": "readonly"
+  },
   "rules": {
     "arrow-parens": ["warn", "as-needed"],
     "block-scoped-var": "warn",
