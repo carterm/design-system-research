@@ -222,15 +222,9 @@ export default class my extends cal_ds_base {
   /**
    *
    * @param {HTMLDivElement} source
-   * @param {HTMLElement} target_site_header_container
+   * @param {HTMLElement} target_site_header_utility
    */
-  static processSearch = (source, target_site_header_container) => {
-    // <div class="site-header-utility">
-    const target_site_header_utility = my.querySelectorRequre(
-      target_site_header_container,
-      ":scope > div.site-header-utility"
-    );
-
+  static processSearch = (source, target_site_header_utility) => {
     // <div class="search-container-desktop">
     const target_search_container_desktop = my.querySelectorRequre(
       target_site_header_utility,
@@ -286,9 +280,30 @@ export default class my extends cal_ds_base {
           "header > div.site-header > div.site-header-container"
         );
 
+        // <div class="site-header-utility">
+        const target_site_header_utility = my.querySelectorRequre(
+          target_site_header_container,
+          ":scope > div.site-header-utility"
+        );
+
         my.processBranding(source, target_site_header_container, this);
-        my.processSearch(source, target_site_header_container);
+        my.processSearch(source, target_site_header_utility);
         my.processNav(source, target_site_header_container);
+
+        // Process Login Button
+        const source_login_button = source.querySelector(
+          ":scope > a.login-button"
+        );
+        const target_login_button = my.querySelectorRequre(
+          target_site_header_utility,
+          ":scope > a.login-button"
+        );
+
+        if (source_login_button) {
+          my.updateElement(target_login_button, source_login_button, true);
+        } else {
+          target_login_button.remove();
+        }
       }
     };
 
