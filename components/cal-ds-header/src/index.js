@@ -81,21 +81,12 @@ export default class my extends cal_ds_base {
    * @template {HTMLElement} T
    * @param {DocumentFragment | Element} element
    * @param {string} selectors
+   * @param {boolean} scope
    */
-  static querySelectorRequre = (element, selectors) => {
+  static querySelectorRequre = (element, selectors, scope = true) => {
+    if (scope) selectors = `:scope > ${selectors}`;
     const result = element.querySelector(selectors);
     if (!result) throw Error(`Can't find selector "${selectors}"`);
-    return /** @type {T} */ (result);
-  };
-
-  /**
-   * @template {NodeListOf<HTMLElement>} T
-   * @param {DocumentFragment | Element} element
-   * @param {string} selectors
-   */
-  static querySelectorAllRequre = (element, selectors) => {
-    const result = element.querySelectorAll(selectors);
-    if (result.length === 0) throw Error(`Can't find selector "${selectors}"`);
     return /** @type {T} */ (result);
   };
 
@@ -129,14 +120,15 @@ export default class my extends cal_ds_base {
         //     <div class="site-header-container">
         const target_site_header_container = my.querySelectorRequre(
           target,
-          "header > div.site-header > div.site-header-container"
+          "header > div.site-header > div.site-header-container",
+          false
         );
 
         if (source_site_logo) {
           // <a class="site-logo">
           const target_site_logo = my.querySelectorRequre(
             target_site_header_container,
-            ":scope > a.site-logo"
+            "a.site-logo"
           );
 
           my.updateElement(target_site_logo, source_site_logo);
@@ -144,11 +136,10 @@ export default class my extends cal_ds_base {
           // <img class="logo-image" />
           const target_site_logo_img = my.querySelectorRequre(
             target_site_logo,
-            ":scope > img.logo-image"
+            "img.logo-image"
           );
 
-          const source_site_logo_img =
-            source_site_logo.querySelector(":scope > img");
+          const source_site_logo_img = source_site_logo.querySelector("img");
           if (source_site_logo_img) {
             my.updateElement(target_site_logo_img, source_site_logo_img);
           }
@@ -158,19 +149,19 @@ export default class my extends cal_ds_base {
           }
 
           const source_site_branding_spans =
-            source_site_logo.querySelectorAll(":scope > span");
+            source_site_logo.querySelectorAll("span");
 
           if (source_site_branding_spans.length) {
             // <div class="site-branding-text">
             const target_site_branding = my.querySelectorRequre(
               target_site_logo,
-              ":scope > div.site-branding-text"
+              "div.site-branding-text"
             );
 
             // <span class="state">
             const target_site_branding_state = my.querySelectorRequre(
               target_site_branding,
-              ":scope > span.state"
+              "span.state"
             );
 
             my.updateElement(
@@ -181,7 +172,7 @@ export default class my extends cal_ds_base {
             // <span class="department">
             const target_site_branding_department = my.querySelectorRequre(
               target_site_branding,
-              ":scope > span.department"
+              "span.department"
             );
 
             if (source_site_branding_spans.length > 1) {
@@ -198,23 +189,23 @@ export default class my extends cal_ds_base {
         // <div class="site-header-utility">
         const target_site_header_utility = my.querySelectorRequre(
           target_site_header_container,
-          ":scope > div.site-header-utility"
+          "div.site-header-utility"
         );
 
         // <div class="search-container-desktop">
         const target_search_container_desktop = my.querySelectorRequre(
           target_site_header_utility,
-          ":scope > div.search-container-desktop"
+          "div.search-container-desktop"
         );
 
         /** @type {HTMLFormElement | null} */
-        const source_form = source.querySelector(":scope > form");
+        const source_form = source.querySelector("form");
 
         if (source_form) {
           // <form>
           const target_form = my.querySelectorRequre(
             target_search_container_desktop,
-            ":scope > form"
+            "form"
           );
 
           my.updateElement(target_form, source_form, true);
