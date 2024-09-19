@@ -120,11 +120,15 @@ export default class my extends cal_ds_base {
         const source_site_logo = source.querySelector(":scope > a");
 
         if (source_site_logo) {
+          // <header role="banner">
+          //   <div class="site-header">
+          //     <div class="site-header-container">
           const target_site_header_container = my.querySelectorRequre(
             target,
             "header > div.site-header > div.site-header-container"
           );
 
+          // <a class="site-logo">
           const target_site_logo = my.querySelectorRequre(
             target_site_header_container,
             ":scope > a.site-logo"
@@ -132,6 +136,7 @@ export default class my extends cal_ds_base {
 
           my.updateElement(target_site_logo, source_site_logo);
 
+          // <img class="logo-image" />
           const target_site_logo_img = my.querySelectorRequre(
             target_site_logo,
             ":scope > img.logo-image"
@@ -151,11 +156,13 @@ export default class my extends cal_ds_base {
             source_site_logo.querySelectorAll(":scope > span");
 
           if (source_site_branding_spans.length) {
+            // <div class="site-branding-text">
             const target_site_branding = my.querySelectorRequre(
               target_site_logo,
               ":scope > div.site-branding-text"
             );
 
+            // <span class="state">
             const target_site_branding_state = my.querySelectorRequre(
               target_site_branding,
               ":scope > span.state"
@@ -166,6 +173,7 @@ export default class my extends cal_ds_base {
               source_site_branding_spans[0]
             );
 
+            // <span class="department">
             const target_site_branding_department = my.querySelectorRequre(
               target_site_branding,
               ":scope > span.department"
