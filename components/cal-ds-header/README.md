@@ -24,9 +24,11 @@ Banner for the top of any page. Place the code anywhere in your HTML and it will
     <!-- Nav links -->
     <nav>
       <a href="/home/">Home</a>
-      <a>Level 2 Menu</a>
-      <a href="/level2/option1" data-level="2">Level 2 Option 1</a>
-      <a href="/level2/option2" data-level="2">Level 2 Option 2</a>
+      <div>
+        Level 2 Menu
+        <a href="/level2/option1">Level 2 Option 1</a>
+        <a href="/level2/option2">Level 2 Option 2</a>
+      </div>
       <a href="/about/">About</a>
     </nav>
 
