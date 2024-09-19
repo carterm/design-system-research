@@ -31,8 +31,13 @@ export default class my extends cal_ds_base {
   static updateAttributes(target, source) {
     if (source.attributes)
       // Update attributes
+      // Clear attribtues set as "null"
       Array.from(source.attributes).forEach(attr => {
-        target.setAttribute(attr.name, attr.value);
+        if (attr.value.trim().toLowerCase() === "null") {
+          target.attributes.removeNamedItem(attr.name);
+        } else {
+          target.setAttribute(attr.name, attr.value);
+        }
       });
 
     // Update text content if specified
@@ -64,7 +69,7 @@ export default class my extends cal_ds_base {
           child => child.tagName === sourceChild.tagName
         );
         if (targetChild) {
-          my.updateElement(targetChild, sourceChild);
+          my.updateElement(targetChild, sourceChild, children);
         } else {
           target.appendChild(sourceChild.cloneNode(true));
         }
@@ -119,15 +124,15 @@ export default class my extends cal_ds_base {
 
         const source_site_logo = source.querySelector(":scope > a");
 
-        if (source_site_logo) {
-          // <header role="banner">
-          //   <div class="site-header">
-          //     <div class="site-header-container">
-          const target_site_header_container = my.querySelectorRequre(
-            target,
-            "header > div.site-header > div.site-header-container"
-          );
+        // <header role="banner">
+        //   <div class="site-header">
+        //     <div class="site-header-container">
+        const target_site_header_container = my.querySelectorRequre(
+          target,
+          "header > div.site-header > div.site-header-container"
+        );
 
+        if (source_site_logo) {
           // <a class="site-logo">
           const target_site_logo = my.querySelectorRequre(
             target_site_header_container,
@@ -188,6 +193,36 @@ export default class my extends cal_ds_base {
               target_site_branding_department.innerHTML = "";
             }
           }
+        }
+
+        // <div class="site-header-utility">
+        const target_site_header_utility = my.querySelectorRequre(
+          target_site_header_container,
+          ":scope > div.site-header-utility"
+        );
+
+        // <div class="search-container-desktop">
+        const target_search_container_desktop = my.querySelectorRequre(
+          target_site_header_utility,
+          ":scope > div.search-container-desktop"
+        );
+
+        /** @type {HTMLFormElement | null} */
+        const source_form = source.querySelector(":scope > form");
+
+        if (source_form) {
+          // <form>
+          const target_form = my.querySelectorRequre(
+            target_search_container_desktop,
+            ":scope > form"
+          );
+
+          my.updateElement(target_form, source_form, true);
+        } else {
+          // No form specified, remove search
+          target_site_header_utility.removeChild(
+            target_search_container_desktop
+          );
         }
       }
     };
