@@ -81,13 +81,70 @@ export default class my extends cal_ds_base {
    * @template {HTMLElement} T
    * @param {DocumentFragment | Element} element
    * @param {string} selectors
-   * @param {boolean} scope true if automatically addings ":scope > " to selectors
    */
-  static querySelectorRequre = (element, selectors, scope = true) => {
-    if (scope) selectors = `:scope > ${selectors}`;
+  static querySelectorRequre = (element, selectors) => {
     const result = element.querySelector(selectors);
     if (!result) throw Error(`Can't find selector "${selectors}"`);
     return /** @type {T} */ (result);
+  };
+
+  /**
+   *
+   * @param {HTMLElement} source
+   * @param {HTMLElement} target_site_header_container
+   */
+  static processNav = (source, target_site_header_container) => {
+    const detailsName = "MobileMenu";
+
+    // <nav class="mobile-nav-menu">
+    const target_mobile_nav_menu = my.querySelectorRequre(
+      target_site_header_container,
+      ":scope > nav.mobile-nav-menu"
+    );
+
+    const source_nav = source.querySelector(":scope > nav");
+    if (!source_nav) {
+      target_mobile_nav_menu.remove();
+      return;
+    }
+
+    /** @type {HTMLUListElement} */
+    const target_mobile_nav_ul = my.querySelectorRequre(
+      target_mobile_nav_menu,
+      ":scope > ul"
+    );
+
+    Array.from(source_nav.children).forEach(n => {
+      const newLi = document.createElement("li");
+      if (n.tagName === "A") {
+        const aTag = /** @type {HTMLAnchorElement} */ (n.cloneNode(true));
+        aTag.role = "menuitem";
+        newLi.appendChild(aTag);
+      } else {
+        const newDetails = document.createElement("details");
+        newDetails.name = detailsName;
+        const newSummary = document.createElement("summary");
+        const newDetailsUl = document.createElement("ul");
+        newDetails.appendChild(newSummary);
+        newDetails.appendChild(newDetailsUl);
+
+        const clone = /** @type {Element} */ (n.cloneNode(true));
+
+        //child
+        clone.querySelectorAll("a").forEach(aTag => {
+          aTag.role = "menuitem";
+          const newDetailsLi = document.createElement("li");
+          newDetailsLi.appendChild(aTag);
+          newDetailsUl.appendChild(newDetailsLi);
+        });
+
+        newLi.appendChild(newDetails);
+
+        newSummary.innerHTML = clone.innerHTML;
+      }
+
+      target_mobile_nav_ul.appendChild(newLi);
+    });
   };
 
   constructor() {
@@ -120,15 +177,16 @@ export default class my extends cal_ds_base {
         //     <div class="site-header-container">
         const target_site_header_container = my.querySelectorRequre(
           target,
-          "header > div.site-header > div.site-header-container",
-          false
+          "header > div.site-header > div.site-header-container"
         );
+
+        my.processNav(source, target_site_header_container);
 
         if (source_site_logo) {
           // <a class="site-logo">
           const target_site_logo = my.querySelectorRequre(
             target_site_header_container,
-            "a.site-logo"
+            ":scope > a.site-logo"
           );
 
           my.updateElement(target_site_logo, source_site_logo);
@@ -136,10 +194,11 @@ export default class my extends cal_ds_base {
           // <img class="logo-image" />
           const target_site_logo_img = my.querySelectorRequre(
             target_site_logo,
-            "img.logo-image"
+            ":scope > img.logo-image"
           );
 
-          const source_site_logo_img = source_site_logo.querySelector("img");
+          const source_site_logo_img =
+            source_site_logo.querySelector(":scope > img");
           if (source_site_logo_img) {
             my.updateElement(target_site_logo_img, source_site_logo_img);
           }
@@ -149,19 +208,19 @@ export default class my extends cal_ds_base {
           }
 
           const source_site_branding_spans =
-            source_site_logo.querySelectorAll("span");
+            source_site_logo.querySelectorAll(":scope > span");
 
           if (source_site_branding_spans.length) {
             // <div class="site-branding-text">
             const target_site_branding = my.querySelectorRequre(
               target_site_logo,
-              "div.site-branding-text"
+              ":scope > div.site-branding-text"
             );
 
             // <span class="state">
             const target_site_branding_state = my.querySelectorRequre(
               target_site_branding,
-              "span.state"
+              ":scope > span.state"
             );
 
             my.updateElement(
@@ -172,7 +231,7 @@ export default class my extends cal_ds_base {
             // <span class="department">
             const target_site_branding_department = my.querySelectorRequre(
               target_site_branding,
-              "span.department"
+              ":scope > span.department"
             );
 
             if (source_site_branding_spans.length > 1) {
@@ -189,31 +248,30 @@ export default class my extends cal_ds_base {
         // <div class="site-header-utility">
         const target_site_header_utility = my.querySelectorRequre(
           target_site_header_container,
-          "div.site-header-utility"
+          ":scope > div.site-header-utility"
         );
 
         // <div class="search-container-desktop">
         const target_search_container_desktop = my.querySelectorRequre(
           target_site_header_utility,
-          "div.search-container-desktop"
+          ":scope > div.search-container-desktop"
         );
 
         /** @type {HTMLFormElement | null} */
-        const source_form = source.querySelector("form");
+        const source_form = source.querySelector(":scope > form");
 
         if (source_form) {
           // <form>
           const target_form = my.querySelectorRequre(
             target_search_container_desktop,
-            "form"
+            ":scope > form"
           );
 
           my.updateElement(target_form, source_form, true);
         } else {
           // No form specified, remove search
-          target_site_header_utility.removeChild(
-            target_search_container_desktop
-          );
+
+          target_search_container_desktop.remove();
         }
       }
     };

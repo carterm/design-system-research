@@ -235,9 +235,19 @@ header {
           display: none;
 
           > li {
+            > a,
+            > details > ul > li > a {
+              padding: 2rem;
+              text-decoration: none;
+              display: block;
+
+              &:focus {
+                background-color: #666;
+              }
+            }
+
             > details {
               display: block;
-              transition: all 200ms ease;
 
               > summary {
                 padding: 2rem;
@@ -253,16 +263,6 @@ header {
 
                 > li {
                   margin: 0;
-
-                  > a {
-                    padding: 2rem;
-                    text-decoration: none;
-                    display: block;
-
-                    &:focus {
-                      background-color: #666;
-                    }
-                  }
                 }
               }
             }
