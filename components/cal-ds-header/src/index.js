@@ -147,6 +147,114 @@ export default class my extends cal_ds_base {
     });
   };
 
+  /**
+   *
+   * @param {HTMLDivElement} source
+   * @param {HTMLElement} target_site_header_container
+   * @param {my} me
+   */
+  static processBranding = (source, target_site_header_container, me) => {
+    const source_site_logo = source.querySelector(":scope > a:first-of-type");
+    if (source_site_logo) {
+      // <a class="site-logo">
+      const target_site_logo = my.querySelectorRequre(
+        target_site_header_container,
+        ":scope > a.site-logo"
+      );
+
+      my.updateElement(target_site_logo, source_site_logo);
+
+      // <img class="logo-image" />
+      const target_site_logo_img = my.querySelectorRequre(
+        target_site_logo,
+        ":scope > img.logo-image"
+      );
+
+      const source_site_logo_img =
+        source_site_logo.querySelector(":scope > img");
+      if (source_site_logo_img) {
+        my.updateElement(target_site_logo_img, source_site_logo_img);
+      }
+
+      if (me.dataset.logoOverflow?.toLowerCase() === "false") {
+        target_site_logo_img.classList.add("no-overflow");
+      }
+
+      const source_site_branding_spans =
+        source_site_logo.querySelectorAll(":scope > span");
+
+      if (source_site_branding_spans.length) {
+        // <div class="site-branding-text">
+        const target_site_branding = my.querySelectorRequre(
+          target_site_logo,
+          ":scope > div.site-branding-text"
+        );
+
+        // <span class="state">
+        const target_site_branding_state = my.querySelectorRequre(
+          target_site_branding,
+          ":scope > span.state"
+        );
+
+        my.updateElement(
+          target_site_branding_state,
+          source_site_branding_spans[0]
+        );
+
+        // <span class="department">
+        const target_site_branding_department = my.querySelectorRequre(
+          target_site_branding,
+          ":scope > span.department"
+        );
+
+        if (source_site_branding_spans.length > 1) {
+          my.updateElement(
+            target_site_branding_department,
+            source_site_branding_spans[1]
+          );
+        } else {
+          target_site_branding_department.innerHTML = "";
+        }
+      }
+    }
+  };
+
+  /**
+   *
+   * @param {HTMLDivElement} source
+   * @param {HTMLElement} target_site_header_container
+   */
+  static processSearch = (source, target_site_header_container) => {
+    // <div class="site-header-utility">
+    const target_site_header_utility = my.querySelectorRequre(
+      target_site_header_container,
+      ":scope > div.site-header-utility"
+    );
+
+    // <div class="search-container-desktop">
+    const target_search_container_desktop = my.querySelectorRequre(
+      target_site_header_utility,
+      ":scope > div.search-container-desktop"
+    );
+
+    /** @type {HTMLFormElement | null} */
+    const source_form = source.querySelector(":scope > form");
+
+    if (source_form) {
+      // <form>
+      const target_form = my.querySelectorRequre(
+        target_search_container_desktop,
+        ":scope > form"
+      );
+
+      my.updateElement(target_form, source_form, true);
+    } else {
+      // No form specified, remove search
+
+      target_search_container_desktop.remove();
+    }
+  };
+
   constructor() {
     /**
      * Used with `observedAttributes` to track attribute changes
@@ -170,8 +278,6 @@ export default class my extends cal_ds_base {
         const source = document.createElement("div");
         source.appendChild(this.UserTemplate.cloneNode(true));
 
-        const source_site_logo = source.querySelector(":scope > a");
-
         // <header role="banner">
         //   <div class="site-header">
         //     <div class="site-header-container">
@@ -180,99 +286,9 @@ export default class my extends cal_ds_base {
           "header > div.site-header > div.site-header-container"
         );
 
+        my.processBranding(source, target_site_header_container, this);
+        my.processSearch(source, target_site_header_container);
         my.processNav(source, target_site_header_container);
-
-        if (source_site_logo) {
-          // <a class="site-logo">
-          const target_site_logo = my.querySelectorRequre(
-            target_site_header_container,
-            ":scope > a.site-logo"
-          );
-
-          my.updateElement(target_site_logo, source_site_logo);
-
-          // <img class="logo-image" />
-          const target_site_logo_img = my.querySelectorRequre(
-            target_site_logo,
-            ":scope > img.logo-image"
-          );
-
-          const source_site_logo_img =
-            source_site_logo.querySelector(":scope > img");
-          if (source_site_logo_img) {
-            my.updateElement(target_site_logo_img, source_site_logo_img);
-          }
-
-          if (this.dataset.logoOverflow?.toLowerCase() === "false") {
-            target_site_logo_img.classList.add("no-overflow");
-          }
-
-          const source_site_branding_spans =
-            source_site_logo.querySelectorAll(":scope > span");
-
-          if (source_site_branding_spans.length) {
-            // <div class="site-branding-text">
-            const target_site_branding = my.querySelectorRequre(
-              target_site_logo,
-              ":scope > div.site-branding-text"
-            );
-
-            // <span class="state">
-            const target_site_branding_state = my.querySelectorRequre(
-              target_site_branding,
-              ":scope > span.state"
-            );
-
-            my.updateElement(
-              target_site_branding_state,
-              source_site_branding_spans[0]
-            );
-
-            // <span class="department">
-            const target_site_branding_department = my.querySelectorRequre(
-              target_site_branding,
-              ":scope > span.department"
-            );
-
-            if (source_site_branding_spans.length > 1) {
-              my.updateElement(
-                target_site_branding_department,
-                source_site_branding_spans[1]
-              );
-            } else {
-              target_site_branding_department.innerHTML = "";
-            }
-          }
-        }
-
-        // <div class="site-header-utility">
-        const target_site_header_utility = my.querySelectorRequre(
-          target_site_header_container,
-          ":scope > div.site-header-utility"
-        );
-
-        // <div class="search-container-desktop">
-        const target_search_container_desktop = my.querySelectorRequre(
-          target_site_header_utility,
-          ":scope > div.search-container-desktop"
-        );
-
-        /** @type {HTMLFormElement | null} */
-        const source_form = source.querySelector(":scope > form");
-
-        if (source_form) {
-          // <form>
-          const target_form = my.querySelectorRequre(
-            target_search_container_desktop,
-            ":scope > form"
-          );
-
-          my.updateElement(target_form, source_form, true);
-        } else {
-          // No form specified, remove search
-
-          target_search_container_desktop.remove();
-        }
       }
     };
 
