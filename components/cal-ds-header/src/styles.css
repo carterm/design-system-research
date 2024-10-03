@@ -475,6 +475,7 @@ header {
           }
         }
 
+        /*
         > slot[name="site-header-utility-slot"] {
           display: none;
 
@@ -482,6 +483,7 @@ header {
             display: block;
           }
         }
+          */
 
         > a.login-button {
           background: var(--login-icon) no-repeat center / 2rem;
