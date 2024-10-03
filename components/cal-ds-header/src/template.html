@@ -1,7 +1,10 @@
 <header role="banner">
   <!-- Add class "theme-light" to use light header version -->
+  <slot name="slot1"></slot>
   <div class="site-header">
+    <slot name="slot2"></slot>
     <div class="site-header-container">
+      <slot name="slot3"></slot>
       <nav class="mobile-nav-menu" role="navigation">
         <a href="#" tabindex="0" class="main-navigation-button" role="button">
           <div class="hamburger"></div>
@@ -28,8 +31,11 @@
           <span class="department">Department Website default</span>
         </div>
       </a>
+      <slot name="slot4"></slot>
       <div class="site-header-utility">
+        <slot name="slot5"></slot>
         <div class="search-container-desktop">
+          <slot name="slot6"></slot>
           <form autocomplete="on">
             <label class="search-toggle" for="site-search"
               ><span class="visually-hidden">Search this site</span></label
@@ -45,14 +51,21 @@
             <button type="submit" class="search-submit" tabindex="-1"></button>
             <button type="submit" class="search-submit"></button>
           </form>
+          <slot name="slot7"></slot>
         </div>
+        <slot name="slot8"></slot>
         <a href="#" class="login-button"
           ><span class="login-text">Login</span></a
         >
+        <slot name="slot9"></slot>
         <a class="cagov-toggle" href="https://www.ca.gov/">
           <span class="visually-hidden">ca.gov link</span>
         </a>
+        <slot name="slot10"></slot>
       </div>
+      <slot name="slot11"></slot>
     </div>
+    <slot name="slot12"></slot>
   </div>
+  <slot name="slot13"></slot>
 </header>

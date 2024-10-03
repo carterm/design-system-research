@@ -475,6 +475,16 @@ header {
           }
         }
 
+        /*
+        > slot[name="site-header-utility-slot"] {
+          display: none;
+
+          @media (min-width: 1080px) {
+            display: block;
+          }
+        }
+          */
+
         > a.login-button {
           background: var(--login-icon) no-repeat center / 2rem;
           padding: var(--space-unit-x2);
