@@ -40,6 +40,21 @@ Banner for the top of any page. Place the code anywhere in your HTML and it will
     <!-- Additional header links -->
     <a href="#" class="login-button">Login</a>
   </template>
+
+  <!-- Optional DOM slots -->
+  <span slot="slot1">Slot 1</span>
+  <span slot="slot2">Slot 2</span>
+  <span slot="slot3">Slot 3</span>
+  <span slot="slot4">Slot 4</span>
+  <span slot="slot5">Slot 5</span>
+  <span slot="slot6">Slot 6</span>
+  <span slot="slot7">Slot 7</span>
+  <span slot="slot8">Slot 8</span>
+  <span slot="slot9">Slot 9</span>
+  <span slot="slot10">Slot 10</span>
+  <span slot="slot11">Slot 11</span>
+  <span slot="slot12">Slot 12</span>
+  <span slot="slot13">Slot 13</span>
 </cal-ds-header>
 ```
 
@@ -48,8 +63,11 @@ Banner for the top of any page. Place the code anywhere in your HTML and it will
 ```html
 <header role="banner">
   <!-- Add class "theme-light" to use light header version -->
+  <slot name="slot1"></slot>
   <div class="site-header">
+    <slot name="slot2"></slot>
     <div class="site-header-container">
+      <slot name="slot3"></slot>
       <nav class="mobile-nav-menu" role="navigation">
         <a href="#" tabindex="0" class="main-navigation-button" role="button">
           <div class="hamburger"></div>
@@ -97,8 +115,11 @@ Banner for the top of any page. Place the code anywhere in your HTML and it will
           <span class="department">Department Website</span>
         </div>
       </a>
+      <slot name="slot4"></slot>
       <div class="site-header-utility">
+        <slot name="slot5"></slot>
         <div class="search-container-desktop">
+          <slot name="slot6"></slot>
           <form autocomplete="on">
             <label class="search-toggle" for="site-search"
               ><span class="visually-hidden">Search this site</span></label
@@ -114,16 +135,23 @@ Banner for the top of any page. Place the code anywhere in your HTML and it will
             <button type="submit" class="search-submit" tabindex="-1"></button>
             <button type="submit" class="search-submit"></button>
           </form>
+          <slot name="slot7"></slot>
         </div>
+        <slot name="slot8"></slot>
         <a href="#" class="login-button"
           ><span class="login-text">Login</span></a
         >
+        <slot name="slot9"></slot>
         <a class="cagov-toggle" href="https://www.ca.gov/">
           <span class="visually-hidden">ca.gov link</span>
         </a>
+        <slot name="slot10"></slot>
       </div>
+      <slot name="slot11"></slot>
     </div>
+    <slot name="slot12"></slot>
   </div>
+  <slot name="slot13"></slot>
 </header>
 ```
 
