@@ -122,7 +122,7 @@ export default class my extends cal_ds_base {
 
     const validUrl = (/** @type {string} */ href) => {
       try {
-        return new URL(a.href, window.location.origin).href;
+        return new URL(href, window.location.origin).href;
       } catch (e) {
         return href;
       }
