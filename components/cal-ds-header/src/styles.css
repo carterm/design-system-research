@@ -173,12 +173,16 @@ header {
     }
 
     /* stylelint-disable-next-line selector-nested-pattern */
+    a {
+      display: block;
+    }
+
+    /* stylelint-disable-next-line selector-nested-pattern */
     a,
     summary {
       color: var(--header-link-color);
       text-decoration: none;
       padding: 2rem;
-      display: block;
 
       &:hover {
         background-color: red;
