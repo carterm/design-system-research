@@ -159,6 +159,48 @@ header {
     position: sticky;
   }
 
+  > nav.desktop-nav-menu {
+    background-color: var(--header-bg);
+    display: flex;
+
+    @media (max-width: 1079px) {
+      display: none;
+    }
+
+    /* stylelint-disable-next-line selector-nested-pattern */
+    ul {
+      list-style: none;
+    }
+
+    /* stylelint-disable-next-line selector-nested-pattern */
+    a,
+    summary {
+      color: var(--header-link-color);
+      text-decoration: none;
+      padding: 2rem;
+      display: block;
+
+      &:hover {
+        background-color: red;
+      }
+
+      &:focus {
+        background-color: #666;
+      }
+
+      &[aria-current="page"] {
+        pointer-events: none;
+        text-decoration: solid underline yellow 0.3rem;
+      }
+    }
+
+    > ul {
+      display: flex;
+      margin: 0;
+      padding-left: 9rem;
+    }
+  }
+
   > div.site-header {
     background-color: var(--header-bg);
 
