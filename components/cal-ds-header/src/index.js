@@ -91,20 +91,20 @@ export default class my extends cal_ds_base {
   /**
    *
    * @param {HTMLElement} source
-   * @param {HTMLElement} target_site_header_container
+   * @param {HTMLElement} target_desktop_nav_menu
+   * @param {HTMLElement} target_mobile_nav_menu
    */
-  static processNav = (source, target_site_header_container) => {
+  static processNav = (
+    source,
+    target_desktop_nav_menu,
+    target_mobile_nav_menu
+  ) => {
     const detailsName = "MobileMenu";
-
-    // <nav class="mobile-nav-menu">
-    const target_mobile_nav_menu = my.querySelectorRequre(
-      target_site_header_container,
-      ":scope > nav.mobile-nav-menu"
-    );
 
     const source_nav = source.querySelector(":scope > nav");
     if (!source_nav) {
       target_mobile_nav_menu.remove();
+      target_desktop_nav_menu.remove();
       return;
     }
 
@@ -114,11 +114,34 @@ export default class my extends cal_ds_base {
       ":scope > ul"
     );
 
+    /** @type {HTMLUListElement} */
+    const target_desktop_nav_ul = my.querySelectorRequre(
+      target_desktop_nav_menu,
+      ":scope > ul"
+    );
+
+    const validUrl = (/** @type {string} */ href) => {
+      try {
+        return new URL(href, window.location.origin).href;
+      } catch (e) {
+        return href;
+      }
+    };
+
+    const setIfCurrent = (/** @type {HTMLAnchorElement} */ a) => {
+      if (validUrl(a.href) === window.location.href) {
+        a.ariaCurrent = "page";
+        a.tabIndex = -1;
+      }
+    };
+
     Array.from(source_nav.children).forEach(n => {
       const newLi = document.createElement("li");
       if (n.tagName === "A") {
         const aTag = /** @type {HTMLAnchorElement} */ (n.cloneNode(true));
         aTag.role = "menuitem";
+        setIfCurrent(aTag);
+
         newLi.appendChild(aTag);
       } else {
         const newDetails = document.createElement("details");
@@ -136,6 +159,8 @@ export default class my extends cal_ds_base {
           const newDetailsLi = document.createElement("li");
           newDetailsLi.appendChild(aTag);
           newDetailsUl.appendChild(newDetailsLi);
+
+          setIfCurrent(aTag);
         });
 
         newLi.appendChild(newDetails);
@@ -144,6 +169,7 @@ export default class my extends cal_ds_base {
       }
 
       target_mobile_nav_ul.appendChild(newLi);
+      target_desktop_nav_ul.appendChild(newLi.cloneNode(true));
     });
   };
 
@@ -288,7 +314,14 @@ export default class my extends cal_ds_base {
 
         my.processBranding(source, target_site_header_container, this);
         my.processSearch(source, target_site_header_utility);
-        my.processNav(source, target_site_header_container);
+        my.processNav(
+          source,
+          my.querySelectorRequre(target, "header > nav.desktop-nav-menu"),
+          my.querySelectorRequre(
+            target_site_header_container,
+            ":scope > nav.mobile-nav-menu"
+          )
+        );
 
         // Process Login Button
         const source_login_button = source.querySelector(
