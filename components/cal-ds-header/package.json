@@ -1,6 +1,6 @@
 {
   "name": "@cagovweb/cal-ds-header",
-  "version": "0.0.1-beta7",
+  "version": "0.0.1-beta8",
   "description": "cal-ds-header top header",
   "type": "module",
   "main": "dist/index.js",
@@ -49,7 +49,7 @@
     "NPM deprecate old version": "npm deprecate @cagovweb/cal-ds-header@0.0.1-beta1 \"Version no longer supported. Upgrade to @latest\""
   },
   "dependencies": {
-    "@cagovweb/cal-ds-base": "^0.0.2"
+    "@cagovweb/cal-ds-base": "^0.1.0"
   },
   "devDependencies": {
     "@cagovweb/cal-ds-base": "file:../_cal-ds-base"

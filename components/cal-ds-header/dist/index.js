@@ -1,13 +1,9 @@
-var CssBaseStyleString = ":host{font-family:system-ui,-apple-system,\"Segoe UI\",Roboto,\"Helvetica Neue\",\"Noto Sans\",\"Liberation Sans\",Arial,sans-serif;--gov-header:#071645;--brand-primary:#13394b;--brand-secondary:#0070a3;--banner-light:#d5dbde;--banner-dark:#09202b;--brand-hover-light:#3ca3d3;--brand-hover-dark:#246c8e;--background-primary-light:#d9d8cf;--background-secondary-light:#f5f3eb;--background-primary-dark:#43433f;--background-secondary-dark:#65645f;--action-primary:#fec335;--action-secondary:#fae2ad;--text-white:#fff;--grey:#ccc;--grey-text:#323232;--grey-background:#eee;--gutter-gap:1.674vw;--flow-space:1rem;--radius:1rem;--shadow:0.2rem 0.2rem 0.5rem 0 rgba(0 0 0 / 25%);--shadow-focus:0.1rem 0.1rem 0.25rem 0 rgba(0 0 0 / 10%);--shadow-active:0.2rem 0.2rem 0.5rem 0 rgba(0 0 0 / 60%);--font-size:1rem;--ratio:1.24;--s0:calc(var(--font-size) - 0.3rem) + 0.2vw;--st:calc(var(--s0) * var(--ratio));--base:calc(var(--st) * var(--ratio));--lt:calc(var(--base) * var(--ratio));--h6:calc(var(--s0) * var(--ratio));--h5:calc(var(--h6) * var(--ratio));--h4:calc(var(--h5) * var(--ratio));--h3:calc(var(--h4) * var(--ratio));--h2:calc(var(--h3) * var(--ratio));--h1:calc(var(--h2) * var(--ratio) * var(--ratio));}";
-
 //@ts-check
-
 
 /**
  * Options for ca-eureka components
  * @typedef {object} cal_ds_options
  * @property {boolean} [shadow] - Create a shadow DOM?
- * @property {boolean} [ignore_base_css] - true to skip including the base style for a standalone component
  * @property {string} [css] - CSS to apply to component
  * @property {string} [global_css] - CSS to merge into the main DOM
  * @property {string} [html] - HTML to apply to component (Event configurable)
@@ -63,8 +59,6 @@ class cal_ds_base extends HTMLElement {
       //Shadow Dom requested
       const shadow = this.attachShadow({ mode: "open" });
       this.dispatchComponentEvent("cal_ds_shadow_constructed_start");
-
-      if (!options.ignore_base_css) this.addStyle(CssBaseStyleString); //Adds the base style for ALL components
 
       if (options.css) {
         this.addStyle(options.css);
@@ -263,258 +257,262 @@ class my extends cal_ds_base {
     return ["data-logo-overflow"];
   }
 
-  /**
-   * @param {Element} target
-   * @param {Element} source
-   */
-  static updateAttributes(target, source) {
-    if (source.attributes)
-      // Update attributes
-      // Clear attribtues set as "null"
-      Array.from(source.attributes).forEach(attr => {
-        if (attr.value.trim().toLowerCase() === "null") {
-          target.attributes.removeNamedItem(attr.name);
-        } else {
-          target.setAttribute(attr.name, attr.value);
-        }
-      });
-
-    // Update text content if specified
-    if (
-      !target.childElementCount &&
-      !source.childElementCount &&
-      source.textContent?.trim()
-    ) {
-      target.textContent = source.textContent;
-    }
-  }
-
-  /**
-   *
-   * @param {Element} target
-   * @param {Element} source
-   * @param {boolean} children
-   */
-  static updateElement(target, source, children = false) {
-    // Update attributes if specified
-    my.updateAttributes(target, source);
-
-    if (!children) return;
-
-    // Add missing children
-    Array.from(source.children).forEach(sourceChild => {
-      if (sourceChild.nodeType === Node.ELEMENT_NODE) {
-        const targetChild = Array.from(target.children).find(
-          child => child.tagName === sourceChild.tagName
-        );
-        if (targetChild) {
-          my.updateElement(targetChild, sourceChild, children);
-        } else {
-          target.appendChild(sourceChild.cloneNode(true));
-        }
-      }
-    });
-  }
-
-  /**
-   * @template {HTMLElement} T
-   * @param {DocumentFragment | Element} element
-   * @param {string} selectors
-   */
-  static querySelectorRequre = (element, selectors) => {
-    const result = element.querySelector(selectors);
-    if (!result) throw Error(`Can't find selector "${selectors}"`);
-    return /** @type {T} */ (result);
-  };
-
-  /**
-   *
-   * @param {HTMLElement} source
-   * @param {HTMLElement} target_desktop_nav_menu
-   * @param {HTMLElement} target_mobile_nav_menu
-   */
-  static processNav = (
-    source,
-    target_desktop_nav_menu,
-    target_mobile_nav_menu
-  ) => {
-    const detailsName = "MobileMenu";
-
-    const source_nav = source.querySelector(":scope > nav");
-    if (!source_nav) {
-      target_mobile_nav_menu.remove();
-      target_desktop_nav_menu.remove();
-      return;
-    }
-
-    /** @type {HTMLUListElement} */
-    const target_mobile_nav_ul = my.querySelectorRequre(
-      target_mobile_nav_menu,
-      ":scope > ul"
-    );
-
-    /** @type {HTMLUListElement} */
-    const target_desktop_nav_ul = my.querySelectorRequre(
-      target_desktop_nav_menu,
-      ":scope > ul"
-    );
-
-    const validUrl = (/** @type {string} */ href) => {
-      try {
-        return new URL(href, window.location.origin).href;
-      } catch (e) {
-        return href;
-      }
-    };
-
-    const setIfCurrent = (/** @type {HTMLAnchorElement} */ a) => {
-      if (validUrl(a.href) === window.location.href) {
-        a.ariaCurrent = "page";
-        a.tabIndex = -1;
-      }
-    };
-
-    Array.from(source_nav.children).forEach(n => {
-      const newLi = document.createElement("li");
-      if (n.tagName === "A") {
-        const aTag = /** @type {HTMLAnchorElement} */ (n.cloneNode(true));
-        aTag.role = "menuitem";
-        setIfCurrent(aTag);
-
-        newLi.appendChild(aTag);
-      } else {
-        const newDetails = document.createElement("details");
-        newDetails.name = detailsName;
-        const newSummary = document.createElement("summary");
-        const newDetailsUl = document.createElement("ul");
-        newDetails.appendChild(newSummary);
-        newDetails.appendChild(newDetailsUl);
-
-        const clone = /** @type {Element} */ (n.cloneNode(true));
-
-        //child
-        clone.querySelectorAll("a").forEach(aTag => {
-          aTag.role = "menuitem";
-          const newDetailsLi = document.createElement("li");
-          newDetailsLi.appendChild(aTag);
-          newDetailsUl.appendChild(newDetailsLi);
-
-          setIfCurrent(aTag);
+  constructor() {
+    /**
+     * @param {Element} target
+     * @param {Element} source
+     * @private
+     */
+    const _updateAttributes = (target, source) => {
+      if (source.attributes)
+        // Update attributes
+        // Clear attribtues set as "null"
+        Array.from(source.attributes).forEach(attr => {
+          if (attr.value.trim().toLowerCase() === "null") {
+            target.attributes.removeNamedItem(attr.name);
+          } else {
+            target.setAttribute(attr.name, attr.value);
+          }
         });
 
-        newLi.appendChild(newDetails);
-
-        newSummary.innerHTML = clone.innerHTML;
+      // Update text content if specified
+      if (
+        !target.childElementCount &&
+        !source.childElementCount &&
+        source.textContent?.trim()
+      ) {
+        target.textContent = source.textContent;
       }
+    };
 
-      target_mobile_nav_ul.appendChild(newLi);
-      target_desktop_nav_ul.appendChild(newLi.cloneNode(true));
-    });
-  };
+    /**
+     *
+     * @param {Element} target
+     * @param {Element} source
+     * @param {boolean} children
+     * @private
+     */
+    const _updateElement = (target, source, children = false) => {
+      // Update attributes if specified
+      _updateAttributes(target, source);
 
-  /**
-   *
-   * @param {HTMLDivElement} source
-   * @param {HTMLElement} target_site_header_container
-   * @param {my} me
-   */
-  static processBranding = (source, target_site_header_container, me) => {
-    const source_site_logo = source.querySelector(":scope > a:first-of-type");
-    if (source_site_logo) {
-      // <a class="site-logo">
-      const target_site_logo = my.querySelectorRequre(
-        target_site_header_container,
-        ":scope > a.site-logo"
-      );
+      if (!children) return;
 
-      my.updateElement(target_site_logo, source_site_logo);
-
-      // <img class="logo-image" />
-      const target_site_logo_img = my.querySelectorRequre(
-        target_site_logo,
-        ":scope > img.logo-image"
-      );
-
-      const source_site_logo_img =
-        source_site_logo.querySelector(":scope > img");
-      if (source_site_logo_img) {
-        my.updateElement(target_site_logo_img, source_site_logo_img);
-      }
-
-      if (me.dataset.logoOverflow?.toLowerCase() === "false") {
-        target_site_logo_img.classList.add("no-overflow");
-      }
-
-      const source_site_branding_spans =
-        source_site_logo.querySelectorAll(":scope > span");
-
-      if (source_site_branding_spans.length) {
-        // <div class="site-branding-text">
-        const target_site_branding = my.querySelectorRequre(
-          target_site_logo,
-          ":scope > div.site-branding-text"
-        );
-
-        // <span class="state">
-        const target_site_branding_state = my.querySelectorRequre(
-          target_site_branding,
-          ":scope > span.state"
-        );
-
-        my.updateElement(
-          target_site_branding_state,
-          source_site_branding_spans[0]
-        );
-
-        // <span class="department">
-        const target_site_branding_department = my.querySelectorRequre(
-          target_site_branding,
-          ":scope > span.department"
-        );
-
-        if (source_site_branding_spans.length > 1) {
-          my.updateElement(
-            target_site_branding_department,
-            source_site_branding_spans[1]
+      // Add missing children
+      Array.from(source.children).forEach(sourceChild => {
+        if (sourceChild.nodeType === Node.ELEMENT_NODE) {
+          const targetChild = Array.from(target.children).find(
+            child => child.tagName === sourceChild.tagName
           );
+          if (targetChild) {
+            _updateElement(targetChild, sourceChild, children);
+          } else {
+            target.appendChild(sourceChild.cloneNode(true));
+          }
+        }
+      });
+    };
+
+    /**
+     * @template {HTMLElement} T
+     * @param {DocumentFragment | Element} element
+     * @param {string} selectors
+     * @private
+     */
+    const _querySelectorRequre = (element, selectors) => {
+      const result = element.querySelector(selectors);
+      if (!result) throw Error(`Can't find selector "${selectors}"`);
+      return /** @type {T} */ (result);
+    };
+
+    /**
+     *
+     * @param {HTMLElement} source
+     * @param {HTMLElement} target_desktop_nav_menu
+     * @param {HTMLElement} target_mobile_nav_menu
+     */
+    const _processNav = (
+      source,
+      target_desktop_nav_menu,
+      target_mobile_nav_menu
+    ) => {
+      const detailsName = "MobileMenu";
+
+      const source_nav = source.querySelector(":scope > nav");
+      if (!source_nav) {
+        target_mobile_nav_menu.remove();
+        target_desktop_nav_menu.remove();
+        return;
+      }
+
+      /** @type {HTMLUListElement} */
+      const target_mobile_nav_ul = _querySelectorRequre(
+        target_mobile_nav_menu,
+        ":scope > ul"
+      );
+
+      /** @type {HTMLUListElement} */
+      const target_desktop_nav_ul = _querySelectorRequre(
+        target_desktop_nav_menu,
+        ":scope > ul"
+      );
+
+      const validUrl = (/** @type {string} */ href) => {
+        try {
+          return new URL(href, window.location.origin).href;
+        } catch (e) {
+          return href;
+        }
+      };
+
+      const setIfCurrent = (/** @type {HTMLAnchorElement} */ a) => {
+        if (validUrl(a.href) === window.location.href) {
+          a.ariaCurrent = "page";
+          a.tabIndex = -1;
+        }
+      };
+
+      Array.from(source_nav.children).forEach(n => {
+        const newLi = document.createElement("li");
+        if (n.tagName === "A") {
+          const aTag = /** @type {HTMLAnchorElement} */ (n.cloneNode(true));
+          aTag.role = "menuitem";
+          setIfCurrent(aTag);
+
+          newLi.appendChild(aTag);
         } else {
-          target_site_branding_department.innerHTML = "";
+          const newDetails = document.createElement("details");
+          newDetails.name = detailsName;
+          const newSummary = document.createElement("summary");
+          const newDetailsUl = document.createElement("ul");
+          newDetails.appendChild(newSummary);
+          newDetails.appendChild(newDetailsUl);
+
+          const clone = /** @type {Element} */ (n.cloneNode(true));
+
+          //child
+          clone.querySelectorAll("a").forEach(aTag => {
+            aTag.role = "menuitem";
+            const newDetailsLi = document.createElement("li");
+            newDetailsLi.appendChild(aTag);
+            newDetailsUl.appendChild(newDetailsLi);
+
+            setIfCurrent(aTag);
+          });
+
+          newLi.appendChild(newDetails);
+
+          newSummary.innerHTML = clone.innerHTML;
+        }
+
+        target_mobile_nav_ul.appendChild(newLi);
+        target_desktop_nav_ul.appendChild(newLi.cloneNode(true));
+      });
+    };
+
+    /**
+     *
+     * @param {HTMLDivElement} source
+     * @param {HTMLElement} target_site_header_container
+     * @param {my} me
+     */
+    const _processBranding = (source, target_site_header_container, me) => {
+      const source_site_logo = source.querySelector(":scope > a:first-of-type");
+      if (source_site_logo) {
+        // <a class="site-logo">
+        const target_site_logo = _querySelectorRequre(
+          target_site_header_container,
+          ":scope > a.site-logo"
+        );
+
+        _updateElement(target_site_logo, source_site_logo);
+
+        // <img class="logo-image" />
+        const target_site_logo_img = _querySelectorRequre(
+          target_site_logo,
+          ":scope > img.logo-image"
+        );
+
+        const source_site_logo_img =
+          source_site_logo.querySelector(":scope > img");
+        if (source_site_logo_img) {
+          _updateElement(target_site_logo_img, source_site_logo_img);
+        }
+
+        if (me.dataset.logoOverflow?.toLowerCase() === "false") {
+          target_site_logo_img.classList.add("no-overflow");
+        }
+
+        const source_site_branding_spans =
+          source_site_logo.querySelectorAll(":scope > span");
+
+        if (source_site_branding_spans.length) {
+          // <div class="site-branding-text">
+          const target_site_branding = _querySelectorRequre(
+            target_site_logo,
+            ":scope > div.site-branding-text"
+          );
+
+          // <span class="state">
+          const target_site_branding_state = _querySelectorRequre(
+            target_site_branding,
+            ":scope > span.state"
+          );
+
+          _updateElement(
+            target_site_branding_state,
+            source_site_branding_spans[0]
+          );
+
+          // <span class="department">
+          const target_site_branding_department = _querySelectorRequre(
+            target_site_branding,
+            ":scope > span.department"
+          );
+
+          if (source_site_branding_spans.length > 1) {
+            _updateElement(
+              target_site_branding_department,
+              source_site_branding_spans[1]
+            );
+          } else {
+            target_site_branding_department.innerHTML = "";
+          }
         }
       }
-    }
-  };
+    };
 
-  /**
-   *
-   * @param {HTMLDivElement} source
-   * @param {HTMLElement} target_site_header_utility
-   */
-  static processSearch = (source, target_site_header_utility) => {
-    // <div class="search-container-desktop">
-    const target_search_container_desktop = my.querySelectorRequre(
-      target_site_header_utility,
-      ":scope > div.search-container-desktop"
-    );
-
-    /** @type {HTMLFormElement | null} */
-    const source_form = source.querySelector(":scope > form");
-
-    if (source_form) {
-      // <form>
-      const target_form = my.querySelectorRequre(
-        target_search_container_desktop,
-        ":scope > form"
+    /**
+     *
+     * @param {HTMLDivElement} source
+     * @param {HTMLElement} target_site_header_utility
+     * @private
+     */
+    const _processSearch = (source, target_site_header_utility) => {
+      // <div class="search-container-desktop">
+      const target_search_container_desktop = _querySelectorRequre(
+        target_site_header_utility,
+        ":scope > div.search-container-desktop"
       );
 
-      my.updateElement(target_form, source_form, true);
-    } else {
-      // No form specified, remove search
+      /** @type {HTMLFormElement | null} */
+      const source_form = source.querySelector(":scope > form");
 
-      target_search_container_desktop.remove();
-    }
-  };
+      if (source_form) {
+        // <form>
+        const target_form = _querySelectorRequre(
+          target_search_container_desktop,
+          ":scope > form"
+        );
 
-  constructor() {
+        _updateElement(target_form, source_form, true);
+      } else {
+        // No form specified, remove search
+
+        target_search_container_desktop.remove();
+      }
+    };
+
     /**
      * Used with `observedAttributes` to track attribute changes
      * @param {string} _name
@@ -540,23 +538,23 @@ class my extends cal_ds_base {
         // <header role="banner">
         //   <div class="site-header">
         //     <div class="site-header-container">
-        const target_site_header_container = my.querySelectorRequre(
+        const target_site_header_container = _querySelectorRequre(
           target,
           "header > div.site-header > div.site-header-container"
         );
 
         // <div class="site-header-utility">
-        const target_site_header_utility = my.querySelectorRequre(
+        const target_site_header_utility = _querySelectorRequre(
           target_site_header_container,
           ":scope > div.site-header-utility"
         );
 
-        my.processBranding(source, target_site_header_container, this);
-        my.processSearch(source, target_site_header_utility);
-        my.processNav(
+        _processBranding(source, target_site_header_container, this);
+        _processSearch(source, target_site_header_utility);
+        _processNav(
           source,
-          my.querySelectorRequre(target, "header > nav.desktop-nav-menu"),
-          my.querySelectorRequre(
+          _querySelectorRequre(target, "header > nav.desktop-nav-menu"),
+          _querySelectorRequre(
             target_site_header_container,
             ":scope > nav.mobile-nav-menu"
           )
@@ -566,22 +564,31 @@ class my extends cal_ds_base {
         const source_login_button = source.querySelector(
           ":scope > a.login-button"
         );
-        const target_login_button = my.querySelectorRequre(
+        const target_login_button = _querySelectorRequre(
           target_site_header_utility,
           ":scope > a.login-button"
         );
 
         if (source_login_button) {
-          my.updateElement(target_login_button, source_login_button, true);
+          _updateElement(target_login_button, source_login_button, true);
         } else {
           target_login_button.remove();
         }
       }
     };
 
+    // Track changes to the URL and update the selected menu item
+    /** @private */
+    let lastUrl = window.location.href;
+    setInterval(() => {
+      if (window.location.href !== lastUrl) {
+        lastUrl = window.location.href;
+        _contentChanged();
+      }
+    }, 1000);
+
     super({
       shadow: true,
-      ignore_base_css: true,
       css,
       connectedCallback: _contentChanged,
       templateChangedCallback: _contentChanged,
