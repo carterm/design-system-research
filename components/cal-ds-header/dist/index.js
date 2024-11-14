@@ -314,8 +314,9 @@ class my extends cal_ds_base {
    * @template {HTMLElement} T
    * @param {DocumentFragment | Element} element
    * @param {string} selectors
+   * @private
    */
-  static querySelectorRequre = (element, selectors) => {
+  static _querySelectorRequre = (element, selectors) => {
     const result = element.querySelector(selectors);
     if (!result) throw Error(`Can't find selector "${selectors}"`);
     return /** @type {T} */ (result);
@@ -327,7 +328,7 @@ class my extends cal_ds_base {
    * @param {HTMLElement} target_desktop_nav_menu
    * @param {HTMLElement} target_mobile_nav_menu
    */
-  static processNav = (
+  static _processNav = (
     source,
     target_desktop_nav_menu,
     target_mobile_nav_menu
@@ -342,13 +343,13 @@ class my extends cal_ds_base {
     }
 
     /** @type {HTMLUListElement} */
-    const target_mobile_nav_ul = my.querySelectorRequre(
+    const target_mobile_nav_ul = my._querySelectorRequre(
       target_mobile_nav_menu,
       ":scope > ul"
     );
 
     /** @type {HTMLUListElement} */
-    const target_desktop_nav_ul = my.querySelectorRequre(
+    const target_desktop_nav_ul = my._querySelectorRequre(
       target_desktop_nav_menu,
       ":scope > ul"
     );
@@ -412,11 +413,11 @@ class my extends cal_ds_base {
    * @param {HTMLElement} target_site_header_container
    * @param {my} me
    */
-  static processBranding = (source, target_site_header_container, me) => {
+  static _processBranding = (source, target_site_header_container, me) => {
     const source_site_logo = source.querySelector(":scope > a:first-of-type");
     if (source_site_logo) {
       // <a class="site-logo">
-      const target_site_logo = my.querySelectorRequre(
+      const target_site_logo = my._querySelectorRequre(
         target_site_header_container,
         ":scope > a.site-logo"
       );
@@ -424,7 +425,7 @@ class my extends cal_ds_base {
       my.updateElement(target_site_logo, source_site_logo);
 
       // <img class="logo-image" />
-      const target_site_logo_img = my.querySelectorRequre(
+      const target_site_logo_img = my._querySelectorRequre(
         target_site_logo,
         ":scope > img.logo-image"
       );
@@ -444,13 +445,13 @@ class my extends cal_ds_base {
 
       if (source_site_branding_spans.length) {
         // <div class="site-branding-text">
-        const target_site_branding = my.querySelectorRequre(
+        const target_site_branding = my._querySelectorRequre(
           target_site_logo,
           ":scope > div.site-branding-text"
         );
 
         // <span class="state">
-        const target_site_branding_state = my.querySelectorRequre(
+        const target_site_branding_state = my._querySelectorRequre(
           target_site_branding,
           ":scope > span.state"
         );
@@ -461,7 +462,7 @@ class my extends cal_ds_base {
         );
 
         // <span class="department">
-        const target_site_branding_department = my.querySelectorRequre(
+        const target_site_branding_department = my._querySelectorRequre(
           target_site_branding,
           ":scope > span.department"
         );
@@ -482,10 +483,11 @@ class my extends cal_ds_base {
    *
    * @param {HTMLDivElement} source
    * @param {HTMLElement} target_site_header_utility
+   * @private
    */
-  static processSearch = (source, target_site_header_utility) => {
+  static _processSearch = (source, target_site_header_utility) => {
     // <div class="search-container-desktop">
-    const target_search_container_desktop = my.querySelectorRequre(
+    const target_search_container_desktop = my._querySelectorRequre(
       target_site_header_utility,
       ":scope > div.search-container-desktop"
     );
@@ -495,7 +497,7 @@ class my extends cal_ds_base {
 
     if (source_form) {
       // <form>
-      const target_form = my.querySelectorRequre(
+      const target_form = my._querySelectorRequre(
         target_search_container_desktop,
         ":scope > form"
       );
@@ -534,23 +536,23 @@ class my extends cal_ds_base {
         // <header role="banner">
         //   <div class="site-header">
         //     <div class="site-header-container">
-        const target_site_header_container = my.querySelectorRequre(
+        const target_site_header_container = my._querySelectorRequre(
           target,
           "header > div.site-header > div.site-header-container"
         );
 
         // <div class="site-header-utility">
-        const target_site_header_utility = my.querySelectorRequre(
+        const target_site_header_utility = my._querySelectorRequre(
           target_site_header_container,
           ":scope > div.site-header-utility"
         );
 
-        my.processBranding(source, target_site_header_container, this);
-        my.processSearch(source, target_site_header_utility);
-        my.processNav(
+        my._processBranding(source, target_site_header_container, this);
+        my._processSearch(source, target_site_header_utility);
+        my._processNav(
           source,
-          my.querySelectorRequre(target, "header > nav.desktop-nav-menu"),
-          my.querySelectorRequre(
+          my._querySelectorRequre(target, "header > nav.desktop-nav-menu"),
+          my._querySelectorRequre(
             target_site_header_container,
             ":scope > nav.mobile-nav-menu"
           )
@@ -560,7 +562,7 @@ class my extends cal_ds_base {
         const source_login_button = source.querySelector(
           ":scope > a.login-button"
         );
-        const target_login_button = my.querySelectorRequre(
+        const target_login_button = my._querySelectorRequre(
           target_site_header_utility,
           ":scope > a.login-button"
         );
@@ -580,6 +582,18 @@ class my extends cal_ds_base {
       templateChangedCallback: _contentChanged,
       attributeChangedCallback: _attributeChangedCallback
     });
+
+    let lastUrl = window.location.href;
+
+    function checkUrlChange() {
+      if (window.location.href !== lastUrl) {
+        lastUrl = window.location.href;
+        _contentChanged();
+        // Your code to handle the URL change
+      }
+    }
+
+    setInterval(checkUrlChange, 1000);
   }
 }
 
