@@ -1,13 +1,9 @@
-var CssBaseStyleString = ":host{font-family:system-ui,-apple-system,\"Segoe UI\",Roboto,\"Helvetica Neue\",\"Noto Sans\",\"Liberation Sans\",Arial,sans-serif;--gov-header:#071645;--brand-primary:#13394b;--brand-secondary:#0070a3;--banner-light:#d5dbde;--banner-dark:#09202b;--brand-hover-light:#3ca3d3;--brand-hover-dark:#246c8e;--background-primary-light:#d9d8cf;--background-secondary-light:#f5f3eb;--background-primary-dark:#43433f;--background-secondary-dark:#65645f;--action-primary:#fec335;--action-secondary:#fae2ad;--text-white:#fff;--grey:#ccc;--grey-text:#323232;--grey-background:#eee;--gutter-gap:1.674vw;--flow-space:1rem;--radius:1rem;--shadow:0.2rem 0.2rem 0.5rem 0 rgba(0 0 0 / 25%);--shadow-focus:0.1rem 0.1rem 0.25rem 0 rgba(0 0 0 / 10%);--shadow-active:0.2rem 0.2rem 0.5rem 0 rgba(0 0 0 / 60%);--font-size:1rem;--ratio:1.24;--s0:calc(var(--font-size) - 0.3rem) + 0.2vw;--st:calc(var(--s0) * var(--ratio));--base:calc(var(--st) * var(--ratio));--lt:calc(var(--base) * var(--ratio));--h6:calc(var(--s0) * var(--ratio));--h5:calc(var(--h6) * var(--ratio));--h4:calc(var(--h5) * var(--ratio));--h3:calc(var(--h4) * var(--ratio));--h2:calc(var(--h3) * var(--ratio));--h1:calc(var(--h2) * var(--ratio) * var(--ratio));}";
-
 //@ts-check
-
 
 /**
  * Options for ca-eureka components
  * @typedef {object} cal_ds_options
  * @property {boolean} [shadow] - Create a shadow DOM?
- * @property {boolean} [ignore_base_css] - true to skip including the base style for a standalone component
  * @property {string} [css] - CSS to apply to component
  * @property {string} [global_css] - CSS to merge into the main DOM
  * @property {string} [html] - HTML to apply to component (Event configurable)
@@ -63,8 +59,6 @@ class cal_ds_base extends HTMLElement {
       //Shadow Dom requested
       const shadow = this.attachShadow({ mode: "open" });
       this.dispatchComponentEvent("cal_ds_shadow_constructed_start");
-
-      if (!options.ignore_base_css) this.addStyle(CssBaseStyleString); //Adds the base style for ALL components
 
       if (options.css) {
         this.addStyle(options.css);
@@ -581,7 +575,6 @@ class my extends cal_ds_base {
 
     super({
       shadow: true,
-      ignore_base_css: true,
       css,
       connectedCallback: _contentChanged,
       templateChangedCallback: _contentChanged,

@@ -342,7 +342,6 @@ export default class my extends cal_ds_base {
 
     super({
       shadow: true,
-      ignore_base_css: true,
       css,
       connectedCallback: _contentChanged,
       templateChangedCallback: _contentChanged,
