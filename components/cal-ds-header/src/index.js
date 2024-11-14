@@ -59,7 +59,7 @@ export default class my extends cal_ds_base {
      * @param {boolean} children
      * @private
      */
-    function _updateElement(target, source, children = false) {
+    const _updateElement = (target, source, children = false) => {
       // Update attributes if specified
       _updateAttributes(target, source);
 
@@ -78,7 +78,7 @@ export default class my extends cal_ds_base {
           }
         }
       });
-    }
+    };
 
     /**
      * @template {HTMLElement} T
