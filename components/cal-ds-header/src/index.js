@@ -27,8 +27,9 @@ export default class my extends cal_ds_base {
   /**
    * @param {Element} target
    * @param {Element} source
+   * @private
    */
-  static updateAttributes(target, source) {
+  static _updateAttributes(target, source) {
     if (source.attributes)
       // Update attributes
       // Clear attribtues set as "null"
@@ -55,10 +56,11 @@ export default class my extends cal_ds_base {
    * @param {Element} target
    * @param {Element} source
    * @param {boolean} children
+   * @private
    */
-  static updateElement(target, source, children = false) {
+  static _updateElement(target, source, children = false) {
     // Update attributes if specified
-    my.updateAttributes(target, source);
+    my._updateAttributes(target, source);
 
     if (!children) return;
 
@@ -69,7 +71,7 @@ export default class my extends cal_ds_base {
           child => child.tagName === sourceChild.tagName
         );
         if (targetChild) {
-          my.updateElement(targetChild, sourceChild, children);
+          my._updateElement(targetChild, sourceChild, children);
         } else {
           target.appendChild(sourceChild.cloneNode(true));
         }
@@ -189,7 +191,7 @@ export default class my extends cal_ds_base {
         ":scope > a.site-logo"
       );
 
-      my.updateElement(target_site_logo, source_site_logo);
+      my._updateElement(target_site_logo, source_site_logo);
 
       // <img class="logo-image" />
       const target_site_logo_img = my._querySelectorRequre(
@@ -200,7 +202,7 @@ export default class my extends cal_ds_base {
       const source_site_logo_img =
         source_site_logo.querySelector(":scope > img");
       if (source_site_logo_img) {
-        my.updateElement(target_site_logo_img, source_site_logo_img);
+        my._updateElement(target_site_logo_img, source_site_logo_img);
       }
 
       if (me.dataset.logoOverflow?.toLowerCase() === "false") {
@@ -223,7 +225,7 @@ export default class my extends cal_ds_base {
           ":scope > span.state"
         );
 
-        my.updateElement(
+        my._updateElement(
           target_site_branding_state,
           source_site_branding_spans[0]
         );
@@ -235,7 +237,7 @@ export default class my extends cal_ds_base {
         );
 
         if (source_site_branding_spans.length > 1) {
-          my.updateElement(
+          my._updateElement(
             target_site_branding_department,
             source_site_branding_spans[1]
           );
@@ -269,7 +271,7 @@ export default class my extends cal_ds_base {
         ":scope > form"
       );
 
-      my.updateElement(target_form, source_form, true);
+      my._updateElement(target_form, source_form, true);
     } else {
       // No form specified, remove search
 
@@ -335,12 +337,22 @@ export default class my extends cal_ds_base {
         );
 
         if (source_login_button) {
-          my.updateElement(target_login_button, source_login_button, true);
+          my._updateElement(target_login_button, source_login_button, true);
         } else {
           target_login_button.remove();
         }
       }
     };
+
+    // Track changes to the URL and update the selected menu item
+    /** @private */
+    let lastUrl = window.location.href;
+    setInterval(() => {
+      if (window.location.href !== lastUrl) {
+        lastUrl = window.location.href;
+        _contentChanged();
+      }
+    }, 1000);
 
     super({
       shadow: true,
@@ -349,17 +361,5 @@ export default class my extends cal_ds_base {
       templateChangedCallback: _contentChanged,
       attributeChangedCallback: _attributeChangedCallback
     });
-
-    let lastUrl = window.location.href;
-
-    function checkUrlChange() {
-      if (window.location.href !== lastUrl) {
-        lastUrl = window.location.href;
-        _contentChanged();
-        // Your code to handle the URL change
-      }
-    }
-
-    setInterval(checkUrlChange, 1000);
   }
 }
