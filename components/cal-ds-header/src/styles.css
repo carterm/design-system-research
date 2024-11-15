@@ -182,10 +182,10 @@ header {
     summary {
       color: var(--header-link-color);
       text-decoration: none;
-      padding: 2rem;
+      padding: 1rem;
 
       &:hover {
-        background-color: red;
+        background-color: var(--action-secondary-hover);
       }
 
       &:focus {
@@ -283,7 +283,7 @@ header {
           > li {
             > a,
             > details > ul > li > a {
-              padding: 2rem;
+              padding: 1rem;
               text-decoration: none;
               display: block;
 
@@ -296,7 +296,7 @@ header {
               display: block;
 
               > summary {
-                padding: 2rem;
+                padding: 1rem;
 
                 &:focus {
                   background-color: #666;
