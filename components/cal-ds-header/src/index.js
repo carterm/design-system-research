@@ -105,24 +105,12 @@ export default class my extends cal_ds_base {
     ) => {
       const detailsName = "MobileMenu";
 
-      const source_nav = source.querySelector(":scope > nav");
-      if (!source_nav) {
+      const source_navs = source.querySelectorAll(":scope > nav");
+      if (!source_navs.length) {
         target_mobile_nav_menu.remove();
         target_desktop_nav_menu.remove();
         return;
       }
-
-      /** @type {HTMLUListElement} */
-      const target_mobile_nav_ul = _querySelectorRequre(
-        target_mobile_nav_menu,
-        ":scope > ul"
-      );
-
-      /** @type {HTMLUListElement} */
-      const target_desktop_nav_ul = _querySelectorRequre(
-        target_desktop_nav_menu,
-        ":scope > ul"
-      );
 
       const validUrl = (/** @type {string} */ href) => {
         try {
@@ -139,10 +127,10 @@ export default class my extends cal_ds_base {
         }
       };
 
-      Array.from(source_nav.children).forEach(n => {
+      const getLi = (/** @type {Element} */ myTag) => {
         const newLi = document.createElement("li");
-        if (n.tagName === "A") {
-          const aTag = /** @type {HTMLAnchorElement} */ (n.cloneNode(true));
+        if (myTag.tagName === "A") {
+          const aTag = /** @type {HTMLAnchorElement} */ (myTag.cloneNode(true));
           aTag.role = "menuitem";
           setIfCurrent(aTag);
 
@@ -155,7 +143,7 @@ export default class my extends cal_ds_base {
           newDetails.appendChild(newSummary);
           newDetails.appendChild(newDetailsUl);
 
-          const clone = /** @type {Element} */ (n.cloneNode(true));
+          const clone = /** @type {Element} */ (myTag.cloneNode(true));
 
           //child
           clone.querySelectorAll("a").forEach(aTag => {
@@ -172,9 +160,47 @@ export default class my extends cal_ds_base {
           newSummary.innerHTML = clone.innerHTML;
         }
 
+        return newLi;
+      };
+
+      /** @type {HTMLUListElement} */
+      const target_mobile_nav_ul = _querySelectorRequre(
+        target_mobile_nav_menu,
+        ":scope > ul"
+      );
+
+      /** @type {HTMLUListElement} */
+      const target_desktop_nav_ul_utility = _querySelectorRequre(
+        target_desktop_nav_menu,
+        ":scope > ul.desktop-nav-menu-utility"
+      );
+
+      /** @type {HTMLUListElement} */
+      const target_desktop_nav_ul_main = _querySelectorRequre(
+        target_desktop_nav_menu,
+        ":scope > ul.desktop-nav-menu-main"
+      );
+
+      [...source_navs[0].children].forEach(n => {
+        const newLi = getLi(n);
+
         target_mobile_nav_ul.appendChild(newLi);
-        target_desktop_nav_ul.appendChild(newLi.cloneNode(true));
+        target_desktop_nav_ul_main.appendChild(newLi.cloneNode(true));
       });
+
+      const source_nav_utility =
+        source_navs.length > 1 ? source_navs[1] : undefined;
+
+      if (source_nav_utility) {
+        [...source_nav_utility.children].forEach(n => {
+          const newLi = getLi(n);
+
+          target_mobile_nav_ul.appendChild(newLi);
+          target_desktop_nav_ul_utility.appendChild(newLi.cloneNode(true));
+        });
+      } else {
+        target_desktop_nav_ul_utility.remove();
+      }
     };
 
     /**

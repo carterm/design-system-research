@@ -32,6 +32,11 @@ Banner for the top of any page. Place the code anywhere in your HTML and it will
       <a href="/about/">About</a>
     </nav>
 
+    <!-- Utility Menu -->
+    <nav>
+      <a href="/contact/">Contact Us</a>
+    </nav>
+
     <!-- Search Form -->
     <form action="/serp.html">
       <input placeholder="Search">
@@ -190,6 +195,11 @@ document.body.innerHTML = `
         <a href="/level2/option2">Level 2 Option 2</a>
       </div>
       <a href="/about/">About</a>
+    </nav>
+
+    <!-- Utility Menu -->
+    <nav>
+      <a href="/contact/">Contact Us</a>
     </nav>
 
     <!-- Search Form -->
