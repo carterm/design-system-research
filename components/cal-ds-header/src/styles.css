@@ -209,7 +209,6 @@ header {
     background-color: var(--header-bg);
 
     > div.site-header-container {
-      max-width: var(--desktop-max-width);
       margin: 0 auto;
       padding: 0 var(--space-unit-x2);
       display: flex;
