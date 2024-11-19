@@ -112,10 +112,6 @@ export default class my extends cal_ds_base {
         return;
       }
 
-      const source_nav_main = source_navs[0];
-      const source_nav_utility =
-        source_navs.length > 1 ? source_navs[1] : undefined;
-
       const validUrl = (/** @type {string} */ href) => {
         try {
           return new URL(href, window.location.origin).href;
@@ -184,12 +180,16 @@ export default class my extends cal_ds_base {
         target_desktop_nav_menu,
         ":scope > ul.desktop-nav-menu-main"
       );
-      [...source_nav_main.children].forEach(n => {
+
+      [...source_navs[0].children].forEach(n => {
         const newLi = getLi(n);
 
         target_mobile_nav_ul.appendChild(newLi);
         target_desktop_nav_ul_main.appendChild(newLi.cloneNode(true));
       });
+
+      const source_nav_utility =
+        source_navs.length > 1 ? source_navs[1] : undefined;
 
       if (source_nav_utility) {
         [...source_nav_utility.children].forEach(n => {
