@@ -135,29 +135,6 @@ export default class my extends cal_ds_base {
           setIfCurrent(aTag);
 
           newLi.appendChild(aTag);
-        } else {
-          const newDetails = document.createElement("details");
-          newDetails.name = detailsName;
-          const newSummary = document.createElement("summary");
-          const newDetailsUl = document.createElement("ul");
-          newDetails.appendChild(newSummary);
-          newDetails.appendChild(newDetailsUl);
-
-          const clone = /** @type {Element} */ (myTag.cloneNode(true));
-
-          //child
-          clone.querySelectorAll("a").forEach(aTag => {
-            aTag.role = "menuitem";
-            const newDetailsLi = document.createElement("li");
-            newDetailsLi.appendChild(aTag);
-            newDetailsUl.appendChild(newDetailsLi);
-
-            setIfCurrent(aTag);
-          });
-
-          newLi.appendChild(newDetails);
-
-          newSummary.innerHTML = clone.innerHTML;
         }
 
         return newLi;
