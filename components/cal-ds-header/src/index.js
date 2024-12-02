@@ -103,8 +103,6 @@ export default class my extends cal_ds_base {
       target_desktop_nav_menu,
       target_mobile_nav_menu
     ) => {
-      const detailsName = "MobileMenu";
-
       const source_navs = source.querySelectorAll(":scope > nav");
       if (!source_navs.length) {
         target_mobile_nav_menu.remove();
