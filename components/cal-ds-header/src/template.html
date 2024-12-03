@@ -6,9 +6,16 @@
     <div class="site-header-container">
       <slot name="slot3"></slot>
       <nav class="mobile-nav-menu" role="navigation">
-        <a href="#" tabindex="0" class="main-navigation-button" role="button">
+        <a
+          href="#"
+          tabindex="0"
+          class="main-navigation-button"
+          role="button"
+          aria-haspopup="true"
+          id="mobilemenubutton"
+          aria-controls="mobilemenu">
           <div class="hamburger"></div>
-          <span class="visually-hidden">Main menu</span>
+          <span class="visually-hidden">Mobile menu</span>
         </a>
         <a
           href="#"
@@ -16,7 +23,13 @@
           class="main-navigation-cancel"
           role="button"
           aria-label="Close menu"></a>
-        <ul></ul>
+        <ul role="menu" id="mobilemenu" aria-labelledby="mobilemenubutton">
+          <template>
+            <li role="presentation">
+              <a role="menuitem" tabindex="0"></a>
+            </li>
+          </template>
+        </ul>
       </nav>
 
       <a href="index.html" class="site-logo">
@@ -48,7 +61,11 @@
               placeholder="Search..."
               tabindex="0"
               required />
-            <button type="submit" class="search-submit" tabindex="-1"></button>
+            <button
+              type="submit"
+              class="search-submit"
+              tabindex="-1"
+              aria-hidden="true"></button>
             <button type="submit" class="search-submit"></button>
           </form>
           <slot name="slot7"></slot>
@@ -68,8 +85,20 @@
     <slot name="slot12"></slot>
   </div>
   <nav class="desktop-nav-menu" role="navigation">
-    <ul class="desktop-nav-menu-main"></ul>
-    <ul class="desktop-nav-menu-utility"></ul>
+    <ul class="desktop-nav-menu-main" role="menu" aria-label="Desktop Menu">
+      <template>
+        <li role="presentation">
+          <a role="menuitem"></a>
+        </li>
+      </template>
+    </ul>
+    <ul class="desktop-nav-menu-utility" role="menu" aria-label="Utility Menu">
+      <template>
+        <li role="presentation">
+          <a role="menuitem"></a>
+        </li>
+      </template>
+    </ul>
   </nav>
   <slot name="slot13"></slot>
 </header>

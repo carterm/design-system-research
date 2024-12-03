@@ -103,8 +103,6 @@ export default class my extends cal_ds_base {
       target_desktop_nav_menu,
       target_mobile_nav_menu
     ) => {
-      const detailsName = "MobileMenu";
-
       const source_navs = source.querySelectorAll(":scope > nav");
       if (!source_navs.length) {
         target_mobile_nav_menu.remove();
@@ -127,40 +125,26 @@ export default class my extends cal_ds_base {
         }
       };
 
-      const getLi = (/** @type {Element} */ myTag) => {
-        const newLi = document.createElement("li");
+      const getLi = (
+        /** @type {Element} */ myTag,
+        /** @type {HTMLTemplateElement} */ myTemplate
+      ) => {
         if (myTag.tagName === "A") {
-          const aTag = /** @type {HTMLAnchorElement} */ (myTag.cloneNode(true));
-          aTag.role = "menuitem";
+          const newLi = /** @type {HTMLElement} */ (
+            myTemplate.content.cloneNode(true)
+          );
+
+          /** @type {HTMLAnchorElement} */
+          const aTag = _querySelectorRequre(newLi, "a");
+
+          _updateElement(aTag, myTag);
+
           setIfCurrent(aTag);
 
-          newLi.appendChild(aTag);
+          return newLi;
         } else {
-          const newDetails = document.createElement("details");
-          newDetails.name = detailsName;
-          const newSummary = document.createElement("summary");
-          const newDetailsUl = document.createElement("ul");
-          newDetails.appendChild(newSummary);
-          newDetails.appendChild(newDetailsUl);
-
-          const clone = /** @type {Element} */ (myTag.cloneNode(true));
-
-          //child
-          clone.querySelectorAll("a").forEach(aTag => {
-            aTag.role = "menuitem";
-            const newDetailsLi = document.createElement("li");
-            newDetailsLi.appendChild(aTag);
-            newDetailsUl.appendChild(newDetailsLi);
-
-            setIfCurrent(aTag);
-          });
-
-          newLi.appendChild(newDetails);
-
-          newSummary.innerHTML = clone.innerHTML;
+          return document.createElement("li");
         }
-
-        return newLi;
       };
 
       /** @type {HTMLUListElement} */
@@ -181,22 +165,41 @@ export default class my extends cal_ds_base {
         ":scope > ul.desktop-nav-menu-main"
       );
 
-      [...source_navs[0].children].forEach(n => {
-        const newLi = getLi(n);
+      /** @type {HTMLTemplateElement} */
+      const templateMobile = _querySelectorRequre(
+        target_mobile_nav_ul,
+        "template"
+      );
+      /** @type {HTMLTemplateElement} */
+      const templateDesktopMain = _querySelectorRequre(
+        target_desktop_nav_ul_main,
+        "template"
+      );
 
-        target_mobile_nav_ul.appendChild(newLi);
-        target_desktop_nav_ul_main.appendChild(newLi.cloneNode(true));
+      //Removing templates once found.  Not needed for output markup
+      templateMobile.remove();
+      templateDesktopMain.remove();
+
+      [...source_navs[0].children].forEach(n => {
+        target_mobile_nav_ul.appendChild(getLi(n, templateMobile));
+        target_desktop_nav_ul_main.appendChild(getLi(n, templateDesktopMain));
       });
 
       const source_nav_utility =
         source_navs.length > 1 ? source_navs[1] : undefined;
 
       if (source_nav_utility) {
+        /** @type {HTMLTemplateElement} */
+        const templateDesktopUtility = _querySelectorRequre(
+          target_desktop_nav_ul_utility,
+          "template"
+        );
+        templateDesktopUtility.remove();
         [...source_nav_utility.children].forEach(n => {
-          const newLi = getLi(n);
-
-          target_mobile_nav_ul.appendChild(newLi);
-          target_desktop_nav_ul_utility.appendChild(newLi.cloneNode(true));
+          target_mobile_nav_ul.appendChild(getLi(n, templateMobile));
+          target_desktop_nav_ul_utility.appendChild(
+            getLi(n, templateDesktopUtility)
+          );
         });
       } else {
         target_desktop_nav_ul_utility.remove();

@@ -175,11 +175,6 @@ header {
     /* stylelint-disable-next-line selector-nested-pattern */
     a {
       display: block;
-    }
-
-    /* stylelint-disable-next-line selector-nested-pattern */
-    a,
-    summary {
       color: var(--header-link-color);
       text-decoration: none;
       padding: 1rem;
@@ -194,7 +189,11 @@ header {
 
       &[aria-current="page"] {
         pointer-events: none;
-        text-decoration: solid underline yellow 0.3rem;
+
+        /* Separate text-decoration values for Safari support (Polyfill?) */
+        text-decoration: underline;
+        text-decoration-color: yellow;
+        text-decoration-thickness: 0.3rem;
       }
     }
 
@@ -287,34 +286,13 @@ header {
           display: none;
 
           > li {
-            > a,
-            > details > ul > li > a {
+            > a {
               padding: 1rem;
               text-decoration: none;
               display: block;
 
               &:focus {
                 background-color: #666;
-              }
-            }
-
-            > details {
-              display: block;
-
-              > summary {
-                padding: 1rem;
-
-                &:focus {
-                  background-color: #666;
-                }
-              }
-
-              > ul {
-                padding: 0;
-
-                > li {
-                  margin: 0;
-                }
               }
             }
           }

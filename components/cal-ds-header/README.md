@@ -24,11 +24,6 @@ Banner for the top of any page. Place the code anywhere in your HTML and it will
     <!-- Nav links -->
     <nav>
       <a href="/home/">Home</a>
-      <div>
-        Level 2 Menu
-        <a href="/level2/option1">Level 2 Option 1</a>
-        <a href="/level2/option2">Level 2 Option 2</a>
-      </div>
       <a href="/about/">About</a>
     </nav>
 
@@ -85,26 +80,7 @@ Banner for the top of any page. Place the code anywhere in your HTML and it will
           role="button"
           aria-label="Close menu"></a>
         <ul>
-          <li>
-            <details name="MobileMenu">
-              <summary>Level 1 menu - 1</summary>
-              <ul>
-                <li><a href="#" role="menuitem">Submenu 1A</a></li>
-                <li><a href="#" role="menuitem">Submenu 1B</a></li>
-                <li><a href="#" role="menuitem">Submenu 1C</a></li>
-              </ul>
-            </details>
-          </li>
-          <li>
-            <details name="MobileMenu">
-              <summary>Level 1 menu - 2</summary>
-              <ul>
-                <li><a href="#" role="menuitem">Submenu 2A</a></li>
-                <li><a href="#" role="menuitem">Submenu 2B</a></li>
-                <li><a href="#" role="menuitem">Submenu 2C</a></li>
-              </ul>
-            </details>
-          </li>
+      <!--  links rendered here -->
         </ul>
       </nav>
 
@@ -189,11 +165,6 @@ document.body.innerHTML = `
     <!-- Nav links -->
     <nav>
       <a href="/home/">Home</a>
-      <div>
-        Level 2 Menu
-        <a href="/level2/option1">Level 2 Option 1</a>
-        <a href="/level2/option2">Level 2 Option 2</a>
-      </div>
       <a href="/about/">About</a>
     </nav>
 
