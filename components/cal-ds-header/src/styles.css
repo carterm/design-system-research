@@ -194,7 +194,11 @@ header {
 
       &[aria-current="page"] {
         pointer-events: none;
-        text-decoration: solid underline yellow 0.3rem;
+
+        /* Separate text-decoration values for Safari support (Polyfill?) */
+        text-decoration: underline;
+        text-decoration-color: yellow;
+        text-decoration-thickness: 0.3rem;
       }
     }
 
