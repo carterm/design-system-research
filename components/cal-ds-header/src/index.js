@@ -103,8 +103,6 @@ export default class my extends cal_ds_base {
       target_desktop_nav_menu,
       target_mobile_nav_menu
     ) => {
-      const detailsName = "MobileMenu";
-
       const source_navs = source.querySelectorAll(":scope > nav");
       if (!source_navs.length) {
         target_mobile_nav_menu.remove();
@@ -135,29 +133,6 @@ export default class my extends cal_ds_base {
           setIfCurrent(aTag);
 
           newLi.appendChild(aTag);
-        } else {
-          const newDetails = document.createElement("details");
-          newDetails.name = detailsName;
-          const newSummary = document.createElement("summary");
-          const newDetailsUl = document.createElement("ul");
-          newDetails.appendChild(newSummary);
-          newDetails.appendChild(newDetailsUl);
-
-          const clone = /** @type {Element} */ (myTag.cloneNode(true));
-
-          //child
-          clone.querySelectorAll("a").forEach(aTag => {
-            aTag.role = "menuitem";
-            const newDetailsLi = document.createElement("li");
-            newDetailsLi.appendChild(aTag);
-            newDetailsUl.appendChild(newDetailsLi);
-
-            setIfCurrent(aTag);
-          });
-
-          newLi.appendChild(newDetails);
-
-          newSummary.innerHTML = clone.innerHTML;
         }
 
         return newLi;
