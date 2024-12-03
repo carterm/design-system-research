@@ -165,11 +165,6 @@ document.body.innerHTML = `
     <!-- Nav links -->
     <nav>
       <a href="/home/">Home</a>
-      <div>
-        Level 2 Menu
-        <a href="/level2/option1">Level 2 Option 1</a>
-        <a href="/level2/option2">Level 2 Option 2</a>
-      </div>
       <a href="/about/">About</a>
     </nav>
 
