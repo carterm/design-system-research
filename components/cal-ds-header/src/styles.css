@@ -15,7 +15,7 @@
   --brand-primary: #13394b;
   --brand-secondary: #0070a3;
   --banner-light: #d5dbde;
-  --banner-dark: #09202b;
+  --banner-dark: #001323;
   --brand-hover-light: #3ca3d3;
   --brand-hover-dark: #246c8e;
   --navigation-hover-light: #1a485e;
@@ -369,7 +369,7 @@ header {
 
             &.department {
               font-size: clamp(1rem, 0.6786rem + 0.4762vw, 1.25rem);
-              font-weight: 400;
+              font-weight: 300;
               margin-top: clamp(0.5rem, -0.4643rem + 1.4286vw, 1.25rem);
             }
           }
