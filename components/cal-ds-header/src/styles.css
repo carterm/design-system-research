@@ -118,6 +118,10 @@
   }
 }
 
+input::placeholder {
+  color: var(--search-placeholder-color);
+}
+
 /* Accessibility */
 span.visually-hidden {
   position: absolute !important;
