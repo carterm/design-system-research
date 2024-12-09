@@ -121,7 +121,6 @@ export default class my extends cal_ds_base {
       const setIfCurrent = (/** @type {HTMLAnchorElement} */ a) => {
         if (validUrl(a.href) === window.location.href) {
           a.ariaCurrent = "page";
-          a.tabIndex = -1;
         }
       };
 

@@ -188,8 +188,6 @@ header {
       }
 
       &[aria-current="page"] {
-        pointer-events: none;
-
         /* Separate text-decoration values for Safari support (Polyfill?) */
         text-decoration: underline;
         text-decoration-color: yellow;
