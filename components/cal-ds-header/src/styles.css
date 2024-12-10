@@ -26,11 +26,6 @@
   --background-secondary-dark: #65645f;
   --action-primary: #fec335;
   --action-secondary: #fae2ad;
-  --action-secondary-hover: linear-gradient(
-    4deg,
-    #fff -98.02%,
-    rgba(0, 81, 148, 1) 33.09%
-  );
   --main-light: #fafafa;
   --main-dark: #242424;
   --navigation-submenu-dark: #6d6d6d;
@@ -101,6 +96,14 @@
   --search-input-outline: var(--black);
   --search-submit-icon: var(--search-submit-light);
   --search-input-clear-icon: var(--search-input-clear-dark);
+  --horizontal-rule: linear-gradient(
+    90deg,
+    transparent 10.5%,
+    #6d6d6d 45%,
+    transparent 95.5%
+  );
+  --action-secondary-hover: linear-gradient(4deg, #fff -98.02%, #999);
+  --current-page-background: #999;
 }
 
 /* Define dark Theme variables */
@@ -119,6 +122,18 @@
     --search-input-outline: var(--white);
     --search-submit-icon: var(--search-submit-dark);
     --search-input-clear-icon: var(--search-input-clear-light);
+    --horizontal-rule: linear-gradient(
+      90deg,
+      black 10.5%,
+      #999 45%,
+      black 95.5%
+    );
+    --action-secondary-hover: linear-gradient(
+      4deg,
+      #fff -98.02%,
+      rgb(0 81 148) 33.09%
+    );
+    --current-page-background: #002747;
   }
 }
 
@@ -167,14 +182,8 @@ header {
     position: sticky;
   }
 
-  div.horizontal-rule {
-    background: linear-gradient(
-      90deg,
-      #040b36 10.5%,
-      #999 38%,
-      rgba(144, 144, 144, 0) 45%,
-      #040b36 95.5%
-    );
+  > div.horizontal-rule {
+    background: var(--horizontal-rule);
     height: 0.125rem;
   }
 
@@ -200,22 +209,17 @@ header {
       font-size: 1rem;
 
       &:hover {
-        background: var(--action-secondary-hover);
+        background-color: var(--action-secondary-hover);
       }
 
       &:focus {
         background: var(--action-secondary-hover);
-        border: 2px solid #fff;
+        border: -2px solid #fff;
       }
 
       &[aria-current="page"] {
-        background: #002747;
-        box-shadow: 2px 2px 4px 0px rgba(0, 0, 0, 0.4) inset;
-
-        /* Separate text-decoration values for Safari support (Polyfill?) */
-        /* text-decoration: underline;
-        text-decoration-color: yellow;
-        text-decoration-thickness: 0.3rem; */
+        background: var(--current-page-background);
+        box-shadow: 2px 2px 4px 0 rgb(0 0 0 / 40%) inset;
       }
     }
 
@@ -314,8 +318,8 @@ header {
               display: block;
 
               &:focus {
-                background: var(--action-secondary-hover);
-                border: 2px solid #fff;
+                background-color: var(--action-secondary-hover);
+                border: -2px solid #fff;
               }
             }
           }
