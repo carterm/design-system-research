@@ -122,6 +122,10 @@
   }
 }
 
+input::placeholder {
+  color: var(--search-placeholder-color);
+}
+
 /* Accessibility */
 span.visually-hidden {
   position: absolute !important;
@@ -205,7 +209,6 @@ header {
       }
 
       &[aria-current="page"] {
-        pointer-events: none;
         background: #002747;
         box-shadow: 2px 2px 4px 0px rgba(0, 0, 0, 0.4) inset;
 
