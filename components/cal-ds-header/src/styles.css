@@ -209,7 +209,7 @@ header {
       font-size: 1rem;
 
       &:hover {
-        background-color: var(--action-secondary-hover);
+        background-image: var(--action-secondary-hover);
       }
 
       &:focus {
@@ -318,7 +318,7 @@ header {
               display: block;
 
               &:focus {
-                background-color: var(--action-secondary-hover);
+                background-image: var(--action-secondary-hover);
                 border: -2px solid #fff;
               }
             }
