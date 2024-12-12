@@ -1,47 +1,12 @@
 :host {
-  /* layout variables */
-  --columns-gap: 1.674vw;
-  --desktop-max-width: 1920px;
-  --mobile-breakpoint-width: 1080px;
-  --sidebar-max-width: 15rem;
-  --main-content-max-width: 80rem;
-  --main-content-left-margin-max-width: 19rem;
-  --breakpoint-width-small: 34rem;
-  --breakpoint-width-medium: 48rem;
-  --breakpoint-width-large: 67rem;
-  --flex-grow-max: 9999;
-
   /* color variables */
-  --brand-primary: #13394b;
-  --brand-secondary: #0070a3;
   --banner-light: #d5dbde;
   --banner-dark: #001323;
-  --brand-hover-light: #3ca3d3;
-  --brand-hover-dark: #246c8e;
-  --navigation-hover-light: #1a485e;
-  --navigation-hover-dark: #0f3040;
-  --background-primary-light: #d9d8cf;
-  --background-primary-dark: #43433f;
-  --background-secondary-light: #f5f3eb;
-  --background-secondary-dark: #65645f;
-  --action-primary: #fec335;
   --action-secondary: #fae2ad;
-  --main-light: #fafafa;
-  --main-dark: #242424;
   --navigation-submenu-dark: #6d6d6d;
   --navigation-submenu-light: #dbdbdb;
-  --utility-dark: #111;
-  --utility-dark-grey: #494949;
-  --utility-mid-grey: #929292;
-  --utility-light-grey: #b6b6b6;
   --text-dark: #323232;
   --text-light: #fff;
-  --hyperlink-light: #0057ad;
-  --hyperlink-activated-light: #8a0071;
-  --hyperlink-dark: #87cefa;
-  --hyperlink-activated-dark: #f692b9;
-  --white: #fff;
-  --black: #000;
 
   /* border variables */
   --rounded-buttons: 50px;
@@ -50,12 +15,9 @@
   --space-unit-1: 0.5rem;
   --space-unit-x2: calc(0.5rem * 2);
   --space-unit-x4: calc(0.5rem * 4);
-  --space-unit-x8: calc(0.5rem * 8);
-  --space-unit-x16: calc(0.5rem * 16);
 
   /* typography variables */
   --font-family: noto sans;
-  --text-max-width: 48rem;
   --font-size-base: 1rem;
   --font-weight-base: 400;
   --line-height-base: 1rem;
@@ -68,7 +30,6 @@
   --p-font-size: calc(
     var(--font-size-base-plus-viewport-adjustment) * var(--ratio)
   );
-  --p-line-height: 1.619;
 
   /* icons */
   --search-icon-light: url("data:image/svg+xml;charset=UTF-8,%3Csvg viewBox='0 0 16.5 16.7' fill='%23FFFFFF' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M16.2,15l-4-4c2-2.6,1.8-6.4-0.6-8.8c-1.3-1.3-3-2-4.7-2s-3.4,0.6-4.7,2c-2.6,2.6-2.6,6.9,0,9.5 c1.3,1.3,3,2,4.7,2c1.4,0,2.9-0.4,4-1.4l4,4c0.2,0.2,0.4,0.3,0.6,0.3c0.2,0,0.5-0.1,0.6-0.3C16.5,16,16.5,15.4,16.2,15L16.2,15z M6.8,11.9c-1.3,0-2.5-0.5-3.5-1.4c-1.9-1.9-1.9-5,0-6.9c0.9-0.9,2.1-1.4,3.5-1.4s2.5,0.5,3.5,1.4c0.9,0.9,1.4,2.1,1.4,3.5 s-0.5,2.5-1.4,3.5C9.4,11.4,8.1,11.9,6.8,11.9z'%3E%3C/path%3E%3C/svg%3E");
@@ -87,13 +48,13 @@
   --cagov-icon: var(--cagov-icon-dark);
   --login-icon: var(--login-icon-dark);
   --header-bg: var(--banner-light);
-  --hamburger-bg: var(--black);
-  --header-link-color: var(--black);
+  --hamburger-bg: #000;
+  --header-link-color: #000;
   --search-border-color: var(--navigation-submenu-dark);
   --search-placeholder-color: var(--navigation-submenu-dark);
-  --search-input-color: var(--black);
+  --search-input-color: #000;
   --search-submit-button-color: var(--navigation-submenu-dark);
-  --search-input-outline: var(--black);
+  --search-input-outline: #000;
   --search-submit-icon: var(--search-submit-light);
   --search-input-clear-icon: var(--search-input-clear-dark);
   --horizontal-rule: linear-gradient(
@@ -113,13 +74,13 @@
     --cagov-icon: var(--cagov-icon-light);
     --login-icon: var(--login-icon-light);
     --header-bg: var(--banner-dark);
-    --hamburger-bg: var(--white);
-    --header-link-color: var(--white);
+    --hamburger-bg: #fff;
+    --header-link-color: #fff;
     --search-border-color: var(--navigation-submenu-light);
     --search-placeholder-color: var(--navigation-submenu-light);
-    --search-input-color: var(--white);
+    --search-input-color: #fff;
     --search-submit-button-color: var(--navigation-submenu-light);
-    --search-input-outline: var(--white);
+    --search-input-outline: #fff;
     --search-submit-icon: var(--search-submit-dark);
     --search-input-clear-icon: var(--search-input-clear-light);
     --horizontal-rule: linear-gradient(
@@ -575,7 +536,7 @@ header {
 
             &:hover,
             &:focus {
-              color: var(--black);
+              color: #000;
               background: var(--action-secondary-hover);
               border: 2px solid #fff;
               box-shadow: 0 4px 4px 0 rgb(0 0 0 / 25%);
