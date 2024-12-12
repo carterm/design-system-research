@@ -387,7 +387,7 @@ header {
             display: flex;
             position: relative;
 
-            > input.search-input {
+            > input#site-search {
               /* Full size search bar */
               outline: 2px solid var(--search-input-outline);
               outline-offset: -4px;
@@ -446,7 +446,7 @@ header {
 
             &:not(:focus-within) {
               /* Shrink into a search icon */
-              > input.search-input {
+              > input#site-search {
                 outline: none;
                 padding: 0;
                 opacity: 0;
@@ -469,14 +469,14 @@ header {
               }
             }
 
-            &:has(> input.search-input:placeholder-shown)
+            &:has(> input#site-search:placeholder-shown)
               > button.search-submit:not([tabindex]) {
               /* No search text entered */
 
               display: none;
             }
 
-            &:not(:has(> input.search-input:placeholder-shown))
+            &:not(:has(> input#site-search:placeholder-shown))
               > button.search-submit[tabindex] {
               /* Search text entered */
 
