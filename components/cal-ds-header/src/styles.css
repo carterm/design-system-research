@@ -42,29 +42,33 @@
   --search-submit-light: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='25px' height='16px' viewBox='0 0 25 16'><path style='fill:%23DBDBDB;' d='M24.5,7.3l-6.4-6.4c-0.4-0.4-1-0.4-1.4,0s-0.4,1,0,1.4L21.4,7H0.1v2h21.3l-4.7,4.7c-0.4,0.4-0.4,1,0,1.4s1,0.4,1.4,0l6.4-6.4C24.9,8.3,24.9,7.7,24.5,7.3z'/></svg>");
   --search-input-clear-dark: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='16px' height='16px' viewBox='0 0 16 16'><path style='fill:%23323232;' d='M9.3,8L9.3,8L8.9,7.5l5.8-5.8c0.4-0.4,0.4-1,0-1.4s-1-0.4-1.4,0L7.9,5.7l0,0L7.4,6.1L1.7,0.3c-0.4-0.4-1-0.4-1.4,0s-0.4,1,0,1.4l5.3,5.3l0,0L6,7.5l-5.8,5.8c-0.4,0.4-0.4,1,0,1.4s1,0.4,1.4,0L7,9.4l0,0L7.4,9l5.8,5.8c0.4,0.4,1,0.4,1.4,0s0.4-1,0-1.4L9.3,8z'/></svg>");
   --search-input-clear-light: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='16px' height='16px' viewBox='0 0 16 16'><path style='fill:%23DBDBDB;' d='M9.3,8L9.3,8L8.9,7.5l5.8-5.8c0.4-0.4,0.4-1,0-1.4s-1-0.4-1.4,0L7.9,5.7l0,0L7.4,6.1L1.7,0.3c-0.4-0.4-1-0.4-1.4,0s-0.4,1,0,1.4l5.3,5.3l0,0L6,7.5l-5.8,5.8c-0.4,0.4-0.4,1,0,1.4s1,0.4,1.4,0L7,9.4l0,0L7.4,9l5.8,5.8c0.4,0.4,1,0.4,1.4,0s0.4-1,0-1.4L9.3,8z'/></svg>");
+}
 
-  /* Light Theme variables (default) */
-  --search-icon: var(--search-icon-dark);
-  --cagov-icon: var(--cagov-icon-dark);
-  --login-icon: var(--login-icon-dark);
-  --header-bg: var(--banner-light);
-  --hamburger-bg: #000;
-  --header-link-color: #000;
-  --search-border-color: var(--navigation-submenu-dark);
-  --search-placeholder-color: var(--navigation-submenu-dark);
-  --search-input-color: #000;
-  --search-submit-button-color: var(--navigation-submenu-dark);
-  --search-input-outline: #000;
-  --search-submit-icon: var(--search-submit-light);
-  --search-input-clear-icon: var(--search-input-clear-dark);
-  --horizontal-rule: linear-gradient(
-    90deg,
-    transparent 10.5%,
-    #6d6d6d 45%,
-    transparent 95.5%
-  );
-  --action-secondary-hover: linear-gradient(4deg, #fff -98.02%, #999);
-  --current-page-background: #999;
+/* Light Theme variables (default) */
+@media (prefers-color-scheme: light) {
+  :host {
+    --search-icon: var(--search-icon-dark);
+    --cagov-icon: var(--cagov-icon-dark);
+    --login-icon: var(--login-icon-dark);
+    --header-bg: var(--banner-light);
+    --hamburger-bg: #000;
+    --header-link-color: #000;
+    --search-border-color: var(--navigation-submenu-dark);
+    --search-placeholder-color: var(--navigation-submenu-dark);
+    --search-input-color: #000;
+    --search-submit-button-color: var(--navigation-submenu-dark);
+    --search-input-outline: #000;
+    --search-submit-icon: var(--search-submit-light);
+    --search-input-clear-icon: var(--search-input-clear-dark);
+    --horizontal-rule: linear-gradient(
+      90deg,
+      transparent 10.5%,
+      #6d6d6d 45%,
+      transparent 95.5%
+    );
+    --action-secondary-hover: linear-gradient(4deg, #fff -98.02%, #999);
+    --current-page-background: #999;
+  }
 }
 
 /* Define dark Theme variables */
@@ -96,10 +100,6 @@
     );
     --current-page-background: #002747;
   }
-}
-
-input::placeholder {
-  color: var(--search-placeholder-color);
 }
 
 /* Accessibility */
@@ -400,6 +400,7 @@ header {
               background: transparent;
               color: var(--search-input-color);
               transition:
+                opacity 300ms ease,
                 width 300ms ease,
                 padding 300ms ease;
 
@@ -409,11 +410,8 @@ header {
                 -webkit-text-fill-color: var(--search-input-color);
               }
 
-              /* stylelint-disable-next-line selector-no-vendor-prefix */
-              &::-ms-input-placeholder, /* -ms-input-placeholder for Edge 12 -18 */
               &::placeholder {
                 color: var(--search-placeholder-color);
-                opacity: 1; /* Firefox */
               }
 
               &::-webkit-search-cancel-button {
@@ -451,19 +449,14 @@ header {
               > input.search-input {
                 outline: none;
                 padding: 0;
+                opacity: 0;
                 width: var(--space-unit-x4);
-                background: transparent;
-                cursor: pointer;
-                color: transparent;
+                cursor: pointer; /* So the icon looks clickable */
                 border-radius: var(--rounded-buttons);
 
                 &:autofill {
                   /* Keeps the autofill consistent with theme */
                   -webkit-text-fill-color: var(--header-bg);
-                }
-
-                &::placeholder {
-                  visibility: hidden; /* Hide the search placeholder as an icon */
                 }
 
                 &::-webkit-search-cancel-button {
