@@ -218,7 +218,7 @@ header {
         color: var(--header-link-color);
 
         > a.main-navigation-cancel,
-        > a.main-navigation-button {
+        > a#mobile-menu-button {
           padding: 1rem;
           width: 24px;
           height: 24px;
@@ -229,7 +229,7 @@ header {
           display: none;
         }
 
-        > a.main-navigation-button {
+        > a#mobile-menu-button {
           > div.hamburger {
             height: 4px;
             position: relative;
@@ -291,7 +291,7 @@ header {
             display: block;
           }
 
-          > a.main-navigation-button {
+          > a#mobile-menu-button {
             pointer-events: none; /* Lets us click the icon to close menu */
 
             > div.hamburger {

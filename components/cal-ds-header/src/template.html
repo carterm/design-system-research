@@ -7,13 +7,12 @@
       <slot name="slot3"></slot>
       <nav class="mobile-nav-menu" role="navigation">
         <a
+          id="mobile-menu-button"
           href="#"
           tabindex="0"
-          class="main-navigation-button"
           role="button"
           aria-haspopup="true"
-          id="mobilemenubutton"
-          aria-controls="mobilemenu">
+          aria-controls="mobile-menu">
           <div class="hamburger"></div>
           <span class="visually-hidden">Mobile menu</span>
         </a>
@@ -23,7 +22,7 @@
           class="main-navigation-cancel"
           role="button"
           aria-label="Close menu"></a>
-        <ul role="menu" id="mobilemenu" aria-labelledby="mobilemenubutton">
+        <ul role="menu" id="mobile-menu" aria-labelledby="mobile-menu-button">
           <template>
             <li role="presentation">
               <a role="menuitem" tabindex="0"></a>
