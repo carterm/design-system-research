@@ -46,15 +46,15 @@
   /* other colors */
   --horizontal-rule-light: linear-gradient(
     90deg,
-    transparent 10.5%,
+    var(--banner-light) 10.5%,
     #6d6d6d 45%,
-    transparent 95.5%
+    var(--banner-light) 95.5%
   );
   --horizontal-rule-dark: linear-gradient(
     90deg,
-    black 10.5%,
+    var(--banner-dark) 10.5%,
     #999 45%,
-    black 95.5%
+    var(--banner-dark) 95.5%
   );
   --action-secondary-hover-light: linear-gradient(4deg, #fff -98.02%, #999);
   --action-secondary-hover-dark: linear-gradient(
@@ -186,8 +186,6 @@ header {
   letter-spacing: 0.02rem;
   font-weight: var(--font-weight-base);
   line-height: var(--line-height-base);
-  background-color: var(--background-color);
-  color: var(--text-color);
   position: relative;
   top: 0;
   z-index: 100;
