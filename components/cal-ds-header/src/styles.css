@@ -64,11 +64,10 @@
   );
 }
 
-/* Begin Light Mode */
-
 /* Light Theme variables (default) */
 @media (prefers-color-scheme: light) {
   :host(:not([data-brightness-mode="dark"])) {
+    /* BEGIN LIGHT MODE SETTINGS */
     --search-icon: var(--search-icon-dark);
     --cagov-icon: var(--cagov-icon-dark);
     --login-icon: var(--login-icon-dark);
@@ -85,11 +84,14 @@
     --horizontal-rule: var(--horizontal-rule-light);
     --action-secondary-hover: var(--action-secondary-hover-light);
     --current-page-background: #999;
+
+    /* END LIGHT MODE SETTINGS */
   }
 }
 
 /* Define light Theme override variables */
 :host([data-brightness-mode="light"]) {
+  /* BEGIN LIGHT MODE SETTINGS */
   --search-icon: var(--search-icon-dark);
   --cagov-icon: var(--cagov-icon-dark);
   --login-icon: var(--login-icon-dark);
@@ -106,15 +108,14 @@
   --horizontal-rule: var(--horizontal-rule-light);
   --action-secondary-hover: var(--action-secondary-hover-light);
   --current-page-background: #999;
+
+  /* END LIGHT MODE SETTINGS */
 }
-
-/* End Light Mode */
-
-/* Begin Dark Mode */
 
 /* Define dark Theme variables */
 @media (prefers-color-scheme: dark) {
   :host(:not([data-brightness-mode="light"])) {
+    /* BEGIN DARK MODE SETTINGS */
     --search-icon: var(--search-icon-light);
     --cagov-icon: var(--cagov-icon-light);
     --login-icon: var(--login-icon-light);
@@ -131,11 +132,14 @@
     --horizontal-rule: var(--horizontal-rule-dark);
     --action-secondary-hover: var(--action-secondary-hover-dark);
     --current-page-background: #002747;
+
+    /* END DARK MODE SETTINGS */
   }
 }
 
 /* Define dark Theme override variables */
 :host([data-brightness-mode="dark"]) {
+  /* BEGIN DARK MODE SETTINGS */
   --search-icon: var(--search-icon-light);
   --cagov-icon: var(--cagov-icon-light);
   --login-icon: var(--login-icon-light);
@@ -152,9 +156,9 @@
   --horizontal-rule: var(--horizontal-rule-dark);
   --action-secondary-hover: var(--action-secondary-hover-dark);
   --current-page-background: #002747;
-}
 
-/* End Dark Mode */
+  /* END DARK MODE SETTINGS */
+}
 
 /* Accessibility */
 span.visually-hidden {
