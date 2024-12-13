@@ -36,6 +36,48 @@
               ]
             }
           ]
+        },
+        {
+          "name": "data-brightness-mode",
+          "description": "Overrides the user preference for dark or light mode. \n\n```html\n<cal-ds-header data-brightness-mode=\"dark\">\n```",
+          "references": [
+            {
+              "name": "Reference - Eureka",
+              "url": "https://template.webstandards.ca.gov/"
+            }
+          ],
+          "values": [
+            {
+              "name": "auto",
+              "description": "User system preferences used (default)",
+              "references": [
+                {
+                  "name": "Reference - Eureka",
+                  "url": "https://template.webstandards.ca.gov/"
+                }
+              ]
+            },
+            {
+              "name": "dark",
+              "description": "Dark mode all the time",
+              "references": [
+                {
+                  "name": "Reference - Eureka",
+                  "url": "https://template.webstandards.ca.gov/"
+                }
+              ]
+            },
+            {
+              "name": "light",
+              "description": "Light mode all the time",
+              "references": [
+                {
+                  "name": "Reference - Eureka",
+                  "url": "https://template.webstandards.ca.gov/"
+                }
+              ]
+            }
+          ]
         }
       ],
       "references": [
