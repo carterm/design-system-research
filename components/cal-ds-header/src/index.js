@@ -369,6 +369,19 @@ export default class my extends cal_ds_base {
         } else {
           target_login_button.remove();
         }
+
+        // Process Translate Button
+        const source_translate = source.querySelector(":scope > a.translate");
+        const target_translate = _querySelectorRequre(
+          target_site_header_utility,
+          ":scope > a.translate"
+        );
+
+        if (source_translate) {
+          _updateElement(target_translate, source_translate, true);
+        } else {
+          target_translate.remove();
+        }
       }
     };
 
