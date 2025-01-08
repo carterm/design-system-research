@@ -593,7 +593,7 @@ header {
           }
         }
 
-        > a.cagov-toggle {
+        > a#cagov-toggle {
           background: transparent var(--cagov-icon) no-repeat center;
           background-size: clamp(2rem, 0.7143rem + 1.9048vw, 3rem)
             clamp(2rem, 0.7143rem + 1.9048vw, 3rem);
