@@ -21,7 +21,7 @@ export default class my extends cal_ds_base {
    * @override
    */
   static get observedAttributes() {
-    return ["data-logo-overflow"];
+    return ["data-logo-overflow", "data-apps-link-style"];
   }
 
   constructor() {
