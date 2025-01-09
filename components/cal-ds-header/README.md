@@ -7,7 +7,7 @@ Banner for the top of any page. Place the code anywhere in your HTML and it will
 ```html
 <cal-ds-header
   data-logo-overflow="true"
-  data-apps-link-style="link"
+  data-apps-link-style="link | none"
   data-apps-link-url="https://www.ca.gov"
   data-apps-link-tooltip="Link to www.ca.gov website"
   data-brightness-mode="auto | light | dark"

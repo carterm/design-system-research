@@ -21,7 +21,7 @@ export default class my extends cal_ds_base {
    * @override
    */
   static get observedAttributes() {
-    return ["data-logo-overflow"];
+    return ["data-logo-overflow", "data-apps-link-style"];
   }
 
   constructor() {
@@ -310,16 +310,16 @@ export default class my extends cal_ds_base {
 
     /**
      * Used with `observedAttributes` to track attribute changes
-     * @param {string} _name
      * @protected
      */
-    const _attributeChangedCallback = _name => {
-      switch (_name) {
-        case my.observedAttributes[0]: //"data-logo-overflow";
-          _contentChanged();
+    const _attributeChangedCallback = () => {
+      //switch (_name) {
+      //  case my.observedAttributes[0]: //"data-logo-overflow";
+      //  case my.observedAttributes[1]: //"data-apps-link-style";
+      _contentChanged();
 
-          break;
-      }
+      //    break;
+      //}
     };
 
     const _contentChanged = () => {
@@ -354,6 +354,14 @@ export default class my extends cal_ds_base {
             ":scope > nav.mobile-nav-menu"
           )
         );
+
+        // ca-gov menu
+        // data-apps-link-style="none"
+        if (this.dataset.appsLinkStyle?.toLowerCase() === "none") {
+          /** @type {HTMLAnchorElement} */ (
+            target.querySelector("#cagov-toggle")
+          ).remove();
+        }
 
         // Process Login Button
         const source_login_button = source.querySelector(
